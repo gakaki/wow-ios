@@ -486,7 +486,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     _bottomBtnsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CX_W, 100)];
     //    _bottomBtnsView.backgroundColor = [UIColor blueColor];
     
-    _bottomBtnsView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, _bottomView.mj_h - (_bottomBtnsView.mj_h / 2));
+    _bottomBtnsView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, _bottomView.mj_h - (_bottomBtnsView.mj_h / 2) - 5);
     //    _bottomBtnsView.backgroundColor = [UIColor cyanColor];
     [_bottomView addSubview:_bottomBtnsView];
     float btnBottom = 40;

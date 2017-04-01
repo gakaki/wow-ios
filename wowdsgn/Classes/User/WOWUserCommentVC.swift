@@ -101,7 +101,7 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
        // 选择照片
     func pushImagePickerController(collectionViewTag: Int)  {
         
-        let imagePickerVc = TZImagePickerController.init(maxImagesCount: 5, columnNumber: 5, delegate: self, pushPhotoPickerVc: true)
+        let imagePickerVc = TZImagePickerController.init(maxImagesCount: 5, columnNumber: 4, delegate: self, pushPhotoPickerVc: true)
         imagePickerVc?.isSelectOriginalPhoto            = false
         
         imagePickerVc?.barItemTextColor                 = UIColor.black

@@ -20,7 +20,7 @@
                         <constraint firstAttribute="height" priority="750" constant="128" id="32R-aG-At7"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Dl-lk-zlj">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Dl-lk-zlj">
                     <rect key="frame" x="10" y="148" width="295" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
@@ -98,7 +98,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Qrcode" width="16" height="16"/>
+        <image name="Qrcode" width="417" height="417"/>
         <image name="quptes-sanjiao" width="37" height="37"/>
     </resources>
 </document>

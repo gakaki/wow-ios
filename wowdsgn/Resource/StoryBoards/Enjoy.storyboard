@@ -45,7 +45,7 @@
                                             <constraint firstAttribute="width" constant="100" id="qf6-EH-sUe"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="21" image="praise-black">
+                                        <state key="normal" title="0" image="praise-black">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="selected" image="Thumb-active"/>
@@ -54,11 +54,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSA-8l-fbg">
-                                        <rect key="frame" x="162" y="7" width="51" height="30"/>
+                                        <rect key="frame" x="167.5" y="7" width="40" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="111" image="photoDetail-no">
+                                        <state key="normal" title="0" image="photoDetail-no">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="disabled" image="collect-ban"/>
                                         <state key="selected" image="photoDetail-yes"/>
                                         <connections>
                                             <action selector="clickCollection:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="EIN-4v-wm8"/>
@@ -444,6 +445,7 @@
         <image name="btn_like_pressed" width="70" height="70"/>
         <image name="btn_skip_normal" width="70" height="70"/>
         <image name="btn_skip_pressed" width="70" height="70"/>
+        <image name="collect-ban" width="30" height="30"/>
         <image name="new_empty" width="234" height="232"/>
         <image name="photoDetail-no" width="30" height="30"/>
         <image name="photoDetail-yes" width="30" height="30"/>

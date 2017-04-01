@@ -91,7 +91,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
         
         let des = textView.text ?? ""
         if des.length > 35 {
-            WOWHud.showMsg("请输入30字以内")
+            WOWHud.showMsg("请输入35字以内")
             return
         }
 //        if des.length < 3 {

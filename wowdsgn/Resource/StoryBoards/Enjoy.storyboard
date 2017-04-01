@@ -329,7 +329,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Ypr-68-nGG" secondAttribute="trailing" constant="53" id="syW-GN-ZIL"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oxD-kB-NvO">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oxD-kB-NvO">
                                 <rect key="frame" x="18" y="45" width="339" height="355"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_empty" translatesAutoresizingMaskIntoConstraints="NO" id="iMK-Lf-Ijx">
@@ -374,6 +374,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emptyView" destination="oxD-kB-NvO" id="j4V-Ue-FLW"/>
                         <outlet property="kolodaView" destination="P5O-Ag-IQN" id="9Yu-8W-eQV"/>
                         <outlet property="leftBtn" destination="PfQ-p2-Oi1" id="h6T-R0-RPk"/>
                         <outlet property="leftSpace" destination="EIs-Tm-Rxr" id="Aeu-Ge-ueH"/>

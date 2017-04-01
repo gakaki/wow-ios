@@ -15,6 +15,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
     @IBOutlet weak var rightBtn: UIButton!
     @IBOutlet weak var rightSpace: NSLayoutConstraint!
     @IBOutlet weak var leftSpace: NSLayoutConstraint!
+    @IBOutlet weak var emptyView: UIView!
     
     weak var delegate:WOWChideControllerDelegate?
     var fineWroksArr = [WOWFineWroksModel]()
@@ -31,7 +32,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addObserver()
         let space = (MGScreenWidth - 190)/3
         rightSpace.constant = space
         leftSpace.constant = space
@@ -41,6 +42,15 @@ class WOWNewEnjoyController: WOWBaseViewController {
         kolodaView.reloadData()
         request()
         // Do any additional setup after loading the view.
+    }
+    /**
+     添加通知
+     */
+    fileprivate func addObserver(){
+
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshRequest), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(refreshRequest), name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
+
     }
     override func request() {
         super.request()
@@ -57,11 +67,15 @@ class WOWNewEnjoyController: WOWBaseViewController {
                 let array   =  Mapper<WOWFineWroksModel>().mapArray(JSONObject: r["list"].arrayObject ) ?? [WOWFineWroksModel]()
                 strongSelf.fineWroksArr = strongSelf.fineWroksArr + array
                 strongSelf.kolodaView.reloadData()
-                
+                if strongSelf.fineWroksArr.count > 0 {
+                    strongSelf.emptyView.isHidden = true
+                }else {
+                    strongSelf.emptyView.isHidden = false
+                }
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
-                
+                strongSelf.emptyView.isHidden = false
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
@@ -70,9 +84,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
     }
     
     func requestLike(type: Int, works worksId: Int) {
-       
-       
-        
+
         WOWNetManager.sharedManager.requestWithTarget(.api_LikeWorks(worksId: worksId, type: type), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
             if let _ = self {
@@ -98,11 +110,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.isHidden = false
     }
-    lazy var emptyView:WOWNewEmptyView = {
-        let v = Bundle.main.loadNibNamed(String(describing: WOWNewEmptyView.self), owner: self, options: nil)?.last as! WOWNewEmptyView
-       
-        return v
-    }()
+
     // MARK: IBActions
     
     @IBAction func leftButtonTapped() {
@@ -119,11 +127,15 @@ class WOWNewEnjoyController: WOWBaseViewController {
             del.updateTabsRequsetData()
             
         }
+        refreshRequest()
+
+    }
+    
+    func refreshRequest() {
         indexRows = 0
         fineWroksArr = [WOWFineWroksModel]()
         kolodaView.resetCurrentCardIndex()
         request()
-
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -138,15 +150,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
 extension WOWNewEnjoyController: KolodaViewDelegate {
     
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-//        let position = kolodaView.currentCardIndex
-//        for _ in 1...4 {
-//            dataSource.append(UIImage(named: "guide0")!)
-//        }
-//        kolodaView.insertCardAtIndexRange(position..<position + 4, animated: true)
-//        emptyView.frame = CGRect(x: 0, y: 0, w: MGScreenWidth - 36, h: 300)
-//        koloda.addSubview(emptyView)
-//        kolodaView.resetCurrentCardIndex()
-        
+        emptyView.isHidden = false
     }
     
     func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -> Bool {

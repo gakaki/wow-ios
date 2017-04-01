@@ -169,22 +169,19 @@ extension WOWUserCenterController:VTMagicViewDataSource{
     }
     
     func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
-        
-        let vc = magicView.dequeueReusablePage(withIdentifier: self.identifier_magic_view_page)
-        
-        if (vc == nil) {
+  
             
             if (pageIndex == 0){
                 vc_product?.delegate = self
                 return vc_product!
             }else if (pageIndex == 1){
+                vc_brand?.delegate = self
                 return vc_brand!
             }else{
+                vc_designer?.delegate = self
                 return vc_designer!
             }
-        }
-        
-        return vc!
+
     }
 }
 
@@ -220,14 +217,8 @@ extension WOWUserCenterController:VTMagicViewDelegate{
     
 }
 
-extension WOWUserCenterController: WOWDidScrollDelegate {
-    func scrollview(scrollOffset: CGFloat) {
-
-        cvTop.constant = -139
-        UIView.animate(withDuration: 0.2) {[weak self] in
-            if let strongSelf = self {
-                strongSelf.view.layoutIfNeeded()
-            }
-        }
+extension WOWUserCenterController: WOWChideControllerDelegate {
+    func updateTabsRequsetData(){
+        request()
     }
 }

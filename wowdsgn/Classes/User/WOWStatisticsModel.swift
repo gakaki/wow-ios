@@ -30,7 +30,7 @@ class WOWStatisticsModel: WOWBaseModel,Mappable{
     }
     
     func mapping(map: Map) {
-        endUserId                   <- map["id"]
+        endUserId                   <- map["endUserId"]
         instagramCounts             <- map["instagramCounts"]
         likeCounts                  <- map["likeCounts"]
         collectCounts               <- map["collectCounts"]

@@ -14,12 +14,13 @@ class WOWPraiseController: WOWBaseViewController {
     let cellTwoID = String(describing: WOWPraiseTwoCell.self)
 
     var dataArr  = [WOWWorksListModel]()
-    
+    weak var delegate:WOWChideControllerDelegate?
+
     let pageSize   = 6
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        request()
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -34,6 +35,14 @@ class WOWPraiseController: WOWBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.isHidden = false
+    }
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        if let del = delegate {
+            
+            del.updateTabsRequsetData()
+            
+        }
     }
     override func setUI() {
         super.setUI()

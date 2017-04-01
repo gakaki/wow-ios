@@ -72,6 +72,10 @@ class WOWWorksDetailsController: WOWBaseViewController {
                 strongSelf.btnCollection.setTitle(strongSelf.modelData?.collectCounts?.toString, for: .normal)
                 strongSelf.btnPraiseCount.isSelected = strongSelf.modelData?.like ?? false
                 strongSelf.btnCollection.isSelected = strongSelf.modelData?.collect ?? false
+                
+                if strongSelf.modelData?.myInstagram ?? false {
+                    strongSelf.btnCollection.isEnabled = false
+                }
                 strongSelf.tableView.reloadData()
 
                 

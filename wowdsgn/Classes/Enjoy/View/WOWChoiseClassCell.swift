@@ -31,6 +31,8 @@ class WOWChoiseClassCell: UICollectionViewCell {
         lbClassSubTittles.text = m.title ?? ""
         if let img = m.pic{
              imgClassIcon.set_webimage_url(img)
+        }else {
+            imgClassIcon.image = UIImage.init(named: "placeholder_product")
         }
         if m.isSelect {
             imgChoiseSelect.isHidden = false

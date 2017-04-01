@@ -16,7 +16,7 @@ class WOWMasterpieceController: WOWBaseViewController {
     var lastContentOffset :CGFloat = 0.0
     let pageSize   = 10
     weak var delegate:WOWChideControllerDelegate?
-
+    var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
     @IBOutlet weak var publishBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +36,31 @@ class WOWMasterpieceController: WOWBaseViewController {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.isHidden = false
     }
+    //MARK:Lazy
+    lazy var topBtn:UIButton = {
+        var btn     = UIButton(type: UIButtonType.custom)
+        btn     = btn as UIButton
+        btn.setBackgroundImage(UIImage(named: "backTop"), for: UIControlState())
+        btn.addTarget(self, action:#selector(backTop), for:.touchUpInside)
+        return btn
+    }()
+    func backTop()  {
+        let index  = IndexPath.init(row: 0, section: 0)
+        self.tableView.scrollToRow(at: index, at: UITableViewScrollPosition.none, animated: true)
+    }
+
     override func setUI() {
         super.setUI()
         configTable()
+        self.view.addSubview(self.topBtn)
+        self.topBtn.snp.makeConstraints {[unowned self] (make) in
+            make.width.equalTo(98)
+            make.height.equalTo(30)
+            make.centerX.equalTo(self.view)
+            make.top.equalTo(self.view).offset(10)
+        }
+        self.topBtn.isHidden = true
+
         request()
     }
     override func pullToRefresh() {
@@ -172,6 +194,14 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
         
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if scrollView.mj_offsetY < self.backTopBtnScrollViewOffsetY {
+            self.topBtn.isHidden = true
+        }else{
+            self.topBtn.isHidden = false
+        }
+
+        
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         self.perform(#selector(scrollViewDidEndScrollingAnimation), with: nil, afterDelay: 0.1)
         let a = scrollView.contentOffset.y

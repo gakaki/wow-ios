@@ -100,7 +100,7 @@ class WOWChoiceClassController: WOWBaseViewController {
     }
     func cloosePhotos() {
 
-                let imagePickerVc = TZImagePickerController.init(maxImagesCount: 1, columnNumber: 5, delegate: self, pushPhotoPickerVc: true)
+                let imagePickerVc = TZImagePickerController.init(maxImagesCount: 1, columnNumber: 4, delegate: self, pushPhotoPickerVc: true)
                 imagePickerVc?.isSelectOriginalPhoto            = false
         
                 imagePickerVc?.barItemTextColor                 = UIColor.black

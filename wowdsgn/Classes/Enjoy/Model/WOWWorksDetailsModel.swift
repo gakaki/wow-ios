@@ -28,7 +28,7 @@ class WOWWorksDetailsModel: WOWBaseModel,Mappable  {
     var like                    :  Bool?
     var collect                 :  Bool?
     var measurement             :  Int?
-    
+    var myInstagram             :  Bool?
     required init?(map: Map) {
         
     }
@@ -50,7 +50,7 @@ class WOWWorksDetailsModel: WOWBaseModel,Mappable  {
         like                                        <- map["like"]
         collect                                     <- map["collect"]
         measurement                                 <- map["measurement"]
-        
+        myInstagram                                 <- map["myInstagram"]
         if let pic = pic ,let measurement = measurement {
             if pic.contains("_2dimension_") {
                 

@@ -113,6 +113,13 @@ class WOWMasterpieceController: WOWBaseViewController {
     //发布
     @IBAction func publishAction(_ sender: UIButton) {
         
+        guard WOWUserManager.loginStatus == true else{
+            
+            UIApplication.currentViewController()?.toLoginVC(true)
+            
+            return
+        }
+        
         let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWChoiceClassController.self)) as! WOWChoiceClassController
         
 

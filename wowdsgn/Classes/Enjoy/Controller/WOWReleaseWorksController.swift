@@ -71,15 +71,18 @@ class WOWReleaseWorksController: WOWBaseViewController {
     }
     // MARK: - 发布按钮
     @IBAction func releaseAction(_ sender: Any) {
+        
+
+        
         let des = textView.text ?? ""
-        if des.length > 30 {
+        if des.length > 35 {
             WOWHud.showMsg("请输入30字以内")
             return
         }
-        if des.length < 3 {
-            WOWHud.showMsg("请输入至少三个字")
-            return
-        }
+//        if des.length < 3 {
+//            WOWHud.showMsg("请输入至少三个字")
+//            return
+//        }
         
         WOWHud.showLoadingSV()
         WOWUploadManager.uploadShareImg(photo, successClosure: {[weak self] (url) in
@@ -116,11 +119,11 @@ extension WOWReleaseWorksController:UITextViewDelegate{
         
         let toBeString = textView.text as NSString
 
-        if (toBeString.length > 30) {
-            numberLabel.colorWithText(toBeString.length.toString, str2: "/30", str1Color: UIColor.red)
+        if (toBeString.length > 35) {
+            numberLabel.colorWithText(toBeString.length.toString, str2: "/35", str1Color: UIColor.red)
             
         }else {
-            numberLabel.text = String(format: "%i/30", toBeString.length)
+            numberLabel.text = String(format: "%i/35", toBeString.length)
         }
 
     }

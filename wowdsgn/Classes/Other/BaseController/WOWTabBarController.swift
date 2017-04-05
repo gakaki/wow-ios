@@ -140,19 +140,26 @@ class WOWTabBarController: UITabBarController {
 }
 
 extension WOWTabBarController:UITabBarControllerDelegate{
-    
-//    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
-//            let controllers = tabBarController.viewControllers
-//            let index = controllers?.indexOf(viewController)
-//            if index == 1{
-//                guard WOWUserManager.loginStatus else {
-//                     UIApplication.currentViewController()?.toLoginVC(true)
-//                    return
-//                }
-//            }
-//        
-//        WOWTool.lastTabIndex = index ?? 0
-//    }
+
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let controllers = tabBarController.viewControllers
+        let index = controllers?.index(of: viewController)
+        if index == 3 {
+            if !UserDefaults.standard.bool(forKey: "FirstTime_StartApp") {
+                UserDefaults.standard.set(true, forKey: "FirstTime_StartApp")
+                UserDefaults.standard.synchronize()
+                /**  第一次进入，此处把第一次进入时要进入的控制器作为根视图控制器  */
+                let data = ["414-1", "414-2", "414-3"]
+                let v = WOWGuidePageView(datas: data)
+                let window = UIApplication.shared.windows.last
+                
+                window?.addSubview(v)
+                window?.bringSubview(toFront: v)
+
+            }
+            
+        }
+    }
 
 //    //将要点击
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {

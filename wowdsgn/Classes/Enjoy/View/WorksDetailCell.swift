@@ -36,7 +36,7 @@ class WorksDetailCell: UITableViewCell {
             VCRedirect.goOtherCenter(endUserId: m.endUserId ?? 0)
         }
         heightConstraint.constant = m.picHeight
-        categoryName.text = m.categoryName ?? ""
+        categoryName.text = (m.categoryName ?? "").get_formted_Space()
         lbDes.text = m.des ?? ""
         lbMyName.text = m.nickName ?? ""
         imgPhoto.set_webimage_url(m.pic ?? "")

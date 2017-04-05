@@ -12,7 +12,7 @@ class WOWMasterpieceCell: UITableViewCell {
 
     @IBOutlet weak var imgWroks: UIImageView!
     
-    @IBOutlet weak var lbCategory: UILabel!
+//    @IBOutlet weak var lbCategory: UILabel!
     
     @IBOutlet weak var heightConstraint: NSLayoutConstraint! // 图片 的高度
     
@@ -46,7 +46,7 @@ class WOWMasterpieceCell: UITableViewCell {
 //          heightConstraint.constant = CGFloat(height_works)
         
           imgWroks.set_webimage_url(m.pic ?? "")
-          lbCategory.text = m.categoryName ?? ""
+//          lbCategory.text = m.categoryName ?? ""
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

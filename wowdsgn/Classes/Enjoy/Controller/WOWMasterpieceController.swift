@@ -182,11 +182,10 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         let delayQueue = DispatchQueue.global()
-        delayQueue.asyncAfter(deadline: .now() + 1.0) {
+        delayQueue.asyncAfter(deadline: .now() + 0.5) {
             
             DispatchQueue.main.async {
-                //                WOWHud.dismiss()
-                //                strongSelf.popVC()
+              
                 self.changeState(alpha: 1)
             }
             
@@ -205,16 +204,16 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         self.perform(#selector(scrollViewDidEndScrollingAnimation), with: nil, afterDelay: 0.1)
         let a = scrollView.contentOffset.y
-        //        lastContentOffset = scrollView.contentOffset.y
+        
         if a -  lastContentOffset  > 50{
-            //            print("shang")
+   
             lastContentOffset = a
-//            hidden = true
+
             changeState(alpha: 0)
             return
         }else if lastContentOffset - a > 50 {
             lastContentOffset = a
-//            hidden = false
+
             changeState(alpha: 1)
             return
         }
@@ -224,14 +223,14 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let a = scrollView.contentOffset.y
         if a -  lastContentOffset  > 50{
-            //            print("shang")
+    
             lastContentOffset = a
-//            hidden = true
+
             changeState(alpha: 0)
             return
         }else if lastContentOffset - a > 50 {
             lastContentOffset = a
-//            hidden = false
+
             changeState(alpha: 1)
             return
         }

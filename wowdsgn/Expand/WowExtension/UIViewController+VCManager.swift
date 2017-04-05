@@ -217,15 +217,31 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
     }
     
-  
-    public class func toHomeIndex(index: Int){
-        guard index != 3 else{
-            toLoginVC(true)
-            return
+    /*
+     ** isNew： 当指定到第三个页面时，isNew 为 true时， 滑动到 最新 界面
+     */
+    public class func toHomeIndex(index: Int,isNew:Bool=false){
+
+        if index == 4 {
+            guard WOWUserManager.loginStatus else{
+                toLoginVC(true)
+                return
+            }
         }
         
-        UIApplication.appTabBarController.selectedIndex = index
+        let tabBarController = UIApplication.currentViewController()?.tabBarController
+        tabBarController?.selectedIndex = index
+        
         WOWTool.lastTabIndex = index
+        if index == 3 {
+            if isNew {
+                let vc =  tabBarController?.viewControllers?[3] as! UINavigationController
+                let viewController = vc.visibleViewController as? WOWEnjoyController
+                viewController?.toMagicPage = 1
+            }
+          
+        }
+
     }
     
     /*
@@ -455,6 +471,7 @@ public class VCRedirect {
     class func goToBannerTypeController(_ model: WOWCarouselBanners) {
      
             if let bannerLinkType = model.bannerLinkType {
+                let id = model.bannerLinkTargetId ?? 0
                 switch bannerLinkType {
                 case 1:
                     if let url = model.bannerLinkUrl{
@@ -467,39 +484,62 @@ public class VCRedirect {
                     print("专题详情页（图文混排）")
                 case 4:
                     print("品牌详情页")
-                    VCRedirect.toBrand(brand_id: model.bannerLinkTargetId)
+                    VCRedirect.toBrand(brand_id: id)
                     
                 case 5:
                     print("设计师详情页")
-                    VCRedirect.toDesigner(designerId: model.bannerLinkTargetId)
+                    VCRedirect.toDesigner(designerId: id)
                     
                 case 6:
                     print("商品详情页")
-                    VCRedirect.toVCProduct(model.bannerLinkTargetId)
+                    VCRedirect.toVCProduct(id)
                     
                 case 7:
                     print("分类详情页")
                     
                 case 8:// 专题详情
-                    VCRedirect.toTopicList(topicId: model.bannerLinkTargetId ?? 0)
+                    VCRedirect.toTopicList(topicId: id)
                     print("场景还是专题")
                 case 9:// 专题详情
                     
-                    VCRedirect.toToPidDetail(topicId: model.bannerLinkTargetId ?? 0)
+                    VCRedirect.toToPidDetail(topicId: id)
                 case 10:// 分组产品列表
                     
                     
-                    VCRedirect.goToProductGroup(model.bannerLinkTargetId ?? 0)
+                    VCRedirect.goToProductGroup(id)
                 case 11:// 跳转分类
-                    VCRedirect.toVCScene(model.bannerLinkTargetId ?? 0, entrance: .category)
+                    VCRedirect.toVCScene(id, entrance: .category)
                     
                     //                 VCRedirect.toVCCategory(model.bannerLinkTargetId ?? 0)
                     
                 case 12:// 跳转场景分类
-                    VCRedirect.toVCScene(model.bannerLinkTargetId ?? 0, entrance: .scene)
+                    VCRedirect.toVCScene(id, entrance: .scene)
                     
                 case 13:// 跳转标签分类
-                    VCRedirect.toVCScene(model.bannerLinkTargetId ?? 0, entrance: .tag)
+                    VCRedirect.toVCScene(id, entrance: .tag)
+                case 14:// 跳转标签分类
+                    
+                    switch id {
+                    case 0:
+                        VCRedirect.toHomeIndex(index: 3)
+
+                    default:
+                        VCRedirect.toHomeIndex(index: 3,isNew: true)
+
+                    }
+         
+
+                case 15:// 跳转标签分类
+                    
+                    VCRedirect.goOtherCenter(endUserId: id)
+                    
+
+
+                case 16:// 跳转标签分类
+                    
+                    VCRedirect.bingWorksDetails(worksId: id)
+
+
                     
                 default:
                     WOWHud.showMsg("请您更新最新版本")

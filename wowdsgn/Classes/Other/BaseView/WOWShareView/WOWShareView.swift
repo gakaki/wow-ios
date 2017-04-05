@@ -133,7 +133,7 @@ class WOWShareBackView:UIView{
         backClear.addSubview(sharePhotoView)
         
         sharePhotoView.imgPhoto.set_webimage_url(m.pic ?? "")
-        sharePhotoView.lbMyName.text = m.nickName ?? ""
+        sharePhotoView.lbMyName.text = "By" +  (m.nickName ?? "")
         sharePhotoView.lbDes.text = m.des ?? ""
         shareView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{

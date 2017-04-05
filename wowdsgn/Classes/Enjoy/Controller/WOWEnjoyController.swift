@@ -13,7 +13,7 @@ import VTMagic
 class WOWEnjoyController: WOWBaseViewController {
     
     var v : VCVTMagic!
-    
+    var toMagicPage : Int = 0
     var categoryArr = [WOWEnjoyCategoryModel]()
     var vc_newEnjoy:WOWNewEnjoyController?
     var vc_masterpiece:WOWMasterpieceController?
@@ -26,6 +26,7 @@ class WOWEnjoyController: WOWBaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+         v.switch(toPage: UInt(toMagicPage), animated: true)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -71,7 +72,7 @@ class WOWEnjoyController: WOWBaseViewController {
         v.magicView.isScrollEnabled         = true
         self.addChildViewController(v)
         self.view.addSubview(v.magicView)
-        
+
         v.magicView.snp.makeConstraints {[weak self] (make) -> Void in
             if let strongSelf = self {
                 make.size.equalTo(strongSelf.view)
@@ -87,6 +88,7 @@ class WOWEnjoyController: WOWBaseViewController {
         vc_masterpiece?.categoryId = self.currentCategoryId
         vc_masterpiece?.delegate = self
         v.magicView.reloadData()
+       
     }
     
     //MARK: -- NetWork

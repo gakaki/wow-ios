@@ -194,5 +194,65 @@ public class JLRouterRule {
        
             return true
         }
+        //佳作 最新
+        JLRoutes.global().addRoute("/instagram/tab/:id") { (params) -> Bool in
+            print(params)
+            if let typeId = params["id"] as? String {
+                
+                if typeId.toInt() == 0 { // 跳佳作
+                    VCRedirect.toHomeIndex(index: 3)
+                }else if typeId.toInt() == 1 { // 跳最新
+                    VCRedirect.toHomeIndex(index: 3,isNew:true)
+                }
+                
+            }
+        
+            return true
+        }
+        //用户中心页
+        JLRoutes.global().addRoute("/instagram/user/:id") { (params) -> Bool in
+            print(params)
+            if let userId = params["id"] as? String {
+                
+                 VCRedirect.goOtherCenter(endUserId: userId.toInt() ?? 0)
+
+            }
+            
+            return true
+        }
+        //用户作品详情页
+        JLRoutes.global().addRoute("/instagram/photo/:id") { (params) -> Bool in
+            print(params)
+            if let worksId = params["id"] as? String {
+                
+                 VCRedirect.bingWorksDetails(worksId: worksId.toInt() ?? 0)
+
+            }
+            
+            return true
+        }
+        // 跳转场景分类页
+        JLRoutes.global().addRoute("/product/scene/:id") { (params) -> Bool in
+            print(params)
+            if let sceneId = params["id"] as? String {
+                
+                  VCRedirect.toVCScene(sceneId.toInt() ?? 0, entrance: .scene)
+
+            }
+            
+            return true
+        }
+        // 跳转标签分类页
+        JLRoutes.global().addRoute("/product/tag/:id") { (params) -> Bool in
+            print(params)
+            if let tagId = params["id"] as? String {
+                
+                 VCRedirect.toVCScene(tagId.toInt() ?? 0, entrance: .tag)
+
+            }
+            
+            return true
+        }
+
     }
 }

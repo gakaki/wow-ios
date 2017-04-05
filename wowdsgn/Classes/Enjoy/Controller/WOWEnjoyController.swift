@@ -14,6 +14,7 @@ class WOWEnjoyController: WOWBaseViewController {
     
     var v : VCVTMagic!
     var toMagicPage : Int = 0
+    var isOppenRouter : Bool = false
     var categoryArr = [WOWEnjoyCategoryModel]()
     var vc_newEnjoy:WOWNewEnjoyController?
     var vc_masterpiece:WOWMasterpieceController?
@@ -26,7 +27,11 @@ class WOWEnjoyController: WOWBaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-         v.switch(toPage: UInt(toMagicPage), animated: true)
+        if isOppenRouter {
+          v.switch(toPage: UInt(toMagicPage), animated: true)
+            isOppenRouter = false
+        }
+       
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

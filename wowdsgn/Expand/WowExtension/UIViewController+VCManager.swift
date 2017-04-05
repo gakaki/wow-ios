@@ -237,7 +237,9 @@ public class VCRedirect {
             if isNew {
                 let vc =  tabBarController?.viewControllers?[3] as! UINavigationController
                 let viewController = vc.visibleViewController as? WOWEnjoyController
+                 viewController?.isOppenRouter = true
                 viewController?.toMagicPage = 1
+               
             }
           
         }
@@ -510,8 +512,6 @@ public class VCRedirect {
                 case 11:// 跳转分类
                     VCRedirect.toVCScene(id, entrance: .category)
                     
-                    //                 VCRedirect.toVCCategory(model.bannerLinkTargetId ?? 0)
-                    
                 case 12:// 跳转场景分类
                     VCRedirect.toVCScene(id, entrance: .scene)
                     
@@ -527,20 +527,15 @@ public class VCRedirect {
                         VCRedirect.toHomeIndex(index: 3,isNew: true)
 
                     }
-         
 
                 case 15:// 跳转标签分类
                     
                     VCRedirect.goOtherCenter(endUserId: id)
                     
-
-
                 case 16:// 跳转标签分类
                     
                     VCRedirect.bingWorksDetails(worksId: id)
 
-
-                    
                 default:
                     WOWHud.showMsg("请您更新最新版本")
                     let vc = UIStoryboard.initialViewController("User", identifier:"WOWAboutController") as! WOWAboutController

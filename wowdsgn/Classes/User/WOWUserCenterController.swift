@@ -14,7 +14,8 @@ import VTMagic
 class WOWUserCenterController: WOWBaseViewController {
     
     var v : VCVTMagic!
-    
+    var topIsHidden = false
+
     var vc_product:WOWWorkController?
     var vc_brand:WOWPraiseController?
     var vc_designer:WOWCollectController?
@@ -56,7 +57,6 @@ class WOWUserCenterController: WOWBaseViewController {
         
         v.magicView.layoutStyle         = .divide
         v.magicView.switchStyle         = .default
-        
         v.magicView.sliderWidth         = 30
         v.magicView.sliderColor         = WowColor.black
         v.magicView.sliderHeight        = 3
@@ -64,12 +64,11 @@ class WOWUserCenterController: WOWBaseViewController {
         v.magicView.isScrollEnabled         = true
         self.addChildViewController(v)
         self.view.addSubview(v.magicView)
-        
         v.magicView.snp.makeConstraints {[weak self] (make) -> Void in
             if let strongSelf = self {
                 make.width.equalTo(strongSelf.view)
                 make.top.equalTo(strongSelf.topView.snp.bottom)
-                make.bottom.equalTo(strongSelf.view).offset(0)
+                make.bottom.equalTo(strongSelf.view.snp.bottom).offset(0)
                 
             }
         }
@@ -81,6 +80,30 @@ class WOWUserCenterController: WOWBaseViewController {
         
 
         v.magicView.reloadData()
+    }
+    //显示顶部视图
+    func showBrand() {
+        topIsHidden = false
+        view.layoutIfNeeded()
+        
+        cvTop.constant = 0
+        UIView.animate(withDuration: 10) {[weak self] in
+            if let strongSelf = self {
+                strongSelf.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    //隐藏顶部视图
+    func hiddenBrand() {
+        topIsHidden = true
+        view.layoutIfNeeded()
+        cvTop.constant = -139
+        UIView.animate(withDuration: 0.3) {[weak self] in
+            if let strongSelf = self {
+                strongSelf.view.layoutIfNeeded()
+            }
+        }
     }
     //MAERK: Net
     override func request() {
@@ -221,4 +244,18 @@ extension WOWUserCenterController: WOWChideControllerDelegate {
     func updateTabsRequsetData(){
         request()
     }
+    
+    func topView(isHidden: Bool) {
+            if isHidden {
+                if !topIsHidden {
+                    hiddenBrand()
+                }
+                
+            }else {
+                if topIsHidden {
+                    showBrand()
+                }
+            }
+        }
+        
 }

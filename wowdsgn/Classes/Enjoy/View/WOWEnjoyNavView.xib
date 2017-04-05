@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,22 +26,33 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="enjoy_back" translatesAutoresizingMaskIntoConstraints="NO" id="jq7-JV-qCg">
-                    <rect key="frame" x="198" y="18.5" width="14" height="8"/>
+                    <rect key="frame" x="209" y="18.5" width="14" height="8"/>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  阿斯蒂芬 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-BN-ZLD">
+                    <rect key="frame" x="117" y="11.5" width="87" height="21.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="183.5" id="WjY-dy-G2b"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="jq7-JV-qCg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="45" id="263-A7-MKq"/>
+                <constraint firstItem="jq7-JV-qCg" firstAttribute="leading" secondItem="c9R-BN-ZLD" secondAttribute="trailing" constant="5" id="IId-p3-QeW"/>
+                <constraint firstItem="c9R-BN-ZLD" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NHW-Fa-E3F"/>
                 <constraint firstItem="JTc-b0-W9Z" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="PQh-bj-aQH"/>
                 <constraint firstItem="JTc-b0-W9Z" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dnS-T5-KS4"/>
                 <constraint firstItem="jq7-JV-qCg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hB4-SO-YoS"/>
+                <constraint firstItem="c9R-BN-ZLD" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="rhr-c3-1d3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="arrowImg" destination="jq7-JV-qCg" id="3oa-ls-Pbt"/>
                 <outlet property="categoryBtn" destination="JTc-b0-W9Z" id="LDp-7z-g33"/>
+                <outlet property="lbTitle" destination="c9R-BN-ZLD" id="mNA-HI-W7H"/>
             </connections>
-            <point key="canvasLocation" x="27" y="372"/>
+            <point key="canvasLocation" x="-135" y="386"/>
         </view>
     </objects>
     <resources>

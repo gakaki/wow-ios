@@ -47,7 +47,7 @@ class WOWEnjoyController: WOWBaseViewController {
     lazy var navView:WOWEnjoyNavView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWEnjoyNavView.self), owner: self, options: nil)?.last as! WOWEnjoyNavView
         v.categoryBtn.addTarget(self, action: #selector(categoryClick), for: .touchUpInside)
-        v.categoryBtn.setTitle("ALL", for: .normal)
+        v.lbTitle.text = "ALL"
         return v
     }()
     lazy var backView:WOWCategoryBackView = {
@@ -110,7 +110,7 @@ class WOWEnjoyController: WOWBaseViewController {
                 for cate in strongSelf.categoryArr {
                     if cate.id == strongSelf.currentCategoryId {
                         cate.isSelect = true
-                        strongSelf.navView.categoryBtn.setTitle(cate.categoryName ?? "ALL", for: .normal)
+                        strongSelf.navView.lbTitle.text = cate.categoryName ?? "ALL"
                         break
                     }
                 }
@@ -249,11 +249,13 @@ extension WOWEnjoyController:WOWSelectCategoryDelegate, WOWChideControllerDelega
         currentCategoryId = model.id ?? 0
         
         vc_masterpiece?.categoryId = model.id ?? 0
+        vc_masterpiece?.pageIndex = 1 
         vc_newEnjoy?.categoryId = model.id ?? 0
         
         vc_masterpiece?.request()
         vc_newEnjoy?.refreshRequest()
-        navView.categoryBtn.setTitle(model.categoryName ?? "ALL", for: .normal)
+        navView.lbTitle.text = model.categoryName ?? "ALL"
+
         changeButtonState()
     }
     

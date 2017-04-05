@@ -133,7 +133,7 @@ class WOWShareBackView:UIView{
         backClear.addSubview(sharePhotoView)
         
         sharePhotoView.imgPhoto.set_webimage_url(m.pic ?? "")
-        sharePhotoView.lbMyName.text = "By" +  (m.nickName ?? "")
+        sharePhotoView.lbMyName.text = "By " +  (m.nickName ?? "")
         sharePhotoView.lbDes.text = m.des ?? ""
         shareView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
@@ -152,15 +152,19 @@ class WOWShareBackView:UIView{
                 
                 make.left.equalTo(strongSelf.backClear).offset(30)
                 make.right.equalTo(strongSelf.backClear).offset(-30)
-                
+       
                 
             }
         }
        
         sharePhotoView.layoutIfNeeded()
         self.layoutIfNeeded()
+        let heightImg =  m.picHeight * (MGScreenWidth - 80 ) / MGScreenWidth
+
+        sharePhotoView.heightImgConstraint.constant = heightImg
         
-        sharePhotoView.heightImgConstraint.constant = m.picHeight * sharePhotoView.mj_w / MGScreenWidth
+        sharePhotoView.layoutIfNeeded()
+        self.layoutIfNeeded()
         
         UIView.animate(withDuration: 0.3, animations: { [unowned self] in
             

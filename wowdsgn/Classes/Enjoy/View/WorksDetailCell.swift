@@ -14,6 +14,7 @@ class WorksDetailCell: UITableViewCell {
     
     @IBOutlet weak var imgMyPhoto: UIImageView!
     
+    @IBOutlet weak var categoryName: UILabel!
     @IBOutlet weak var lbDes: UILabel!
     
     @IBOutlet weak var lbMyName: UILabel!
@@ -35,7 +36,7 @@ class WorksDetailCell: UITableViewCell {
             VCRedirect.goOtherCenter(endUserId: m.endUserId ?? 0)
         }
         heightConstraint.constant = m.picHeight
-
+        categoryName.text = m.categoryName ?? ""
         lbDes.text = m.des ?? ""
         lbMyName.text = m.nickName ?? ""
         imgPhoto.set_webimage_url(m.pic ?? "")

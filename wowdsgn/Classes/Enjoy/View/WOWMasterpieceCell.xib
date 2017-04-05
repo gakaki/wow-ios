@@ -24,17 +24,9 @@
                             <constraint firstAttribute="width" secondItem="onv-Ld-ip0" secondAttribute="height" multiplier="1:1" id="bzd-dG-De4"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcK-IJ-8BN">
-                        <rect key="frame" x="22" y="289" width="0.0" height="0.0"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="onv-Ld-ip0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7Sp-Lj-bwW"/>
-                    <constraint firstAttribute="bottom" secondItem="AcK-IJ-8BN" secondAttribute="bottom" constant="41" id="BtL-o7-Yl2"/>
-                    <constraint firstItem="AcK-IJ-8BN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="22" id="gEG-Lp-SF1"/>
                     <constraint firstAttribute="bottom" secondItem="onv-Ld-ip0" secondAttribute="bottom" constant="10" id="i8E-dF-cx9"/>
                     <constraint firstAttribute="trailing" secondItem="onv-Ld-ip0" secondAttribute="trailing" id="lQC-mS-dUz"/>
                     <constraint firstItem="onv-Ld-ip0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="osJ-mR-9eR"/>
@@ -42,7 +34,6 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="imgWroks" destination="onv-Ld-ip0" id="97y-no-XH0"/>
-                <outlet property="lbCategory" destination="AcK-IJ-8BN" id="DdL-V9-E55"/>
             </connections>
             <point key="canvasLocation" x="35" y="116"/>
         </tableViewCell>

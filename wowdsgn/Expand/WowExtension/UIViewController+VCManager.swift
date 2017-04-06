@@ -433,6 +433,7 @@ public class VCRedirect {
     //个人中心内页
     public class func goUserCenter() {
         let vc = UIStoryboard.initialViewController("User", identifier:"WOWUserCenterController") as! WOWUserCenterController
+
         topNaVC?.pushViewController(vc, animated: true)
     }
     

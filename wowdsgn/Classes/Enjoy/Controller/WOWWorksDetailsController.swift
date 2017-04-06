@@ -32,7 +32,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
         tableView.mj_header = mj_header
         tableView.clearRestCell()
         
-        navigationItem.title = "作品详情"
+        navigationItem.title = "照片"
         //        configureSearchController()
         tableView.register(UINib.nibName("WorksDetailCell"), forCellReuseIdentifier:"WorksDetailCell")
       

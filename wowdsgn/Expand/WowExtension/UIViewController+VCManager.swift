@@ -240,6 +240,11 @@ public class VCRedirect {
                  viewController?.isOppenRouter = true
                 viewController?.toMagicPage = 1
                
+            }else {
+                let vc =  tabBarController?.viewControllers?[3] as! UINavigationController
+                let viewController = vc.visibleViewController as? WOWEnjoyController
+                viewController?.isOppenRouter = true
+                viewController?.toMagicPage = 0
             }
           
         }

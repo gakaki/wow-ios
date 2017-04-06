@@ -31,8 +31,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
         tableView.sectionIndexColor = GrayColorlevel1
         tableView.mj_header = mj_header
         tableView.clearRestCell()
-        
-        navigationItem.title = "照片"
+        self.title = "照片"
         //        configureSearchController()
         tableView.register(UINib.nibName("WorksDetailCell"), forCellReuseIdentifier:"WorksDetailCell")
       

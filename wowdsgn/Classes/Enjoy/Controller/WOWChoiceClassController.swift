@@ -103,6 +103,7 @@ class WOWChoiceClassController: WOWBaseViewController {
                 imagePickerVc?.isSelectOriginalPhoto            = false
         
                 imagePickerVc?.barItemTextColor                 = UIColor.black
+                imagePickerVc?.naviTitleColor                   = UIColor.black
                 imagePickerVc?.navigationBar.barTintColor       = UIColor.black
                 imagePickerVc?.navigationBar.tintColor          = UIColor.black
         

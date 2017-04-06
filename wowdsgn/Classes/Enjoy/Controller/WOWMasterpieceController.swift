@@ -185,13 +185,8 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
         let delayQueue = DispatchQueue.global()
         delayQueue.asyncAfter(deadline: .now() + 0.5) {
             
-<<<<<<< HEAD
             DispatchQueue.main.async { [unowned self] in
-              
-=======
-            DispatchQueue.main.async {
-            
->>>>>>> b051ba18a34f2507d96bdf64cb74272647592498
+
                 self.changeState(alpha: 1)
             }
             

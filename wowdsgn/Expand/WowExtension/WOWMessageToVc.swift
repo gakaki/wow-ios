@@ -112,7 +112,12 @@ public class WOWMessageToVc: NSObject {
                 if let id = id {
                     VCRedirect.goToProductGroup(id.toInt() ?? 0)
                 }
+            case "213": //个人中心页
+//                if id != nil {
                 
+                    VCRedirect.goUserCenter(1)
+                    
+//                }
             default:
                 break
             }

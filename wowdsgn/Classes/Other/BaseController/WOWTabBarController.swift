@@ -46,7 +46,7 @@ class WOWTabBarController: UITabBarController {
         
         let storys =        ["Home",    "Found",       "HotStyle",        "Enjoy",     "User"      ]
         let images =        ["tab_home","tab_shopping","tab_special",  "tab_like",     "tab_me"    ]
-        let imagesTitle =   ["首页",      "分类",       "灵感",          "欣赏",          "我"        ]
+        let imagesTitle =   ["首页",      "分类",       "灵感",          "晒图",          "我"        ]
     
 
         

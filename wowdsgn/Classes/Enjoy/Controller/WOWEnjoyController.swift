@@ -249,9 +249,9 @@ extension WOWEnjoyController:WOWSelectCategoryDelegate, WOWChideControllerDelega
         currentCategoryId = model.id ?? 0
         
         vc_masterpiece?.categoryId = model.id ?? 0
-        vc_masterpiece?.pageIndex = 1 
+        vc_masterpiece?.pageIndex = 1
+        vc_masterpiece?.backTop()
         vc_newEnjoy?.categoryId = model.id ?? 0
-        
         vc_masterpiece?.request()
         vc_newEnjoy?.refreshRequest()
         navView.lbTitle.text = model.categoryName ?? "ALL"

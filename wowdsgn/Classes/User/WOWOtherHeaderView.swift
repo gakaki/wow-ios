@@ -28,7 +28,12 @@ class WOWOtherHeaderView: UICollectionReusableView {
             userName.text = model.nickName
             workNum.text = String(format: "%i", model.instagramCounts ?? 0)
             praiseNum.text = String(format: "%i", model.likeCounts ?? 0)
-            selfIntroduction.text = model.selfIntroduction
+            if model.selfIntroduction == nil && model.selfIntroduction == "" {
+                selfIntroduction.text = "这家伙很懒，什么也没留下"
+            }else {
+                selfIntroduction.text = model.selfIntroduction
+
+            }
         }
         
     }

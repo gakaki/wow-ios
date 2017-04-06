@@ -23,9 +23,9 @@ protocol DraggableCardDelegate: class {
 
 //Drag animation constants
 private let rotationMax: CGFloat = 1.0
-private let defaultRotationAngle = CGFloat(M_PI) / 10.0
+private let defaultRotationAngle = CGFloat(M_PI) / 20.0
 private let scaleMin: CGFloat = 0.8
-public let cardSwipeActionAnimationDuration: TimeInterval  = 0.4
+public let cardSwipeActionAnimationDuration: TimeInterval  = 1
 
 private let screenSize = UIScreen.main.bounds.size
 
@@ -33,7 +33,7 @@ private let screenSize = UIScreen.main.bounds.size
 private let cardResetAnimationSpringBounciness: CGFloat = 0.0
 private let cardResetAnimationSpringSpeed: CGFloat = 20.0
 private let cardResetAnimationKey = "resetPositionAnimation"
-private let cardResetAnimationDuration: TimeInterval = 0.2
+private let cardResetAnimationDuration: TimeInterval = 0.5
 
 public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
     

@@ -21,14 +21,6 @@ class WOWNewEnjoyController: WOWBaseViewController {
     var fineWroksArr = [WOWFineWroksModel]()
     var categoryId = 0
     var indexRows = 0
-    fileprivate var dataSource: [UIImage] = {
-        var array: [UIImage] = []
-        for index in 0..<5 {
-            array.append(UIImage(named: "guide0")!)
-        }
-        
-        return array
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()

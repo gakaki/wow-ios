@@ -64,7 +64,6 @@ class WOWUserCenterController: WOWBaseViewController {
         v.magicView.sliderHeight        = 3
         v.magicView.isSwitchAnimated        = false
         v.magicView.isScrollEnabled         = true
-        v.magicView.isHeaderHidden = false
         self.addChildViewController(v)
         self.view.addSubview(v.magicView)
         v.magicView.snp.makeConstraints {[weak self] (make) -> Void in

@@ -157,7 +157,25 @@ extension WOWWorkController:UICollectionViewDelegate,UICollectionViewDataSource{
 
 
     }
-
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard dataArr.count > 9 else {
+            return
+        }
+        let offsetY = scrollView.contentOffset.y
+        var isHidden = false
+        if offsetY > 100 {
+            isHidden = true
+        }
+        if  let del = delegate {
+            del.topView?(isHidden: isHidden)
+        }
+    }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        if  let del = delegate {
+            del.topView?(isHidden: false)
+        }
+    }
 }
 //MARK: Delegate
 extension WOWWorkController:CollectionViewWaterfallLayoutDelegate{

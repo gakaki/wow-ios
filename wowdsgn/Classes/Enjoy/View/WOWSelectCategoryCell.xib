@@ -25,6 +25,10 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ef4-mK-xEf">
                         <rect key="frame" x="330" y="7.5" width="30" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="BDM-UO-ocC"/>
+                            <constraint firstAttribute="height" constant="34" id="vuV-Nt-UfV"/>
+                        </constraints>
                         <state key="selected" image="selectBig"/>
                     </button>
                 </subviews>

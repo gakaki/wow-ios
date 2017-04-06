@@ -17,6 +17,7 @@ class WOWMasterpieceController: WOWBaseViewController {
     let pageSize   = 10
     weak var delegate:WOWChideControllerDelegate?
     var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
+
     @IBOutlet weak var publishBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,7 +120,7 @@ class WOWMasterpieceController: WOWBaseViewController {
 
     }
     fileprivate func configTable(){
-        tableView.estimatedRowHeight = 200
+        tableView.estimatedRowHeight = MGScreenWidth
         tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.register(UINib.nibName(cellID), forCellReuseIdentifier:cellID)
         tableView.delegate = self
@@ -185,7 +186,7 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
         delayQueue.asyncAfter(deadline: .now() + 0.5) {
             
             DispatchQueue.main.async {
-              
+            
                 self.changeState(alpha: 1)
             }
             
@@ -193,68 +194,32 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
         
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        if scrollView.mj_offsetY < self.backTopBtnScrollViewOffsetY {
-            self.topBtn.isHidden = true
-        }else{
-            self.topBtn.isHidden = false
-        }
-
-        
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         self.perform(#selector(scrollViewDidEndScrollingAnimation), with: nil, afterDelay: 0.1)
         let a = scrollView.contentOffset.y
-        
-        if a -  lastContentOffset  > 50{
-   
+        //        lastContentOffset = scrollView.contentOffset.y
+        if a -  lastContentOffset  > 20 && a > 0{
+            //            print("shang")
             lastContentOffset = a
-
+     
             changeState(alpha: 0)
             return
-        }else if lastContentOffset - a > 50 {
+        }else if lastContentOffset - a > 20 && (a  <= scrollView.contentSize.height-scrollView.bounds.size.height-20) {
             lastContentOffset = a
-
+       
             changeState(alpha: 1)
             return
         }
         
         
     }
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let a = scrollView.contentOffset.y
-        if a -  lastContentOffset  > 50{
-    
-            lastContentOffset = a
 
-            changeState(alpha: 0)
-            return
-        }else if lastContentOffset - a > 50 {
-            lastContentOffset = a
-
-            changeState(alpha: 1)
-            return
-        }
-        
-        
-    }
-    
     func changeState(alpha:CGFloat)  {
-        UIView.animate(withDuration: 0.3) {
-            self.publishBtn.alpha = alpha
-        }
+
+                UIView.animate(withDuration: 0.3) {
+                    self.publishBtn.alpha = alpha
+                }
+      
     }
 
-    
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        lastContentOffset = scrollView.contentOffset.y
-//    }
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        
-//        if lastContentOffset < scrollView.contentOffset.y {
-////            print("shang")
-//        }else{
-////            print("xia")
-//        }
-//        
-//    }
 }

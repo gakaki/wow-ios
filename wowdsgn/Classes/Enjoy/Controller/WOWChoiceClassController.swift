@@ -17,7 +17,7 @@ class WOWChoiceClassController: WOWBaseViewController {
 //    var imgSizeId : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "选择上传分类"
+        self.title = "选择分类"
 
     
         

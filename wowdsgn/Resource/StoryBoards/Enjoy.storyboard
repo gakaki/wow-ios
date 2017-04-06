@@ -38,60 +38,55 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ee-Wp-Dzk">
-                                        <rect key="frame" x="45" y="7" width="100" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="dkS-PC-kfN"/>
-                                            <constraint firstAttribute="width" constant="100" id="qf6-EH-sUe"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="0" image="praise-black">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected" image="Thumb-active"/>
-                                        <connections>
-                                            <action selector="clickPraise:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="PWq-si-2Aw"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSA-8l-fbg">
-                                        <rect key="frame" x="167.5" y="7" width="40" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="0" image="photoDetail-no">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled" image="collect-ban"/>
-                                        <state key="selected" image="photoDetail-yes"/>
-                                        <connections>
-                                            <action selector="clickCollection:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="EIN-4v-wm8"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXe-aW-8ul">
-                                        <rect key="frame" x="250" y="7" width="80" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="FW1-b3-vPe"/>
-                                            <constraint firstAttribute="height" constant="30" id="qBZ-9h-qXJ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" image="share-black">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected" image="share-black"/>
-                                        <connections>
-                                            <action selector="clickShare:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="1ZP-I5-Y4W"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RDh-NI-dnI">
+                                        <rect key="frame" x="0.0" y="0.5" width="375" height="43.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ee-Wp-Dzk">
+                                                <rect key="frame" x="0.0" y="7" width="125" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="0" image="praise-black">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected" image="Thumb-active"/>
+                                                <connections>
+                                                    <action selector="clickPraise:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="PWq-si-2Aw"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSA-8l-fbg">
+                                                <rect key="frame" x="125" y="7" width="125" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="0" image="photoDetail-no">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled" image="collect-ban"/>
+                                                <state key="selected" image="photoDetail-yes"/>
+                                                <connections>
+                                                    <action selector="clickCollection:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="EIN-4v-wm8"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXe-aW-8ul">
+                                                <rect key="frame" x="250" y="7" width="125" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" image="share-black">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected" image="share-black"/>
+                                                <connections>
+                                                    <action selector="clickShare:" destination="aAn-1Z-NjH" eventType="touchUpInside" id="1ZP-I5-Y4W"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="fXe-aW-8ul" firstAttribute="centerY" secondItem="fgG-lP-gu7" secondAttribute="centerY" id="1nE-IS-5VH"/>
-                                    <constraint firstItem="TSA-8l-fbg" firstAttribute="centerX" secondItem="fgG-lP-gu7" secondAttribute="centerX" id="2um-ZV-R5O"/>
+                                    <constraint firstAttribute="trailing" secondItem="RDh-NI-dnI" secondAttribute="trailing" id="2PG-Ko-gfh"/>
                                     <constraint firstAttribute="height" constant="44" id="6cb-S7-Fmq"/>
-                                    <constraint firstItem="TSA-8l-fbg" firstAttribute="centerY" secondItem="fgG-lP-gu7" secondAttribute="centerY" id="77O-qk-FZC"/>
-                                    <constraint firstAttribute="trailing" secondItem="fXe-aW-8ul" secondAttribute="trailing" constant="45" id="Vpb-FX-fFl"/>
-                                    <constraint firstItem="1Ee-Wp-Dzk" firstAttribute="centerY" secondItem="fgG-lP-gu7" secondAttribute="centerY" id="WzN-9V-gMg"/>
-                                    <constraint firstItem="1Ee-Wp-Dzk" firstAttribute="leading" secondItem="fgG-lP-gu7" secondAttribute="leading" constant="45" id="glh-3p-fe9"/>
+                                    <constraint firstAttribute="bottom" secondItem="RDh-NI-dnI" secondAttribute="bottom" id="Rzn-TV-KFR"/>
+                                    <constraint firstItem="RDh-NI-dnI" firstAttribute="top" secondItem="7Di-2D-QK7" secondAttribute="bottom" id="c8M-Pe-gW1"/>
                                     <constraint firstItem="7Di-2D-QK7" firstAttribute="top" secondItem="fgG-lP-gu7" secondAttribute="top" id="jK0-EB-zRh"/>
                                     <constraint firstAttribute="trailing" secondItem="7Di-2D-QK7" secondAttribute="trailing" id="ttn-jV-5Kh"/>
+                                    <constraint firstItem="RDh-NI-dnI" firstAttribute="leading" secondItem="fgG-lP-gu7" secondAttribute="leading" id="tyh-31-Aii"/>
                                     <constraint firstItem="7Di-2D-QK7" firstAttribute="leading" secondItem="fgG-lP-gu7" secondAttribute="leading" id="uqt-Na-bYT"/>
                                 </constraints>
                             </view>
@@ -116,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Vx-Pa-L1w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1777" y="-329"/>
+            <point key="canvasLocation" x="-1778.4000000000001" y="-329.68515742128938"/>
         </scene>
         <!--Choice Class Controller-->
         <scene sceneID="py9-Ya-eN8">

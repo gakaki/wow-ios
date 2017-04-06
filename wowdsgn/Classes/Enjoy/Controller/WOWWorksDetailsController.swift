@@ -78,6 +78,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
                 
                 if strongSelf.modelData?.myInstagram ?? false {
                     strongSelf.btnCollection.isEnabled = false
+                    strongSelf.btnCollection.isHidden = true
                     
                 }
                 strongSelf.tableView.reloadData()

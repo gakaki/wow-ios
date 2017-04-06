@@ -14,6 +14,7 @@ class WOWChoiceClassController: WOWBaseViewController {
     var px = (MGScreenWidth - (80 * 3)) / 4
     var instagramCategoryId:Int?
     var btnRright = UIButton()
+    var classId : Int?
 //    var imgSizeId : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,17 +179,20 @@ extension WOWChoiceClassController:UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
      
         let m = categoryArr[indexPath.row]
+        classId = m.id ?? 0
         for model in categoryArr {
             if model == m {
                 if model.isSelect {
 //                    btnRright.isSelected    = false
                     btnRright.isEnabled     = false
                     model.isSelect          = false
+//                    classId = model.id ?? 0
                     
                 }else {
 //                    btnRright.isSelected    = true
                     btnRright.isEnabled     = true
                     model.isSelect          = true
+//                    classId = model.id ?? 0
                     
                 }
             }else {
@@ -224,7 +228,7 @@ extension WOWChoiceClassController:TZImagePickerControllerDelegate,PhotoTweaksVi
     func photoTweaksController(_ controller: PhotoTweaksViewController, didFinishWithCroppedImage croppedImage: UIImage!, clooseSizeImgId sizeId: Int32) {
       
         if categoryArr.count > 0 {
-            VCRedirect.bingReleaseWorks(photo: croppedImage, instagramCategoryId: categoryArr[0].id ?? 0, sizeImgId: Int(sizeId))
+            VCRedirect.bingReleaseWorks(photo: croppedImage, instagramCategoryId: classId ?? 0, sizeImgId: Int(sizeId))
         }
         
    

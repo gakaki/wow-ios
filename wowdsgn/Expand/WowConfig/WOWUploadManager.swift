@@ -98,7 +98,7 @@ class WOWUploadManager {
     static  func uploadShareImg(_ image:UIImage,successClosure:@escaping HeadImgURL,failClosure:@escaping FailClosure){
 
         // 拼接唯一字符串
-        let qiniu_key  = QiniuBucket.ShowWorksDetail.rawValue + onlyStr() + "_2dimension_" + String(describing: NSDecimalNumber(value: Int(image.size.width))) + "x" + String(describing: NSDecimalNumber(value: Int(image.size.height)))
+        let qiniu_key  = QiniuBucket.ShowWorksDetail.rawValue + hashidsUserIdStr() + onlyStr() + "_2dimension_" + String(describing: NSDecimalNumber(value: Int(image.size.width))) + "x" + String(describing: NSDecimalNumber(value: Int(image.size.height)))
         
         PushImage(image, imagePath: qiniu_key, successClosure: { (url) in
             // 保存用户URL

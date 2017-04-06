@@ -20,6 +20,7 @@ class WOWEnjoyController: WOWBaseViewController {
     var vc_masterpiece:WOWMasterpieceController?
     var isOpen: Bool = false
     var currentCategoryId = 0
+    let categoryName = "全部"
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -47,7 +48,7 @@ class WOWEnjoyController: WOWBaseViewController {
     lazy var navView:WOWEnjoyNavView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWEnjoyNavView.self), owner: self, options: nil)?.last as! WOWEnjoyNavView
         v.categoryBtn.addTarget(self, action: #selector(categoryClick), for: .touchUpInside)
-        v.lbTitle.text = "ALL"
+        v.lbTitle.text = "全部"
         return v
     }()
     lazy var backView:WOWCategoryBackView = {
@@ -99,18 +100,18 @@ class WOWEnjoyController: WOWBaseViewController {
     //MARK: -- NetWork
     override func request() {
         super.request()
-        WOWNetManager.sharedManager.requestWithTarget(.api_getCategory, successClosure: {[weak self](result, code) in
+        WOWNetManager.sharedManager.requestWithTarget(.api_getCategory_Has, successClosure: {[weak self](result, code) in
             WOWHud.dismiss()
             
             if let strongSelf = self{
                 let r                             =  JSON(result)
                 strongSelf.categoryArr          =  Mapper<WOWEnjoyCategoryModel>().mapArray(JSONObject: r.arrayObject ) ?? [WOWEnjoyCategoryModel]()
-                let category = WOWEnjoyCategoryModel(id: 0, categoryName: "ALL")
+                let category = WOWEnjoyCategoryModel(id: 0, categoryName: strongSelf.categoryName)
                 strongSelf.categoryArr.insertAsFirst(category)
                 for cate in strongSelf.categoryArr {
                     if cate.id == strongSelf.currentCategoryId {
                         cate.isSelect = true
-                        strongSelf.navView.lbTitle.text = cate.categoryName ?? "ALL"
+                        strongSelf.navView.lbTitle.text = cate.categoryName ?? strongSelf.categoryName
                         break
                     }
                 }
@@ -250,11 +251,11 @@ extension WOWEnjoyController:WOWSelectCategoryDelegate, WOWChideControllerDelega
         
         vc_masterpiece?.categoryId = model.id ?? 0
         vc_masterpiece?.pageIndex = 1
-        vc_masterpiece?.backTop()
+//        vc_masterpiece?.backTop()
         vc_newEnjoy?.categoryId = model.id ?? 0
         vc_masterpiece?.request()
         vc_newEnjoy?.refreshRequest()
-        navView.lbTitle.text = model.categoryName ?? "ALL"
+        navView.lbTitle.text = model.categoryName ?? categoryName
 
         changeButtonState()
     }

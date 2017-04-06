@@ -9,7 +9,7 @@
 import UIKit
 
 class WOWWorkdEmptyView: UIView {
-
+    @IBOutlet weak var lbEmpty: UILabel!
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

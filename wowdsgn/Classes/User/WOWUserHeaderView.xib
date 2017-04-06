@@ -17,8 +17,9 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZp-e1-uOI">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                 </imageView>
-                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_cover" translatesAutoresizingMaskIntoConstraints="NO" id="74T-jB-D8r">
+                <imageView clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="74T-jB-D8r">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Znd-W2-7Qv">
                     <rect key="frame" x="229.5" y="175" width="1" height="25"/>
@@ -82,7 +83,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCR-u8-rjf">
-                    <rect key="frame" x="188.5" y="119.5" width="0.0" height="0.0"/>
+                    <rect key="frame" x="187.5" y="119.5" width="0.0" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="220.5" id="7gS-Ms-Vnf"/>
                     </constraints>
@@ -158,6 +159,5 @@
     </objects>
     <resources>
         <image name="userEdit" width="30" height="30"/>
-        <image name="user_cover" width="375" height="210"/>
     </resources>
 </document>

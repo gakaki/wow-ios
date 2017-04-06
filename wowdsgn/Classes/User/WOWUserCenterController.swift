@@ -36,11 +36,11 @@ class WOWUserCenterController: WOWBaseViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -50,7 +50,9 @@ class WOWUserCenterController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         userHeadImg.borderRadius(40)
-
+        userHeadImg.addAction {
+            VCRedirect.goUserInfo()
+        }
         v                               = VCVTMagic()
         v.magicView.dataSource          = self
         v.magicView.delegate            = self
@@ -62,6 +64,7 @@ class WOWUserCenterController: WOWBaseViewController {
         v.magicView.sliderHeight        = 3
         v.magicView.isSwitchAnimated        = false
         v.magicView.isScrollEnabled         = true
+        v.magicView.isHeaderHidden = false
         self.addChildViewController(v)
         self.view.addSubview(v.magicView)
         v.magicView.snp.makeConstraints {[weak self] (make) -> Void in

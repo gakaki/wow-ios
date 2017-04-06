@@ -81,6 +81,8 @@ extension WOWPraiseTwoCell: UICollectionViewDataSource, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as! WOWWorksCell
         cell.imageView.borderRadius(18.w)
+        let borColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
+        cell.imageView.borderColor(1, borderColor: borColor)
         let model = dataArr[indexPath.row]
         cell.imageView.set_webUserPhotoimage_url(model.avatar ?? "")
         return cell

@@ -66,11 +66,11 @@ class WOWUploadManager {
     // 上传头像
     static  func uploadPhoto(_ image:UIImage,successClosure:@escaping HeadImgURL,failClosure:@escaping FailClosure){
          // 压缩图片
-        let photoImage = imageCompressForWidth(sourceImage: image, targetWidth: 200)
+//        let photoImage = imageCompressForWidth(sourceImage: image, targetWidth: 200)
          //          拼接唯一字符串
         let qiniu_key  = QiniuBucket.UserPhoto.rawValue + hashidsUserIdStr()
         
-        PushImage(photoImage, imagePath: qiniu_key, successClosure: { (url) in
+        PushImage(image, imagePath: qiniu_key, successClosure: { (url) in
             // 保存用户URL
             if let url = url {
                 let serverUrl = url + "?v=" + onlyStr() // 由于七牛云服务器的图片缓存问题， 所以在传给后台的时候， 要 拼上 ?v= XXX 这样的格式，确保从七牛读取图片时，拿到的最新的图片data ,同时本地也是如此

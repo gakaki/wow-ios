@@ -56,33 +56,9 @@ class WOWHotMainCell: UITableViewCell {
         modelData = m
         lbWOWTitle.text = m.columnName?.get_formted_Space()
         shareProductImage = m.topicImg
-//        if let url = m.topicImg {
-        
-            
-//            let image_place_holder = UIImage(named: "placeholder_product")
-//            var res :String?
-//            switch UIDevice.deviceType {
-//            case .dt_iPhone4S,.dt_iPhone5:
-//                res     = "\(url)?imageView2/0/w/500/format/webp/q/90"
-//            case .dt_iPhone6:
-//                res     = "\(url)?imageView2/0/w/700/format/webp/q/90"
-//            case .dt_iPhone6_Plus:
-//                res     = "\(url)?imageView2/0/w/900/format/webp/q/90"
-//            default:
-//                res     = "\(url)?imageView2/0/w/700/format/webp/q/90"
-//                
-//            }
-//            let url_obj            = URL(string:res ?? "")
-            imgBack.set_webimage_url(m.topicImg)
-//            imgBack.yy_setImage(with: url_obj,
-//                                placeholder: image_place_holder,
-//                                completion: { [weak self](image, url, cacheType, webImage, error) in
-//                                    if let strongSelf = self{
-//                                        strongSelf.shareProductImage = image
-//                                    }
-//            })
 
-//        }
+        imgBack.set_webimage_url(m.topicImg)
+
         
         if m.favoriteQty == 0 {
             lbBrowse.text = ""

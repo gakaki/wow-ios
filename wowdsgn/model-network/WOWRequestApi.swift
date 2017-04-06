@@ -273,6 +273,8 @@ public enum RequestApi{
     //获取分类
     case api_getCategory
     
+    case api_getCategory_Has
+    
     case api_PushWorks(params: [String: AnyObject])
     
     case api_GetWorksDetails(worksId: Int)
@@ -571,6 +573,8 @@ extension RequestApi:TargetType{
             return URL_LoginByCaptcha
         case .api_getCategory:
             return URL_GetCategory
+        case .api_getCategory_Has:
+            return URL_GetCategory_Has
         
         case .api_PushWorks:
             return URL_PushImgWorks
@@ -625,6 +629,7 @@ extension RequestApi:TargetType{
             .api_Home_Tabs,
             .api_ProductCategory,
             .api_getCategory,
+            .api_getCategory_Has,
             .api_GetWorksDetails,
             .api_UserStatistics,
             .api_WorksList,

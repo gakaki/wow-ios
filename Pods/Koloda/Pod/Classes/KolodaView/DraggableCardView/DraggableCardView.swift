@@ -30,7 +30,7 @@ public let cardSwipeActionAnimationDuration: TimeInterval  = 0.4
 private let screenSize = UIScreen.main.bounds.size
 
 //Reset animation constants
-private let cardResetAnimationSpringBounciness: CGFloat = 10.0
+private let cardResetAnimationSpringBounciness: CGFloat = 0.0
 private let cardResetAnimationSpringSpeed: CGFloat = 20.0
 private let cardResetAnimationKey = "resetPositionAnimation"
 private let cardResetAnimationDuration: TimeInterval = 0.2

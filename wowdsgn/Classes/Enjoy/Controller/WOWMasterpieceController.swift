@@ -185,8 +185,8 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
         let delayQueue = DispatchQueue.global()
         delayQueue.asyncAfter(deadline: .now() + 0.5) {
             
-            DispatchQueue.main.async {
-            
+            DispatchQueue.main.async { [unowned self] in
+
                 self.changeState(alpha: 1)
             }
             
@@ -221,10 +221,9 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func changeState(alpha:CGFloat)  {
-
-                UIView.animate(withDuration: 0.3) {
-                    self.publishBtn.alpha = alpha
-                }
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            self.publishBtn.alpha = alpha
+        }
       
     }
 

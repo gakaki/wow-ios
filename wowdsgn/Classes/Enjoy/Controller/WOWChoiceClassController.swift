@@ -39,15 +39,14 @@ class WOWChoiceClassController: WOWBaseViewController {
   
         btnRright = UIButton(frame:CGRect.init(x: 0, y: 0, width: 50, height: 18))
         btnRright.setTitle("下一步", for: .normal)
-        btnRright.setTitleColor(UIColor.darkGray, for: .normal)
-        btnRright.setTitleColor(UIColor.black, for: .selected)
+        btnRright.setTitleColor(UIColor.black, for: .normal)
+        btnRright.setTitleColor(UIColor.init(hexString: "cccccc"), for: .disabled)
         btnRright.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-//        btnRright.isEnabled = true
         btnRright.addTarget(self,action:#selector(nextAction),for:.touchUpInside)
-//
         let barItem = UIBarButtonItem.init(customView: btnRright)
         self.navigationItem.rightBarButtonItem = barItem
         btnRright.isEnabled     = false
+        
     }
     func configCollectionView() {
         
@@ -65,7 +64,6 @@ class WOWChoiceClassController: WOWBaseViewController {
         makeCustomerImageNavigationItem("close", left:true) {[weak self] in
             if let strongSelf = self{
 
-//                    strongSelf.dismiss(animated: true, completion: nil)
                 strongSelf.popVC()
                 
             }
@@ -183,12 +181,12 @@ extension WOWChoiceClassController:UICollectionViewDelegate,UICollectionViewData
         for model in categoryArr {
             if model == m {
                 if model.isSelect {
-                    btnRright.isSelected    = false
+//                    btnRright.isSelected    = false
                     btnRright.isEnabled     = false
                     model.isSelect          = false
                     
                 }else {
-                    btnRright.isSelected    = true
+//                    btnRright.isSelected    = true
                     btnRright.isEnabled     = true
                     model.isSelect          = true
                     

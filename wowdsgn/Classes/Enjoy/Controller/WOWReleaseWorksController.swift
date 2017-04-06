@@ -98,21 +98,20 @@ class WOWReleaseWorksController: WOWBaseViewController {
     // MARK: - 发布按钮
     @IBAction func releaseAction(_ sender: Any) {
         
-
+            requestPushlish()
         
+    }
+    func requestPushlish()  {
         let des = textView.text ?? ""
         if des.length > 35 {
             WOWHud.showMsg("请输入35字以内")
             return
         }
-//        if des.length < 3 {
-//            WOWHud.showMsg("请输入至少三个字")
-//            return
-//        }
+        textView.resignFirstResponder()
         
         WOWHud.showLoadingSV()
         WOWUploadManager.uploadShareImg(photo, successClosure: {[weak self] (url) in
-           
+            
             if let strongSelf = self {
                 strongSelf.requestPushWorks(pic: url ?? "", des: des)
             }
@@ -178,4 +177,13 @@ extension WOWReleaseWorksController:UITextViewDelegate{
         }
         
     }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            requestPushlish()
+            return false
+        }else {
+            return true
+        }
+    }
+
 }

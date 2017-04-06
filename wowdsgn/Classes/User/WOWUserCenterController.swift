@@ -72,8 +72,7 @@ class WOWUserCenterController: WOWBaseViewController {
                 
             }
         }
-        
-        
+//        v.magicView.switch(toPage: 1, animated: false)
         vc_product    = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWWorkController.self)) as? WOWWorkController
         vc_brand    = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWPraiseController.self)) as? WOWPraiseController
         vc_designer = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWCollectController.self)) as? WOWCollectController

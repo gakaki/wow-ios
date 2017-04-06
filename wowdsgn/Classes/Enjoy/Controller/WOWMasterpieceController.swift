@@ -194,6 +194,12 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
         
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.mj_offsetY < self.backTopBtnScrollViewOffsetY {
+            self.topBtn.isHidden = true
+        }else{
+            self.topBtn.isHidden = false
+        }
+
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         self.perform(#selector(scrollViewDidEndScrollingAnimation), with: nil, afterDelay: 0.1)
         let a = scrollView.contentOffset.y

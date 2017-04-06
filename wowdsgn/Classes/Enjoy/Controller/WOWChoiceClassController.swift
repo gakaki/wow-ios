@@ -117,7 +117,7 @@ class WOWChoiceClassController: WOWBaseViewController {
                 imagePickerVc?.allowPickingOriginalPhoto = false// 用户不能选择发送原图
                 imagePickerVc?.sortAscendingByModificationDate = false// 是否按照时间排序
                 imagePickerVc?.autoDismiss = false // 不自动dismiss
-                imagePickerVc?.allowPreview = false // 不预览图片
+                imagePickerVc?.allowPreview = true // 不预览图片
                 imagePickerVc?.showSelectBtn = true // 展示完成按钮
                 imagePickerVc?.didFinishPickingPhotosHandle = {[weak self](images,asstes,isupdete) in
                     if let strongSelf = self,let images = images {

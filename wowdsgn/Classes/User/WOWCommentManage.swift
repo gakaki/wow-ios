@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Photos
 class WOWCommentManage: NSObject {
 
 }

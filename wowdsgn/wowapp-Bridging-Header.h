@@ -15,7 +15,7 @@
 @import DZNEmptyDataSet;
 
 @import EZSwiftExtensions;
-@import TZImagePickerController;
+
 //@import HidingNavigationBar;
 @import YYImage;
 @import YYCache;
@@ -33,7 +33,7 @@
 #import <UMMobClick/MobClick.h>
 #import "UMessage.h"
 #import "PhotoTweaksViewController.h"
-
+#import "TZImagePickerController.h"
 #import "TalkingData.h"
 #import "TalkingDataAppCpa.h"
 #import "TalkingDataSMS.h"

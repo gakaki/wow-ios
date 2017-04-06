@@ -307,6 +307,20 @@
 		2D0077701E545A790033108D /* StyleCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D00776E1E545A780033108D /* StyleCVCell.swift */; };
 		2D0077711E545A790033108D /* StyleCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D00776F1E545A780033108D /* StyleCVCell.xib */; };
 		2D01E19E1E651BCB008F71DC /* WOWHomeControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D01E19D1E651BCB008F71DC /* WOWHomeControllers.swift */; };
+		2D0867451E95D6E8006BF8B2 /* NSBundle+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D08672B1E95D6E8006BF8B2 /* NSBundle+TZImagePicker.m */; };
+		2D0867461E95D6E8006BF8B2 /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D08672D1E95D6E8006BF8B2 /* TZAssetCell.m */; };
+		2D0867471E95D6E8006BF8B2 /* TZAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D08672F1E95D6E8006BF8B2 /* TZAssetModel.m */; };
+		2D0867481E95D6E8006BF8B2 /* TZGifPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0867311E95D6E8006BF8B2 /* TZGifPhotoPreviewController.m */; };
+		2D0867491E95D6E8006BF8B2 /* TZImageCropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0867331E95D6E8006BF8B2 /* TZImageCropManager.m */; };
+		2D08674A1E95D6E8006BF8B2 /* TZImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0867351E95D6E8006BF8B2 /* TZImageManager.m */; };
+		2D08674B1E95D6E8006BF8B2 /* TZImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2D0867361E95D6E8006BF8B2 /* TZImagePickerController.bundle */; };
+		2D08674C1E95D6E8006BF8B2 /* TZImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0867381E95D6E8006BF8B2 /* TZImagePickerController.m */; };
+		2D08674D1E95D6E8006BF8B2 /* TZPhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D08673A1E95D6E8006BF8B2 /* TZPhotoPickerController.m */; };
+		2D08674E1E95D6E8006BF8B2 /* TZPhotoPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D08673C1E95D6E8006BF8B2 /* TZPhotoPreviewCell.m */; };
+		2D08674F1E95D6E8006BF8B2 /* TZPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D08673E1E95D6E8006BF8B2 /* TZPhotoPreviewController.m */; };
+		2D0867501E95D6E8006BF8B2 /* TZProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0867401E95D6E8006BF8B2 /* TZProgressView.m */; };
+		2D0867511E95D6E8006BF8B2 /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0867421E95D6E8006BF8B2 /* TZVideoPlayerController.m */; };
+		2D0867521E95D6E8006BF8B2 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0867441E95D6E8006BF8B2 /* UIView+Layout.m */; };
 		2D1138C91E84CB7B00A78FD6 /* WOWWorksDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1138C81E84CB7B00A78FD6 /* WOWWorksDetailsController.swift */; };
 		2D1138CC1E84CC7800A78FD6 /* WorksDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1138CA1E84CC7800A78FD6 /* WorksDetailCell.swift */; };
 		2D1138CD1E84CC7800A78FD6 /* WorksDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D1138CB1E84CC7800A78FD6 /* WorksDetailCell.xib */; };
@@ -910,6 +924,33 @@
 		2D00776E1E545A780033108D /* StyleCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleCVCell.swift; sourceTree = "<group>"; };
 		2D00776F1E545A780033108D /* StyleCVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleCVCell.xib; sourceTree = "<group>"; };
 		2D01E19D1E651BCB008F71DC /* WOWHomeControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWHomeControllers.swift; sourceTree = "<group>"; };
+		2D08672A1E95D6E8006BF8B2 /* NSBundle+TZImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+TZImagePicker.h"; sourceTree = "<group>"; };
+		2D08672B1E95D6E8006BF8B2 /* NSBundle+TZImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+TZImagePicker.m"; sourceTree = "<group>"; };
+		2D08672C1E95D6E8006BF8B2 /* TZAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetCell.h; sourceTree = "<group>"; };
+		2D08672D1E95D6E8006BF8B2 /* TZAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZAssetCell.m; sourceTree = "<group>"; };
+		2D08672E1E95D6E8006BF8B2 /* TZAssetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetModel.h; sourceTree = "<group>"; };
+		2D08672F1E95D6E8006BF8B2 /* TZAssetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZAssetModel.m; sourceTree = "<group>"; };
+		2D0867301E95D6E8006BF8B2 /* TZGifPhotoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZGifPhotoPreviewController.h; sourceTree = "<group>"; };
+		2D0867311E95D6E8006BF8B2 /* TZGifPhotoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZGifPhotoPreviewController.m; sourceTree = "<group>"; };
+		2D0867321E95D6E8006BF8B2 /* TZImageCropManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZImageCropManager.h; sourceTree = "<group>"; };
+		2D0867331E95D6E8006BF8B2 /* TZImageCropManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZImageCropManager.m; sourceTree = "<group>"; };
+		2D0867341E95D6E8006BF8B2 /* TZImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZImageManager.h; sourceTree = "<group>"; };
+		2D0867351E95D6E8006BF8B2 /* TZImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZImageManager.m; sourceTree = "<group>"; };
+		2D0867361E95D6E8006BF8B2 /* TZImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TZImagePickerController.bundle; sourceTree = "<group>"; };
+		2D0867371E95D6E8006BF8B2 /* TZImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZImagePickerController.h; sourceTree = "<group>"; };
+		2D0867381E95D6E8006BF8B2 /* TZImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZImagePickerController.m; sourceTree = "<group>"; };
+		2D0867391E95D6E8006BF8B2 /* TZPhotoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPickerController.h; sourceTree = "<group>"; };
+		2D08673A1E95D6E8006BF8B2 /* TZPhotoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZPhotoPickerController.m; sourceTree = "<group>"; };
+		2D08673B1E95D6E8006BF8B2 /* TZPhotoPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPreviewCell.h; sourceTree = "<group>"; };
+		2D08673C1E95D6E8006BF8B2 /* TZPhotoPreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZPhotoPreviewCell.m; sourceTree = "<group>"; };
+		2D08673D1E95D6E8006BF8B2 /* TZPhotoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPreviewController.h; sourceTree = "<group>"; };
+		2D08673E1E95D6E8006BF8B2 /* TZPhotoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZPhotoPreviewController.m; sourceTree = "<group>"; };
+		2D08673F1E95D6E8006BF8B2 /* TZProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZProgressView.h; sourceTree = "<group>"; };
+		2D0867401E95D6E8006BF8B2 /* TZProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZProgressView.m; sourceTree = "<group>"; };
+		2D0867411E95D6E8006BF8B2 /* TZVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZVideoPlayerController.h; sourceTree = "<group>"; };
+		2D0867421E95D6E8006BF8B2 /* TZVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZVideoPlayerController.m; sourceTree = "<group>"; };
+		2D0867431E95D6E8006BF8B2 /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
+		2D0867441E95D6E8006BF8B2 /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
 		2D1138C81E84CB7B00A78FD6 /* WOWWorksDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWWorksDetailsController.swift; sourceTree = "<group>"; };
 		2D1138CA1E84CC7800A78FD6 /* WorksDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorksDetailCell.swift; sourceTree = "<group>"; };
 		2D1138CB1E84CC7800A78FD6 /* WorksDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorksDetailCell.xib; sourceTree = "<group>"; };
@@ -1727,6 +1768,7 @@
 		069D31051DB47ADD00A059D0 /* WowVendor */ = {
 			isa = PBXGroup;
 			children = (
+				2D0867291E95D6E8006BF8B2 /* TZImagePickerController */,
 				2D670E7F1E851AF900D7A8EB /* PhotoTweaks */,
 				63A3104F1E77E41000D7C983 /* HidingNavigationBar */,
 				63F14ADA1E66C5450034C09E /* CustomTransion */,
@@ -1904,6 +1946,40 @@
 				2DDC99AE1DDADF4F00201856 /* CellView */,
 			);
 			path = TableViewDelegate;
+			sourceTree = "<group>";
+		};
+		2D0867291E95D6E8006BF8B2 /* TZImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				2D08672A1E95D6E8006BF8B2 /* NSBundle+TZImagePicker.h */,
+				2D08672B1E95D6E8006BF8B2 /* NSBundle+TZImagePicker.m */,
+				2D08672C1E95D6E8006BF8B2 /* TZAssetCell.h */,
+				2D08672D1E95D6E8006BF8B2 /* TZAssetCell.m */,
+				2D08672E1E95D6E8006BF8B2 /* TZAssetModel.h */,
+				2D08672F1E95D6E8006BF8B2 /* TZAssetModel.m */,
+				2D0867301E95D6E8006BF8B2 /* TZGifPhotoPreviewController.h */,
+				2D0867311E95D6E8006BF8B2 /* TZGifPhotoPreviewController.m */,
+				2D0867321E95D6E8006BF8B2 /* TZImageCropManager.h */,
+				2D0867331E95D6E8006BF8B2 /* TZImageCropManager.m */,
+				2D0867341E95D6E8006BF8B2 /* TZImageManager.h */,
+				2D0867351E95D6E8006BF8B2 /* TZImageManager.m */,
+				2D0867361E95D6E8006BF8B2 /* TZImagePickerController.bundle */,
+				2D0867371E95D6E8006BF8B2 /* TZImagePickerController.h */,
+				2D0867381E95D6E8006BF8B2 /* TZImagePickerController.m */,
+				2D0867391E95D6E8006BF8B2 /* TZPhotoPickerController.h */,
+				2D08673A1E95D6E8006BF8B2 /* TZPhotoPickerController.m */,
+				2D08673B1E95D6E8006BF8B2 /* TZPhotoPreviewCell.h */,
+				2D08673C1E95D6E8006BF8B2 /* TZPhotoPreviewCell.m */,
+				2D08673D1E95D6E8006BF8B2 /* TZPhotoPreviewController.h */,
+				2D08673E1E95D6E8006BF8B2 /* TZPhotoPreviewController.m */,
+				2D08673F1E95D6E8006BF8B2 /* TZProgressView.h */,
+				2D0867401E95D6E8006BF8B2 /* TZProgressView.m */,
+				2D0867411E95D6E8006BF8B2 /* TZVideoPlayerController.h */,
+				2D0867421E95D6E8006BF8B2 /* TZVideoPlayerController.m */,
+				2D0867431E95D6E8006BF8B2 /* UIView+Layout.h */,
+				2D0867441E95D6E8006BF8B2 /* UIView+Layout.m */,
+			);
+			path = TZImagePickerController;
 			sourceTree = "<group>";
 		};
 		2D2331D81DFF9398006E7BC0 /* UpdateView */ = {
@@ -2706,6 +2782,7 @@
 				069D33491DB47ADE00A059D0 /* Store.storyboard in Resources */,
 				63DD6A5E1DE29EFF005BE631 /* WOWProductLimitCell.xib in Resources */,
 				2D509A771DB5D3120047CD13 /* WOWSearchBarView.xib in Resources */,
+				2D08674B1E95D6E8006BF8B2 /* TZImagePickerController.bundle in Resources */,
 				069D32841DB47ADD00A059D0 /* WOWProductHeaderView.xib in Resources */,
 				63F3DA841DE6873E009CE52D /* WOWProductCommentCell.xib in Resources */,
 				63546E101E84B40E00DB7F82 /* WOWSelectCategory.xib in Resources */,
@@ -3001,6 +3078,7 @@
 				63EC147F1E2CC2E80027BEFD /* WOWSearchBrandView.swift in Sources */,
 				63A310531E77E41000D7C983 /* HidingViewController.swift in Sources */,
 				069D31DF1DB47ADD00A059D0 /* VCDesignerList.swift in Sources */,
+				2D08674A1E95D6E8006BF8B2 /* TZImageManager.m in Sources */,
 				069D32D91DB47ADD00A059D0 /* WOWUserController.swift in Sources */,
 				069D31D41DB47ADD00A059D0 /* WOWFavoriteProductModel.swift in Sources */,
 				069D31B91DB47ADD00A059D0 /* WOWOrderCell.swift in Sources */,
@@ -3012,6 +3090,7 @@
 				63306CE31E8A45A4005E0B32 /* WOWWorksCell.swift in Sources */,
 				2D142EA11E03E38C009A50CB /* WOWProductListController.swift in Sources */,
 				069D32D31DB47ADD00A059D0 /* WOWSettingController.swift in Sources */,
+				2D0867521E95D6E8006BF8B2 /* UIView+Layout.m in Sources */,
 				63EC147D1E2CB55E0027BEFD /* WOWSearchSortController.swift in Sources */,
 				2D509A161DB5D30C0047CD13 /* WOWSearchController.swift in Sources */,
 				06A5C4591E13B1F500FE0A7A /* UMengEvent.swift in Sources */,
@@ -3031,9 +3110,11 @@
 				069D323E1DB47ADD00A059D0 /* WOWBaseViewController.swift in Sources */,
 				069D2F581DB46AD100A059D0 /* AppDelegate.swift in Sources */,
 				2D1138CC1E84CC7800A78FD6 /* WorksDetailCell.swift in Sources */,
+				2D08674D1E95D6E8006BF8B2 /* TZPhotoPickerController.m in Sources */,
 				63B6AEB41E5D987C00DF1533 /* WOWMessageToVc.swift in Sources */,
 				069D32461DB47ADD00A059D0 /* WowBaseVCCartSearch.swift in Sources */,
 				069D32F61DB47ADD00A059D0 /* UILabel+Style.swift in Sources */,
+				2D0867481E95D6E8006BF8B2 /* TZGifPhotoPreviewController.m in Sources */,
 				63108BB01E8B7F63004B2064 /* WOWStatisticsModel.swift in Sources */,
 				2DDA4DEB1DDEFE2E00E7A7E8 /* WowModulePageView.swift in Sources */,
 				069D32DF1DB47ADD00A059D0 /* WOWUserModel.swift in Sources */,
@@ -3084,6 +3165,7 @@
 				069D331A1DB47ADE00A059D0 /* PhotoBrowser.swift in Sources */,
 				069D32AA1DB47ADD00A059D0 /* WOWAddressBottomView.swift in Sources */,
 				069D32581DB47ADD00A059D0 /* WOWAttributeModel.swift in Sources */,
+				2D08674F1E95D6E8006BF8B2 /* TZPhotoPreviewController.m in Sources */,
 				069D31B31DB47ADD00A059D0 /* WOWBuyCarRequestVo.swift in Sources */,
 				63E57C8B1E51B363003AD552 /* WOWTopicProductCell.swift in Sources */,
 				069D33221DB47ADE00A059D0 /* TagCellLayout+Helper.swift in Sources */,
@@ -3097,6 +3179,7 @@
 				63F3DA961DEC0059009CE52D /* WOWOrderRemissionView.swift in Sources */,
 				2D670E8B1E851AF900D7A8EB /* PhotoTweakView.m in Sources */,
 				069D32371DB47ADD00A059D0 /* WOWRegistController.swift in Sources */,
+				2D08674C1E95D6E8006BF8B2 /* TZImagePickerController.m in Sources */,
 				06C869AB1DD19C8E004C05E3 /* Config3rd.swift in Sources */,
 				069D325E1DB47ADD00A059D0 /* WOWBrandHomeController.swift in Sources */,
 				069D32B31DB47ADD00A059D0 /* WOWCouponheaderView.swift in Sources */,
@@ -3163,6 +3246,7 @@
 				06A5C45B1E13B1F500FE0A7A /* WowWebView.swift in Sources */,
 				2D670E7D1E8505EE00D7A8EB /* WOWSharePhotoView.swift in Sources */,
 				069D32341DB47ADD00A059D0 /* WOWIntroduceController.swift in Sources */,
+				2D0867511E95D6E8006BF8B2 /* TZVideoPlayerController.m in Sources */,
 				069D31D01DB47ADD00A059D0 /* WOWFavDesigner.swift in Sources */,
 				069D31C21DB47ADD00A059D0 /* WOWSelectPayView.swift in Sources */,
 				069D33231DB47ADE00A059D0 /* TagCellLayout.swift in Sources */,
@@ -3202,6 +3286,7 @@
 				069D331E1DB47ADE00A059D0 /* UIViewExtension.swift in Sources */,
 				2DDA4DE31DDEFE2E00E7A7E8 /* MODULE_TYPE_CATEGORIES_CV_CELL_301.swift in Sources */,
 				069D33271DB47ADE00A059D0 /* TagView.swift in Sources */,
+				2D08674E1E95D6E8006BF8B2 /* TZPhotoPreviewCell.m in Sources */,
 				2D562C9E1E16038500E702CE /* ColorCVCell.swift in Sources */,
 				63D20CF71E23863900105FBC /* CyclePictureView.swift in Sources */,
 				63F3DA8F1DEBD6C5009CE52D /* WOWProductPromotionCell.swift in Sources */,
@@ -3214,11 +3299,13 @@
 				069D32351DB47ADD00A059D0 /* WOWLoginController.swift in Sources */,
 				069D31D71DB47ADD00A059D0 /* WOWFavProduct.swift in Sources */,
 				069D32F71DB47ADD00A059D0 /* UIView+BorderLine.swift in Sources */,
+				2D0867471E95D6E8006BF8B2 /* TZAssetModel.m in Sources */,
 				2D562CA61E16038500E702CE /* SVStyleCell.swift in Sources */,
 				069D32A51DB47ADD00A059D0 /* Stopwatch.swift in Sources */,
 				069D32B01DB47ADD00A059D0 /* WOWCouponCell.swift in Sources */,
 				2D1EEC7C1E8BA96F00207EE9 /* WOWFineWroksModel.swift in Sources */,
 				06A5C4711E13BE8100FE0A7A /* TestViewController.m in Sources */,
+				2D0867491E95D6E8006BF8B2 /* TZImageCropManager.m in Sources */,
 				069D32981DB47ADD00A059D0 /* WOWTelCell.swift in Sources */,
 				2D0076F21E4D6C940033108D /* Cell_105_SingBrand.swift in Sources */,
 				2D80F0941E0A262500B60AE8 /* WOWFeedBackCell.swift in Sources */,
@@ -3248,7 +3335,9 @@
 				067AFF631DB9C4CF00D48020 /* ExtensionEquatable.swift in Sources */,
 				2D00775F1E51A4750033108D /* Cell_ProjectSelect_View.swift in Sources */,
 				639C13E81DD59966003B0F59 /* WOWContentTopicTopCell.swift in Sources */,
+				2D0867451E95D6E8006BF8B2 /* NSBundle+TZImagePicker.m in Sources */,
 				069D31A91DB47ADD00A059D0 /* WOWBuyCarController.swift in Sources */,
+				2D0867461E95D6E8006BF8B2 /* TZAssetCell.m in Sources */,
 				069D31BD1DB47ADD00A059D0 /* WOWOrderFreightCell.swift in Sources */,
 				069D33391DB47ADE00A059D0 /* CollectionViewWaterfallLayout.swift in Sources */,
 				069D32601DB47ADD00A059D0 /* WOWBrandListModel.swift in Sources */,
@@ -3264,6 +3353,7 @@
 				069D331D1DB47ADE00A059D0 /* SimpleHUD.swift in Sources */,
 				63F3DA831DE6873E009CE52D /* WOWProductCommentCell.swift in Sources */,
 				2D562CA01E16038500E702CE /* PriceCVCell.swift in Sources */,
+				2D0867501E95D6E8006BF8B2 /* TZProgressView.m in Sources */,
 				069D32611DB47ADD00A059D0 /* WOWBrandModel.swift in Sources */,
 				2D1AB5C81E08D5DE00821012 /* OrderTimerView.swift in Sources */,
 				2D0077701E545A790033108D /* StyleCVCell.swift in Sources */,

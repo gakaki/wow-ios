@@ -75,6 +75,7 @@ PODS:
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (3.1.1)
   - SwiftyUserDefaults (3.0.0)
+  - TZImagePickerController (1.7.9)
   - UICKeyChainStore (2.1.0)
   - UITableView+FDTemplateLayoutCell (1.5.beta)
   - URLNavigator (1.1.1)
@@ -129,6 +130,7 @@ DEPENDENCIES:
   - SVProgressHUD
   - SwiftyJSON
   - SwiftyUserDefaults
+  - TZImagePickerController (from `https://github.com/cxcxy/TZImagePickerController.git`)
   - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
   - VTMagic
   - wow-vendor-ui (from `wow-vendor-ui/wow-vendor-ui.podspec`)
@@ -144,6 +146,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/malczak/hashids.git
   PonyFrameworkOnSwift:
     :path: PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec
+  TZImagePickerController:
+    :git: https://github.com/cxcxy/TZImagePickerController.git
   wow-vendor-ui:
     :path: wow-vendor-ui/wow-vendor-ui.podspec
   WowThird:
@@ -153,6 +157,9 @@ CHECKOUT OPTIONS:
   Hashids-Swift:
     :commit: 173c567d959ae9327b0e63a4e463cdbdab916b7b
     :git: https://github.com/malczak/hashids.git
+  TZImagePickerController:
+    :commit: b487a0445709eca09dd6dffb9315fd99b1db64da
+    :git: https://github.com/cxcxy/TZImagePickerController.git
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -187,6 +194,7 @@ SPEC CHECKSUMS:
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
+  TZImagePickerController: 0a8ff228d287ebdd7d485e8c42a2a932894f1fba
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
   UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
   URLNavigator: 2ec64d7ade7fa11032e57776ab826a8631377301
@@ -199,6 +207,6 @@ SPEC CHECKSUMS:
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 39db616c41a4864adf3a8e844379bc1ec191c6cf
+PODFILE CHECKSUM: 809d5854684b05a9c3e7df327daf6a921187c30e
 
 COCOAPODS: 1.2.0.beta.3

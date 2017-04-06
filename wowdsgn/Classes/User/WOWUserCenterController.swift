@@ -85,7 +85,7 @@ class WOWUserCenterController: WOWBaseViewController {
         view.layoutIfNeeded()
         
         cvTop.constant = 0
-        UIView.animate(withDuration: 10) {[weak self] in
+        UIView.animate(withDuration: 0.3) {[weak self] in
             if let strongSelf = self {
                 strongSelf.view.layoutIfNeeded()
             }

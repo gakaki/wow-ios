@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,6 +25,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ClY-Um-Fml">
                     <rect key="frame" x="187" y="110" width="0.0" height="20.5"/>
                     <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="208" id="Ei3-cw-ftU"/>
                         <constraint firstAttribute="height" constant="20.5" id="TD6-nI-Vkf"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -94,10 +95,8 @@
                 <constraint firstItem="Asv-Tk-vEh" firstAttribute="top" secondItem="ClY-Um-Fml" secondAttribute="bottom" constant="8" id="H0b-qu-MWq"/>
                 <constraint firstItem="UyD-Jf-YWg" firstAttribute="top" secondItem="g5D-HF-gWO" secondAttribute="bottom" constant="1" id="HfK-Je-A0w"/>
                 <constraint firstItem="hJp-31-ZBR" firstAttribute="top" secondItem="2cR-Ts-y8b" secondAttribute="bottom" constant="1" id="IXz-5e-eht"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ClY-Um-Fml" secondAttribute="trailing" constant="20" id="KxT-6z-geP"/>
                 <constraint firstItem="NtT-3s-MEG" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" id="Lca-Z4-eda"/>
                 <constraint firstItem="ClY-Um-Fml" firstAttribute="top" secondItem="NtT-3s-MEG" secondAttribute="bottom" constant="15" id="WJN-CN-akO"/>
-                <constraint firstItem="ClY-Um-Fml" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="20" id="XgG-HO-MLs"/>
                 <constraint firstItem="2cR-Ts-y8b" firstAttribute="leading" secondItem="7BY-4n-ZuU" secondAttribute="trailing" constant="30" id="aO5-aU-C8C"/>
                 <constraint firstItem="g5D-HF-gWO" firstAttribute="top" secondItem="Asv-Tk-vEh" secondAttribute="bottom" constant="20" id="fls-pv-SWj"/>
                 <constraint firstItem="Asv-Tk-vEh" firstAttribute="width" secondItem="U6b-Vx-4bR" secondAttribute="width" multiplier="0.6" id="hog-Eb-obc"/>

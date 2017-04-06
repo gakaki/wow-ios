@@ -110,7 +110,7 @@ extension CGPoint {
     
     func scalarProjectionPointWith(_ point: CGPoint) -> CGPoint {
         let r = scalarProjectionWith(point) / point.modulo
-        return CGPoint(x: point.x * r, y: point.y * r)
+        return CGPoint(x: point.x * 2 * r, y: point.y * 2 * r)
     }
     
     func dotProductWith(_ point: CGPoint) -> CGFloat {

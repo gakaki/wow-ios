@@ -436,9 +436,9 @@ public class VCRedirect {
     }
     
     //个人中心内页
-    public class func goUserCenter() {
+    public class func goUserCenter(_ toIndexPage:Int = 0) {
         let vc = UIStoryboard.initialViewController("User", identifier:"WOWUserCenterController") as! WOWUserCenterController
-
+        vc.indexPage = toIndexPage
         topNaVC?.pushViewController(vc, animated: true)
     }
     

@@ -19,7 +19,7 @@ class WOWUserCenterController: WOWBaseViewController {
     var vc_product:WOWWorkController?
     var vc_brand:WOWPraiseController?
     var vc_designer:WOWCollectController?
-    
+    var indexPage : Int = 0
     @IBOutlet weak var selfIntroduction: UILabel!
     @IBOutlet weak var workNum: UILabel!
     @IBOutlet weak var praiseNum: UILabel!
@@ -80,6 +80,8 @@ class WOWUserCenterController: WOWBaseViewController {
         
 
         v.magicView.reloadData()
+        v.switch(toPage: UInt(indexPage), animated: true)
+
     }
     //显示顶部视图
     func showBrand() {

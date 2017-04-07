@@ -20,7 +20,7 @@ class WOWWorksDetailsModel: WOWBaseModel,Mappable  {
     var collectCounts           :  Int?
     var nickName                :  String?
     var pic                     :  String?
-    
+    var pubTime                 :  String?
     var picHeight               : CGFloat = MGScreenWidth
     
     var totalCollectCounts      :  Int?
@@ -51,6 +51,8 @@ class WOWWorksDetailsModel: WOWBaseModel,Mappable  {
         collect                                     <- map["collect"]
         measurement                                 <- map["measurement"]
         myInstagram                                 <- map["myInstagram"]
+        pubTime                                     <- map["pubTime"]
+
         if let pic = pic ,let measurement = measurement {
             if pic.contains("_2dimension_") {
                 

@@ -290,6 +290,7 @@
     if (_tzImagePickerVc.selectedModels.count == 0 && _tzImagePickerVc.minImagesCount <= 0) {
         TZAssetModel *model = _models[_currentIndex];
         model.isSelected = YES;
+
         [_tzImagePickerVc.selectedModels addObject:model];
     }
     if (_tzImagePickerVc.allowCrop) { // 裁剪状态

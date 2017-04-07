@@ -82,12 +82,12 @@ class WOWShareBackView:UIView{
     
     lazy var sharePhotoView:WOWSharePhotoView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWSharePhotoView.self), owner: self, options: nil)?.last as! WOWSharePhotoView
-        let nowDate = NSDate()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy.MM.dd"
-        let dateString = formatter.string(from: nowDate as Date)
+//        let nowDate = NSDate()
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy.MM.dd"
+//        let dateString = formatter.string(from: nowDate as Date)
 
-        v.lbCurrentTime.text = dateString
+     
         return v
     }()
 
@@ -135,6 +135,7 @@ class WOWShareBackView:UIView{
         sharePhotoView.imgPhoto.set_webimage_url(m.pic ?? "")
         sharePhotoView.lbMyName.text = "By " +  (m.nickName ?? "")
         sharePhotoView.lbDes.text = m.des ?? ""
+        sharePhotoView.lbCurrentTime.text = m.pubTime ?? ""
         shareView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)

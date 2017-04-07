@@ -21,6 +21,7 @@ class WorksDetailCell: UITableViewCell {
     
     @IBOutlet weak var lbMyIntro: UILabel!
     
+    @IBOutlet weak var lbPushTime: UILabel!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,7 +41,7 @@ class WorksDetailCell: UITableViewCell {
         lbDes.text = m.des ?? ""
         lbMyName.text = m.nickName ?? ""
         imgPhoto.set_webimage_url(m.pic ?? "")
-
+        lbPushTime.text = "发布于" + (m.pubTime ?? "")
         lbMyIntro.text = (m.instagramCounts?.toString)!  + "件作品／" + (m.totalLikeCounts?.toString)! + "次被赞"
         
     }

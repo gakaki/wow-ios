@@ -30,17 +30,11 @@ class WOWReleaseWorksController: WOWBaseViewController {
         self.automaticallyAdjustsScrollViewInsets = true
         let itemReghit = UIBarButtonItem.init(title: "取消", style: .plain, target: self, action: #selector(cancelAction))
         navigationItem.rightBarButtonItem = itemReghit
-//
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tap:")
-//        tapGestureRecognizer.numberOfTapsRequired = 2
-//        
-//        imageView.userInteractionEnabled = true
-//        imageView.addGestureRecognizer(tapGestureRecognizer)
+
         let tapGestureRecognizer = UIPanGestureRecognizer.init(target: self, action:  #selector(tap))
     
         self.view.addGestureRecognizer(tapGestureRecognizer)
 
-        // Do any additional setup after loading the view.
     }
     func tap(gestureRecognizer: UIPanGestureRecognizer)  {
      self.view.endEditing(true)

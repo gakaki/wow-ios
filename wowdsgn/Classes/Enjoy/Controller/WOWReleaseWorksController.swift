@@ -52,10 +52,10 @@ class WOWReleaseWorksController: WOWBaseViewController {
     }
     func cancelAction()  {
         
-        let alertController = UIAlertController(title: "温馨提示",
-                                                message: "您确定要取消发布作品吗？", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "",
+                                                message: "退出此次编辑？", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "确定", style: .default, handler: {
+        let okAction = UIAlertAction(title: "退出", style: .default, handler: {
             action in
             
             self.dismiss(animated: true) {

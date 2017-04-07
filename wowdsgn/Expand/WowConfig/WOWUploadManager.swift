@@ -45,10 +45,10 @@ class WOWUploadManager {
     // 针对时间戳 进行哈希
    static func onlyStr() -> String  {
         //          拼接唯一字符串
-        let onlyStr         = FCUUID.uuidForDevice() + (Date().timeIntervalSince1970 * 1000).toString
-        let hashids         = Hashids(salt:onlyStr)
-        return hashids.encode([1,2,3])!
-        
+        let onlyStr         = FCUUID.uuidForDevice() + String.init(format: "%.0f",(Date().timeIntervalSince1970 * 1000))
+//        let hashids         = Hashids(salt:onlyStr)
+//        return hashids.encode([1,2,3])!
+        return onlyStr
     }
     // 针对 userId 进行 哈希
     static func hashidsUserIdStr() -> String {
@@ -120,7 +120,6 @@ class WOWUploadManager {
         }
         
     }
-    
 
     // 发布评论 上传图片 GCD 分组  pushQiniuPath ： 上传至七牛服务器的 路径， 默认为 商品评论的路径，
     static func pushCommentPhotos(_ images:[imageInfo],pushQiNiuPath:QiniuBucket = .UserShopComment,successClosure:@escaping PushImgURLs){
@@ -167,7 +166,7 @@ class WOWUploadManager {
         let uploadOption            = QNUploadOption.init(
             mime: nil,
             progressHandler: { ( key, percent_f) in
-                //                print(key,percent_f)
+
             },
             params: nil  ,
             checkCrc: false,
@@ -183,18 +182,13 @@ class WOWUploadManager {
                     qm.put(data, key: imagePath, token: token, complete: { (info, key, resp) in
                          WOWHud.dismiss()
                         if (info?.error != nil) {
-//                            DLog(info?.error)
                             
                             failClosure("错误")
                             
                         } else {
-                            
-//                            print(resp,resp?["key"])
-//                            print(info,key,resp)
+
                             let key = resp?["key"]
                             let headImageUrl = "https://img.wowdsgn.com/\(key!)"
-                            
-                           
                             successClosure(headImageUrl)
 
                         }

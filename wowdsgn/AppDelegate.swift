@@ -143,10 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         TalkingDataAppCpa.onReceiveDeepLink(userActivity.webpageURL)
 
-//        //DeepShare
-//        if DeepShare.continue(userActivity) {
-//            return true
-//        }
+
         //Universal Link
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             let url = userActivity.webpageURL!
@@ -154,15 +151,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let d = " get url is \(url) , url string is \(url.absoluteString)"
             DLog(d)
-            
-//            WOWHud.showMsg(d)
-      
-//            if url.host == "qnssl.com" {
-//                
-//            }else{
-//                UIApplication.shared.openURL(url)
-//            }
-            
+
             if JLRouterRule.handle_open_url(url: url) {
                 return true
             }
@@ -182,23 +171,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if JLRouterRule.handle_open_url(url: url){
             return true
         }
-//        if RouterRule.handle_open_url(url: url){
-//            return true
-//        }
+
         if Pingpp.handleOpen(url, withCompletion: nil) {
             return true
         }
-        
-//        //growing io
-//        if Growing.handle(url) {
-//            return true
-//        }
-//        
-//        //DeepShare
-//        if DeepShare.handle(url) {
-//            return true
-//        }
-//        
+
         //TalkingData ADTracking
         TalkingDataAppCpa.onReceiveDeepLink(url)
         
@@ -215,9 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if JLRouterRule.handle_open_url(url: url){
             return true
         }
-//        if RouterRule.handle_open_url(url: url){
-//            return true
-//        }
+
         
         if Pingpp.handleOpen(url, withCompletion: nil) {
             return true
@@ -226,16 +201,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
     
-        //growing io
-//        if Growing.handle(url) {
-//            return true
-//        }
-////
-//        //DeepShare
-//        if DeepShare.handle(url) {
-//            return true
-//        }
-        
         //TalkingData ADTracking
         TalkingDataAppCpa.onReceiveDeepLink(url)
         return true
@@ -314,10 +279,8 @@ extension AppDelegate{
     
     func get_version_full() -> String{
         var v = "0.0.0"
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
-            let version_build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-        {
-            v = "\(version).\(version_build)"
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            v = version
         }
         return v
     }

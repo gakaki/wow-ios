@@ -65,7 +65,7 @@ class WOWProductCommentCell: UITableViewCell, UICollectionViewDelegate, UICollec
                 collectionHeight.constant = 0
             }
             headImg.setCornerRadius(radius: 15)
-            headImg.set_webimage_url_base(model.avatar?.webp_url(), place_holder_name: "placeholder_userhead")
+            headImg.set_webUserPhotoimage_url(model.avatar)
             nameLabel.text = model.nickName
             //格式化时间
             timeLabel.text = model.publishTimeFormat?.stringToTimeStamp()

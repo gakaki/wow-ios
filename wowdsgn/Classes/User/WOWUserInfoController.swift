@@ -182,7 +182,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
                         self.headImageView.image = self.image
                     }else{
 
-                       self.headImageView.set_webimage_url_base(WOWUserManager.userHeadImageUrl.webp_url(), place_holder_name: "placeholder_userhead")
+                        self.headImageView.set_webUserPhotoimage_url(WOWUserManager.userHeadImageUrl)
                     }
 
         }else{

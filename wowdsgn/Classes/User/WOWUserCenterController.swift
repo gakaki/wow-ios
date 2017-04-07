@@ -15,6 +15,24 @@ class WOWUserCenterController: WOWBaseViewController {
     
     var v : VCVTMagic!
     var topIsHidden = false
+    var lastPoint = CGPoint(x: 0, y: 0)
+    var viewTop:CGFloat = 139 {
+        didSet{
+            if viewTop <= 0 {
+                viewTop = 0
+            }
+            
+            if viewTop > 139 {
+                viewTop = 139
+            }
+            if cvTop.constant == viewTop - 139 {
+                return
+            }
+            cvTop.constant = viewTop - 139
+            view.layoutIfNeeded()
+
+        }
+    }
 
     var vc_product:WOWWorkController?
     var vc_brand:WOWPraiseController?
@@ -32,15 +50,40 @@ class WOWUserCenterController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = WOWUserManager.userName
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(panOnView(pan:)))
+        pan.delegate = self
+        self.view.addGestureRecognizer(pan)
         request()
+    }
+    
+    func panOnView(pan: UIPanGestureRecognizer) {
+        print("pannnnnning received..")
+        let currentPoint = pan.location(in: self.view)
+        if pan.state == .began {
+            lastPoint = currentPoint
+        }else if pan.state == .ended {
+            let velocity = pan.velocity(in: self.view)
+            let targetPoint: CGFloat = velocity.y < 0 ? 0 : 139
+            let duration: TimeInterval = fabs(Double((targetPoint - self.viewTop) / velocity.y))
+            
+            if fabs(velocity.y) > fabs(targetPoint - self.viewTop) {
+                UIView.animate(withDuration: duration, animations: {
+                    self.viewTop = targetPoint
+                }, completion: { (finish) in
+                    return
+                })
+            }
+        }
+        let yChange = currentPoint.y - self.lastPoint.y
+        viewTop += yChange
+        lastPoint = currentPoint
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -83,30 +126,7 @@ class WOWUserCenterController: WOWBaseViewController {
         v.switch(toPage: UInt(indexPage), animated: true)
 
     }
-    //显示顶部视图
-    func showBrand() {
-        topIsHidden = false
-        view.layoutIfNeeded()
-        
-        cvTop.constant = 0
-        UIView.animate(withDuration: 0.3) {[weak self] in
-            if let strongSelf = self {
-                strongSelf.view.layoutIfNeeded()
-            }
-        }
-    }
-    
-    //隐藏顶部视图
-    func hiddenBrand() {
-        topIsHidden = true
-        view.layoutIfNeeded()
-        cvTop.constant = -139
-        UIView.animate(withDuration: 0.3) {[weak self] in
-            if let strongSelf = self {
-                strongSelf.view.layoutIfNeeded()
-            }
-        }
-    }
+
     //MAERK: Net
     override func request() {
         super.request()
@@ -131,7 +151,12 @@ class WOWUserCenterController: WOWBaseViewController {
             workNum.text = String(format: "%i", model.instagramCounts ?? 0)
             praiseNum.text = String(format: "%i", model.likeCounts ?? 0)
             favoriteNum.text = String(format: "%i", model.collectCounts ?? 0)
-            selfIntroduction.text = model.selfIntroduction
+            if model.selfIntroduction == nil && model.selfIntroduction == "" {
+                selfIntroduction.text = "这家伙很懒，什么也没留下"
+            }else {
+                selfIntroduction.text = model.selfIntroduction
+                
+            }
 
         }
     }
@@ -242,22 +267,18 @@ extension WOWUserCenterController:VTMagicViewDelegate{
     
 }
 
-extension WOWUserCenterController: WOWChideControllerDelegate {
+extension WOWUserCenterController: WOWChideControllerDelegate, UIGestureRecognizerDelegate {
     func updateTabsRequsetData(){
         request()
     }
     
-    func topView(isHidden: Bool) {
-            if isHidden {
-                if !topIsHidden {
-                    hiddenBrand()
-                }
-                
-            }else {
-                if topIsHidden {
-                    showBrand()
-                }
-            }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if otherGestureRecognizer.view?.className == VTContentView.className {
+            return false
         }
+ 
+        return true
+    }
         
 }

@@ -51,7 +51,7 @@ target 'wowdsgn' do
 
   #Ping++支付
 	pod "Qiniu"
-  pod 'XZMRefresh'            #横向刷新
+    pod 'XZMRefresh'            #横向刷新
 	pod 'FMDB'
 	pod 'FCUUID'
 	pod 'MJRefresh'

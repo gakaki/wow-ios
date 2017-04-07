@@ -179,7 +179,7 @@ class WOWShareBackView:UIView{
             self.backClear.y = MGScreenHeight + 10;
         }, completion: { (ret) in
             self.backClear.removeFromSuperview()
-            
+            self.sharePhotoView.removeFromSuperview()
             self.removeFromSuperview()
         })
     }

@@ -72,8 +72,11 @@ class WOWWorksDetailsController: WOWBaseViewController {
                 
                 strongSelf.endRefresh()
                 strongSelf.modelData    =    Mapper<WOWWorksDetailsModel>().map(JSONObject:result)
-                strongSelf.btnPraiseCount.setTitle(strongSelf.modelData?.likeCounts?.toString, for: .normal)
-                strongSelf.btnCollection.setTitle(strongSelf.modelData?.collectCounts?.toString, for: .normal)
+                let praiseCountStr  = strongSelf.modelData?.likeCounts?.toString
+                let collectCountStr = strongSelf.modelData?.collectCounts?.toString
+
+                strongSelf.btnPraiseCount.setTitle((praiseCountStr == "0" ? "" : praiseCountStr), for: .normal)
+                strongSelf.btnCollection.setTitle((collectCountStr == "0" ? "" : collectCountStr), for: .normal)
                 strongSelf.btnPraiseCount.isSelected = strongSelf.modelData?.like ?? false
                 strongSelf.btnCollection.isSelected = strongSelf.modelData?.collect ?? false
                 
@@ -115,7 +118,8 @@ class WOWWorksDetailsController: WOWBaseViewController {
                         model.like = !like
                         strongSelf.btnPraiseCount.isSelected = model.like ?? false
                         model.likeCounts = Calculate.calculateType(type: !like)(model.likeCounts ?? 0)
-                        strongSelf.btnPraiseCount.setTitle(model.likeCounts?.toString, for: .normal)
+                        let praiseCountStr  = model.likeCounts?.toString
+                        strongSelf.btnPraiseCount.setTitle((praiseCountStr == "0" ? "" : praiseCountStr), for: .normal)
                     }
                 }
            
@@ -140,7 +144,8 @@ class WOWWorksDetailsController: WOWBaseViewController {
                         model.collect = !collect
                         strongSelf.btnCollection.isSelected = model.collect ?? false
                         model.collectCounts = Calculate.calculateType(type: !collect)(model.collectCounts ?? 0)
-                        strongSelf.btnCollection.setTitle(model.collectCounts?.toString, for: .normal)
+                        let collectCountStr = model.collectCounts?.toString
+                        strongSelf.btnCollection.setTitle((collectCountStr == "0" ? "" : collectCountStr), for: .normal)
 
                     }
                     

@@ -35,7 +35,6 @@ class WOWReleaseWorksController: WOWBaseViewController {
     
         self.view.addGestureRecognizer(tapGestureRecognizer)
 
-        // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

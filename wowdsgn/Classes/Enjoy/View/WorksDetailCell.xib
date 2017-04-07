@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="304"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="304"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="303"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quotes" translatesAutoresizingMaskIntoConstraints="NO" id="mcS-wQ-pup">
@@ -41,7 +41,10 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fb7-T3-kGT">
-                                <rect key="frame" x="30" y="71" width="315" height="0.0"/>
+                                <rect key="frame" x="95.5" y="71" width="184" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="184" id="Nnu-vl-cu0"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -61,8 +64,7 @@
                             <constraint firstItem="9xJ-pr-MQt" firstAttribute="top" secondItem="Ghh-sw-2Xp" secondAttribute="top" id="M3B-Hy-JvG"/>
                             <constraint firstItem="fb7-T3-kGT" firstAttribute="top" secondItem="9xJ-pr-MQt" secondAttribute="bottom" constant="15" id="XHy-UP-A5w"/>
                             <constraint firstAttribute="bottom" secondItem="Tq9-uS-xDd" secondAttribute="bottom" constant="28.5" id="b8P-IE-AF1"/>
-                            <constraint firstItem="fb7-T3-kGT" firstAttribute="leading" secondItem="Ghh-sw-2Xp" secondAttribute="leading" constant="30" id="dJc-XU-Fyu"/>
-                            <constraint firstAttribute="trailing" secondItem="fb7-T3-kGT" secondAttribute="trailing" constant="30" id="flv-Pg-Gsx"/>
+                            <constraint firstItem="fb7-T3-kGT" firstAttribute="centerX" secondItem="Ghh-sw-2Xp" secondAttribute="centerX" id="elX-Gw-Vfh"/>
                             <constraint firstItem="Tq9-uS-xDd" firstAttribute="top" secondItem="fb7-T3-kGT" secondAttribute="bottom" constant="5" id="hAg-Jc-RMK"/>
                         </constraints>
                     </view>
@@ -82,8 +84,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqw-s3-Cry">
-                        <rect key="frame" x="45" y="150" width="300" height="0.0"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqw-s3-Cry">
+                        <rect key="frame" x="45" y="150" width="300" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>

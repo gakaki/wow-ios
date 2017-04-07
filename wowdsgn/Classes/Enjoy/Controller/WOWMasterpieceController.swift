@@ -204,15 +204,11 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         NSObject.cancelPreviousPerformRequests(withTarget: self)
-        let delayQueue = DispatchQueue.global()
-        delayQueue.asyncAfter(deadline: .now() + 0.5) {
-            
-            DispatchQueue.main.async { [unowned self] in
-
-                self.changeState(alpha: 1)
-            }
-            
-        }
+ 
+                if self.publishBtn.alpha < 1 {
+                    self.changeState(alpha: 1)
+                    
+                }
         
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -223,19 +219,24 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
         }
 
         NSObject.cancelPreviousPerformRequests(withTarget: self)
-        self.perform(#selector(scrollViewDidEndScrollingAnimation), with: nil, afterDelay: 0.1)
+        self.perform(#selector(scrollViewDidEndScrollingAnimation), with: nil, afterDelay: 0.5)
         let a = scrollView.contentOffset.y
-        //        lastContentOffset = scrollView.contentOffset.y
+  
         if a -  lastContentOffset  > 20 && a > 0{
-            //            print("shang")
+       
             lastContentOffset = a
-     
-            changeState(alpha: 0)
+            if self.publishBtn.alpha  >= 0.95 {
+                changeState(alpha: 0.01)
+            }
+ 
             return
         }else if lastContentOffset - a > 20 && (a  <= scrollView.contentSize.height-scrollView.bounds.size.height-20) {
             lastContentOffset = a
-       
-            changeState(alpha: 1)
+            
+            if self.publishBtn.alpha < 1 {
+                changeState(alpha: 1)
+            }
+    
             return
         }
         
@@ -243,7 +244,10 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func changeState(alpha:CGFloat)  {
+        self.publishBtn.layer.removeAllAnimations()
         UIView.animate(withDuration: 0.3) { [unowned self] in
+            
+            self.publishBtn.transform = CGAffineTransform(scaleX: alpha, y: alpha)
             self.publishBtn.alpha = alpha
         }
       

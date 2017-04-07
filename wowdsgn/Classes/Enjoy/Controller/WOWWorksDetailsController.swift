@@ -42,11 +42,13 @@ class WOWWorksDetailsController: WOWBaseViewController {
         super.viewWillAppear(animated)
           setLeftBack()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        MobClick.e(.picture_details_page)
+    }
     func setLeftBack() {
-//        if navigationController?.viewControllers.count > 1 {
             let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action:#selector(backAction))
             navigationItem.leftBarButtonItem = item
-//        }
     }
     
     func backAction() {
@@ -91,6 +93,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
             if let strongSelf = self{
                 strongSelf.endRefresh()
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
+//                WOWHud.showMsg(errorMsg)
             }
         })
         
@@ -154,14 +157,16 @@ class WOWWorksDetailsController: WOWBaseViewController {
     }
 
     @IBAction func clickPraise(_ sender: Any) {
+        MobClick.e(.thumbs_up_clicks_picture_details_page)
         requestPraise()
     }
 
     @IBAction func clickCollection(_ sender: Any) {
+        MobClick.e(.collection_clicks_picture_details_page)
         requestCollect()
     }
     @IBAction func clickShare(_ sender: Any) {
-        
+        MobClick.e(.sharing_clicks_picture_details_page)
         if let modelData = self.modelData {
             WOWShareManager.sharePhoto(modelData)
         }

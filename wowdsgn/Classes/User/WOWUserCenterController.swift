@@ -80,6 +80,7 @@ class WOWUserCenterController: WOWBaseViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        MobClick.e(.my_personalpicture_page)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -93,6 +94,7 @@ class WOWUserCenterController: WOWBaseViewController {
         super.setUI()
         userHeadImg.borderRadius(40)
         userHeadImg.addAction {
+            MobClick.e(.change_personal_information_clicks_my_homepage)
             VCRedirect.goUserInfo()
         }
         v                               = VCVTMagic()
@@ -244,16 +246,15 @@ extension WOWUserCenterController:VTMagicViewDelegate{
             
             switch pageIndex {
             case  0:
-               
+                MobClick.e(.picture_uploadlist_clicks)
                 break
             case  1:
-                //                MobClick.e(.Brands_List)
+                MobClick.e(.picture_uploaddetail_clicks)
                 break
             case  2:
-                //                MobClick.e(.Designers_List)
+                MobClick.e(.savepicture_clicks)
                 break
             default:
-                //                MobClick.e(.Shopping)
                 break
             }
             

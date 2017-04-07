@@ -171,7 +171,7 @@ class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
-        v.labelText.text = "全部分类"
+        v.labelText.text = "所有分类"
         return v
         
     }

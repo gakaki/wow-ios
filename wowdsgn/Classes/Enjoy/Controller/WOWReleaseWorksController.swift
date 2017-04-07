@@ -36,6 +36,11 @@ class WOWReleaseWorksController: WOWBaseViewController {
         self.view.addGestureRecognizer(tapGestureRecognizer)
 
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        MobClick.e(.post_picture_page)
+    }
+    
     func tap(gestureRecognizer: UIPanGestureRecognizer)  {
      self.view.endEditing(true)
     }
@@ -53,6 +58,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
             action in
             
             self.dismiss(animated: true) {
+                MobClick.e(.cancel_post_picture_page)
                 _ = FNUtil.currentTopViewController().navigationController?.popViewController(animated: true)
             }
   
@@ -91,7 +97,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
     }
     // MARK: - 发布按钮
     @IBAction func releaseAction(_ sender: Any) {
-        
+            MobClick.e(.post_clicks_post_picture_page)
             requestPushlish()
         
     }

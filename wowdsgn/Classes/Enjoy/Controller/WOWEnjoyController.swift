@@ -54,7 +54,7 @@ class WOWEnjoyController: WOWBaseViewController {
     lazy var backView:WOWCategoryBackView = {
         let v = WOWCategoryBackView(frame:CGRect(x: 0,y: 64,width: MGScreenWidth,height: MGScreenHeight - 64))
         v.selectView.delegate = self
-        v.dismissButton.addTarget(self, action: #selector(categoryClick), for:.touchUpInside)
+        v.dismissButton.addTarget(self, action: #selector(dismissClick), for:.touchUpInside)
         return v
     }()
     
@@ -131,10 +131,15 @@ class WOWEnjoyController: WOWBaseViewController {
     
     //MARK: --privite 
     func categoryClick()  {
-      
+        MobClick.e(.select_classification_masterpiece_page)
         changeButtonState()
     }
-        func changeButtonState() {
+    
+    func dismissClick()  {
+        changeButtonState()
+
+    }
+    func changeButtonState() {
         if isOpen {
             backView.hideView()
         }else {

@@ -69,8 +69,8 @@ class PhotoViewCell: UICollectionViewCell {
     
     fileprivate var downloadTask: RetrieveImageTask?
     /// 懒加载 对外可读
-    fileprivate(set) lazy var imageView: UIImageView = {[unowned self] in
-        let imageView = UIImageView()
+    fileprivate(set) lazy var imageView: AnimatedImageView = {[unowned self] in
+        let imageView = AnimatedImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true
         imageView.backgroundColor = UIColor.black
@@ -216,9 +216,8 @@ extension PhotoViewCell {
         }
         
         // 加载网路图片
-        guard let urlString = photo.imageUrlString, let url = URL(string: urlString.webp_url()) else {
-//            assert(false, "设置的url不合法")
-            print("设置的url不合法")
+        guard let urlString = photo.imageUrlString, let url = URL(string: urlString) else {
+            assert(false, "设置的url不合法")
             return
         }
         // 添加提示框
@@ -232,43 +231,30 @@ extension PhotoViewCell {
             image = sourceImageView.image
         }
         
-        image =  UIImage(named: "placeholder_product")
-        imageView.yy_setImage(with: url, placeholder: image, options: []) {[weak self] (img, url, imageFromType, imageStage, error) in
-            if let strongSelf = self  {
+        image =  image ?? UIImage(named: "placeholder_product")
+        //TODO
+        downloadTask = imageView.kf.setImage(with: url, placeholder: image, options: nil, progressBlock: {[weak self] (receivedSize, totalSize) in
+            let progress = Double(receivedSize) / Double(totalSize)
+            //            print(progress)
+            if let sSelf = self {
                 
-                strongSelf.image = img
-                strongSelf.hud?.hideLoadingView()
-                
-                if let _ = img {//加载成功
-                    strongSelf.hud?.hideHUD()
-                    return
-                }
+                sSelf.hud?.progress = progress
             }
-
-        }
-//        //TODO
-//        downloadTask = imageView.kf.setImage(with: url, placeholder: image, options: nil, progressBlock: {[weak self] (receivedSize, totalSize) in
-//            let progress = Double(receivedSize) / Double(totalSize)
-//            //            print(progress)
-//            if let sSelf = self {
-//                
-//                sSelf.hud?.progress = progress
-//            }
-//            }, completionHandler: {[weak self] (image, error, cacheType, imageURL) in
-//                if let strongSelf = self  {
-//                    
-//                    strongSelf.image = image
-//                    strongSelf.hud?.hideLoadingView()
-//                    
-//                    if let _ = image {//加载成功
-//                        strongSelf.hud?.hideHUD()
-//                        return
-//                    }
-//                    
-//                    // 提示加载错误
-//                    strongSelf.hud?.showHUD("加载失败", autoHide: false, afterTime: 0.0)
-//                }
-//        })
+            }, completionHandler: {[weak self] (image, error, cacheType, imageURL) in
+                if let strongSelf = self  {
+                    
+                    strongSelf.image = image
+                    strongSelf.hud?.hideLoadingView()
+                    
+                    if let _ = image {//加载成功
+                        strongSelf.hud?.hideHUD()
+                        return
+                    }
+                    
+                    // 提示加载错误
+                    strongSelf.hud?.showHUD("加载失败", autoHide: false, afterTime: 0.0)
+                }
+        })
 //        downloadTask = imageView.kf.setImageWithURL(url, placeholderImage: image, optionsInfo: nil, progressBlock: {[weak self] (receivedSize, totalSize) in
 //            let progress = Double(receivedSize) / Double(totalSize)
 //            //            print(progress)
@@ -316,7 +302,7 @@ extension PhotoViewCell {
             imageView.image = image
 
             // 按照图片比例设置imageView的frame
-            let width = imageV.size.width < scrollView.zj_width ? scrollView.zj_width : scrollView.zj_width
+            let width = imageV.size.width < scrollView.zj_width ? imageV.size.width : scrollView.zj_width
             let height = imageV.size.height * (width / imageV.size.width)
             
             // 长图

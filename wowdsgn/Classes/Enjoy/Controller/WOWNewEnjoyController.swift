@@ -101,7 +101,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.isHidden = true
         if !UserDefaults.standard.bool(forKey: "FirstTime_New") {
-//            UserDefaults.standard.set(true, forKey: "FirstTime_Master")
+            UserDefaults.standard.set(true, forKey: "FirstTime_New")
             UserDefaults.standard.synchronize()
             /**  第一次进入，此处把第一次进入时要进入的控制器作为根视图控制器  */
             

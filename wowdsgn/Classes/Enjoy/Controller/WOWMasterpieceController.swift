@@ -31,6 +31,22 @@ class WOWMasterpieceController: WOWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.isHidden = true
+        if !UserDefaults.standard.bool(forKey: "FirstTime_Master") {
+            UserDefaults.standard.set(true, forKey: "FirstTime_Master")
+            UserDefaults.standard.synchronize()
+            /**  第一次进入，此处把第一次进入时要进入的控制器作为根视图控制器  */
+            /**  第一次进入，此处把第一次进入时要进入的控制器作为根视图控制器  */
+            let data = ["414-1", "414-2", "414-3"]
+            let v = WOWGuidePageView(datas: data)
+            let window = UIApplication.shared.windows.last
+            
+            window?.addSubview(guideView)
+            window?.addSubview(v)
+//            window?.bringSubview(toFront: v)
+            
+            
+        }
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,6 +61,12 @@ class WOWMasterpieceController: WOWBaseViewController {
         btn.addTarget(self, action:#selector(backTop), for:.touchUpInside)
         return btn
     }()
+    lazy var guideView:WOWMasterGuideView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWMasterGuideView.self), owner: self, options: nil)?.last as! WOWMasterGuideView
+        return v
+    }()
+    
+    
     func backTop()  {
         let index  = IndexPath.init(row: 0, section: 0)
         self.tableView.scrollToRow(at: index, at: UITableViewScrollPosition.none, animated: true)

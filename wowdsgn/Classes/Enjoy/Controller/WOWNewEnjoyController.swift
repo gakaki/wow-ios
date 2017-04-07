@@ -22,6 +22,10 @@ class WOWNewEnjoyController: WOWBaseViewController {
     var categoryId = 0
     var indexRows = 0
 
+    lazy var guideView:WOWNewGuideView = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWNewGuideView.self), owner: self, options: nil)?.last as! WOWNewGuideView
+        return v
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         addObserver()
@@ -32,7 +36,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
         kolodaView.delegate = self
         kolodaView.alphaValueSemiTransparent = 1.0
         kolodaView.reloadData()
-        request()
+//        request()
         // Do any additional setup after loading the view.
     }
     /**
@@ -91,11 +95,23 @@ class WOWNewEnjoyController: WOWBaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        refreshRequest()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.isHidden = true
+        if !UserDefaults.standard.bool(forKey: "FirstTime_New") {
+//            UserDefaults.standard.set(true, forKey: "FirstTime_Master")
+            UserDefaults.standard.synchronize()
+            /**  第一次进入，此处把第一次进入时要进入的控制器作为根视图控制器  */
+            
+            let window = UIApplication.shared.windows.last
+            
+            window?.addSubview(guideView)
+            window?.bringSubview(toFront: guideView)
+            
+        }
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {

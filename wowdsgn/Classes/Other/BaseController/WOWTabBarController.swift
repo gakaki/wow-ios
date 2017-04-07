@@ -87,12 +87,7 @@ class WOWTabBarController: UITabBarController {
     }
     func configBadge(){
         WOWBuyCarMananger.updateBadge()
-//        if WOWUserManager.loginStatus { //登录了
-//           //FIXME:赞不考虑与电脑同步
-//            WOWBuyCarMananger.updateBadge()
-//        }else{ //未登录
-//            WOWBuyCarMananger.updateBadge()
-//        }
+
     }
     
     /**
@@ -142,29 +137,16 @@ class WOWTabBarController: UITabBarController {
 extension WOWTabBarController:UITabBarControllerDelegate{
 
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        let controllers = tabBarController.viewControllers
-        let index = controllers?.index(of: viewController)
-        if index == 3 {
-            if !UserDefaults.standard.bool(forKey: "FirstTime_StartApp") {
-                UserDefaults.standard.set(true, forKey: "FirstTime_StartApp")
-                UserDefaults.standard.synchronize()
-                /**  第一次进入，此处把第一次进入时要进入的控制器作为根视图控制器  */
-                let data = ["414-1", "414-2", "414-3"]
-                let v = WOWGuidePageView(datas: data)
-                let window = UIApplication.shared.windows.last
-                
-                window?.addSubview(v)
-                window?.bringSubview(toFront: v)
-
-            }
-            
-        }
+    
+        
     }
 
 //    //将要点击
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let controllers = tabBarController.viewControllers
         let index = controllers?.index(of: viewController)
+     
+
         if index == 4{
             guard WOWUserManager.loginStatus else {
                 UIApplication.currentViewController()?.toLoginVC(true)

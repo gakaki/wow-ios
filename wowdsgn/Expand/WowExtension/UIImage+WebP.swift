@@ -32,7 +32,7 @@ extension UIImageView {
     }
     
     func set_webimage_url_user( _ url:String? ) -> Void {
-        let pic_name    = "placeholder_userhead"
+        let pic_name    = "defaultHead"
         var url = self.webp_url(url)
         url = "\(url)/&rand=\(String.random())"
         let cache = YYWebImageManager.shared().cache
@@ -76,7 +76,7 @@ extension UIImageView {
     func set_webUserPhotoimage_url( _ url:String? ) -> Void {
         if url != nil {
             let url         = self.webp_url(url)
-            let pic_name    = "placeholder_userhead"
+            let pic_name    = "defaultHead"
             self.set_webimage_url_base(url,place_holder_name: pic_name)
             
         }

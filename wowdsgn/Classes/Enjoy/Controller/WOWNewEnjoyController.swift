@@ -36,7 +36,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
         kolodaView.delegate = self
         kolodaView.alphaValueSemiTransparent = 1.0
         kolodaView.reloadData()
-//        request()
+        request()
         // Do any additional setup after loading the view.
     }
     /**
@@ -95,7 +95,6 @@ class WOWNewEnjoyController: WOWBaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        refreshRequest()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

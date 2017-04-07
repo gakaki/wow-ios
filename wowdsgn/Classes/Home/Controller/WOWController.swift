@@ -9,12 +9,10 @@
 
 import UIKit
 
-@objc
 protocol WOWChideControllerDelegate:class {
     
     func updateTabsRequsetData()
 
-    @objc optional func topView(isHidden: Bool)
 }
 
 class WOWController: WOWBaseModuleVC {

@@ -95,10 +95,6 @@ class WOWNewEnjoyController: WOWBaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationShadowImageView?.isHidden = true
         if !UserDefaults.standard.bool(forKey: "FirstTime_New") {
             UserDefaults.standard.set(true, forKey: "FirstTime_New")
             UserDefaults.standard.synchronize()
@@ -111,6 +107,11 @@ class WOWNewEnjoyController: WOWBaseViewController {
             
         }
 
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationShadowImageView?.isHidden = true
+       
     }
     
     override func viewWillDisappear(_ animated: Bool) {

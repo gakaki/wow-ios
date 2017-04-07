@@ -121,6 +121,8 @@ public enum UMengEvent  {
     case Category_Banner                    //分类banner
     case Category_Option                    //分类选项点击
     
+    case masterpiece_page_community_homepage   //佳作页（社区首页）
+    
 }
 
 

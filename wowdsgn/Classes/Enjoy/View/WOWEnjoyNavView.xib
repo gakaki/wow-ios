@@ -26,14 +26,14 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="enjoy_back" translatesAutoresizingMaskIntoConstraints="NO" id="jq7-JV-qCg">
-                    <rect key="frame" x="209" y="18.5" width="14" height="8"/>
+                    <rect key="frame" x="166" y="18.5" width="14" height="8"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  阿斯蒂芬 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-BN-ZLD">
-                    <rect key="frame" x="117" y="11.5" width="87" height="21.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-BN-ZLD">
+                    <rect key="frame" x="161" y="22.5" width="0.0" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="183.5" id="WjY-dy-G2b"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>

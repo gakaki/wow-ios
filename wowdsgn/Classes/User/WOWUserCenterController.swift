@@ -57,7 +57,6 @@ class WOWUserCenterController: WOWBaseViewController {
     }
     
     func panOnView(pan: UIPanGestureRecognizer) {
-        print("pannnnnning received..")
         let currentPoint = pan.location(in: self.view)
         if pan.state == .began {
             lastPoint = currentPoint

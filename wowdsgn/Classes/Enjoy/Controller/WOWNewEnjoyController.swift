@@ -112,14 +112,18 @@ class WOWNewEnjoyController: WOWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.isHidden = true
-       
+         kolodaView.isHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.isHidden = false
+       
     }
-
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        kolodaView.isHidden = true
+    }
     // MARK: IBActions
     
     @IBAction func leftButtonTapped() {

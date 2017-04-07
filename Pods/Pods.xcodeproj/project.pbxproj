@@ -647,7 +647,6 @@
 		8212C6EA45F232600F0372B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC614B6BEF149CECB8568E6 /* CoreGraphics.framework */; };
 		8234540B57D10F3A2521F267 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF1EE1847AE88ABEAD60B78 /* CGFloatExtensions.swift */; };
 		827703397E276101ECF44694 /* UIScrollView+VTMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F7BDC28B1E8D0C7B064726 /* UIScrollView+VTMagic.m */; };
-		828B8BA6A7283DCD007C3005 /* HolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA50A8E1634C035D683E3274 /* HolderTextView.swift */; };
 		82B98ECC1B556CD0229B058F /* VTEnumType.h in Headers */ = {isa = PBXBuildFile; fileRef = B07134331E56A8E627CE21AB /* VTEnumType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82DCA476760141049F0AD825 /* AVHistoryMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 871F56602991DB6C41610FDB /* AVHistoryMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82FFCAB3D197788B910E6D3F /* LCURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 82574870404529B111A17902 /* LCURLResponseSerialization.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -3056,7 +3055,6 @@
 		D9A0492DFD7D7D26937A5FDA /* TZImageCropManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZImageCropManager.h; path = TZImagePickerController/TZImagePickerController/TZImageCropManager.h; sourceTree = "<group>"; };
 		D9AA3159CF5D700E7430EC8B /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "Source/UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		DA3DCDA3E461FE02E654029B /* TZProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZProgressView.m; path = TZImagePickerController/TZImagePickerController/TZProgressView.m; sourceTree = "<group>"; };
-		DA50A8E1634C035D683E3274 /* HolderTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HolderTextView.swift; sourceTree = "<group>"; };
 		DA5DF7A791821823C2D397D9 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = src/fmdb/FMDatabaseAdditions.m; sourceTree = "<group>"; };
 		DA7B2CDAFF8253A80EFA3908 /* UITextField+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITextField+Rx.swift"; path = "RxCocoa/iOS/UITextField+Rx.swift"; sourceTree = "<group>"; };
 		DA7FFA4A080A0BB0F522C2A2 /* AVHTTPClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AVHTTPClient.m; path = AVOS/AVOSCloud/ThirdParty/AFNetworking/AVHTTPClient.m; sourceTree = "<group>"; };
@@ -3894,7 +3892,6 @@
 				A98F1FBB79D69ADD3F98AA99 /* DACircularProgress */,
 				AE54C9DBA36F1F0394C34C93 /* FlexBoxLayout */,
 				F93476F5C78668D304B67DC5 /* GYHttpMock */,
-				AFE8A641287CFA909842FF29 /* HolderTextView */,
 				1C43CE94A06DEEC66CFF9F0C /* MIBadgeButton */,
 			);
 			path = Classes;
@@ -5807,14 +5804,6 @@
 				CBBDD02EF6C4FE6AD62805EA /* Array+Add.swift */,
 			);
 			path = "Array+";
-			sourceTree = "<group>";
-		};
-		AFE8A641287CFA909842FF29 /* HolderTextView */ = {
-			isa = PBXGroup;
-			children = (
-				DA50A8E1634C035D683E3274 /* HolderTextView.swift */,
-			);
-			path = HolderTextView;
 			sourceTree = "<group>";
 		};
 		B11981DB2FC4915C3291507E /* Support Files */ = {
@@ -8711,7 +8700,6 @@
 				1267157C2FCD301CADCE954B /* GYMockURLProtocol.m in Sources */,
 				8160D5AE637978EF17B5E523 /* GYNSURLHook.m in Sources */,
 				44E38939816EC08FE68385A9 /* GYNSURLSessionHook.m in Sources */,
-				828B8BA6A7283DCD007C3005 /* HolderTextView.swift in Sources */,
 				D25316DB3CAAD32A1A117CBF /* Layout.c in Sources */,
 				06DD8EAB6BC329F5FFBEFEBD /* Layout.swift in Sources */,
 				A58EA610D3C9574591E70782 /* LICENSE in Sources */,

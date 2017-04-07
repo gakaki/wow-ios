@@ -30,18 +30,18 @@ class WOWReleaseWorksController: WOWBaseViewController {
         self.automaticallyAdjustsScrollViewInsets = true
         let itemReghit = UIBarButtonItem.init(title: "取消", style: .plain, target: self, action: #selector(cancelAction))
         navigationItem.rightBarButtonItem = itemReghit
-//
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tap:")
-//        tapGestureRecognizer.numberOfTapsRequired = 2
-//        
-//        imageView.userInteractionEnabled = true
-//        imageView.addGestureRecognizer(tapGestureRecognizer)
+
         let tapGestureRecognizer = UIPanGestureRecognizer.init(target: self, action:  #selector(tap))
     
         self.view.addGestureRecognizer(tapGestureRecognizer)
 
         // Do any additional setup after loading the view.
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        MobClick.e(.post_picture_page)
+    }
+    
     func tap(gestureRecognizer: UIPanGestureRecognizer)  {
      self.view.endEditing(true)
     }
@@ -59,6 +59,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
             action in
             
             self.dismiss(animated: true) {
+                MobClick.e(.cancel_post_picture_page)
                 _ = FNUtil.currentTopViewController().navigationController?.popViewController(animated: true)
             }
   
@@ -97,7 +98,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
     }
     // MARK: - 发布按钮
     @IBAction func releaseAction(_ sender: Any) {
-        
+            MobClick.e(.post_clicks_post_picture_page)
             requestPushlish()
         
     }

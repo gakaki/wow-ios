@@ -29,7 +29,7 @@
                             <constraint firstAttribute="width" constant="30" id="BDM-UO-ocC"/>
                             <constraint firstAttribute="height" constant="34" id="vuV-Nt-UfV"/>
                         </constraints>
-                        <state key="selected" image="selectBig"/>
+                        <state key="selected" image="gou"/>
                     </button>
                 </subviews>
                 <constraints>
@@ -44,10 +44,10 @@
                 <outlet property="selectBtn" destination="ef4-mK-xEf" id="7Nf-YG-95O"/>
                 <outlet property="titleLb" destination="L5h-Kl-Txs" id="As9-Vi-DWK"/>
             </connections>
-            <point key="canvasLocation" x="-7.5" y="15.5"/>
+            <point key="canvasLocation" x="-7" y="19"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="selectBig" width="20" height="20"/>
+        <image name="gou" width="16" height="12"/>
     </resources>
 </document>

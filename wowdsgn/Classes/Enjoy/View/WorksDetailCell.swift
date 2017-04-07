@@ -34,6 +34,7 @@ class WorksDetailCell: UITableViewCell {
 
         imgMyPhoto.set_webUserPhotoimage_url(m.avatar ?? "")
         imgMyPhoto.addTapGesture { (sender) in
+            MobClick.e(.avatars_clicks_picture_details_page)
             VCRedirect.goOtherCenter(endUserId: m.endUserId ?? 0)
         }
         heightConstraint.constant = m.picHeight

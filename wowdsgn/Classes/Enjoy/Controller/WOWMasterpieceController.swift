@@ -26,7 +26,7 @@ class WOWMasterpieceController: WOWBaseViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        MobClick.e(.masterpiece_page_community_homepage)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -164,7 +164,7 @@ class WOWMasterpieceController: WOWBaseViewController {
             
             return
         }
-        
+        MobClick.e(.upload_picture_clicks_masterpiece_page)
         let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWChoiceClassController.self)) as! WOWChoiceClassController
         
 

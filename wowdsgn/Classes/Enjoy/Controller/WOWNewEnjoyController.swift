@@ -95,6 +95,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        MobClick.e(.latest_picture_page)
         if !UserDefaults.standard.bool(forKey: "FirstTime_New") {
             UserDefaults.standard.set(true, forKey: "FirstTime_New")
             UserDefaults.standard.synchronize()
@@ -130,6 +131,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
     }
     
     @IBAction func refreshButton() {
+        MobClick.e(.refresh_clicks_latest_picture_page)
         if let del = delegate {
             
             del.updateTabsRequsetData()
@@ -217,9 +219,11 @@ extension WOWNewEnjoyController: KolodaViewDelegate {
         }
         let model = fineWroksArr[index]
         if direction == .left {
+            MobClick.e(.dislike_clicks_latest_picture_page)
             requestLike(type: 0, works: model.id ?? 0)
         }
         if direction == .right {
+            MobClick.e(.like_clicks_latest_picture_page)
             requestLike(type: 1, works: model.id ?? 0)
         }
         

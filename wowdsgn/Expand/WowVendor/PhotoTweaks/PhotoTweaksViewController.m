@@ -9,6 +9,7 @@
 #import "PhotoTweaksViewController.h"
 #import "PhotoTweakView.h"
 #import "UIColor+Tweak.h"
+#import "wowdsgn-Swift.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #define DV_W ([UIScreen mainScreen].bounds.size.width)
 #define DV_H ([UIScreen mainScreen].bounds.size.height)
@@ -37,6 +38,11 @@
     [super viewWillAppear:animated];
 
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [MobClick event:@"edit_picture_page"];
     
 }
 - (void)viewDidLoad
@@ -94,7 +100,7 @@
 //        [self.delegate photoTweaksController:self didFinishWithCroppedImage:self.image clooseSizeImgId:self.photoView.sizeImgId];
 //        return;
 //    }
-
+    [MobClick event:@"next_edit_picture_page"];
     CGAffineTransform transform = CGAffineTransformIdentity;
 
     // translate

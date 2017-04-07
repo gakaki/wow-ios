@@ -68,7 +68,7 @@ struct WOWShareManager {
     
     public static func sharePhoto(_ m: WOWWorksDetailsModel){
 //        WOWShareManager.sharePhoto(self.modelData?.nickName ?? "", shareText: self.modelData?.des ?? "", url: "", shareImage: self.modelData?.pic ?? "")
-
+        MobClick.e(.sharepicture_popup)
         shareBackView.showPhotoImg(m)
         
         let pushlishImg = shareBackView.sharePhotoView.createViewImage()
@@ -83,7 +83,7 @@ struct WOWShareManager {
                 
                 switch shareType {
                 case .friends:
-                    
+                    MobClick.e(.moments_clicks_sharing_page)
                     WowShare.share_WechatFriendsImg(url: pushLishUrl, shareImage: pushlishImg, successClosure: {
                         
                         WOWHud.showMsg("分享成功")
@@ -96,7 +96,7 @@ struct WOWShareManager {
                     
                     return
                 case .wechat:
-                    
+                    MobClick.e(.wx_friends_clicks_sharing_page)
                     WowShare.share_WechatImg(url: pushLishUrl, shareImage: pushlishImg, successClosure: {
                         WOWHud.showMsg("分享成功")
                     }, failClosure: { (e) in

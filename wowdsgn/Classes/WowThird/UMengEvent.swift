@@ -122,6 +122,42 @@ public enum UMengEvent  {
     case Category_Option                    //分类选项点击
     
     case masterpiece_page_community_homepage   //佳作页（社区首页）
+    case select_classification_masterpiece_page  //筛选分类按钮（佳作页)
+    case upload_picture_clicks_masterpiece_page     //上传佳作按钮（佳作页）
+    case latest_picture_page                        //最新页
+    case dislike_clicks_latest_picture_page        //左划不喜欢按钮（最新页）
+    case like_clicks_latest_picture_page            //右划赞按钮（最新页）
+    case refresh_clicks_latest_picture_page         //刷新按钮（最新页）
+    case upload_classified_picture_page             //选择上传分类页
+    case sellect_classifiaction_clicks_upload_classified_picture_page       //分类选项按钮（选择上传分类页）
+    case next_clicks_upload_classified_picture_page     //下一步（选择上传分类页）
+    case select_picture_page                            //选择图片页
+    case takephoto_clicks                           //拍照按钮（选择图片页）
+    case finishpicturebutton                        //完成按钮（选择图片页）
+    case edit_picture_page                          //编辑图片页
+    case turning_picture_clicks_edit_picture_page       //旋转图片按钮（编辑图片页）
+    case cut_picture_clicks_edit_picture_page           //裁剪图片按钮（编辑图片页）
+    case select_size_clicks_edit_picture_page           //比例选项按钮（编辑图片页）
+    case next_edit_picture_page                         //下一步（编辑图片页）
+    case post_picture_page                              //编辑文字页（发布）
+    case cancel_post_picture_page                       //取消（发布页）
+    case post_clicks_post_picture_page                  //发布按钮（发布页）
+    case sharepicture_popup                             //分享弹窗
+    case moments_clicks_sharing_page                    //朋友圈按钮（分享页）
+    case wx_friends_clicks_sharing_page                  //微信好友（分享页）
+    case picture_details_page                            //作品详情页    
+    case avatars_clicks_picture_details_page                //用户头像点击（作品详情页）
+    case thumbs_up_clicks_picture_details_page              //点赞（作品详情页）
+    case collection_clicks_picture_details_page             //收藏（作品详情页） 
+    case sharing_clicks_picture_details_page                //分享（作品详情页）
+    case my_personalpicture_page                                //个人作品页（自己）
+    case other_personalpicture_page                         //个人作品页（其他人）
+    case picture_uploadlist_clicks                          //已上传tab点击
+    case picture_uploaddetail_clicks                        //已上传详情tab点击
+    case savepicture_clicks                                 //收藏的作品tab点击
+    case change_personal_information_clicks_my_homepage         //修改个人信息按钮（个人中心页）
+
+
     
 }
 

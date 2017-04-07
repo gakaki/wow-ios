@@ -28,6 +28,10 @@ class WOWChoiceClassController: WOWBaseViewController {
         
         // Do any additional setup after loading the view.
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        MobClick.e(.upload_classified_picture_page)
+    }
     override func setUI() {
         super.setUI()
         
@@ -93,8 +97,8 @@ class WOWChoiceClassController: WOWBaseViewController {
 
     }
     func nextAction()  {
-           cloosePhotos()
-        
+        MobClick.e(.next_clicks_upload_classified_picture_page)
+        cloosePhotos()
         print("点击了下一步")
     }
     func cloosePhotos() {
@@ -121,7 +125,7 @@ class WOWChoiceClassController: WOWBaseViewController {
                 imagePickerVc?.showSelectBtn = true // 展示完成按钮
                 imagePickerVc?.didFinishPickingPhotosHandle = {[weak self](images,asstes,isupdete) in
                     if let strongSelf = self,let images = images {
-                        
+                        MobClick.e(.finishpicturebutton)
                         UIApplication.shared.statusBarStyle = .default
                         let photoTweaksViewController = PhotoTweaksViewController(image: images[0])
                         photoTweaksViewController?.delegate = strongSelf
@@ -190,6 +194,7 @@ extension WOWChoiceClassController:UICollectionViewDelegate,UICollectionViewData
 //                    classId = model.id ?? 0
                     
                 }else {
+                    MobClick.e(.sellect_classifiaction_clicks_upload_classified_picture_page)
 //                    btnRright.isSelected    = true
                     btnRright.isEnabled     = true
                     model.isSelect          = true

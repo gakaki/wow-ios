@@ -158,9 +158,9 @@ extension WOWWorkController:UICollectionViewDelegate,UICollectionViewDataSource{
 
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard dataArr.count > 9 else {
-            return
-        }
+//        guard dataArr.count > 9 else {
+//            return
+//        }
         let offsetY = scrollView.contentOffset.y
         var isHidden = false
         if offsetY > 100 {

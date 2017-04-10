@@ -14,10 +14,8 @@ struct WOWHud {
 
     
         DispatchQueue.main.async {
-            
             UIApplication.currentViewController()?.view.addSubview(LoadView.show())
-            
-            
+        
         }
 
     }
@@ -31,28 +29,19 @@ struct WOWHud {
     }
     static func dismiss(){
         SVProgressHUD.popActivity()
-        DispatchQueue.main.async {
-
-            LoadView.dissMissView()
-        }
+        LoadView.dissMissView()
 
     }
     // 接口请求成功，返回code码错误
     static func showMsg(_ message:String?){
-//        DispatchQueue.main.async {
-//            
-////            WOWHud.dismiss()
-//
-//        }
+
         configSVHud()
         let msg = message ?? "网络错误"
         SVProgressHUD.showInfo(withStatus: msg)
     }
     // 接口请求不成功
     static func showMsgNoNetWrok(message:String?){
-//        DispatchQueue.main.async {
-            WOWHud.dismiss()
-//        }
+        WOWHud.dismiss()
         configErrorSVHud()
         let msg = message ?? "网络错误"
         SVProgressHUD.showInfo(withStatus: msg)

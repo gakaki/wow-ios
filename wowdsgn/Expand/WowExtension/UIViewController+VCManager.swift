@@ -592,7 +592,7 @@ extension  UIViewController {
         var params              = [String: Any]()
         params = ["openId": open_id, "unionId": unionid, "wechatAvatar": avatar, "wechatNickName": nickName, "language": language, "province": province, "sex": sex, "country": country]
         WOWNetManager.sharedManager.requestWithTarget(.api_Wechat(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
-            if let strongSelf = self{
+            if let _ = self{
                 let json = JSON(result)
                 DLog(json)
                 firstLogin = JSON(result)["firstLogin"].bool ?? true

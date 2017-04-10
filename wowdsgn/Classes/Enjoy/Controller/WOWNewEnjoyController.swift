@@ -36,7 +36,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
         kolodaView.delegate = self
         kolodaView.alphaValueSemiTransparent = 1.0
         kolodaView.reloadData()
-        request()
+//        request()
         // Do any additional setup after loading the view.
     }
     /**
@@ -55,7 +55,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
         params = ["categoryId": categoryId   ,"type": 1 ,"startRows":indexRows,"pageSize":20]
         
         WOWNetManager.sharedManager.requestWithTarget(.api_getInstagramList(params: params), successClosure: {[weak self] (result, code) in
-            WOWHud.dismiss()
+            
             if let strongSelf = self{
                 
                 let r = JSON(result)
@@ -96,6 +96,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         MobClick.e(.latest_picture_page)
+        
         if !UserDefaults.standard.bool(forKey: "FirstTime_New") {
             UserDefaults.standard.set(true, forKey: "FirstTime_New")
             UserDefaults.standard.synchronize()
@@ -112,7 +113,8 @@ class WOWNewEnjoyController: WOWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.isHidden = true
-         kolodaView.isHidden = false
+        kolodaView.isHidden = false
+        refreshRequest()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -141,6 +143,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
             del.updateTabsRequsetData()
             
         }
+        WOWHud.showLoading()
         refreshRequest()
 
     }
@@ -173,6 +176,7 @@ extension WOWNewEnjoyController: KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
         let model = fineWroksArr[index]
         VCRedirect.bingWorksDetails(worksId: model.id ?? 0)
+
     }
     
     func koloda(_ koloda: KolodaView, draggedCardWithPercentage finishPercentage: CGFloat, in direction: SwipeResultDirection) {

@@ -74,10 +74,10 @@ class WOWNetManager {
     
        _ =  requestProvider.request(target) { (result) in
             //消失loading页面
-            DispatchQueue.main.async {
-            
+//            DispatchQueue.main.async {
+        
                 LoadView.dissMissView()
-            }
+//            }
         
             switch result{
                 

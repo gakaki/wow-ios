@@ -21,7 +21,7 @@ class WOWCustomKoloda: UIView {
     
     init(frame: CGRect, _ imgStr: String) {
         self.init()
-        self.frame = frame
+        self.frame = CGRect(x: 0, y: 0, w: MGScreenWidth - 36, h: MGScreenWidth - 20)
         self.layer.shadowOffset = CGSize(width: 0, height: 2)  //设置图层阴影的偏移量
         self.layer.shadowOpacity = 0.1  //将图层阴影的不透明度设为 0.7
         self.layer.shadowRadius = 4 //将图层阴影的范围设为 5

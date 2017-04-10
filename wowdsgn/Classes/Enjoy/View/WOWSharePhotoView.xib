@@ -29,7 +29,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLk-iM-dOj">
                     <rect key="frame" x="10" y="194" width="295" height="56"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Qrcode" translatesAutoresizingMaskIntoConstraints="NO" id="7Ym-4j-67M">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shareQrcode" translatesAutoresizingMaskIntoConstraints="NO" id="7Ym-4j-67M">
                             <rect key="frame" x="239" y="0.0" width="56" height="56"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="56" id="Ukg-bb-P6R"/>
@@ -98,7 +98,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Qrcode" width="417" height="417"/>
         <image name="quptes-sanjiao" width="37" height="37"/>
+        <image name="shareQrcode" width="800" height="800"/>
     </resources>
 </document>

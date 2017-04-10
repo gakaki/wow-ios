@@ -10,6 +10,8 @@
 #import "PhotoTweakView.h"
 #import "UIColor+Tweak.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "UMMobClick/MobClick.h"
+
 #define DV_W ([UIScreen mainScreen].bounds.size.width)
 #define DV_H ([UIScreen mainScreen].bounds.size.height)
 @interface PhotoTweaksViewController ()
@@ -46,7 +48,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [MobClick event:@"edit_picture_page"];
 
     self.navigationController.navigationBar.translucent = NO;
     
@@ -93,6 +95,7 @@
 
 - (void)saveBtnTapped
 {
+    [MobClick event:@"next_edit_picture_page"];
 //    if (self.photoView.isCrop && self.photoView.isRoat) {
 //        
 //        [self.delegate photoTweaksController:self didFinishWithCroppedImage:self.image clooseSizeImgId:self.photoView.sizeImgId];

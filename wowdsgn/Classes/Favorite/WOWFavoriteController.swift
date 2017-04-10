@@ -41,7 +41,7 @@ class WOWFavoriteController: WOWBaseViewController {
     
     override func setUI() {
         super.setUI()
-        self.title = "我喜欢的"
+        self.title = "心愿单"
         configBuyBarItem()
         addObserver()
         

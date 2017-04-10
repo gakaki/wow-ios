@@ -137,7 +137,7 @@ class WOWChoiceClassController: WOWBaseViewController {
                 
                     }
                 }
-
+                MobClick.e(.select_picture_page)
                 present(imagePickerVc!, animated: true, completion: nil)
 
         

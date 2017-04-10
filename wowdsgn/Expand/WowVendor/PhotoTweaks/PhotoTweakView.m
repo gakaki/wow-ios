@@ -445,22 +445,23 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         
         _cropBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _cropBtn.frame = CGRectMake(30, 20, 30, 30);
-        _cropBtn.center =  CGPointMake(CX_W / 2 + 35, 35);
+        _cropBtn.center = CGPointMake(CX_W / 2 - 35, 35) ;
         
         
         [_cropBtn addTarget:self action:@selector(cropBtnTapped:) forControlEvents:UIControlEventTouchUpInside];
         [_cropBtn setImage:[UIImage imageNamed:@"crop-no"] forState:UIControlStateNormal];
         [_cropBtn setImage:[UIImage imageNamed:@"crop-yes"] forState:UIControlStateSelected];
+         _cropBtn.selected = YES;
         [_bottomView addSubview:_cropBtn];
         
         _rotaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _rotaBtn.frame = CGRectMake(_cropBtn.mj_x + _cropBtn.mj_w + 40, 20, 30, 30);
-        _rotaBtn.center = CGPointMake(CX_W / 2 - 35, 35);
+        _rotaBtn.center = CGPointMake(CX_W / 2 + 35, 35);
         
         [_rotaBtn addTarget:self action:@selector(rotaBtnTapped:) forControlEvents:UIControlEventTouchUpInside];
         [_rotaBtn setImage:[UIImage imageNamed:@"rotating-no"] forState:UIControlStateNormal];
         [_rotaBtn setImage:[UIImage imageNamed:@"rotating-yes"] forState:UIControlStateSelected];
-        _rotaBtn.selected = YES;
+       
         [_bottomView addSubview:_rotaBtn];
         
         
@@ -524,7 +525,6 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         [_bottomBtnsView addSubview:sizeBtn];
         
     }
-    _bottomBtnsView.hidden = YES;
 }
 // 配置滚动角度的scrollView
 -(void)configAngleScrollView {
@@ -589,6 +589,13 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     _centerView.backgroundColor = [UIColor centerLineColor];
     _centerView.center = CGPointMake(_scrollViewAngle.center.x, _scrollViewAngle.center.y - (_scrollViewAngle.mj_h - angleHeight));
     [self addSubview:_centerView];
+    
+    _centerView.hidden = YES;
+    _scaleMaskView.hidden = YES;
+    _bottomBtnsView.hidden = NO;
+    _scrollViewAngle.hidden = YES;
+ 
+
     
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{

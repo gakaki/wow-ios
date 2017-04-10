@@ -11,6 +11,7 @@
 #import "UIView+Extension.h"
 #import <math.h>
 #import "UIButton+ImageTitleStyle.h"
+#import "UMMobClick/MobClick.h"
 
 #define CX_W ([UIScreen mainScreen].bounds.size.width)
 #define CX_H ([UIScreen mainScreen].bounds.size.height)
@@ -107,7 +108,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     if (self = [super init]) {
         self.frame = CGRectMake(0, 0, kCropViewCornerLength, kCropViewCornerLength);
         self.backgroundColor = [UIColor clearColor];
-        
+         
         CGFloat lineWidth = 2;
         UIView *horizontal = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kCropViewCornerLength, lineWidth)];
         horizontal.backgroundColor = [UIColor cropLineColor];
@@ -231,6 +232,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
 // slider 改变时 ，增加的格子  比九宫格多的那种
 - (void)updateGridLines:(BOOL)animate
 {
+    
     // show grid lines
     if (self.gridLinesDismissed) {
         [self showGridLines];
@@ -833,7 +835,9 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     }];
     
 }
+//裁剪图片
 -(void)cropBtnTapped:(UIButton *)sender{
+    [MobClick event:@"turning_picture_clicks_edit_picture_page"];
     if (sender.selected == NO) {// 点击状态
         if (self.rotaBtn.selected == YES){
             [self.rotaBtn setSelected:NO];
@@ -849,7 +853,10 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     }
     
 }
+//旋转图片
 -(void)rotaBtnTapped:(UIButton *)sender{
+    [MobClick event:@"cut_picture_clicks_edit_picture_page"];
+
     if (sender.selected == NO) {// 点击状态
         if (self.cropBtn.selected == YES){
             [self.cropBtn setSelected:NO];
@@ -863,8 +870,10 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     }
     
 }
+//比例按钮
 - (void)resetBtnTapped:(UIButton *)sender
 {
+    [MobClick event:@"select_size_clicks_edit_picture_page"];
     CGFloat width   = 0;
     CGFloat height  = 0;
     switch ([sender tag]) {

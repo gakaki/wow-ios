@@ -29,12 +29,12 @@ class WOWPraiseController: WOWBaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationShadowImageView?.isHidden = true
+//        self.navigationShadowImageView?.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationShadowImageView?.isHidden = false
+//        self.navigationShadowImageView?.isHidden = false
     }
     override func pullToRefresh() {
         super.pullToRefresh()

@@ -40,7 +40,6 @@ extension VCDesignerListSearchResult{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WOWBaseStyleCell", for: indexPath) as! WOWBaseStyleCell
         let model = resultArr[(indexPath as NSIndexPath).row]
-        //        cell.leftImageView.kf_setImageWithURL(NSURL(string:model.image ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         cell.leftImageView.set_webimage_url(model.designerPhoto )
         
         cell.centerTitleLabel!.text = model.designerName

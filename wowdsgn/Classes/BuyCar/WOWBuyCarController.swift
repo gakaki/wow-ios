@@ -143,13 +143,9 @@ class WOWBuyCarController: WOWBaseViewController {
             bottomListArray.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{[weak self] in
                 if let strongSelf = self {
                     strongSelf.tableView.reloadData()
-                    //                    strongSelf.collectionView.reloadData()
                 }
                 
             })
-//            bottomListArray.ergodicArrayWithProductModel(dic: send_obj)
-//            
-//            self.tableView.reloadData()
             
         }
         
@@ -234,11 +230,6 @@ class WOWBuyCarController: WOWBaseViewController {
                 }
             }
             
-//            if product.productQty > product.productStock {
-//                WOWHud.showMsg((product.productName ?? "您有商品") + "库存不足")
-//                return
-//            }
-            
         }
         MobClick.e(.Buy_Clicks)
          //结算
@@ -268,7 +259,7 @@ class WOWBuyCarController: WOWBaseViewController {
 //MARK Network 购物车
     
     /**
-     2.同步登录之后个人购物车的数据
+     个人购物车的数据
      */
     override func request() {
         super.request()

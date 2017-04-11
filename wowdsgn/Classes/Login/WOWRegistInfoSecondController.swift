@@ -41,7 +41,6 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        sex = WOWUserManager.userSex
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,7 +91,6 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         pickerContainerView.sureButton.addTarget(self, action:#selector(surePicker), for:.touchUpInside)
         pickerContainerView.cancelButton.addTarget(self, action:#selector(cancel), for:.touchUpInside)
         
-        //        pickerContainerView.tag == 1001
         
         backGroundWindow = UIApplication.shared.keyWindow
         
@@ -267,21 +265,7 @@ extension WOWRegistInfoSecondController:UIPickerViewDelegate,UIPickerViewDataSou
         
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-//        let currentType = clickType
-//        switch currentType {
-//            
-//        case .ageType:
-//            ageRow = row
-//            ageTextField?.text = pickDataArr[row]
-//        case .starType:
-//            starRow = row + 1
-//            starTextField?.text = pickDataArr[row + 1]
-//            
-//            
-//        }
-    }
+
     /**
      弹出选择器
      */

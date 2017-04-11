@@ -28,13 +28,10 @@ class WOWFavoriteController: WOWBaseViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        self.navigationShadowImageView?.isHidden = false
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.navigationShadowImageView?.isHidden = true
-//        self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         MobClick.e(.Like_Page)
     }
@@ -72,10 +69,7 @@ class WOWFavoriteController: WOWBaseViewController {
         vc_product    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavProduct.self)) as? WOWFavProduct
         vc_brand    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavBrand.self)) as? WOWFavBrand
         vc_designer = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavDesigner.self)) as? WOWFavDesigner
-        
-//        addChildViewController(vc_product!)
-//        addChildViewController(vc_brand!)
-//        addChildViewController(vc_designer!)
+
         v.magicView.reloadData()
     }
     fileprivate func addObserver(){
@@ -158,13 +152,10 @@ extension WOWFavoriteController:VTMagicViewDelegate{
             switch pageIndex {
             case  0: break
             case  1:
-//                MobClick.e(.Brands_List)
                 break
             case  2:
-//                MobClick.e(.Designers_List)
                 break
             default:
-//                MobClick.e(.Shopping)
                 break
             }
             

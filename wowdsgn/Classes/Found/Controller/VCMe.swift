@@ -29,13 +29,4 @@ class VCMe:WOWBaseViewController{
 
 
 }
-//func magicView(magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
-//    let vc = magicView.dequeueReusablePageWithIdentifier(self.identifier_magic_view_page)
-//    if (vc == nil) {
-//        
-//        let vc_me       = VCCategoryProducts()
-//        addChildViewController(vc_me)
-//        return vc_me
-//    }
-//    return vc!;
-//}
+

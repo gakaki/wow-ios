@@ -16,7 +16,6 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     var isPresent:Bool = false
     @IBOutlet weak var headImageView: UIImageView!
     @IBOutlet weak var nickTextField: UITextField!
-//    @IBOutlet weak var telTextField: UITextField!
     @IBOutlet weak var descTextField: UITextField!
     var phoneNumber  :String?
     var headImageUrl:String = WOWUserManager.userHeadImageUrl
@@ -104,8 +103,7 @@ class WOWRegistInfoFirstController: WOWBaseTableViewController {
     }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         nickTextField.resignFirstResponder()
-//         telTextField.resignFirstResponder()
-         descTextField.resignFirstResponder()
+        descTextField.resignFirstResponder()
     }
 //MARK:Actions
     func nextButton() {
@@ -194,10 +192,7 @@ extension WOWRegistInfoFirstController:UIImagePickerControllerDelegate,UINavigat
                 WOWHud.dismiss()
                 strongSelf.headImageView.image = image
                 strongSelf.headImageUrl = result ?? ""
-//                strongSelf.headImageUrl = (result as? String) ?? ""
                 
-                
-                print(result ?? "")
             }
             
             

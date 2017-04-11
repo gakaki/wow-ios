@@ -44,9 +44,7 @@ class WOWOrderCell: UITableViewCell {
             return
         }
         tagList.textFont = UIFont.systemFont(ofSize: 10)
-        self.model = model
-//        goodsImageView.kf_setImageWithURL(NSURL(string:model.specImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
-        
+        self.model = model        
         goodsImageView.set_webimage_url(model.specImg)
         
         nameLabel.text = model.productName

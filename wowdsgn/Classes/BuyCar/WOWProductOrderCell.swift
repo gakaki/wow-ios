@@ -39,9 +39,7 @@ class WOWProductOrderCell: UITableViewCell{
         guard let model = model else{
             return
         }
-        self.model = model
-        //        goodsImageView.kf_setImageWithURL(NSURL(string:model.specImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
-        
+        self.model = model        
         switch model.productStatus ?? 1{
         case -1:
             statusLabel.isHidden = false

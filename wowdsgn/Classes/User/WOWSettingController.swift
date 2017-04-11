@@ -31,17 +31,7 @@ class WOWSettingController: WOWBaseTableViewController {
     }
     
 //MARK:Private Method
-    fileprivate func calCacheSize(){
 
-//        KingfisherManager.shared.cache.calculateDiskCacheSizeWithCompletionHandler {[weak self](size) in
-//            if let strongSelf = self{
-//                let mSize = Float(size) / 1024 / 1024
-//                let str = String(format:"%.1f",mSize)
-//                strongSelf.cacheLabel.text = str + "m"
-//            }
-//        }
-    }
-    
     
 //MARK:Delegate
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -132,12 +122,10 @@ class WOWSettingController: WOWBaseTableViewController {
     fileprivate func exitLogin(){
         WOWNetManager.sharedManager.requestWithTarget(.api_Logout, successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
-//                strongSelf.cancleWecha()
                 WOWHud.showMsg("退出登录")
                 WOWUserManager.exitLogin()
                 
                 UIApplication.currentViewController()?.toLoginVC(true)
-//                WOWTool.lastTabIndex = 0
                 strongSelf.tabBarController?.selectedIndex = 0
                 strongSelf.tableView.reloadData()
                 NotificationCenter.postNotificationNameOnMainThread(WOWExitLoginNotificationKey, object: nil)

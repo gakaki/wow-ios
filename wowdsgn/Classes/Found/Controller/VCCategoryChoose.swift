@@ -306,14 +306,7 @@ extension VCCategoryChoose:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
-//    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
-//    {
-//        return 60.w
-//        
-//    }
-//    func tableView( tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
-//        return 60.w
-//    }
+
    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let m = vo_categories_arr[(indexPath as NSIndexPath).section]

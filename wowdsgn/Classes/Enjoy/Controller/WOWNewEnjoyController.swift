@@ -36,7 +36,6 @@ class WOWNewEnjoyController: WOWBaseViewController {
         kolodaView.delegate = self
         kolodaView.alphaValueSemiTransparent = 1.0
         kolodaView.reloadData()
-//        request()
         // Do any additional setup after loading the view.
     }
     /**
@@ -78,7 +77,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
         
         
     }
-    
+    //是否喜欢某个作品
     func requestLike(type: Int, works worksId: Int) {
 
         WOWNetManager.sharedManager.requestWithTarget(.api_LikeWorks(worksId: worksId, type: type), successClosure: {[weak self] (result, code) in
@@ -96,7 +95,9 @@ class WOWNewEnjoyController: WOWBaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         MobClick.e(.latest_picture_page)
-        
+        //每次进入页面都重新拉取数据
+        refreshRequest()
+ 
         if !UserDefaults.standard.bool(forKey: "FirstTime_New") {
             UserDefaults.standard.set(true, forKey: "FirstTime_New")
             UserDefaults.standard.synchronize()
@@ -114,7 +115,6 @@ class WOWNewEnjoyController: WOWBaseViewController {
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.isHidden = true
         kolodaView.isHidden = false
-        refreshRequest()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -127,15 +127,15 @@ class WOWNewEnjoyController: WOWBaseViewController {
         kolodaView.isHidden = true
     }
     // MARK: IBActions
-    
+    //不喜欢
     @IBAction func leftButtonTapped() {
         kolodaView?.swipe(.left)
     }
-    
+    //喜欢
     @IBAction func rightButtonTapped() {
         kolodaView?.swipe(.right)
     }
-    
+    //重置按钮
     @IBAction func refreshButton() {
         MobClick.e(.refresh_clicks_latest_picture_page)
         if let del = delegate {
@@ -147,7 +147,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
         refreshRequest()
 
     }
-    
+    //重置
     func refreshRequest() {
         indexRows = 0
         fineWroksArr = [WOWFineWroksModel]()

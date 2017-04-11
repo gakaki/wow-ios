@@ -237,9 +237,6 @@ extension WOWAllClassViewController: WOWAllClassViewHeaderDelegate {
                                     }
                                 
                                 }
-//                                let indexSet = NSIndexSet.init(index: module.offset)
-//
-//                                self.tableView.reloadSections(indexSet as IndexSet, with: .none)
 
                         }
                                                

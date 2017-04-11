@@ -26,7 +26,6 @@ class WOWEditOrderController: WOWBaseViewController {
     
     var productArr                      :[WOWCarProductModel]?  //产品列表清单
     var orderSettle                     :WOWEditOrderModel?     //确认订单的信息
-//    var totalPrice                      : String?
     var addressInfo                     :WOWAddressListModel?       //地址信息
     var orderCode                       = String()      //订单号
     var couponModel                     :WOWCouponModel?        //优惠券信息
@@ -593,10 +592,7 @@ class WOWEditOrderController: WOWBaseViewController {
                 var sum = payAmount ?? 0
                 sum                  = sum * 100 
                 let order_id             = orderCode ?? ""
-                
-//                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
-//                TalkingDataAppCpa.onPay( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName, with: order)
-//                TalkingDataAppCpa.onOrderPaySucc( WOWUserManager.userID, withOrderId: order_id, withAmount: Int32(sum), withCurrencyType: "CNY", withPayType: paymentChannelName)
+
                 AnalyaticEvent.e2(.PaySuccess,["totalAmount":Int32(sum) ,"OrderCode":order_id ])
                 //支付结果
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
@@ -745,8 +741,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         discountAmount = orderSettle?.deduction
         reCalTotalPrice()
         tableView.reloadData()
-//        let section = IndexSet(integer: 2)
-//        tableView.reloadSections(section, with: .automatic)
+
     }
     //选择促销
     func selectPromotion() {
@@ -754,8 +749,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         discountAmount = orderSettle?.totalPromotionDeduction
         reCalTotalPrice()
         tableView.reloadData()
-//        let section = IndexSet(integer: 2)
-//        tableView.reloadSections(section, with: .automatic)
+
     }
 }
 

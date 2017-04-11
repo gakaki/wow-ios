@@ -231,10 +231,8 @@ extension AppDelegate{
         if appVersion == nil {
             // 保存最新的版本号
             userDefaults.setValue(currentAppVersion, forKey: "appVersion")
-            let introVC = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWIntroduceController.self))
-            self.window?.rootViewController = introVC
+        
             rootVCGuide()
-//            requestDeferreddeeplink()
             
         }else{
             

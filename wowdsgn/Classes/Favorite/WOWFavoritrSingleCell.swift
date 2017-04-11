@@ -24,8 +24,6 @@ class WOWFavoritrSingleCell: UICollectionViewCell {
     }
     func showData(_ model:WOWProductModel,indexPath:IndexPath) {
         let url             = model.productImg ?? ""
-//        imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: UIImage(named: "placeholder_product"))
-
         imageView.set_webimage_url( url)
         //默认上架，1上架，2下架，10失效
         switch model.productStatus ?? 1 {

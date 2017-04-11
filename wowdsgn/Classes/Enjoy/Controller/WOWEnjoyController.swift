@@ -14,7 +14,7 @@ class WOWEnjoyController: WOWBaseViewController {
     
     var v : VCVTMagic!
     var toMagicPage : Int = 0
-    var isOppenRouter : Bool = false
+    var isOpenRouter : Bool = false
     var categoryArr = [WOWEnjoyCategoryModel]()
     var vc_newEnjoy:WOWNewEnjoyController?
     var vc_masterpiece:WOWMasterpieceController?
@@ -27,23 +27,18 @@ class WOWEnjoyController: WOWBaseViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        if isOppenRouter {
+        if isOpenRouter {
           v.switch(toPage: UInt(toMagicPage), animated: true)
-            isOppenRouter = false
+            isOpenRouter = false
         }
        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-         
-        //        self.navigationShadowImageView?.isHidden = false
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        self.navigationShadowImageView?.isHidden = true
-        //        self.navigationController?.setNavigationBarHidden(false, animated: true)
+
     }
     lazy var navView:WOWEnjoyNavView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWEnjoyNavView.self), owner: self, options: nil)?.last as! WOWEnjoyNavView
@@ -61,8 +56,6 @@ class WOWEnjoyController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         self.navigationItem.titleView = navView
-        
-//        configBuyBarItem()
         
         v                               = VCVTMagic()
         v.magicView.dataSource          = self
@@ -89,7 +82,6 @@ class WOWEnjoyController: WOWBaseViewController {
         
         vc_newEnjoy    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWNewEnjoyController.self)) as? WOWNewEnjoyController
         vc_newEnjoy?.delegate = self
-        vc_newEnjoy?.categoryId = self.currentCategoryId
         vc_masterpiece    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWMasterpieceController.self)) as? WOWMasterpieceController
         vc_masterpiece?.categoryId = self.currentCategoryId
         vc_masterpiece?.delegate = self
@@ -101,7 +93,6 @@ class WOWEnjoyController: WOWBaseViewController {
     override func request() {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(.api_getCategory_Has, successClosure: {[weak self](result, code) in
-            WOWHud.dismiss()
             
             if let strongSelf = self{
                 let r                             =  JSON(result)
@@ -139,6 +130,7 @@ class WOWEnjoyController: WOWBaseViewController {
         changeButtonState()
 
     }
+    //更改箭头
     func changeButtonState() {
         if isOpen {
             backView.hideView()
@@ -233,10 +225,8 @@ extension WOWEnjoyController:VTMagicViewDataSource, VTMagicViewDelegate{
             switch pageIndex {
             case  0: break
             case  1:
-                //                MobClick.e(.Brands_List)
                 break
             default:
-                //                MobClick.e(.Shopping)
                 break
             }
             

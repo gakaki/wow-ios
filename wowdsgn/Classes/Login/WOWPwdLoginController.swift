@@ -37,7 +37,6 @@ class WOWPwdLoginController: WOWBaseViewController {
     //MARK:Private Method
     override func setUI() {
         wechatButton.isHidden = !WXApi.isWXAppInstalled()
-//        pwdView.borderColor(0.5, borderColor: UIColor.init(hexString: "#EAEAEA")!)
     }
 
     //MARK:Actions

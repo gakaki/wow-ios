@@ -79,9 +79,6 @@ class WOWLoginController: WOWBaseViewController {
         vc_pwd    = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWPwdLoginController.self)) as? WOWPwdLoginController
         vc_pwd?.isPresent = isPresent
         
-        addChildViewController(vc_code!)
-        addChildViewController(vc_pwd!)
-        
         v.magicView.reloadData()
 
     }
@@ -89,7 +86,6 @@ class WOWLoginController: WOWBaseViewController {
     fileprivate func configNavItem(){
         makeCustomerImageNavigationItem("close", left:true) {[weak self] in
             if let strongSelf = self{
-//                strongSelf.dismissViewControllerAnimated(true, completion: nil)
                 if strongSelf.isPopRootVC {
                     strongSelf.dismiss(animated: true, completion: {
                        _ = UIApplication.currentViewController()?.navigationController?.popToRootViewController(animated: true)

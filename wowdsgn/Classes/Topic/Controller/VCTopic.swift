@@ -183,12 +183,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
             
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: cell_header_reuse, for: indexPath) as! WOWTopicHeaderView
             headerView.showData(model: vo_topic)
-             
-//                header_height = headerView.label_desc.getEstimatedHeight()
-//                headerView.label_name.text = "归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋归自然，崇尚原木韵味，外加现代、实用、精美的艺术设计风格，北欧人似乎有着不可替代的天赋"
 
-            
-            
             reusableView    =  headerView
             
         }

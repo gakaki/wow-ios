@@ -237,13 +237,13 @@ public class VCRedirect {
             if isNew {
                 let vc =  tabBarController?.viewControllers?[3] as! UINavigationController
                 let viewController = vc.visibleViewController as? WOWEnjoyController
-                 viewController?.isOppenRouter = true
+                 viewController?.isOpenRouter = true
                 viewController?.toMagicPage = 1
                
             }else {
                 let vc =  tabBarController?.viewControllers?[3] as! UINavigationController
                 let viewController = vc.visibleViewController as? WOWEnjoyController
-                viewController?.isOppenRouter = true
+                viewController?.isOpenRouter = true
                 viewController?.toMagicPage = 0
             }
           
@@ -299,9 +299,7 @@ public class VCRedirect {
         let vc = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: VCCategory.self)) as! VCCategory
         vc.ob_cid.value     = pid ?? 10
         topNaVC?.pushViewController(vc, animated: true)
-        
-//        let vc = UIStoryboard.initialViewController(StoryBoardNames.Found.rawValue, identifier: String(describing: WOWSceneController.self)) as! WOWSceneController
-//        vc.entrance = .tag //        topNaVC?.pushViewController(vc, animated: true)
+
     }
     
     /*

@@ -41,9 +41,6 @@ class WOWBindMobileFirstController: WOWBaseViewController {
     
     //MARK:Actions
     @IBAction func msgCodeButtonClick(_ sender: UIButton) {
-//        if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
-//            return
-//        }
       
         let mobile = WOWUserManager.userMobile
         sender.isUserInteractionEnabled = false
@@ -62,9 +59,7 @@ class WOWBindMobileFirstController: WOWBaseViewController {
     
     @IBAction func sureClick(_ sender: UIButton) {
         //手机号验证成功才进去验证码界面
-//        if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
-//            return
-//        }
+
        
         if !validatePhone(codeTextField.text, tips: "请输入验证码"){
             
@@ -77,9 +72,7 @@ class WOWBindMobileFirstController: WOWBaseViewController {
             }
         }) {(errorMsg) in
             WOWHud.showMsgNoNetWrok(message: errorMsg)
-//            if let strongSelf = self{
-                //                strongSelf.tipsLabel.text = errorMsg
-//            }
+
         }
     }
     
@@ -102,9 +95,6 @@ class WOWBindMobileFirstController: WOWBaseViewController {
         }
         return true
     }
-    
-    
-    //MARK:Network
     
     
 }

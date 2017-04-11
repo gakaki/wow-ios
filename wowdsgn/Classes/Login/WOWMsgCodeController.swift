@@ -107,17 +107,14 @@ class WOWMsgCodeController: WOWBaseViewController {
 
         guard newPwdTextField.text == pwdTextField.text else{
             WOWHud.showMsg("两次输入密码不一致")
-//            tipsLabel.text = "两次输入密码不一致"
             return
         }
         if (pwdTextField.text?.length)! < 6 {
             WOWHud.showMsg("密码不能少于6位")
-//            tipsLabel.text = "密码不能少于6位"
             return
         }
         if (pwdTextField.text?.length)! > 20 {
             WOWHud.showMsg("密码不能大于20位")
-//            tipsLabel.text = "密码不能大于20位"
             return
         }
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ResetPwd(mobile:mobile, captcha:codeTextField.text!, newPwd:newPwdTextField.text!), successClosure: {[weak self](result, code) in

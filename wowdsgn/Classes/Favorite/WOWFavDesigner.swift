@@ -33,7 +33,6 @@ class WOWFavDesigner: WOWBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.isHidden = false
-//       NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWRefreshFavoritNotificationKey, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -77,8 +76,6 @@ class WOWFavDesigner: WOWBaseViewController {
     func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
         let view = Bundle.main.loadNibNamed(String(describing: FavoriteEmpty.self), owner: self, options: nil)?.last as! FavoriteEmpty
         
-//        view.goStoreButton.addTarget(self, action:#selector(goStore), forControlEvents:.TouchUpInside)
-        
         return view
     }
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
@@ -121,14 +118,12 @@ extension WOWFavDesigner:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WOWFavoriteBrandCell.self), for: indexPath) as! WOWFavoriteBrandCell
         let model = dataArr[(indexPath as NSIndexPath).row]
-//        cell.logoImg.kf_setImageWithURL(NSURL(string:model.designerPhoto ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         cell.logoImg.set_webimage_url(model.designerPhoto)
 
         
         WOWBorderColor(cell.logoImg)
         cell.logoImg.borderRadius(32)
         cell.logoName.text = model.designerName ?? ""
-//        cell.logoDes.text = model.designerDesc ?? ""
         return cell
     }
     

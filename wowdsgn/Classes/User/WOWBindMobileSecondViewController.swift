@@ -94,9 +94,7 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
             }
         }) {(errorMsg) in
             WOWHud.showMsgNoNetWrok(message: errorMsg)
-//            if let strongSelf = self{
-                //                strongSelf.tipsLabel.text = errorMsg
-//            }
+
         }
     }
     
@@ -115,9 +113,6 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
         }
         return true
     }
-    
-    
-    //MARK:Network
     
     
 }

@@ -96,12 +96,6 @@ class WOWSearchController: WOWBaseViewController{
         view.cancelButton.addTarget(self, action:#selector(cancel), for:.touchUpInside)
         return view
     }()
-//    lazy var childVC:WOWSearchSortController = {
-//        let vc = UIStoryboard.initialViewController("Home", identifier:String(describing: WOWSearchSortController.self)) as! WOWSearchSortController
-//        vc.brandArray = self.brandArr
-//        vc.view.frame = CGRect(x: 0, y: 0,width: MGScreenWidth,height: MGScreenHeight - 64)
-//        return vc
-//    }()
     
 
     lazy var emptyView: UIView = {
@@ -143,8 +137,6 @@ class WOWSearchController: WOWBaseViewController{
         
         params = ["sort": ShowTypeIndex.New.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":SortType.Asc.rawValue,"keyword":searchView.searchTextField.text ?? ""]
         
-        //        pageSize: 10, currentPage: pageIndex, sortBy: pageVc ?? 0, asc: asc ?? 0, seoKey: seoKey ?? ""
-        //            params = ["pageSize": pageSize, "currentPage": currentPage, "sortBy": sortBy, "asc": asc, "seoKey":seoKey]
         WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(params : params as [String : AnyObject]), successClosure: { [weak self](result, code) in
 
             let json = JSON(result)

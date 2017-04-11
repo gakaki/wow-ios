@@ -35,7 +35,6 @@ class WOWMasterpieceController: WOWBaseViewController {
             UserDefaults.standard.set(true, forKey: "FirstTime_Master")
             UserDefaults.standard.synchronize()
             /**  第一次进入，此处把第一次进入时要进入的控制器作为根视图控制器  */
-            /**  第一次进入，此处把第一次进入时要进入的控制器作为根视图控制器  */
             let data = ["414-1", "414-2", "414-3"]
             let v = WOWGuidePageView(datas: data)
             let window = UIApplication.shared.windows.last
@@ -61,6 +60,7 @@ class WOWMasterpieceController: WOWBaseViewController {
         btn.addTarget(self, action:#selector(backTop), for:.touchUpInside)
         return btn
     }()
+    //引导视图
     lazy var guideView:WOWMasterGuideView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWMasterGuideView.self), owner: self, options: nil)?.last as! WOWMasterGuideView
         return v
@@ -86,6 +86,7 @@ class WOWMasterpieceController: WOWBaseViewController {
 
         request()
     }
+    //下拉刷新的时候更新顶部分类
     override func pullToRefresh() {
         super.pullToRefresh()
         if let del = delegate {

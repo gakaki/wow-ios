@@ -105,8 +105,6 @@ class TooglePriceBtn:UIButton {
 
         
         self.titleLabel!.font            = UIFont.systemFont(ofSize: 14)
-//        self.imageEdgeInsets             = UIEdgeInsetsMake(0, 77, 0, 0)
-//        self.frame                       = CGRectMake(0, 0, wOk, hOk)
         
 
         self.imageView!.contentMode      = UIViewContentMode.scaleAspectFill

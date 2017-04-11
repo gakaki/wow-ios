@@ -49,7 +49,6 @@ class WOWBuyCarNormalCell: UITableViewCell{
             return
         }
         self.model = model
-//        goodsImageView.kf_setImageWithURL(NSURL(string:model.specImg ?? "")!, placeholderImage:UIImage(named: "placeholder_product"))
         goodsImageView.set_webimage_url( model.specImg ?? "" )
         
         nameLabel.text = model.productName

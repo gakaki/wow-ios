@@ -52,11 +52,6 @@ class WOWProductCommentCell: UITableViewCell, UICollectionViewDelegate, UICollec
             if count > 0 {
                 configCollectionView()
                 //动态改变collectionview的高度
-//                if count > 4 {
-//                    collectionHeight.constant = (itemWidth + 8) * 2
-//                }else {
-//                    collectionHeight.constant = itemWidth + 8
-//                }
                 collectionHeight.constant = itemWidth + 8
                 
                 imgArray = WOWArrayAddStr.strAddJPG(array: model.commentImgs ?? [String]())

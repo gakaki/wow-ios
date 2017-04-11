@@ -488,12 +488,12 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     _proportionBtns = [NSMutableArray array];
     
     _bottomBtnsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CX_W, 100)];
-    //    _bottomBtnsView.backgroundColor = [UIColor blueColor];
+//    _bottomBtnsView.backgroundColor = [UIColor blueColor];
     
-    _bottomBtnsView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, _bottomView.mj_h - (_bottomBtnsView.mj_h / 2) - 5);
+    _bottomBtnsView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, _bottomView.mj_h / 2);
     //    _bottomBtnsView.backgroundColor = [UIColor cyanColor];
     [_bottomView addSubview:_bottomBtnsView];
-    float btnBottom = 40;
+//    float btnBottom = 40;
     
     float centerPX = CX_W / 5 ;
     for (int i = 0; i < btnTitleArray.count; i++) {
@@ -501,7 +501,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         UIButton *sizeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         //        sizeBtn.backgroundColor = [UIColor redColor];
         sizeBtn.frame = CGRectMake(0, 0, 50, 50);
-        sizeBtn.center = CGPointMake(centerPX + (i * centerPX) , _bottomBtnsView.mj_h/2 - btnBottom);
+        sizeBtn.center = CGPointMake(centerPX + (i * centerPX) , _bottomBtnsView.mj_h/2);
         
         
         [sizeBtn setTitle:btnTitleArray[i] forState:UIControlStateNormal];
@@ -544,7 +544,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
     
     
     _scrollViewAngle = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CX_W - 30, angleHeight + 20)];
-    _scrollViewAngle.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) - 65);
+    _scrollViewAngle.center = CGPointMake(CGRectGetWidth(self.bounds) / 2,_centerY + (CX_W / 2) + (_bottomView.mj_h / 2) + 30);
     _scrollView.alwaysBounceVertical = YES;
     _scrollView.alwaysBounceHorizontal = YES;
     //    _scrollViewAngle.backgroundColor = [UIColor greenColor];

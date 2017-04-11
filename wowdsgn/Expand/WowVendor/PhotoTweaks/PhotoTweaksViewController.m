@@ -79,7 +79,8 @@
 }
 - (void)setupSubviews
 {
-    self.photoView = [[PhotoTweakView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 64) image:self.image maxRotationAngle:self.maxRotationAngle];
+    
+    self.photoView = [[PhotoTweakView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) image:self.image maxRotationAngle:self.maxRotationAngle];
 //    self.photoView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.photoView.backgroundColor = [UIColor orangeColor];
     [self.view addSubview:self.photoView];

@@ -59,6 +59,7 @@ PODS:
   - Qiniu (7.1.2):
     - AFNetworking (~> 3)
     - HappyDNS (~> 0.3)
+  - QIYU_iOS_SDK (3.5.5)
   - Reachability (3.2)
   - Result (3.0.0)
   - RxCocoa (3.0.0-beta.2):
@@ -122,6 +123,7 @@ DEPENDENCIES:
   - Pingpp/Wx (~> 2.2.10)
   - PonyFrameworkOnSwift (from `PonyFrameworkOnSwift/PonyFrameworkOnSwift.podspec`)
   - Qiniu
+  - QIYU_iOS_SDK
   - Reachability
   - RxDataSources (~> 1.0.0-beta.2)
   - SDAutoLayout
@@ -183,6 +185,7 @@ SPEC CHECKSUMS:
   PonyFrameworkOnSwift: 12ff0055496c68cffa297c168c282b869dd5d1e1
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Qiniu: d57cb922b5c31f0d1cfe2c8fea3cf83997cdcf62
+  QIYU_iOS_SDK: bb2fe96f9e7b3f2b92ea4d0e0c19af43879c0086
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
   RxCocoa: 1dd105d8a4e18034ccd7bd6d136445363ce67c8e
@@ -207,6 +210,6 @@ SPEC CHECKSUMS:
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 809d5854684b05a9c3e7df327daf6a921187c30e
+PODFILE CHECKSUM: 0a0fa5e096dfd84070c17150ea4bb7f4bc97a8f7
 
 COCOAPODS: 1.2.0.beta.3

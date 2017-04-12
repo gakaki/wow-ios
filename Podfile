@@ -21,7 +21,7 @@ target 'wowdsgn' do
 	#pod 'Pitaya', git: "https://github.com/johnlui/Pitaya.git", :branch => 'swift3'
 
 	pod 'EZSwiftExtensions'
-
+    pod 'QIYU_iOS_SDK'
 	#pod 'JSPatch', git: "https://github.com/bang590/JSPatch.git", :branch => 'master'
 	#pod 'JSPatch/Core', git: "https://github.com/bang590/JSPatch.git", :branch => 'master'
 	#pod 'JSPatch/Extensions', git: "https://github.com/bang590/JSPatch.git", :branch => 'master'

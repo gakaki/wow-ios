@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         appConfig()
         
-        
+        QYSDK.shared().registerAppId("00dfd57e3ad2136ef9169314142c8fc1", appName: "尖叫设计Demo")
         
         
         ADLaunchView()

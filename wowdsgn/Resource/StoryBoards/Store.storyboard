@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="3Sm-BO-NMd">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="3Sm-BO-NMd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -87,30 +87,37 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdm-uj-kwH">
                                 <rect key="frame" x="0.0" y="667" width="375" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" tag="4001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfS-7l-afX" userLabel="like">
-                                        <rect key="frame" x="0.0" y="7" width="50" height="36"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="c0S-xc-K50"/>
-                                        </constraints>
-                                        <state key="normal" image="like_white">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <state key="selected" image="like_select"/>
-                                        <connections>
-                                            <action selector="likeClick:" destination="7vb-eE-k6p" eventType="touchDown" id="nJh-gj-4hn"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="4002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6M-Jc-5fm" userLabel="share">
-                                        <rect key="frame" x="50" y="0.0" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="wKN-YM-9Yb"/>
-                                        </constraints>
-                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" image="share_white"/>
-                                        <connections>
-                                            <action selector="shareClick:" destination="7vb-eE-k6p" eventType="touchUpInside" id="S6H-5O-xdk"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="P4Z-wc-jNW">
+                                        <rect key="frame" x="0.0" y="0.0" width="175" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljf-NY-EhZ">
+                                                <rect key="frame" x="0.0" y="10" width="58.5" height="30"/>
+                                                <state key="normal" image="shopCustomer"/>
+                                                <connections>
+                                                    <action selector="customerClick:" destination="7vb-eE-k6p" eventType="touchUpInside" id="Wij-gB-N11"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="4001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfS-7l-afX" userLabel="like">
+                                                <rect key="frame" x="58.5" y="10" width="58" height="30"/>
+                                                <state key="normal" image="like-black">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <state key="selected" image="like_select"/>
+                                                <connections>
+                                                    <action selector="likeClick:" destination="7vb-eE-k6p" eventType="touchDown" id="nJh-gj-4hn"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEn-2Z-Eif" customClass="MIBadgeButton" customModule="wow_vendor_ui">
+                                                <rect key="frame" x="116.5" y="10" width="58.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <state key="normal" image="buy"/>
+                                                <connections>
+                                                    <action selector="carEntranceButton:" destination="7vb-eE-k6p" eventType="touchUpInside" id="D7y-Nb-nGh"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </stackView>
                                     <button opaque="NO" tag="4004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ui9-Q6-WqD">
                                         <rect key="frame" x="275" y="0.0" width="100" height="50"/>
                                         <color key="backgroundColor" red="1" green="0.83137254900000002" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
@@ -130,32 +137,30 @@
                                     </button>
                                     <button opaque="NO" tag="4003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wo2-sn-OfK">
                                         <rect key="frame" x="175" y="0.0" width="100" height="50"/>
-                                        <color key="backgroundColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="as6-DY-ZGN"/>
                                         </constraints>
                                         <state key="normal" title="加入购物车">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="addCarClick:" destination="7vb-eE-k6p" eventType="touchUpInside" id="CrG-Za-98M"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="VfS-7l-afX" secondAttribute="bottom" constant="7" id="0d4-IY-fVB"/>
                                     <constraint firstAttribute="height" constant="50" id="A0R-vf-j6k"/>
+                                    <constraint firstItem="wo2-sn-OfK" firstAttribute="leading" secondItem="P4Z-wc-jNW" secondAttribute="trailing" id="Bna-4n-bDa"/>
                                     <constraint firstAttribute="bottom" secondItem="wo2-sn-OfK" secondAttribute="bottom" id="KOo-He-mS6"/>
-                                    <constraint firstItem="q6M-Jc-5fm" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="top" id="Lkc-l3-wz5"/>
                                     <constraint firstAttribute="trailing" secondItem="Ui9-Q6-WqD" secondAttribute="trailing" id="Qbk-fQ-dmb"/>
+                                    <constraint firstAttribute="bottom" secondItem="P4Z-wc-jNW" secondAttribute="bottom" id="Y5B-Vk-rr8"/>
                                     <constraint firstItem="Ui9-Q6-WqD" firstAttribute="leading" secondItem="wo2-sn-OfK" secondAttribute="trailing" id="YrI-hH-cbI"/>
-                                    <constraint firstItem="q6M-Jc-5fm" firstAttribute="leading" secondItem="VfS-7l-afX" secondAttribute="trailing" id="caG-zr-ikj"/>
-                                    <constraint firstItem="VfS-7l-afX" firstAttribute="leading" secondItem="Sdm-uj-kwH" secondAttribute="leading" id="ipL-pa-4Tx"/>
+                                    <constraint firstItem="P4Z-wc-jNW" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="top" id="hNR-xX-EKN"/>
+                                    <constraint firstItem="P4Z-wc-jNW" firstAttribute="leading" secondItem="Sdm-uj-kwH" secondAttribute="leading" id="hen-T7-rle"/>
                                     <constraint firstItem="Ui9-Q6-WqD" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="top" id="lkX-lO-7qa"/>
-                                    <constraint firstAttribute="bottom" secondItem="q6M-Jc-5fm" secondAttribute="bottom" id="lmT-7p-6Zl"/>
                                     <constraint firstItem="wo2-sn-OfK" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="top" id="mIb-fd-WDF"/>
-                                    <constraint firstItem="VfS-7l-afX" firstAttribute="top" secondItem="Sdm-uj-kwH" secondAttribute="top" constant="7" id="oCw-bw-Gis"/>
                                     <constraint firstAttribute="bottom" secondItem="Ui9-Q6-WqD" secondAttribute="bottom" id="vzs-MW-dgz"/>
                                 </constraints>
                             </view>
@@ -180,8 +185,8 @@
                                                     <constraint firstAttribute="height" constant="75" id="mRl-dc-rpS"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="该商品已过期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsI-Ur-y8Q">
-                                                <rect key="frame" x="18" y="95" width="98" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="该商品已过期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsI-Ur-y8Q">
+                                                <rect key="frame" x="24" y="95" width="86" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -214,7 +219,7 @@
                                             <constraint firstAttribute="height" constant="44" id="9Cv-r5-Txh"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-7"/>
-                                        <state key="normal" image="top_back"/>
+                                        <state key="normal" image="back_top"/>
                                         <connections>
                                             <action selector="backClick:" destination="7vb-eE-k6p" eventType="touchUpInside" id="gXe-R8-UGn"/>
                                         </connections>
@@ -227,9 +232,9 @@
                                             <constraint firstAttribute="width" constant="44" id="qit-Z4-61n"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-7"/>
-                                        <state key="normal" image="top_car"/>
+                                        <state key="normal" image="share_top"/>
                                         <connections>
-                                            <action selector="carEntranceButton:" destination="7vb-eE-k6p" eventType="touchUpInside" id="Mws-gL-um2"/>
+                                            <action selector="shareClick:" destination="7vb-eE-k6p" eventType="touchUpInside" id="bBB-c0-4yc"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -265,11 +270,11 @@
                         <outlet property="addCartButton" destination="wo2-sn-OfK" id="OlZ-Sd-JdC"/>
                         <outlet property="bottomSpace" destination="wE5-VR-zKV" id="LMY-ly-wrf"/>
                         <outlet property="bottomView" destination="Sdm-uj-kwH" id="VwI-Rh-3J4"/>
-                        <outlet property="carEntranceButton" destination="nHb-tb-mKs" id="fRs-pe-rRy"/>
+                        <outlet property="carEntranceButton" destination="QEn-2Z-Eif" id="ANy-As-eTE"/>
                         <outlet property="likeButton" destination="VfS-7l-afX" id="FDp-Xs-Fr1"/>
                         <outlet property="nowBuyButton" destination="Ui9-Q6-WqD" id="WPY-BS-v9U"/>
                         <outlet property="productEffectView" destination="iEe-la-3xG" id="kbw-jO-IzT"/>
-                        <outlet property="shareButton" destination="q6M-Jc-5fm" id="J3i-tN-RJc"/>
+                        <outlet property="shareButton" destination="nHb-tb-mKs" id="BFg-zo-9TJ"/>
                         <outlet property="tableView" destination="Z1W-LA-2Dq" id="0W3-7j-PpS"/>
                         <outlet property="topSpace" destination="FeH-ac-j7m" id="tHZ-eA-MvF"/>
                     </connections>
@@ -458,16 +463,17 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back_top" width="44" height="44"/>
+        <image name="buy" width="30" height="30"/>
         <image name="icon_share" width="30" height="30"/>
+        <image name="like-black" width="30" height="30"/>
         <image name="like-gray" width="30" height="30"/>
         <image name="like_select" width="30" height="30"/>
-        <image name="like_white" width="30" height="30"/>
         <image name="likeblack" width="30" height="30"/>
         <image name="nav_backArrow" width="9" height="16"/>
         <image name="productEffect" width="53" height="50"/>
-        <image name="share_white" width="30" height="30"/>
-        <image name="top_back" width="44" height="44"/>
-        <image name="top_car" width="44" height="44"/>
+        <image name="share_top" width="44" height="44"/>
+        <image name="shopCustomer" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

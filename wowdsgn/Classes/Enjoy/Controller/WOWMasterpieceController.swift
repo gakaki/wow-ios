@@ -198,10 +198,10 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
         
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = fineWroksArr[indexPath.row]
-        VCRedirect.bingWorksDetails(worksId: model.id ?? 0)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let model = fineWroksArr[indexPath.row]
+//        VCRedirect.bingWorksDetails(worksId: model.id ?? 0)
+//    }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         NSObject.cancelPreviousPerformRequests(withTarget: self)

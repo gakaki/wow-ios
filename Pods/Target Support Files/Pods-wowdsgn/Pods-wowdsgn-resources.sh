@@ -80,11 +80,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "Pingpp/lib/Channels/Alipay/AlipaySDK.bundle"
   install_resource "Pingpp/lib/Channels/CmbWallet/SecreteKeyBoard"
   install_resource "Pingpp/lib/Pingpp.bundle"
+  install_resource "QIYU_iOS_SDK/SDK/QYResource.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "Pingpp/lib/Channels/Alipay/AlipaySDK.bundle"
   install_resource "Pingpp/lib/Channels/CmbWallet/SecreteKeyBoard"
   install_resource "Pingpp/lib/Pingpp.bundle"
+  install_resource "QIYU_iOS_SDK/SDK/QYResource.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

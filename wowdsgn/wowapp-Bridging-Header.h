@@ -43,7 +43,7 @@
 //#import "GYHttpMock.h"
 //@import MLeaksFinder;
 //@import QiniuTokenIOS;
-
+#import "QYSDK.h"
 #import <FCUUID/FCUUID.h>
 #import "UICollectionViewLeftAlignedLayout.h"
 

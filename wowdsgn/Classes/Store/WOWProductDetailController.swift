@@ -50,6 +50,7 @@ class WOWProductDetailController: WOWBaseViewController {
     @IBOutlet weak var nowBuyButton: UIButton!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var topSpace: NSLayoutConstraint!
+    var isCustormer:Bool = false  // 是否点击客服
     //是否展开参数
     var isOpenParam: Bool = true
     //是否展开温馨提示
@@ -64,9 +65,15 @@ class WOWProductDetailController: WOWBaseViewController {
     deinit {
         removeObservers()
     }
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+            if isCustormer {
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+            }
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+         self.navigationController?.setNavigationBarHidden(true, animated: false)
         MobClick.e(UMengEvent.Product_Detail)
 
     }
@@ -362,6 +369,30 @@ class WOWProductDetailController: WOWBaseViewController {
         
     }
     
+    @IBAction func customerClick(_ sender: Any) {
+//        QYSDK.shared().conversationManager().setDelegate(self)
+        
+        
+//        QYSDK.shared().setUserInfo(userInfo)
+        let source = QYSource()
+        source.title =  "ccc"
+        source.urlString = "https://www.baidu.com"
+        source.customInfo = "hahhahahahahah"
+        let sessionViewController = QYSDK.shared().sessionViewController()
+        sessionViewController?.sessionTitle = "qqqq"
+        sessionViewController?.source = source
+        sessionViewController?.hidesBottomBarWhenPushed = true
+        QYCustomActionConfig.sharedInstance().linkClickBlock = {(str) in
+            print(str ?? "")
+        }
+
+        self.isCustormer = true
+     
+
+        self.navigationController?.pushViewController(sessionViewController!, animated: true)
+
+        
+    }
     //MARK:选择规格,有两种视图
     func chooseStyle(_ entrue: carEntrance) {
         WOWBuyCarMananger.sharedBuyCar.productSpecModel = productSpecModel

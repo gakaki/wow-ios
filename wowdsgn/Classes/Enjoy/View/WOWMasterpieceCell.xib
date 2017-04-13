@@ -18,24 +18,33 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="330"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="onv-Ld-ip0">
+                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="onv-Ld-ip0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="onv-Ld-ip0" secondAttribute="height" multiplier="1:1" id="bzd-dG-De4"/>
                         </constraints>
                     </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumb" translatesAutoresizingMaskIntoConstraints="NO" id="0s4-NM-iZv">
+                        <rect key="frame" x="110.5" y="110" width="99" height="100"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="onv-Ld-ip0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7Sp-Lj-bwW"/>
+                    <constraint firstItem="0s4-NM-iZv" firstAttribute="centerX" secondItem="onv-Ld-ip0" secondAttribute="centerX" id="7nv-pR-npW"/>
                     <constraint firstAttribute="bottom" secondItem="onv-Ld-ip0" secondAttribute="bottom" constant="10" id="i8E-dF-cx9"/>
                     <constraint firstAttribute="trailing" secondItem="onv-Ld-ip0" secondAttribute="trailing" id="lQC-mS-dUz"/>
                     <constraint firstItem="onv-Ld-ip0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="osJ-mR-9eR"/>
+                    <constraint firstItem="0s4-NM-iZv" firstAttribute="centerY" secondItem="onv-Ld-ip0" secondAttribute="centerY" id="vSS-Uh-auG"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="imgWroks" destination="onv-Ld-ip0" id="97y-no-XH0"/>
+                <outlet property="thumbImg" destination="0s4-NM-iZv" id="tcw-UZ-NqY"/>
             </connections>
             <point key="canvasLocation" x="35" y="116"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="thumb" width="99" height="100"/>
+    </resources>
 </document>

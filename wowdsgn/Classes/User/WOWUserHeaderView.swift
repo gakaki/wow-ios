@@ -36,9 +36,9 @@ class WOWUserHeaderView: UIView {
             userHeadImg.set_webimage_url_base(model.avatar?.webp_url(), place_holder_name: "defaultHead")
 
             userName.text = model.nickName
-            workNum.text = String(format: "%i", model.instagramCounts ?? 0)
-            praiseNum.text = String(format: "%i", model.likeCounts ?? 0)
-            favoriteNum.text = String(format: "%i", model.collectCounts ?? 0)
+            workNum.text = model.instagramCounts?.intToThousand()
+            praiseNum.text = model.likeCounts?.intToThousand()
+            favoriteNum.text = model.collectCounts?.intToThousand()
             
         }else {
             userHeadImg.set_webimage_url("")

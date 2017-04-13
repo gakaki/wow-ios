@@ -55,11 +55,7 @@ class WOWContentTopicController: WOWBaseViewController {
     var isHaveComment = 0       //是否有评论，如果没有则不显示
     var isHaveAbout = 0         //是否有相关商品，如果没有则不显示
     weak var  delegate :WOWHotStyleDelegate?
-//    fileprivate var shareProductImage:UIImage? //供分享使用
-//    lazy var placeImageView:UIImageView={  //供分享使用
-//        let image = UIImageView()
-//        return image
-//    }()
+
     var navBackgroundView: WOWMaskColorView!
     
     fileprivate(set) var numberSections = 0
@@ -226,12 +222,10 @@ class WOWContentTopicController: WOWBaseViewController {
             vo_products.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{[weak self] in
                 if let strongSelf = self {
                     strongSelf.tableView.reloadData()
-                    //                    strongSelf.collectionView.reloadData()
                 }
                 
             })
-//            vo_products.ergodicArrayWithProductModel(dic: send_obj)
-//            self.tableView.reloadData()
+
         }
 
       
@@ -390,26 +384,6 @@ class WOWContentTopicController: WOWBaseViewController {
             WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
     }
-//    func requestLikeProject(topicId: Int,isFavorite:LikeAction){
-//        //用户喜欢某个单品
-//     
-//            WOWHud.showLoadingSV()
-//            
-//            WOWNetManager.sharedManager.requestWithTarget(RequestApi.Api_LikeProject(topicId: topicId), successClosure: {[weak self] (result, code) in
-//                if let strongSelf = self{
-//                   
-//                    let favorite = JSON(result)["favorite"].bool ?? false
-//
-//                    isFavorite(isFavorite: favorite)
-//
-//                }
-//            }) { (errorMsg) in
-//                
-//                return false
-//        
-//            }
-//        
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -658,10 +632,7 @@ extension WOWContentTopicController: PhotoBrowserDelegate{
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-//    func photoBrowserDidEndDisplay(_ endPage: Int) {
-//        self.navigationController?.setNavigationBarHidden(false, animated: true)
-//
-//    }
+
     
 }
 

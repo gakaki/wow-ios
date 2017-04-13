@@ -11,7 +11,6 @@ import UIKit
 class WOWBuyCarController: WOWBaseViewController {
     let cellNormalID = String(describing: WOWBuyCarNormalCell.self)
     let cellID = String(describing: WOWOrderCell.self)
-//    fileprivate var totalPrice      : String?
     let pageSize           = 10 //分页每页拉取数据
     var bottomListCount    = 0 // 底部数组个数
     var bottomCellLine     = 0 // 底部cell number
@@ -72,8 +71,6 @@ class WOWBuyCarController: WOWBaseViewController {
             
         }
     }
-    var selectedImage: UIImageView!
-
     
     @IBOutlet weak var allButton: UIButton!             //全选按钮
     @IBOutlet weak var tableView: UITableView!          //购物车列表
@@ -102,7 +99,6 @@ class WOWBuyCarController: WOWBaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.delegate = self
         MobClick.e(.Cart_Detail_Page)
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -323,13 +319,11 @@ class WOWBuyCarController: WOWBaseViewController {
                     //如果选中的数组数量跟购物车内有效的商品数量相同全选按钮置为选中状态
                     strongSelf.allbuttonIsSelect()
                 }else {
-                    //                        showRecommendView()
                     strongSelf.dataArr = []
                     strongSelf.bottomView.isHidden = true
                 }
                 strongSelf.endRefresh()
                 
-                //                    strongSelf.updateCarCountBadge()
                 strongSelf.tableView.reloadData()
                 
                 
@@ -742,39 +736,22 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
 }
 
 extension WOWBuyCarController: buyCarDelegate, HomeBottomDelegate {
-    func goProductDetail(_ productId: Int?, selectedImage: UIImageView!) {
-        self.selectedImage = selectedImage
-        VCRedirect.toVCProduct(productId, customPop: true)
+    func goProductDetail(_ productId: Int?) {
+        VCRedirect.toVCProduct(productId)
     
     }
-    func goToProductDetailVC(_ productId: Int?, selectedImage: UIImageView!){
-        self.selectedImage = selectedImage
-        VCRedirect.toVCProduct(productId, customPop: true)
+    func goToProductDetailVC(_ productId: Int?){
+        VCRedirect.toVCProduct(productId)
         
     }
   
 }
 
-
-extension WOWBuyCarController: UINavigationControllerDelegate
-{
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
-    {
-        if operation == .push, toVC.className == WOWProductDetailController.className
-        {
-            return MagicMovePush(selectView: self.selectedImage)
-        }
-        else
-        {
-            return nil
-        }
-    }
-}
 extension WOWBuyCarController: orderCarDelegate {
-    func toProductDetail(_ productId: Int?, selectedImage: UIImageView!) {
+    func toProductDetail(_ productId: Int?) {
         
-        self.selectedImage = selectedImage
-        VCRedirect.toVCProduct(productId, customPop: true)    }
+        VCRedirect.toVCProduct(productId)
+    }
 }
 
 

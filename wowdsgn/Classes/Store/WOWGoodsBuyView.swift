@@ -43,7 +43,7 @@ class WOWBuyBackView: UIView {
     lazy var dismissButton:UIButton = {
         let b = UIButton(type: .system)
         b.backgroundColor = UIColor.clear
-//        b.addTarget(self, action: #selector(hideBuyView), forControlEvents:.TouchUpInside)
+        b.addTarget(self, action: #selector(closeButtonClick), for:.touchUpInside)
         return b
     }()
 //MARK:Private Method
@@ -94,6 +94,7 @@ class WOWBuyBackView: UIView {
     }
     
     func closeButtonClick()  {
+        buyView.closeBuyView()
         hideBuyView()
     }
     
@@ -279,8 +280,6 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
         }else{
                 if productInfo?.availableStock ?? 0 > skuCount {
                     skuCount += 1
-                }else {
-                    WOWHud.showMsg("库存不足")
                 }
             
             showResult(count: skuCount)
@@ -293,7 +292,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
      */
     private func showResult(count:Int){
         
-        if count <= 1 {
+        if count <= 1 || count >= productInfo?.availableStock ?? 0{
             
             subButton.isEnabled = false
             subButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
@@ -368,6 +367,12 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
 
+    func closeBuyView() {
+        if let del = delegate {
+            MobClick.e(.Standard_Cancel)
+            del.closeBuyView(productInfo)
+        }
+    }
     
 //MARK:Actions
  
@@ -415,12 +420,6 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
        
     }
     
-    @IBAction func closeButtonClick(_ sender: UIButton) {
-        if let del = delegate {
-            MobClick.e(.Standard_Cancel)
-            del.closeBuyView(productInfo)
-        }
-    }
     
     //MARK: - validate Methods
     fileprivate func validateMethods() -> Bool{

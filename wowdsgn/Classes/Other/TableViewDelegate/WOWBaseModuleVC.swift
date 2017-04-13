@@ -177,7 +177,7 @@ class WOWBaseModuleVC: WOWBaseViewController {
 
 extension WOWBaseModuleVC:HomeBottomDelegate{
     
-    func goToProductDetailVC(_ productId: Int?, selectedImage: UIImageView!){
+    func goToProductDetailVC(_ productId: Int?){
         VCRedirect.toVCProduct(productId)
         
     }
@@ -345,24 +345,3 @@ extension WOWBaseModuleVC:Cell_107_BrandZoneDelegate{//  品牌专区  一个推
         VCRedirect.toVCProduct(productId)
     }
 }
-//extension WOWBaseModuleVC:Cell_105_BannerDelegate{
-//    
-//    func updataTableViewCellHight(section: Int)  {
-//        
-//        let indexSet = NSIndexSet.init(index: section)
-//        
-//       tableView.reloadSections(indexSet as IndexSet, with: .none)
-//        
-//        let b = IndexPath.init(row: 0, section: section)
-//        tableView.scrollToRow(at: b, at: .top, animated: true)
-//    }
-//    
-//    
-//    // banner 跳转
-//    func gotoVCFormLinkType_ClassBanner(model: WOWCarouselBanners){
-//        
-//        goController(model)
-//        
-//    }
-//
-//}

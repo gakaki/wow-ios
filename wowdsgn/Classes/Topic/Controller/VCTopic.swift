@@ -15,9 +15,7 @@ class HairlineView: UIView {
 }
 
 class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewWaterfallLayoutDelegate{
-    
-    weak var selectedCell: WOWGoodsSmallCell!        //转场cell
-    
+        
     var vo_products             = [WOWProductModel]()
     let cell_reuse              = "cell_reuse"
     let cell_header_reuse       = "cell_header_reuse"
@@ -62,8 +60,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                 }
                 
             })
-//            vo_products.ergodicArrayWithProductModel(dic: send_obj)
-//            self.cv.reloadData()
+
             
         }
 
@@ -127,7 +124,6 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.navigationController?.delegate = self
     }
     
     lazy var layout:CollectionViewWaterfallLayout = {
@@ -160,9 +156,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
         cv.showsVerticalScrollIndicator     = false
         
         cv.decelerationRate                 = UIScrollViewDecelerationRateFast
-//        cv.bounces                          = false
         cv.mj_header                        = self.mj_header
-//        cv.mj_footer                        = self.mj_footer
 
         self.cv                             = cv
         self.view.addSubview(self.cv)
@@ -225,8 +219,7 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
                 cell.isSelected  = false;
                 
                 if ( row.productId != nil ){
-                    selectedCell = cell as! WOWGoodsSmallCell
-                    VCRedirect.toVCProduct(row.productId, customPop: true)
+                    VCRedirect.toVCProduct(row.productId)
                 }
             }
 
@@ -234,19 +227,5 @@ class VCTopic:VCBaseNavCart ,UICollectionViewDelegate,UICollectionViewDataSource
     
 }
 
-extension VCTopic: UINavigationControllerDelegate
-{
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
-    {
-        if operation == .push, toVC.className == WOWProductDetailController.className
-        {
-            return MagicMovePush(selectView: self.selectedCell.pictureImageView)
-        }
-        else
-        {
-            return nil
-        }
-    }
-}
 
 

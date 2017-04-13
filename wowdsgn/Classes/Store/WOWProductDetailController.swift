@@ -56,16 +56,10 @@ class WOWProductDetailController: WOWBaseViewController {
     var isOpenTips: Bool = false
     //轮播图数组
     var imgUrlArr = [String]()
-//    fileprivate var shareProductImage:UIImage? //供分享使用
-//    lazy var placeImageView:UIImageView={  //供分享使用
-//        let image = UIImageView()
-//        return image
-//    }()
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.delegate = self
-        showBottom()
     }
     deinit {
         removeObservers()
@@ -76,43 +70,11 @@ class WOWProductDetailController: WOWBaseViewController {
         MobClick.e(UMengEvent.Product_Detail)
 
     }
-    
-    func showBottom() {
-       
-        bottomSpace.constant = 0
-        topSpace.constant = 0
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: { [weak self] in
-            if let strongSelf = self {
 
-                strongSelf.view.layoutIfNeeded()
-            }
-        }) { (finish) in
-            
-        }
-    }
-    func hiddenBottom(progress: CGFloat) {
-        UIView.animate(withDuration: 0.01, animations: {[weak self] in
-            if let strongSelf = self {
-                strongSelf.bottomSpace.constant = -(CGFloat(50.0) * progress)
-                strongSelf.topSpace.constant = -(CGFloat(72.0) * progress)
-
-            }
-        }) { (finish) in
-            
-        }
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
         addObservers()
-        if isNeedCustomPop {
-            //手势监听器
-            let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(edgePanGesture(_:)))
-            edgePan.edges = UIRectEdge.left
-            self.view.addGestureRecognizer(edgePan)
-        }
-       
-
         
     }
     
@@ -409,29 +371,6 @@ class WOWProductDetailController: WOWBaseViewController {
         backView.show(entrue)
     }
     
-    func edgePanGesture(_ edgePan: UIScreenEdgePanGestureRecognizer) {
-        let progress = edgePan.translation(in: self.view).x / self.view.bounds.width
-        
-        if edgePan.state == UIGestureRecognizerState.began {
-            self.percentDrivenTransition = UIPercentDrivenInteractiveTransition()
-          _ =  self.navigationController?.popViewController(animated: true)
-        } else if edgePan.state == UIGestureRecognizerState.changed {
-            self.hiddenBottom(progress: progress)
-            self.percentDrivenTransition?.update(progress)
-        } else if edgePan.state == UIGestureRecognizerState.cancelled || edgePan.state == UIGestureRecognizerState.ended {
-            if progress > 0.2 {
-                self.hiddenBottom(progress: 1)
-
-                self.percentDrivenTransition?.finish()
-            } else {
-                self.hiddenBottom(progress: 0)
-
-                self.percentDrivenTransition?.cancel()
-            }
-            self.percentDrivenTransition = nil
-        }
-    }
-    
     
     
     @IBAction func backClick(_ sender: UIButton) {
@@ -667,45 +606,6 @@ extension WOWProductDetailController : CyclePictureViewDelegate {
         loadBigImage(imgUrlArr, indexPath.row)
     }
 }
-extension WOWProductDetailController: UINavigationControllerDelegate ,UIGestureRecognizerDelegate
-{
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        if operation == UINavigationControllerOperation.pop, toVC.className == VCTopic.className {
-            let popController = toVC as! VCTopic
-            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
-        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWProductListController.className {
-            let popController = toVC as! WOWProductListController
-            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
-        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWSceneController.className {
-            let popController = toVC as! WOWSceneController
-            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
-        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWSearchController.className {
-            let popController = toVC as! WOWSearchController
-            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
-        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWBuyCarController.className {
-            let popController = toVC as! WOWBuyCarController
-            return MagicMovePop(popController: popController, selectView: popController.selectedImage)
-        }else if operation == UINavigationControllerOperation.pop, toVC.className == WOWBrandHomeController.className {
-            let popController = toVC as! WOWBrandHomeController
-            return MagicMovePop(popController: popController, selectView: popController.selectedCell.pictureImageView )
-        }else {
-            return nil
-        }
-    }
-    
-    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        if animationController is MagicMovePop {
-            return self.percentDrivenTransition
-        } else {
-            return nil
-        }
-    }
-    
-//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-//        return true
-//    }
-    
-}
+
 
 

@@ -12,6 +12,15 @@ extension Int {
     func getParityCellNumber() -> Int {
         return  ((self % 2) == 0 ? (self / 2) : ((self / 2) + 1))
     }
+    
+    func intToThousand() -> String {
+        if self >= 1000 {
+            let result:Float = Float(self/1000)
+            return String(format: ".1fK", result)
+        }else {
+            return "\(self)"
+        }
+    }
 }
 public extension Int {
     /*

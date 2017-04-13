@@ -17,12 +17,6 @@ class WOWCategoryBackView: UIView {
         return v
     }()
     
-    lazy var backClear:UIView = {
-        let v = UIView()
-        v.backgroundColor = UIColor.clear
-        return v
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.frame = frame
@@ -66,7 +60,6 @@ class WOWCategoryBackView: UIView {
     //MARK:Actions
     func show() {
 
-        
         selectView.snp.updateConstraints { (make) in
             make.height.equalTo(MGScreenHeight*0.6)
         }
@@ -77,7 +70,6 @@ class WOWCategoryBackView: UIView {
                 strongSelf.alpha = 1
                 strongSelf.layoutIfNeeded()
             }
-            
 
         })
     }
@@ -189,9 +181,6 @@ class WOWSelectCategory: UIView, UITableViewDelegate, UITableViewDataSource {
             tableView.reloadData()
             del.selectCategory(model: categoryArr[indexPath.row])
         }
-//            UIApplication.currentViewController()?.bingWorksDetail()
-//        VCRedirect.bingWorksDetails()
-
 
     }
 }

@@ -22,6 +22,11 @@ class WOWWorksDetailsController: WOWBaseViewController {
     
     var worksId : Int?
     var modelData : WOWWorksDetailsModel?
+    
+    lazy var backView:WOWWorkMoreBackView = {
+        let v = WOWWorkMoreBackView(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight))
+        return v
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -38,6 +43,25 @@ class WOWWorksDetailsController: WOWBaseViewController {
         request()
       
     }
+    override func setUI() {
+        super.setUI()
+        self.makeCustomerImageNavigationItem("work_more", left: false) { [weak self] in
+            if let strongSelf = self {
+                let window = UIApplication.shared.windows.last
+                
+                window?.addSubview(strongSelf.backView)
+                window?.bringSubview(toFront: strongSelf.backView)
+                strongSelf.backView.selectView.delegate = self
+                if strongSelf.modelData?.myInstagram ?? false {
+                    strongSelf.backView.showView_self()
+                }else {
+                    strongSelf.backView.showView_othersOne()
+                }
+            }
+            
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
           setLeftBack()
@@ -175,7 +199,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
 
 
 }
-extension WOWWorksDetailsController:UITableViewDelegate,UITableViewDataSource{
+extension WOWWorksDetailsController:UITableViewDelegate,UITableViewDataSource, WorksDetailCellDelegate{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -185,10 +209,10 @@ extension WOWWorksDetailsController:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell                = tableView.dequeueReusableCell(withIdentifier: "WorksDetailCell", for: indexPath) as! WorksDetailCell
-        
+        cell.delegate = self
         if let photo = photo {
             
-         cell.imgPhoto.image = photo
+            cell.imgPhoto.image = photo
             
         }
         
@@ -199,5 +223,36 @@ extension WOWWorksDetailsController:UITableViewDelegate,UITableViewDataSource{
         
         return cell
         
+    }
+    
+    func doubleTapThumb() {
+        if !btnPraiseCount.isSelected {
+            requestPraise()
+        }
+    }
+}
+
+extension WOWWorksDetailsController: WOWWorkMoreViewDelegate {
+    func selectType(type: MoreType) {
+        switch type {
+        case .cancle:   //取消
+            backView.hideView()
+            break
+        case .delete:   //删除
+            backView.hideView()
+            break
+        case .report:    //举报
+            backView.hideOtherView()
+            break
+        case .improper:     //内容不当
+            backView.hideView()
+            break
+        case .edit:     //编辑
+            backView.hideView()
+            break
+        case .rubbish:  //垃圾内容
+            backView.hideView()
+            break
+        }
     }
 }

@@ -18,14 +18,17 @@ class WOWRemissionBackView: UIView {
         return v
     }()
     
-    lazy var backClear:UIView = {
-        let v = UIView()
-        v.backgroundColor = UIColor.clear
-        return v
-    }()
+//    lazy var backClear:UIView = {
+//        let v = UIView()
+//        v.backgroundColor = UIColor.clear
+//        return v
+//    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.frame = frame
+        backgroundColor = MaskColor
+        self.alpha = 0
         setUP()
     }
     
@@ -36,51 +39,69 @@ class WOWRemissionBackView: UIView {
     lazy var dismissButton:UIButton = {
         let b = UIButton(type: .system)
         b.backgroundColor = UIColor.clear
-                b.addTarget(self, action: #selector(hidePayView), for:.touchUpInside)
+        b.addTarget(self, action: #selector(hidePayView), for:.touchUpInside)
         
         return b
     }()
     //MARK:Private Method
     fileprivate func setUP(){
-        self.frame = CGRect(x: 0, y: 0, width: self.w, height: self.h)
-        backgroundColor = MaskColor
-        self.alpha = 0
+
+        addSubview(remissionView)
+        remissionView.snp.makeConstraints {[weak self](make) in
+            if let strongSelf = self{
+                make.left.right.bottom.equalTo(strongSelf).offset(0)
+                make.height.equalTo(0)
+            }
+        }
+        insertSubview(dismissButton, belowSubview: remissionView)
+        dismissButton.snp.makeConstraints {[weak self](make) in
+            if let strongSelf = self{
+                make.left.top.right.equalTo(strongSelf).offset(0)
+                make.bottom.equalTo(strongSelf.remissionView.snp.top).offset(0)
+            }
+        }
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
     }
     
     
     
     //MARK:Actions
     func show() {
-        backClear.frame = CGRect(x: 0,y: self.h,width: self.w,height: self.h)
-        addSubview(backClear)
-        backClear.addSubview(remissionView)
-        remissionView.snp.makeConstraints {[weak self](make) in
-            if let strongSelf = self{
-                make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
-                make.height.equalTo(MGScreenHeight*0.5)
-            }
+   
+        remissionView.snp.updateConstraints { (make) in
+            make.height.equalTo(MGScreenHeight*0.5)
         }
-        backClear.insertSubview(dismissButton, belowSubview: remissionView)
-        dismissButton.snp.makeConstraints {[weak self](make) in
-            if let strongSelf = self{
-                make.left.top.right.equalTo(strongSelf.backClear).offset(0)
-                make.bottom.equalTo(strongSelf.remissionView.snp.top).offset(0)
-            }
-        }
+        self.setNeedsLayout()
         
-        UIView.animate(withDuration: 0.3, animations: { [unowned self] in
-            self.alpha = 1
-            self.backClear.y = 0
+        UIView.animate(withDuration: 0.3, animations: {[weak self] in
+            if let strongSelf = self {
+                strongSelf.alpha = 1
+                strongSelf.layoutIfNeeded()
+            }
+            
         })
     }
     
     
     func hidePayView(){
-        UIView.animate(withDuration: 0.3, animations: { [unowned self] in
-            self.backClear.y = self.h + 10
-            self.alpha = 0
-        }, completion: { (ret) in
-            self.removeFromSuperview()
+        remissionView.snp.updateConstraints { (make) in
+            make.height.equalTo(0)
+        }
+        self.setNeedsLayout()
+        
+        UIView.animate(withDuration: 0.3, animations: {[weak self] in
+            if let strongSelf = self {
+                strongSelf.alpha = 0
+                strongSelf.layoutIfNeeded()
+                
+            }
+            
+            }, completion: {[weak self] (ret) in
+                if let strongSelf = self {
+                    strongSelf.removeFromSuperview()
+                    
+                }
         })
     }
     
@@ -91,7 +112,11 @@ class WOWOrderRemissionView: UIView, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var closeBtn: UIButton!
     
-    var promotionInfoArr: [WOWPromotionProductInfoModel]?
+    var promotionInfoArr = [WOWPromotionProductInfoModel]() {
+        didSet{
+            tableView.reloadData()
+        }
+    }
     
     let cellID = String(describing: WOWRemissionNameCell.self)
 
@@ -123,23 +148,23 @@ class WOWOrderRemissionView: UIView, UITableViewDelegate, UITableViewDataSource 
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return promotionInfoArr?.count ?? 0
+        return promotionInfoArr.count 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return promotionInfoArr?[section].productNames?.count ?? 0
+        return promotionInfoArr[section].productNames?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWRemissionNameCell
-            cell.productNameLabel.text = promotionInfoArr?[indexPath.section].productNames?[indexPath.row]
+            cell.productNameLabel.text = promotionInfoArr[indexPath.section].productNames?[indexPath.row]
             return cell
         
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let v = Bundle.main.loadNibNamed(String(describing: WOWRemissionHeaderView.self), owner: self, options: nil)?.last as! WOWRemissionHeaderView
-        v.promotionLabel.text = promotionInfoArr?[section].promotionName
+        v.promotionLabel.text = promotionInfoArr[section].promotionName
         return v
         
     }

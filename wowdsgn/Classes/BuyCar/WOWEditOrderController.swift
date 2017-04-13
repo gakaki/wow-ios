@@ -133,7 +133,7 @@ class WOWEditOrderController: WOWBaseViewController {
         
         window?.addSubview(remissionView)
         window?.bringSubview(toFront: remissionView)
-        remissionView.remissionView.promotionInfoArr = self.orderSettle?.promotionProductInfoVos
+        remissionView.remissionView.promotionInfoArr = self.orderSettle?.promotionProductInfoVos ?? [WOWPromotionProductInfoModel]()
         remissionView.show()
     }
     

@@ -22,7 +22,6 @@ protocol WOWBaseProductsControllerDelegate :class{
 
 class WOWBaseProductsController: WOWBaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-    var selectedCell: WOWGoodsSmallCell!
     var entrance        = CategoryEntrance.category
 
     
@@ -92,9 +91,7 @@ class WOWBaseProductsController: WOWBaseViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let topViewController = FNUtil.currentTopViewController()
-        let navigation = topViewController.navigationController
-        navigation?.delegate = self 
+   
     }
     
     override func didReceiveMemoryWarning() {
@@ -121,8 +118,7 @@ class WOWBaseProductsController: WOWBaseViewController {
                 }
                 
             })
-//            dataArr.ergodicArrayWithProductModel(dic: send_obj)
-//            self.collectionView.reloadData()
+
         }
         
     }
@@ -168,32 +164,9 @@ extension WOWBaseProductsController:UICollectionViewDelegate,UICollectionViewDat
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            
+        
             let model = dataArr[(indexPath as NSIndexPath).row]
-            selectedCell = cell as! WOWGoodsSmallCell
-            let topViewController = FNUtil.currentTopViewController()
-            switch entrance {
-            case .scene, .tag, .category:
-                if topViewController.className == WOWSceneController.className {
-                    let vc = topViewController as! WOWSceneController
-                    vc.selectedCell = self.selectedCell
-                }
-            case .couponEntrance, .searchEntrance:
-                if topViewController.className == WOWSearchController.className {
-                    
-                    let vc = topViewController as! WOWSearchController
-                    vc.selectedCell = self.selectedCell
-                }
-              
-//            default:
-//                break
-            }
-            
-            
-            VCRedirect.toVCProduct(model.productId, customPop: true)
-
-        }
+            VCRedirect.toVCProduct(model.productId)
         
     }
     
@@ -228,17 +201,3 @@ extension WOWBaseProductsController:CollectionViewWaterfallLayoutDelegate{
     }
 }
 
-extension WOWBaseProductsController: UINavigationControllerDelegate
-{
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
-    {
-        if operation == .push, toVC.className == WOWProductDetailController.className
-        {
-            return MagicMovePush(selectView: self.selectedCell.pictureImageView)
-        }
-        else
-        {
-            return nil
-        }
-    }
-}

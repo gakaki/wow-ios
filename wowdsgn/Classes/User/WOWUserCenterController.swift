@@ -148,11 +148,10 @@ class WOWUserCenterController: WOWBaseViewController {
             self.title = model.nickName
             
             userHeadImg.set_webUserPhotoimage_url(model.avatar ?? "")
-
-            workNum.text = String(format: "%i", model.instagramCounts ?? 0)
-            praiseNum.text = String(format: "%i", model.likeCounts ?? 0)
-            favoriteNum.text = String(format: "%i", model.collectCounts ?? 0)
-            if model.selfIntroduction == nil && model.selfIntroduction == "" {
+            workNum.text = model.instagramCounts?.intToThousand()
+            praiseNum.text = model.likeCounts?.intToThousand()
+            favoriteNum.text = model.collectCounts?.intToThousand()
+            if model.selfIntroduction == nil || model.selfIntroduction == "" {
                 selfIntroduction.text = "这家伙很懒，什么也没留下"
             }else {
                 selfIntroduction.text = model.selfIntroduction

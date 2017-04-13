@@ -26,9 +26,9 @@ class WOWOtherHeaderView: UICollectionReusableView {
             
             userHeadImg.set_webUserPhotoimage_url(model.avatar ?? "")
             userName.text = model.nickName
-            workNum.text = String(format: "%i", model.instagramCounts ?? 0)
-            praiseNum.text = String(format: "%i", model.likeCounts ?? 0)
-            if model.selfIntroduction == nil && model.selfIntroduction == "" {
+            workNum.text = model.instagramCounts?.intToThousand()
+            praiseNum.text = model.likeCounts?.intToThousand()
+            if model.selfIntroduction == nil || model.selfIntroduction == "" {
                 selfIntroduction.text = "这家伙很懒，什么也没留下"
             }else {
                 selfIntroduction.text = model.selfIntroduction

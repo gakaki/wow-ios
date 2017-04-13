@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="304"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="303"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="304"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quotes" translatesAutoresizingMaskIntoConstraints="NO" id="mcS-wQ-pup">
@@ -68,7 +68,7 @@
                             <constraint firstItem="Tq9-uS-xDd" firstAttribute="top" secondItem="fb7-T3-kGT" secondAttribute="bottom" constant="5" id="hAg-Jc-RMK"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZDf-oR-F30">
+                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZDf-oR-F30">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="knL-a7-EGE"/>
@@ -90,6 +90,9 @@
                         <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumb" translatesAutoresizingMaskIntoConstraints="NO" id="CY9-Ur-4FS">
+                        <rect key="frame" x="138" y="0.0" width="99" height="100"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="zqw-s3-Cry" firstAttribute="top" secondItem="Isk-Qj-Z28" secondAttribute="bottom" constant="2" id="998-c3-V0z"/>
@@ -99,6 +102,7 @@
                     <constraint firstItem="Ghh-sw-2Xp" firstAttribute="top" secondItem="zqw-s3-Cry" secondAttribute="bottom" priority="750" constant="40" id="Pwe-bc-B57"/>
                     <constraint firstItem="ZDf-oR-F30" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QhP-vw-Rst"/>
                     <constraint firstItem="mcS-wQ-pup" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="RJ7-6y-gf1"/>
+                    <constraint firstItem="CY9-Ur-4FS" firstAttribute="centerY" secondItem="ZDf-oR-F30" secondAttribute="centerY" id="S5z-uO-MAk"/>
                     <constraint firstAttribute="trailing" secondItem="ZDf-oR-F30" secondAttribute="trailing" id="bjg-Dv-72B"/>
                     <constraint firstItem="zqw-s3-Cry" firstAttribute="leading" secondItem="Isk-Qj-Z28" secondAttribute="leading" id="eXd-yV-CqM"/>
                     <constraint firstAttribute="bottom" secondItem="Ghh-sw-2Xp" secondAttribute="bottom" id="h2P-tp-Ias"/>
@@ -107,6 +111,7 @@
                     <constraint firstItem="Ghh-sw-2Xp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="pvI-K1-qJ2"/>
                     <constraint firstItem="cCY-Km-JYf" firstAttribute="bottom" secondItem="ZDf-oR-F30" secondAttribute="bottom" constant="-10" id="ryg-Qw-bFS"/>
                     <constraint firstItem="zqw-s3-Cry" firstAttribute="trailing" secondItem="Isk-Qj-Z28" secondAttribute="trailing" id="sZu-ux-ZuO"/>
+                    <constraint firstItem="CY9-Ur-4FS" firstAttribute="centerX" secondItem="ZDf-oR-F30" secondAttribute="centerX" id="sbW-tf-8qz"/>
                     <constraint firstItem="cCY-Km-JYf" firstAttribute="leading" secondItem="ZDf-oR-F30" secondAttribute="leading" constant="10" id="sbr-OQ-Io7"/>
                     <constraint firstItem="mcS-wQ-pup" firstAttribute="top" secondItem="ZDf-oR-F30" secondAttribute="bottom" constant="15" id="vOP-d5-nNg"/>
                 </constraints>
@@ -120,11 +125,13 @@
                 <outlet property="lbMyIntro" destination="Tq9-uS-xDd" id="5Vx-lw-UDy"/>
                 <outlet property="lbMyName" destination="fb7-T3-kGT" id="g8f-Rc-Zbp"/>
                 <outlet property="lbPushTime" destination="zqw-s3-Cry" id="e9Z-bX-bCI"/>
+                <outlet property="thumbImg" destination="CY9-Ur-4FS" id="Z0U-D6-Ubx"/>
             </connections>
-            <point key="canvasLocation" x="-705" y="-192"/>
+            <point key="canvasLocation" x="-705.5" y="-192"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="quotes" width="20" height="15"/>
+        <image name="thumb" width="99" height="100"/>
     </resources>
 </document>

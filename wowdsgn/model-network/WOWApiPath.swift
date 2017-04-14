@@ -253,7 +253,7 @@ let URL_H5Share                 = "v1/h5Page/shareInfo"
 
 //v1/deferreddeeplink
 let URL_Deferreddeeplink        = "v1/deferreddeeplink"
-//领取优惠券     
+//领取优惠券                                                                                                                                                                
 let URL_CouponObtain            = "v1/user/coupon/obtain"
 
 //欣赏

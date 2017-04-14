@@ -11,6 +11,8 @@ import UIKit
 enum WOWShareType:String{
     case friends
     case wechat
+    case needPhone
+    case needCustomer
 }
 
 typealias ShareViewAction = (_ shareType:WOWShareType) -> Void
@@ -34,6 +36,27 @@ class WOWShareBackView:UIView{
         return v
     }()
     
+    lazy var customerView:WOWCustomer = {
+        let v = Bundle.main.loadNibNamed(String(describing: WOWCustomer.self), owner: self, options: nil)?.last as! WOWCustomer
+        v.viewPhone.addTapGesture {[weak self](tap) in
+            if let strongSelf = self{
+                if let action = strongSelf.shareActionBack {
+                    action(WOWShareType.needPhone)
+                }
+                strongSelf.dismiss()
+            }
+        }
+        
+        v.viewMessage.addTapGesture {[weak self](tap) in
+            if let strongSelf = self{
+                if let action = strongSelf.shareActionBack {
+                    action(WOWShareType.needCustomer)
+                }
+                strongSelf.dismiss()
+            }
+        }
+        return v
+    }()
     lazy var shareView:WOWShareView = {
        let v = Bundle.main.loadNibNamed(String(describing: WOWShareView.self), owner: self, options: nil)?.last as! WOWShareView
         v.friendView.addTapGesture {[weak self](tap) in
@@ -53,15 +76,6 @@ class WOWShareBackView:UIView{
                 strongSelf.dismiss()
             }
         }
-        
-//        v.weiboView.addTapGesture {[weak self](tap) in
-//            if let strongSelf = self{
-//                if let action = strongSelf.shareActionBack {
-//                    action(shareType: WOWShareType.weibo)
-//                }
-//                strongSelf.dismiss()
-//            }
-//        }
         return v
     }()
     
@@ -75,6 +89,7 @@ class WOWShareBackView:UIView{
         }
     }
 
+    
     lazy var popWindow:UIWindow = {
         let w = UIApplication.shared.delegate as! AppDelegate
         return w.window!
@@ -82,21 +97,36 @@ class WOWShareBackView:UIView{
     
     lazy var sharePhotoView:WOWSharePhotoView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWSharePhotoView.self), owner: self, options: nil)?.last as! WOWSharePhotoView
-//        let nowDate = NSDate()
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy.MM.dd"
-//        let dateString = formatter.string(from: nowDate as Date)
+
 
      
         return v
     }()
-
+    func showNeedHelp() {
+        popWindow.addSubview(self)
+        addSubview(backClear)
+        backClear.addSubview(customerView)
+        
+        customerView.snp.makeConstraints {[weak self] (make) in
+            if let strongSelf = self{
+                make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
+                make.height.equalTo(128)
+            }
+        }
+        
+        self.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 0.3, animations: { [unowned self] in
+            
+            self.alpha = 1
+            self.backClear.y = 0
+        }) 
+    }
     func show() {
         popWindow.addSubview(self)
         addSubview(backClear)
         backClear.addSubview(shareView)
-//        backClear.addSubview(sharePhotoView)
-        
+
         shareView.snp.makeConstraints {[weak self] (make) in
             if let strongSelf = self{
                 make.left.right.bottom.equalTo(strongSelf.backClear).offset(0)
@@ -105,19 +135,6 @@ class WOWShareBackView:UIView{
         }
 
         self.layoutIfNeeded()
-//        print("\(backClear.centerY)--\(shareView.centerY)--\(self.centerY)")
-//        sharePhotoView.snp.makeConstraints {[weak self] (make) in
-//            if let strongSelf = self{
-//                make.centerY.equalTo((MGScreenHeight - 128) / 2)
-//
-//                make.centerX.equalTo(strongSelf.backClear.centerX)
-//
-//                make.left.equalTo(strongSelf.backClear).offset(30)
-//                make.right.equalTo(strongSelf.backClear).offset(-30)
-//
-//
-//            }
-//        }
 
         UIView.animate(withDuration: 0.3, animations: { [unowned self] in
 
@@ -125,7 +142,7 @@ class WOWShareBackView:UIView{
             self.backClear.y = 0
         }) 
     }
-//    img: self.modelData?.pic ?? "" ,des: self.modelData?.des ?? "", nikeName: self.modelData?.nickName ?? ""
+
     func showPhotoImg(_ m: WOWWorksDetailsModel) {
         popWindow.addSubview(self)
         addSubview(backClear)

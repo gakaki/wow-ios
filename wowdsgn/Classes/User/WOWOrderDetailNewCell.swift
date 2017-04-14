@@ -77,32 +77,6 @@ class WOWOrderDetailNewCell: UITableViewCell {
                 }
             }
         }
-
-//        let orderProductModel = orderNewDetailModel.packages![indexSection].orderItems![indexRow]
-//
-////        colorLabel.text = orderProductModel.color?.get_formted_Space()
-//        titleLabel.text = orderProductModel.productName
-//        singsTagView.textFont = UIFont.systemFont(ofSize: 10)
-//          singsTagView.removeAllTags()
-//        for sing in orderProductModel.attributes ?? [""]{
-//            singsTagView.addTag(sing)
-//        }
-//
-//        titleImageView.set_webimage_url(orderProductModel.specImg ?? "")
-//        tapView.addAction({[weak self] in
-//            if let strongSelf = self {
-//                if let del = strongSelf.delegeta {
-//                    del.orderGoProductDetail(orderProductModel.productId)
-//                }
-//            }
-//        })
-//        
-//        priceLabel.text = (orderProductModel.sellPrice)!.toString.get_formted_price()
-//        goodsNumber.text = (orderProductModel.productQty)!.toString.get_formted_X()
-
-//        contentLabel.text = orderProductModel.specName?.get_formted_Space()
-
-
         
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="17i-SD-Nl7" customClass="WOWCustomer" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="128"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZJ-1A-oDI">
+                    <rect key="frame" x="200" y="0.0" width="200" height="128"/>
+                    <subviews>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="customer-message" translatesAutoresizingMaskIntoConstraints="NO" id="L4q-iP-r8B">
+                            <rect key="frame" x="75" y="25" width="50" height="50"/>
+                        </imageView>
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在线客服" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFr-y7-P2k">
+                            <rect key="frame" x="75.5" y="85" width="49.5" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="L4q-iP-r8B" firstAttribute="top" secondItem="SZJ-1A-oDI" secondAttribute="top" constant="25" id="1h3-CE-I3F"/>
+                        <constraint firstItem="xFr-y7-P2k" firstAttribute="centerX" secondItem="L4q-iP-r8B" secondAttribute="centerX" id="6PG-h7-Kg8"/>
+                        <constraint firstItem="xFr-y7-P2k" firstAttribute="top" secondItem="L4q-iP-r8B" secondAttribute="bottom" constant="10" id="plQ-gf-HD3"/>
+                        <constraint firstItem="L4q-iP-r8B" firstAttribute="centerX" secondItem="SZJ-1A-oDI" secondAttribute="centerX" id="rVF-qk-tpw"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOT-3R-8Xz">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="128"/>
+                    <subviews>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="customer-phone" translatesAutoresizingMaskIntoConstraints="NO" id="Ik0-cl-WmT">
+                            <rect key="frame" x="75" y="25" width="50" height="50"/>
+                        </imageView>
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客服电话" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LgX-Ih-Rwo">
+                            <rect key="frame" x="75.5" y="85" width="49.5" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="Ik0-cl-WmT" firstAttribute="centerX" secondItem="bOT-3R-8Xz" secondAttribute="centerX" id="04m-Gj-7Vj"/>
+                        <constraint firstItem="LgX-Ih-Rwo" firstAttribute="centerX" secondItem="Ik0-cl-WmT" secondAttribute="centerX" id="bsU-IW-Knt"/>
+                        <constraint firstItem="LgX-Ih-Rwo" firstAttribute="top" secondItem="Ik0-cl-WmT" secondAttribute="bottom" constant="10" id="eNc-fx-H4p"/>
+                        <constraint firstItem="Ik0-cl-WmT" firstAttribute="top" secondItem="bOT-3R-8Xz" secondAttribute="top" constant="25" id="sFp-zJ-5Gz"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="SZJ-1A-oDI" firstAttribute="leading" secondItem="bOT-3R-8Xz" secondAttribute="trailing" id="A3Z-le-h35"/>
+                <constraint firstAttribute="trailing" secondItem="SZJ-1A-oDI" secondAttribute="trailing" id="GWR-RY-JIP"/>
+                <constraint firstItem="SZJ-1A-oDI" firstAttribute="width" secondItem="bOT-3R-8Xz" secondAttribute="width" id="U9v-Cg-W0W"/>
+                <constraint firstItem="bOT-3R-8Xz" firstAttribute="top" secondItem="17i-SD-Nl7" secondAttribute="top" id="XYt-wL-ODG"/>
+                <constraint firstAttribute="bottom" secondItem="bOT-3R-8Xz" secondAttribute="bottom" id="dU3-ix-M6T"/>
+                <constraint firstItem="bOT-3R-8Xz" firstAttribute="leading" secondItem="17i-SD-Nl7" secondAttribute="leading" id="pzd-pG-Mh8"/>
+                <constraint firstAttribute="bottom" secondItem="SZJ-1A-oDI" secondAttribute="bottom" id="qSH-PO-zeC"/>
+                <constraint firstItem="SZJ-1A-oDI" firstAttribute="top" secondItem="17i-SD-Nl7" secondAttribute="top" id="tEd-Qq-Dsw"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="viewMessage" destination="SZJ-1A-oDI" id="dtC-6U-aeB"/>
+                <outlet property="viewPhone" destination="bOT-3R-8Xz" id="Alq-qH-ktf"/>
+            </connections>
+            <point key="canvasLocation" x="-7" y="643"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="customer-message" width="50" height="50"/>
+        <image name="customer-phone" width="50" height="50"/>
+    </resources>
+</document>

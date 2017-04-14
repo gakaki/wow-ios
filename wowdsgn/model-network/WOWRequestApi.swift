@@ -85,8 +85,6 @@ public enum RequestApi{
 
     case api_Product_By_Category(params: [String: AnyObject])//查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
     
-//    case api_Product_By_Category(asc:Int , currentPage: Int, showCount :Int , sortBy:Int, categoryId:Int ) //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
-
     case api_Captcha(mobile:String) //绑定微信验证码
     
     case api_ProductGroupTop(groupId : Int)// 分组产品 上边的 图片接口
@@ -165,10 +163,6 @@ public enum RequestApi{
     case api_LoginByCaptcha(mobile: String, captcha:String)
     
     //订单相关
-    
-
-//    case Api_OrderList(uid:String,type:String) //100为全部
-//    case Api_OrderList(orderStatus:String,currentPage:Int,pageSize:Int)
 
     case api_OrderList(params: [String: AnyObject]?)
     
@@ -282,10 +276,18 @@ public enum RequestApi{
     case api_UserStatistics(params: [String: AnyObject])
     
     case api_WorksList(params: [String: AnyObject])
+    
     case api_LikeWorks(worksId: Int, type: Int)
+    
     case api_CollectWorks(worksId: Int, collect: Int)
+    
     case api_getInstagramList(params: [String: Any])
     
+    case api_UpdateDescription(workId: Int, description: String)
+    
+    case api_Report(instagramId: Int, reason: Int)
+    
+    case api_Works_Delete(worksId: Int)
 }
 
 extension RequestApi:TargetType{
@@ -339,7 +341,6 @@ extension RequestApi:TargetType{
             return URL_ProductCategory
             
         //Tab 第一个栏 首页 该死的那3个url
-        //Tab 第一个栏 首页 该死的那3个url
         case .api_Home_Banners:
             return URL_home_banners
         case .api_Home_Tabs:
@@ -352,12 +353,7 @@ extension RequestApi:TargetType{
             
         case .api_HotStyle_BottomList:
             return URL_HotStyle_BottomList
-            
-//        case .Api_Home_Scenes:
-//            return URL_home_scenes
-//        case .Api_Home_Topics:
-//            return URL_home_topics
-//            
+           
         case .api_SearchHot:
             return URL_Search_hot
         case .api_SearchResult:
@@ -591,8 +587,13 @@ extension RequestApi:TargetType{
             return URL_CollectWorks
         case .api_getInstagramList:
             return URL_GetInstagram
-        default:
-            return URL_topic
+        case .api_UpdateDescription:
+            return URL_UpdateDescription
+        case .api_Report:
+            return URL_Report
+        case .api_Works_Delete:
+            return URL_Works_Delete
+
         }
     }
     
@@ -633,9 +634,7 @@ extension RequestApi:TargetType{
             .api_GetWorksDetails,
             .api_UserStatistics,
             .api_WorksList,
-//            .api_CollectWorks,
             .api_getInstagramList:
-
             return .GET
 
         default:
@@ -832,7 +831,6 @@ extension RequestApi:TargetType{
             case .api_User:
                 break
             case let .api_Product_By_Category(param): //查看分类下商品 asc 0 降序 当前页 showCount  sortBy 1 categoryId
-//                    params = ["asc": asc, "currentPage": currentPage, "showCount": showCount, "sortBy": sortBy, "categoryId":categoryId]
                 params = param
                 break
             
@@ -852,7 +850,6 @@ extension RequestApi:TargetType{
             
             case let .api_SearchResult(param):
                 params =  param
-//                params = ["pageSize": pageSize, "currentPage": currentPage, "sortBy": sortBy, "asc": asc, "seoKey":seoKey]
             
             //推送消息
             case let .api_MessageList(msgType, pageSize, currentPage):
@@ -902,19 +899,19 @@ extension RequestApi:TargetType{
                 params = ["instagramId": worksId, "collect": type]
             case let .api_getInstagramList(param):
                 params = param
-    
+            case let .api_UpdateDescription(workId, description):   //修改作品
+                params = ["id":workId,"description":description]
+            case let .api_Report(instagramId, reason):  //举报作品
+                params = ["instagramId":instagramId,"reason":reason]
+            case let .api_Works_Delete(worksId):         //删除作品
+                params = ["id": worksId]
             default:
                 break
 
         }
         DLog(WOWUserManager.sessionToken)
-//        if WOWUserManager.sessionToken.isEmpty {
             params =   ["paramJson":JSONStringify(params as AnyObject? ?? "" as AnyObject)]
-//        }else {
-//            params =   ["paramJson":JSONStringify(params as AnyObject? ?? "" as AnyObject),"channel":"2","sessionToken":WOWUserManager.sessionToken, "deviceToken": WOWUserManager.deviceToken]
-//        }
         
-
         return params
     }
     var multipartBody: [MultipartFormData]? {

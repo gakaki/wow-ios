@@ -276,8 +276,7 @@ class WOWEditOrderController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AddressDefault, successClosure: { [weak self](result, code) in
             if let strongSelf = self{
                 strongSelf.addressInfo = Mapper<WOWAddressListModel>().map(JSONObject:result)
-                let section = IndexSet(integer: 0)
-                strongSelf.tableView.reloadSections(section, with: .none)
+                strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
             }
         }) { [weak self](errorMsg) in

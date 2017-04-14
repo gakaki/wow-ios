@@ -78,6 +78,7 @@ class WOWBuyCarController: WOWBaseViewController {
     @IBOutlet weak var totalPriceLabel: UILabel!        //商品总价
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var bottomHeight: NSLayoutConstraint!    //底部view高度
+    var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
 
     
     override func viewDidLoad() {
@@ -120,6 +121,13 @@ class WOWBuyCarController: WOWBaseViewController {
         let view = Bundle.main.loadNibNamed("WOWBuyCarHeaderView", owner: self, options: nil)?.last as! WOWBuyCarHeaderView
         return view
     }()
+    lazy var topBtn:UIButton = {
+        var btn     = UIButton(type: UIButtonType.custom)
+        btn     = btn as UIButton
+        btn.setBackgroundImage(UIImage(named: "backTop"), for: UIControlState())
+        btn.addTarget(self, action:#selector(backTop), for:.touchUpInside)
+        return btn
+    }()
 //MARK:Private Method
     fileprivate func addObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object:nil)
@@ -130,6 +138,10 @@ class WOWBuyCarController: WOWBaseViewController {
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWLoginSuccessNotificationKey), object: nil)
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object: nil)
         
+    }
+    func backTop()  {
+        let index  = IndexPath.init(row: 0, section: 0)
+        self.tableView.scrollToRow(at: index, at: UITableViewScrollPosition.none, animated: true)
     }
     //MARK notidication method
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
@@ -169,6 +181,18 @@ class WOWBuyCarController: WOWBaseViewController {
         endButton.setTitle("去结算", for:UIControlState())
         endButton.tintColor = UIColor.clear
         configTable()
+        configTop()
+    }
+    
+    func configTop()  {
+        self.view.addSubview(self.topBtn)
+        self.topBtn.snp.makeConstraints {[unowned self] (make) in
+            make.width.equalTo(98)
+            make.height.equalTo(30)
+            make.centerX.equalTo(self.view)
+            make.top.equalTo(self.view).offset(10)
+        }
+        self.topBtn.isHidden = true
     }
     
     
@@ -537,6 +561,13 @@ class WOWBuyCarController: WOWBaseViewController {
 
 
 extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.mj_offsetY < self.backTopBtnScrollViewOffsetY {
+            self.topBtn.isHidden = true
+        }else{
+            self.topBtn.isHidden = false
+        }
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataArr.count + bottomCellLine
     }

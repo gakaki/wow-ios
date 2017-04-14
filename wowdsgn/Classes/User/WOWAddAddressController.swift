@@ -38,8 +38,6 @@ class WOWAddAddressController: WOWBaseTableViewController {
     //选择的县索引
     var districtIndex = 0
 
-    
-    
     var action:WOWActionClosure?
     
     

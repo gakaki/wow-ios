@@ -275,5 +275,6 @@ let URL_CollectWorks            = "v1/instagram/user/collect"       // 收藏作
 
 let URL_UpdateDescription       = "v1/instagram/updateDescription"      //修改作品描述
 let URL_Report                  = "v1/instagram/report"                 //举报
+let URL_Works_Delete            = "v1/instagram/del"                    //删除
 
 

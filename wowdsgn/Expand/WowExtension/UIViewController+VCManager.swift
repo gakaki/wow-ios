@@ -473,6 +473,7 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
         
     }
+
     //    //点击跳转
     class func goToBannerTypeController(_ model: WOWCarouselBanners) {
      

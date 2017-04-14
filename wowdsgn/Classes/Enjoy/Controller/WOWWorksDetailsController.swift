@@ -70,6 +70,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
         super.viewDidAppear(animated)
         MobClick.e(.picture_details_page)
     }
+    //MARK: - private
     func setLeftBack() {
             let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action:#selector(backAction))
             navigationItem.leftBarButtonItem = item
@@ -87,7 +88,37 @@ class WOWWorksDetailsController: WOWBaseViewController {
         }
        
     }
+    
+    func deleteAction()  {
+        
+        let alertController = UIAlertController(title: "",
+                                                message: "删除帖子？", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "删除", style: .default, handler: {
+           [unowned self] action  in
+            self.requestDelete()
+            
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
 
+    //编辑作品
+    func goEditWorks(model: WOWWorksDetailsModel) {
+        let vc = UIStoryboard.initialViewController("Enjoy", identifier: "WOWEditWorksNavController") as! WOWNavigationController
+        let works = vc.topViewController as! WOWEditWorksController
+        works.modelData = model
+        works.action = {[weak self] in
+            if let strongSelf = self{
+                strongSelf.request()
+            }
+        }
+        present(vc, animated: true, completion: nil)
+        
+    }
+    //MARK:- Net
     override func request() {
         super.request()
         WOWNetManager.sharedManager.requestWithTarget(.api_GetWorksDetails(worksId: worksId ?? 0), successClosure: {[weak self] (result, code) in
@@ -117,16 +148,12 @@ class WOWWorksDetailsController: WOWBaseViewController {
             if let strongSelf = self{
                 strongSelf.endRefresh()
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
-//                WOWHud.showMsg(errorMsg)
             }
         })
         
 
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     // MARK: - 点赞作品
     func requestPraise() {
         if let model = self.modelData { // 喜欢的类型  取反
@@ -179,16 +206,40 @@ class WOWWorksDetailsController: WOWBaseViewController {
         }
         
     }
+    
+    //举报作品
+    func requestReport(reason: Int) {
+        WOWNetManager.sharedManager.requestWithTarget(.api_Report(instagramId: worksId ?? 0, reason: reason), successClosure: { (result, code) in
+            WOWHud.showMsg("感谢您的反馈")
+        }) { (errorMsg) in
+            WOWHud.showWarnMsg(errorMsg)
+        }
+    }
+    
+    //删除作品
+    func requestDelete() {
+        WOWNetManager.sharedManager.requestWithTarget(.api_Works_Delete(worksId: worksId ?? 0), successClosure: {[weak self] (result, code) in
+            if let strongSelf = self {
+                WOWHud.showMsg("删除作品")
+                strongSelf.popVC()
+            }
+    
+        }) { (errorMsg) in
+            WOWHud.showWarnMsg(errorMsg)
 
+        }
+    }
+    //点赞
     @IBAction func clickPraise(_ sender: Any) {
         MobClick.e(.thumbs_up_clicks_picture_details_page)
         requestPraise()
     }
-
+    //收藏
     @IBAction func clickCollection(_ sender: Any) {
         MobClick.e(.collection_clicks_picture_details_page)
         requestCollect()
     }
+    //分享
     @IBAction func clickShare(_ sender: Any) {
         MobClick.e(.sharing_clicks_picture_details_page)
         if let modelData = self.modelData {
@@ -197,7 +248,10 @@ class WOWWorksDetailsController: WOWBaseViewController {
 
     }
 
-
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 }
 extension WOWWorksDetailsController:UITableViewDelegate,UITableViewDataSource, WorksDetailCellDelegate{
     
@@ -240,18 +294,24 @@ extension WOWWorksDetailsController: WOWWorkMoreViewDelegate {
             break
         case .delete:   //删除
             backView.hideView()
+            deleteAction()
             break
         case .report:    //举报
             backView.hideOtherView()
             break
         case .improper:     //内容不当
             backView.hideView()
+            requestReport(reason: 2)
             break
         case .edit:     //编辑
             backView.hideView()
+            if let model = modelData {
+                goEditWorks(model: model)
+            }
             break
         case .rubbish:  //垃圾内容
             backView.hideView()
+            requestReport(reason: 1)
             break
         }
     }

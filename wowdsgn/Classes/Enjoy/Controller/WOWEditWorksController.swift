@@ -1,53 +1,54 @@
 //
-//  WOWReleaseWorksController.swift
+//  WOWEditWorksController.swift
 //  wowdsgn
 //
-//  Created by 陈旭 on 2017/3/24.
+//  Created by 安永超 on 2017/4/14.
 //  Copyright © 2017年 g. All rights reserved.
 //
 
 import UIKit
 
-class WOWReleaseWorksController: WOWBaseViewController {
-    var photo : UIImage!
-
+class WOWEditWorksController: WOWBaseViewController {
+    
     @IBOutlet weak var imgHeightLayou: NSLayoutConstraint!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var textView: KMPlaceholderTextView!
     @IBOutlet weak var imgPhoto: UIImageView!
-    var modelData : WOWWorksDetailsModel?
+    var modelData : WOWWorksDetailsModel!
     var instagramCategoryId:Int?
+    var action:WOWActionClosure?
 
     var imgSizeId : Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "发布"
-        self.imgPhoto.image = photo
-
         textView.delegate = self
         self.view.backgroundColor = UIColor.white
-        self.automaticallyAdjustsScrollViewInsets = true
         let itemReghit = UIBarButtonItem.init(title: "取消", style: .plain, target: self, action: #selector(cancelAction))
         navigationItem.rightBarButtonItem = itemReghit
-
+        
         let tapGestureRecognizer = UIPanGestureRecognizer.init(target: self, action:  #selector(tap))
-    
+        
         self.view.addGestureRecognizer(tapGestureRecognizer)
-
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        MobClick.e(.post_picture_page)
     }
     
+    override func setUI() {
+        super.setUI()
+        textView.text = modelData.des
+        limitTextLength(textView)
+        imgHeightLayou.constant = modelData.picHeight
+        imgPhoto.set_webimage_url(modelData.pic ?? "")
+    }
     func tap(gestureRecognizer: UIPanGestureRecognizer)  {
-     self.view.endEditing(true)
+        self.view.endEditing(true)
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let height = self.imgPhoto.mj_w  * photo.size.height / photo.size.width
-        imgHeightLayou.constant = height
+
     }
     func cancelAction()  {
         
@@ -58,47 +59,33 @@ class WOWReleaseWorksController: WOWBaseViewController {
             [unowned self] action in
             
             self.dismiss(animated: true) {
-                MobClick.e(.cancel_post_picture_page)
-                _ = FNUtil.currentTopViewController().navigationController?.popViewController(animated: true)
             }
-  
+            
         })
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
-      
+        
     }
     
-    func requestPushWorks(pic:String ,des:String){
+    func requestPushWorks(des:String){
         
-        var params = [String: Any]()
-        params = ["instagramCategoryId": instagramCategoryId ?? 0  ,"pic": pic ,"description":des , "measurement":imgSizeId  ?? 1]
-
-        WOWNetManager.sharedManager.requestWithTarget(.api_PushWorks(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
-            WOWHud.dismiss()
-            if let strongSelf = self{
-                let r = JSON(result)
-                print(r)
-                
-                strongSelf.modelData    =    Mapper<WOWWorksDetailsModel>().map(JSONObject:result)
-                
-                strongSelf.toWorksDetails(worksId:strongSelf.modelData?.id ?? 0)
-            
-                
+        WOWNetManager.sharedManager.requestWithTarget(.api_UpdateDescription(workId: modelData.id ?? 0, description: des), successClosure: {[weak self] (result, code) in
+            if let strongSelf = self {
+                strongSelf.dismiss(animated: true, completion: {
+                    print("fanhui")
+                })
             }
-        }) {[weak self] (errorMsg) in
-            if self != nil{
-             
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
-                
-            }
+        }) { (errorMsg) in
+            WOWHud.showWarnMsg(errorMsg)
         }
 
+        
     }
     // MARK: - 发布按钮
     @IBAction func releaseAction(_ sender: Any) {
-            MobClick.e(.post_clicks_post_picture_page)
-            requestPushlish()
+        MobClick.e(.post_clicks_post_picture_page)
+        requestPushlish()
         
     }
     func requestPushlish()  {
@@ -108,55 +95,34 @@ class WOWReleaseWorksController: WOWBaseViewController {
             return
         }
         textView.resignFirstResponder()
-        
-        WOWHud.showLoadingSV()
-        WOWUploadManager.uploadShareImg(photo, successClosure: {[weak self] (url) in
-            
-            if let strongSelf = self {
-                strongSelf.requestPushWorks(pic: url ?? "", des: des)
-            }
-            
-            
-        }) { (error) in
-            WOWHud.dismiss()
-            print("upload error...")
-        }
-
+        requestPushWorks(des: des)
     }
-    // MARK: - 跳转到作品详情
-    func toWorksDetails(worksId:Int) {
-        let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWWorksDetailsController.self)) as! WOWWorksDetailsController
-        vc.isBoolFormReleaseVC = true
-        vc.photo = photo
-        vc.worksId = worksId
-        self.navigationController?.pushViewController(vc, animated: true)
 
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
 }
-extension WOWReleaseWorksController:UITextViewDelegate{
+extension WOWEditWorksController:UITextViewDelegate{
     
     fileprivate func limitTextLength(_ textView: UITextView){
         
         let toBeString = textView.text as NSString
-
+        
         if (toBeString.length > 35) {
             numberLabel.colorWithText(toBeString.length.toString, str2: "/35", str1Color: UIColor.red)
             
         }else {
             numberLabel.text = String(format: "%i/35", toBeString.length)
         }
-
+        
     }
     //中文和其他字符的判断方式不一样
     func textViewDidChange(_ textView: UITextView) {
         
         let language = textView.textInputMode?.primaryLanguage
-   
+        
         if let lang = language {
             if lang == "zh-Hans" ||  lang == "zh-Hant" || lang == "ja-JP"{ //如果是中文简体,或者繁体输入,或者是日文这种带默认带高亮的输入法
                 let selectedRange = textView.markedTextRange
@@ -177,6 +143,6 @@ extension WOWReleaseWorksController:UITextViewDelegate{
         }
         
     }
-
-
+    
+    
 }

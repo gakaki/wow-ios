@@ -69,8 +69,8 @@ class PhotoViewCell: UICollectionViewCell {
     
     fileprivate var downloadTask: RetrieveImageTask?
     /// 懒加载 对外可读
-    fileprivate(set) lazy var imageView: AnimatedImageView = {[unowned self] in
-        let imageView = AnimatedImageView()
+    fileprivate(set) lazy var imageView: UIImageView = {[unowned self] in
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true
         imageView.backgroundColor = UIColor.black
@@ -216,8 +216,9 @@ extension PhotoViewCell {
         }
         
         // 加载网路图片
-        guard let urlString = photo.imageUrlString, let url = URL(string: urlString) else {
-            assert(false, "设置的url不合法")
+        guard let urlString = photo.imageUrlString, let url = URL(string: urlString.webp_url()) else {
+//            assert(false, "设置的url不合法")
+            print("设置的url不合法")
             return
         }
         // 添加提示框
@@ -231,65 +232,21 @@ extension PhotoViewCell {
             image = sourceImageView.image
         }
         
-        image =  image ?? UIImage(named: "placeholder_product")
-        //TODO
-        downloadTask = imageView.kf.setImage(with: url, placeholder: image, options: nil, progressBlock: {[weak self] (receivedSize, totalSize) in
-            let progress = Double(receivedSize) / Double(totalSize)
-            //            print(progress)
-            if let sSelf = self {
+        image =  UIImage(named: "placeholder_product")
+        imageView.yy_setImage(with: url, placeholder: image, options: []) {[weak self] (img, url, imageFromType, imageStage, error) in
+            if let strongSelf = self  {
                 
-                sSelf.hud?.progress = progress
-            }
-            }, completionHandler: {[weak self] (image, error, cacheType, imageURL) in
-                if let strongSelf = self  {
-                    
-                    strongSelf.image = image
-                    strongSelf.hud?.hideLoadingView()
-                    
-                    if let _ = image {//加载成功
-                        strongSelf.hud?.hideHUD()
-                        return
-                    }
-                    
-                    // 提示加载错误
-                    strongSelf.hud?.showHUD("加载失败", autoHide: false, afterTime: 0.0)
+                strongSelf.image = img
+                strongSelf.hud?.hideLoadingView()
+                
+                if let _ = img {//加载成功
+                    strongSelf.hud?.hideHUD()
+                    return
                 }
-        })
-//        downloadTask = imageView.kf.setImageWithURL(url, placeholderImage: image, optionsInfo: nil, progressBlock: {[weak self] (receivedSize, totalSize) in
-//            let progress = Double(receivedSize) / Double(totalSize)
-//            //            print(progress)
-//            if let sSelf = self {
-//                
-//                sSelf.hud?.progress = progress
-//            }
-//            
-//        }) {[weak self] (image, error, cacheType, imageURL) in
-//            // 加载完成
-//            // 注意: 因为这个闭包是多线程调用的 所以可能存在 没有显示完图片,就点击了返回
-//            // 这个时候self已经被销毁了 所以使用[unonwed self] 将会导致"野指针"的问题
-//            // 使用 [weak self] 保证安全访问self
-//            // 但是这也不是绝对安全的, 比如在 self 销毁之前, 进入了这个闭包 那么strongSelf 有值 进入
-//            // 如果在这时恰好 self 销毁了,那么之后调用strongSelf 都将会出错crash
-//            
-//            //            withExtendedLifetime(self, { () -> self in
-//            //
-//            //            })
-//            if let strongSelf = self  {
-//                
-//                strongSelf.image = image
-//                strongSelf.hud?.hideLoadingView()
-//                
-//                if let _ = image {//加载成功
-//                    strongSelf.hud?.hideHUD()
-//                    return
-//                }
-//                
-//                // 提示加载错误
-//                strongSelf.hud?.showHUD("加载失败", autoHide: false, afterTime: 0.0)
-//            }
-        
-            
-//        }
+            }
+
+        }
+
         
     }
     
@@ -302,7 +259,7 @@ extension PhotoViewCell {
             imageView.image = image
 
             // 按照图片比例设置imageView的frame
-            let width = imageV.size.width < scrollView.zj_width ? imageV.size.width : scrollView.zj_width
+            let width = imageV.size.width < scrollView.zj_width ? scrollView.zj_width : scrollView.zj_width
             let height = imageV.size.height * (width / imageV.size.width)
             
             // 长图

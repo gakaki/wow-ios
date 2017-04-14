@@ -400,6 +400,10 @@ class WOWProductDetailController: WOWBaseViewController {
         view.addSubview(backView)
         view.bringSubview(toFront: backView)
         backView.show(entrue)
+        backView.buyView.goodsImageView.addTapGesture {[unowned self] (tap) in
+            let productImg = self.backView.buyView.productInfo?.productImg ?? ""
+            self.loadBigImage([productImg], 0)
+        }
     }
     
     

@@ -79,7 +79,10 @@ class WOWNewEnjoyController: WOWBaseViewController {
     }
     //是否喜欢某个作品
     func requestLike(type: Int, works worksId: Int) {
-
+        guard WOWUserManager.loginStatus == true else{
+            UIApplication.currentViewController()?.toLoginVC(true)
+            return
+        }
         WOWNetManager.sharedManager.requestWithTarget(.api_LikeWorks(worksId: worksId, type: type), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
             if let _ = self {
@@ -221,10 +224,7 @@ extension WOWNewEnjoyController: KolodaViewDelegate {
     }
 
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
-        guard WOWUserManager.loginStatus == true else{
-            UIApplication.currentViewController()?.toLoginVC(true)
-            return
-        }
+        
         let model = fineWroksArr[index]
         if direction == .left {
             MobClick.e(.dislike_clicks_latest_picture_page)

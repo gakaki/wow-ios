@@ -12,24 +12,40 @@ class WOWMasterpieceCell: UITableViewCell {
 
     @IBOutlet weak var imgWroks: UIImageView!
     @IBOutlet weak var thumbImg: UIImageView!
+    var model: WOWFineWroksModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapClick(tap:)))
-        tap.numberOfTapsRequired = 2
-        imgWroks.addGestureRecognizer(tap)
-    }
-
-
-    func showData(_ m : WOWFineWroksModel)  {
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(singleTapClick(tap:)))
+        singleTap.numberOfTapsRequired = 1
         
-        imgWroks.set_webimage_url(m.pic ?? "")
-//        VCRedirect.bingWorksDetails(worksId: m.id ?? 0)
-
+        imgWroks.addGestureRecognizer(singleTap)
+        
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapClick(tap:)))
+        doubleTap.numberOfTapsRequired = 2
+        imgWroks.addGestureRecognizer(doubleTap)
+        singleTap.require(toFail: doubleTap)
+        
     }
     
-    func tapClick(tap: UITapGestureRecognizer)  {
+
+    func showData(_ m : WOWFineWroksModel)  {
+        model = m
+        imgWroks.set_webimage_url(m.pic ?? "")
+
+    }
+    //单击手势事件
+    func singleTapClick(tap: UITapGestureRecognizer)  {
+        VCRedirect.bingWorksDetails(worksId: model?.id ?? 0)
+    }
+    //双击手势事件
+    func doubleTapClick(tap: UITapGestureRecognizer)  {
+        guard WOWUserManager.loginStatus == true else{
+            UIApplication.currentViewController()?.toLoginVC(true)
+            return
+        }
+        requestLike(works: model?.id ?? 0)
         imgWroks.isUserInteractionEnabled = false
         thumbImg.isHidden = false
         thumbImg.alpha = 0
@@ -48,7 +64,17 @@ class WOWMasterpieceCell: UITableViewCell {
             self.imgWroks.isUserInteractionEnabled = true
         }
     }
-    
+    //喜欢某个作品
+    func requestLike(works worksId: Int) {
+
+        WOWNetManager.sharedManager.requestWithTarget(.api_LikeWorks(worksId: worksId, type: 1), successClosure: { (result, code) in
+            WOWHud.dismiss()
+            
+        }) { (errorMsg) in
+            WOWHud.dismiss()
+            
+        }
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

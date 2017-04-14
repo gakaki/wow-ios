@@ -253,7 +253,7 @@ let URL_H5Share                 = "v1/h5Page/shareInfo"
 
 //v1/deferreddeeplink
 let URL_Deferreddeeplink        = "v1/deferreddeeplink"
-//领取优惠券
+//领取优惠券     
 let URL_CouponObtain            = "v1/user/coupon/obtain"
 
 //欣赏
@@ -272,5 +272,8 @@ let URL_UserStatistics          = "v1/instagram/user/statistics"        //作品
 let URL_WorksList               = "v1/instagram/user"               //作品列表
 let URL_LikeWorks               = "v1/instagram/user/like"          // 喜欢作品
 let URL_CollectWorks            = "v1/instagram/user/collect"       // 收藏作品
+
+let URL_UpdateDescription       = "v1/instagram/updateDescription"      //修改作品描述
+let URL_Report                  = "v1/instagram/report"                 //举报
 
 

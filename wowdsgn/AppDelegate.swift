@@ -24,8 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDeleg
     
     var window: UIWindow?
     static var rootVC : UIViewController?
-    //    var sideController:WOWSideContainerController!
-    var adLaunchView: AdLaunchView?
     let umessage  = AppDelegateUmengHelper()
     var lunchView: WOWLaunchView!
     
@@ -36,7 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDeleg
     }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-//        RouterRule.router_init()
         JLRouterRule.router_init()
         
         asyncLoad()
@@ -92,12 +89,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDeleg
         lunchView = Bundle.main.loadNibNamed(String(describing: WOWLaunchView.self), owner: self, options: nil)?.last as! WOWLaunchView
         lunchView.frame =  CGRect(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight)
         window?.addSubview(lunchView)
-//        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(closeButtonClick), userInfo: nil, repeats: false)
         self.fetchADImage()
     }
     
-  
-//    }
     
     func asyncLoad(){
 
@@ -153,7 +147,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDeleg
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
   //universal link call back
-        
         
         TalkingDataAppCpa.onReceiveDeepLink(userActivity.webpageURL)
 
@@ -332,11 +325,7 @@ extension AppDelegate{
         navBar.isTranslucent = false
         navBar.setBackgroundImage(UIImage.imageWithColor(UIColor.white, size:CGSize(width: MGScreenWidth, height: 64)), for: .any, barMetrics: .default)
         navBar.shadowImage = UIImage.imageWithColor(MGRgb(234, g: 234, b: 234), size:CGSize(width: MGScreenWidth, height: 0.5)) //去除导航栏下方黑线
-        
-        //        navBar.shadowImage = UIImage()
-        //更换导航栏返回按图片
-        //        navBar.backIndicatorImage = UIImage(named: "nav_backArrow")
-        //        navBar.backIndicatorTransitionMaskImage = UIImage(named:"nav_backArrow")
+
         
         //设置导航条背景
         navBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.black] //导航栏标题颜色
@@ -397,20 +386,6 @@ extension AppDelegate: AdLaunchViewDelegate {
                             
                     })
 
-//                    strongSelf.lunchView.backgroundImg.kf.setImage(with: URL(string:imgUrl),
-//                                        placeholder:UIImage(named: "Artboard"),
-//                                        options: nil,
-//                                        progressBlock: nil,
-//                                        completionHandler: {[weak self] (image, error, chcheTypr, imageUrl) in
-//                                            if let strongSelf = self {
-//                                                UIView.animate(withDuration: 1, animations: {
-//                                                    if strongSelf.lunchView.backgroundImg != nil {
-//                                                        strongSelf.lunchView.backgroundImg.alpha = 1
-//                                                    }
-//                                                    
-//                                                })
-//                                            }
-//                    })
                     
                 }
             }

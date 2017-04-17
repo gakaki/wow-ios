@@ -303,7 +303,6 @@
 		2D1138C91E84CB7B00A78FD6 /* WOWWorksDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1138C81E84CB7B00A78FD6 /* WOWWorksDetailsController.swift */; };
 		2D1138CC1E84CC7800A78FD6 /* WorksDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1138CA1E84CC7800A78FD6 /* WorksDetailCell.swift */; };
 		2D1138CD1E84CC7800A78FD6 /* WorksDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D1138CB1E84CC7800A78FD6 /* WorksDetailCell.xib */; };
-		2D142E9D1E03C1EF009A50CB /* WowShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D142E9C1E03C1EF009A50CB /* WowShare.framework */; };
 		2D142EA11E03E38C009A50CB /* WOWProductListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D142EA01E03E38C009A50CB /* WOWProductListController.swift */; };
 		2D1AB5C51E07D43000821012 /* Cell_104_TwoLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1AB5C31E07D43000821012 /* Cell_104_TwoLine.swift */; };
 		2D1AB5C61E07D43000821012 /* Cell_104_TwoLine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D1AB5C41E07D43000821012 /* Cell_104_TwoLine.xib */; };
@@ -474,6 +473,8 @@
 		63306CEB1E8A64F9005E0B32 /* WOWPraiseTwoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63306CE91E8A64F9005E0B32 /* WOWPraiseTwoCell.swift */; };
 		63306CEC1E8A64F9005E0B32 /* WOWPraiseTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63306CEA1E8A64F9005E0B32 /* WOWPraiseTwoCell.xib */; };
 		633382981E86251C003A301C /* WOWCustomKoloda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633382971E86251C003A301C /* WOWCustomKoloda.swift */; };
+		63351BA91EA49B43006D681F /* WowShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6373FF691E9DDCBD006BB4C0 /* WowShare.framework */; };
+		63351BAA1EA49B43006D681F /* WowShare.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6373FF691E9DDCBD006BB4C0 /* WowShare.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6338F4EC1E972D93006D0890 /* WOWNewGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6338F4EB1E972D93006D0890 /* WOWNewGuideView.swift */; };
 		6338F4EE1E972DB1006D0890 /* WOWNewGuideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6338F4ED1E972DB1006D0890 /* WOWNewGuideView.xib */; };
 		633FD2CE1E88A9F7004C508A /* WOWEnjoyCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633FD2CD1E88A9F7004C508A /* WOWEnjoyCategoryModel.swift */; };
@@ -601,6 +602,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				63351BAA1EA49B43006D681F /* WowShare.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1223,7 +1225,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D142E9D1E03C1EF009A50CB /* WowShare.framework in Frameworks */,
 				639C13DA1DD204AA003B0F59 /* UserNotificationsUI.framework in Frameworks */,
 				63803AE81DC325BD000AA259 /* UserNotifications.framework in Frameworks */,
 				069D2F761DB4793B00A059D0 /* CoreTelephony.framework in Frameworks */,
@@ -1245,6 +1246,7 @@
 				069D2F6A1DB4790C00A059D0 /* SafariServices.framework in Frameworks */,
 				06A5C46E1E13BB4D00FE0A7A /* UMMobClick.framework in Frameworks */,
 				06A5C4691E13B21600FE0A7A /* libUMessage_Sdk_1.4.0.a in Frameworks */,
+				63351BA91EA49B43006D681F /* WowShare.framework in Frameworks */,
 				458523D0F557C0CFD1003B89 /* Pods_wowdsgn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -70,7 +70,6 @@ public extension UIButton{
                     strongSelf.backgroundColor = countBGColor
                     strongSelf.setTitleColor(countTitleColor, for: UIControlState())
                     strongSelf.setTitle(content, for: UIControlState())
-//                    self.titleLabel?.text = content
                     strongSelf.isUserInteractionEnabled = false // 这里不要用enable
                     
                 })
@@ -81,9 +80,7 @@ public extension UIButton{
             }
             
             time -= 1
-            
-        
-            
+                        
         }
         
         // 启动

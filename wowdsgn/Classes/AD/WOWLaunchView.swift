@@ -10,17 +10,29 @@ import UIKit
 
 class WOWLaunchView: UIView {
     @IBOutlet weak var backgroundImg: UIImageView!
+    @IBOutlet weak var timeButton: UIButton!
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-//        backgroundImg.alpha = 0
-//        UIView.animate(withDuration: 1, animations: {
-//            self.backgroundImg.alpha = 1
-//        })
+        startTime()
         let delayTime = DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
             self.requestCheakVersion()
             self.removeFromSuperview()
         }
+
+    }
+    
+    func startTime() {
+        let basicAnimation = POPBasicAnimation.linear()
+        basicAnimation?.property = POPAnimatableProperty.property(withName: "linearCountdownAnimation", initializer: {(property) in
+            property?.writeBlock = { [unowned self](object,values) in//在这里设置动画内容
+                self.timeButton.setTitle("跳过 " + String(format:"%.0f",(values?[0])!), for: .normal)
+            }
+        }) as! POPAnimatableProperty
+        basicAnimation?.duration = 3.0
+        basicAnimation?.fromValue = 3
+        basicAnimation?.toValue = 0
+        timeButton.pop_add(basicAnimation, forKey: "countdown")
     }
     override func removeFromSuperview() {
         UIView.animate(withDuration: 1, animations: {

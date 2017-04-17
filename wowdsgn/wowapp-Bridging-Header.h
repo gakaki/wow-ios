@@ -24,6 +24,7 @@
 @import wow_vendor_ui;
 @import XZMRefresh;
 @import FMDB;
+@import pop;
 
 @import WowShare;
 
@@ -38,7 +39,6 @@
 #import "TalkingDataAppCpa.h"
 #import "TalkingDataSMS.h"
 //#import <JSPatchPlatform/JSPatch.h>
-
 //#import "JPPlayground.h"
 //#import "GYHttpMock.h"
 //@import MLeaksFinder;

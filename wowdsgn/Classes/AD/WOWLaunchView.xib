@@ -30,11 +30,25 @@
                                 <constraint firstAttribute="height" constant="140" id="e8q-oM-zu5"/>
                             </constraints>
                         </imageView>
+                        <button opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tHH-xI-GVk">
+                            <rect key="frame" x="310" y="40" width="50" height="25"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="QoS-X2-1S1"/>
+                                <constraint firstAttribute="height" constant="25" id="tNk-G8-724"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="跳过 5">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="zEI-4p-vhd" firstAttribute="centerY" secondItem="PTX-H2-G7y" secondAttribute="centerY" id="8BH-2a-7cH"/>
                         <constraint firstItem="zEI-4p-vhd" firstAttribute="centerX" secondItem="PTX-H2-G7y" secondAttribute="centerX" id="XdO-yB-CmI"/>
+                        <constraint firstAttribute="trailing" secondItem="tHH-xI-GVk" secondAttribute="trailing" constant="15" id="ouz-lj-Yac"/>
+                        <constraint firstItem="tHH-xI-GVk" firstAttribute="top" secondItem="PTX-H2-G7y" secondAttribute="top" constant="40" id="tLu-KL-vLL"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaL-wM-23Y">
@@ -80,6 +94,7 @@
             </constraints>
             <connections>
                 <outlet property="backgroundImg" destination="HFn-ZA-zTG" id="5so-UZ-lbK"/>
+                <outlet property="timeButton" destination="tHH-xI-GVk" id="UDY-py-XTB"/>
             </connections>
             <point key="canvasLocation" x="258" y="-868"/>
         </view>

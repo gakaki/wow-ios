@@ -73,7 +73,9 @@ class WOWEditWorksController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.api_UpdateDescription(workId: modelData.id ?? 0, description: des), successClosure: {[weak self] (result, code) in
             if let strongSelf = self {
                 strongSelf.dismiss(animated: true, completion: {
-                    print("fanhui")
+                    if let action = strongSelf.action {
+                        action()
+                    }
                 })
             }
         }) { (errorMsg) in

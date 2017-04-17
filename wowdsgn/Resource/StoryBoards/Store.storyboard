@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="3Sm-BO-NMd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="3Sm-BO-NMd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -90,31 +90,77 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="P4Z-wc-jNW">
                                         <rect key="frame" x="0.0" y="0.0" width="175" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljf-NY-EhZ">
-                                                <rect key="frame" x="0.0" y="10" width="58.5" height="30"/>
-                                                <state key="normal" image="shopCustomer"/>
-                                                <connections>
-                                                    <action selector="customerClick:" destination="7vb-eE-k6p" eventType="touchUpInside" id="Wij-gB-N11"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" tag="4001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfS-7l-afX" userLabel="like">
-                                                <rect key="frame" x="58.5" y="10" width="58" height="30"/>
-                                                <state key="normal" image="like-black">
-                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected" image="like_select"/>
-                                                <connections>
-                                                    <action selector="likeClick:" destination="7vb-eE-k6p" eventType="touchDown" id="nJh-gj-4hn"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEn-2Z-Eif" customClass="MIBadgeButton" customModule="wow_vendor_ui">
-                                                <rect key="frame" x="116.5" y="10" width="58.5" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <state key="normal" image="buy"/>
-                                                <connections>
-                                                    <action selector="carEntranceButton:" destination="7vb-eE-k6p" eventType="touchUpInside" id="D7y-Nb-nGh"/>
-                                                </connections>
-                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGb-3O-9pF">
+                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljf-NY-EhZ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="58.5" height="50"/>
+                                                        <state key="normal" image="shopCustomer"/>
+                                                        <connections>
+                                                            <action selector="customerClick:" destination="7vb-eE-k6p" eventType="touchUpInside" id="Wij-gB-N11"/>
+                                                        </connections>
+                                                    </button>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yk3-dJ-8Jw">
+                                                        <rect key="frame" x="33" y="13" width="8" height="8"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="8" id="B5K-s1-VXH"/>
+                                                            <constraint firstAttribute="height" constant="8" id="YTl-VU-5Nz"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="ljf-NY-EhZ" firstAttribute="top" secondItem="AGb-3O-9pF" secondAttribute="top" id="1M0-5L-AmS"/>
+                                                    <constraint firstItem="Yk3-dJ-8Jw" firstAttribute="centerY" secondItem="ljf-NY-EhZ" secondAttribute="centerY" constant="-8" id="M8Z-rF-sHi"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ljf-NY-EhZ" secondAttribute="trailing" id="O5N-TS-tAk"/>
+                                                    <constraint firstItem="Yk3-dJ-8Jw" firstAttribute="centerX" secondItem="ljf-NY-EhZ" secondAttribute="centerX" constant="8" id="OZp-rf-sPK"/>
+                                                    <constraint firstItem="ljf-NY-EhZ" firstAttribute="leading" secondItem="AGb-3O-9pF" secondAttribute="leading" id="WpC-cx-KFk"/>
+                                                    <constraint firstAttribute="bottom" secondItem="ljf-NY-EhZ" secondAttribute="bottom" id="ZDF-NP-zvd"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5h-eq-iXn">
+                                                <rect key="frame" x="58.5" y="0.0" width="58" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" tag="4001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfS-7l-afX" userLabel="like">
+                                                        <rect key="frame" x="0.0" y="0.0" width="58" height="50"/>
+                                                        <state key="normal" image="like-black">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <state key="selected" image="like_select"/>
+                                                        <connections>
+                                                            <action selector="likeClick:" destination="7vb-eE-k6p" eventType="touchDown" id="nJh-gj-4hn"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="VfS-7l-afX" firstAttribute="top" secondItem="Z5h-eq-iXn" secondAttribute="top" id="8M0-hw-MW3"/>
+                                                    <constraint firstAttribute="bottom" secondItem="VfS-7l-afX" secondAttribute="bottom" id="F7o-EM-l3g"/>
+                                                    <constraint firstItem="VfS-7l-afX" firstAttribute="leading" secondItem="Z5h-eq-iXn" secondAttribute="leading" id="Fod-HM-T2C"/>
+                                                    <constraint firstAttribute="trailing" secondItem="VfS-7l-afX" secondAttribute="trailing" id="xSF-Lu-eJ4"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHg-Br-dfr">
+                                                <rect key="frame" x="116.5" y="0.0" width="58.5" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEn-2Z-Eif" customClass="MIBadgeButton" customModule="wow_vendor_ui">
+                                                        <rect key="frame" x="-0.5" y="0.0" width="59" height="50"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <state key="normal" image="buy"/>
+                                                        <connections>
+                                                            <action selector="carEntranceButton:" destination="7vb-eE-k6p" eventType="touchUpInside" id="D7y-Nb-nGh"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="QEn-2Z-Eif" firstAttribute="leading" secondItem="pHg-Br-dfr" secondAttribute="leading" id="TIY-MG-xU7"/>
+                                                    <constraint firstAttribute="trailing" secondItem="QEn-2Z-Eif" secondAttribute="trailing" id="W7P-SE-5VL"/>
+                                                    <constraint firstItem="QEn-2Z-Eif" firstAttribute="top" secondItem="pHg-Br-dfr" secondAttribute="top" id="Zan-WT-2Op"/>
+                                                    <constraint firstAttribute="bottom" secondItem="QEn-2Z-Eif" secondAttribute="bottom" id="frZ-cR-gfT"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </stackView>
@@ -270,8 +316,10 @@
                         <outlet property="addCartButton" destination="wo2-sn-OfK" id="OlZ-Sd-JdC"/>
                         <outlet property="bottomSpace" destination="wE5-VR-zKV" id="LMY-ly-wrf"/>
                         <outlet property="bottomView" destination="Sdm-uj-kwH" id="VwI-Rh-3J4"/>
+                        <outlet property="bottom_LikeView" destination="Z5h-eq-iXn" id="Gmr-SB-TfB"/>
                         <outlet property="carEntranceButton" destination="QEn-2Z-Eif" id="ANy-As-eTE"/>
                         <outlet property="likeButton" destination="VfS-7l-afX" id="FDp-Xs-Fr1"/>
+                        <outlet property="messageView" destination="Yk3-dJ-8Jw" id="3d2-uN-Fxj"/>
                         <outlet property="nowBuyButton" destination="Ui9-Q6-WqD" id="WPY-BS-v9U"/>
                         <outlet property="productEffectView" destination="iEe-la-3xG" id="kbw-jO-IzT"/>
                         <outlet property="shareButton" destination="nHb-tb-mKs" id="BFg-zo-9TJ"/>

@@ -61,6 +61,8 @@ class WOWMessageController: WOWBaseViewController {
         tableView.separatorColor = SeprateColor
         tableView.estimatedRowHeight = 130
         tableView.register(UINib.nibName(cellID), forCellReuseIdentifier: cellID)
+        tableView.register(UINib.nibName("WOWCustormerMessageCell"), forCellReuseIdentifier: "WOWCustormerMessageCell")
+        
 
     }
     override func request() {
@@ -138,37 +140,56 @@ class WOWMessageController: WOWBaseViewController {
 extension WOWMessageController:UITableViewDelegate,UITableViewDataSource{
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 1 { return 1 }
         return messageArr?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWMessageCenterCell
-        if let array = messageArr {
-            cell.showData(model: array[indexPath.row])
-            cell.delegate = self
-            //如果是最后一行的话隐藏横线
-            if array.count > 0 {
-                if indexPath.row == array.count - 1 {
-                    cell.lineView.isHidden = true
-                }else {
-                    cell.lineView.isHidden = false
+        let section = indexPath.section
+        switch section {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWMessageCenterCell
+            if let array = messageArr {
+                cell.showData(model: array[indexPath.row])
+                cell.delegate = self
+                //如果是最后一行的话隐藏横线
+                if array.count > 0 {
+                    if indexPath.row == array.count - 1 {
+                        cell.lineView.isHidden = true
+                    }else {
+                        cell.lineView.isHidden = false
+                    }
                 }
             }
+            return cell
+
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWCustormerMessageCell", for: indexPath) as! WOWCustormerMessageCell
+            return cell
         }
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //跳转消息中心
+        if indexPath.section == 1 {
+            let source = QYSource()
+            source.title =  "消息中心"
+            source.urlString = "https://www.baidu.com"
+            source.customInfo = "hahhahahahahah"
+            
+            VCRedirect.goCustomerVC(source, commodityInfo: nil)
+
+            return
+        }
             let vc = UIStoryboard.initialViewController("Message", identifier:String(describing: WOWMessageInfoController.self)) as! WOWMessageInfoController
             vc.hideNavigationBar = false
             vc.msgType = messageArr?[indexPath.row].msgType
             pushVC(vc)
+        
     }
     
     //MARK: - EmptyData
@@ -181,7 +202,14 @@ extension WOWMessageController:UITableViewDelegate,UITableViewDataSource{
         let attri = NSAttributedString(string: text, attributes:[NSForegroundColorAttributeName:MGRgb(74, g: 74, b: 74),NSFontAttributeName:UIFont.systemScaleFontSize(14)])
         return attri
     }
-
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 10
+        }else{
+            return 0.01
+        }
+        
+    }
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }

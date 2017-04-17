@@ -13,7 +13,7 @@ protocol UpdateBuyCarListDelegate:class {
     func updateBuyCarList()
 }
 
-class WOWProductDetailController: WOWBaseViewController {
+class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDelegate {
     
     var selectedView: UIView = UIView()        //转场cell
 
@@ -50,6 +50,8 @@ class WOWProductDetailController: WOWBaseViewController {
     @IBOutlet weak var nowBuyButton: UIButton!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var topSpace: NSLayoutConstraint!
+    @IBOutlet weak var messageView: UIView!
+    @IBOutlet weak var bottom_LikeView: UIView!
     var isCustormer:Bool = false  // 是否点击客服
     //是否展开参数
     var isOpenParam: Bool = true
@@ -58,6 +60,7 @@ class WOWProductDetailController: WOWBaseViewController {
     //轮播图数组
     var imgUrlArr = [String]()
 
+  
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -65,7 +68,7 @@ class WOWProductDetailController: WOWBaseViewController {
     deinit {
         removeObservers()
     }
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
             if isCustormer {
                 self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -73,23 +76,33 @@ class WOWProductDetailController: WOWBaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         self.navigationController?.setNavigationBarHidden(true, animated: false)
+//         self.navigationController?.setNavigationBarHidden(true, animated: false)
         MobClick.e(UMengEvent.Product_Detail)
 
     }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
         addObservers()
-        
+        messageView.addSubview(WOWCustormMessageView.sharedInstance)
     }
-    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+//        if viewController.isKind(of: self.classForCoder) {
+//            self.navigationController?.setNavigationBarHidden(true, animated: false)
+//        }else {
+//             self.navigationController?.setNavigationBarHidden(false, animated: true)
+//        }
+//        if ([viewController isKindOfClass:[self class]]) {
+//            [navigationController setNavigationBarHidden:YES animated:YES];
+//        }else {
+//            [navigationController setNavigationBarHidden:NO animated:YES];
+//        }
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-    
     //MARK:Lazy
     var cycleView:CyclePictureView! = {
         let v = CyclePictureView(frame:MGFrame(0, y: 0, width:MGScreenWidth, height:MGScreenWidth), imageURLArray: nil)
@@ -322,7 +335,6 @@ class WOWProductDetailController: WOWBaseViewController {
             return
         }
         let vc = UIStoryboard.initialViewController("BuyCar", identifier:String(describing: WOWBuyCarController.self)) as! WOWBuyCarController
-        vc.hideNavigationBar = false
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -370,26 +382,25 @@ class WOWProductDetailController: WOWBaseViewController {
     }
     
     @IBAction func customerClick(_ sender: Any) {
-//        QYSDK.shared().conversationManager().setDelegate(self)
+        let shareUrl = WOWShareUrl + "/item/\(productId ?? 0)"
+        let commodityInfo = QYCommodityInfo()
+        commodityInfo.title = productModel?.productTitle
+        commodityInfo.desc = productModel?.detailDescription
+        commodityInfo.pictureUrlString = imgUrlArr[0]
+        commodityInfo.urlString = shareUrl
+        commodityInfo.note = productModel?.sellPrice?.toString
+        commodityInfo.show = true //访客端是否要在消息中显示商品信息，YES代表显示,NO代表不显示
         
-        
-//        QYSDK.shared().setUserInfo(userInfo)
         let source = QYSource()
-        source.title =  "ccc"
-        source.urlString = "https://www.baidu.com"
-        source.customInfo = "hahhahahahahah"
-        let sessionViewController = QYSDK.shared().sessionViewController()
-        sessionViewController?.sessionTitle = "qqqq"
-        sessionViewController?.source = source
-        sessionViewController?.hidesBottomBarWhenPushed = true
-        QYCustomActionConfig.sharedInstance().linkClickBlock = {(str) in
-            print(str ?? "")
-        }
-
+        source.title =  "商品详情"
+        source.urlString = shareUrl
+        source.customInfo = "hahhahahahahah" // 自定义的信息
+        
+        VCRedirect.goCustomerVC(source, commodityInfo: commodityInfo)
+        
         self.isCustormer = true
      
 
-        self.navigationController?.pushViewController(sessionViewController!, animated: true)
 
         
     }
@@ -405,8 +416,6 @@ class WOWProductDetailController: WOWBaseViewController {
             self.loadBigImage([productImg], 0)
         }
     }
-    
-    
     
     @IBAction func backClick(_ sender: UIButton) {
         _ = navigationController?.popViewController(animated: true)
@@ -438,9 +447,7 @@ class WOWProductDetailController: WOWBaseViewController {
                 strongSelf.configParameter()
                 strongSelf.requestCommentList()
                 strongSelf.buyCarCount()
-                
-                
-                
+
                 let dict = [
                     "sellprice"             :strongSelf.productModel?.sellPrice ?? "",
                     "productId"             :strongSelf.productModel?.productId ?? "",
@@ -497,7 +504,7 @@ class WOWProductDetailController: WOWBaseViewController {
         
 //        WOWHud.showLoadingSV()
 
-        WOWClickLikeAction.requestFavoriteProduct(productId: productId ?? 0,view:bottomView,btn:likeButton, isFavorite: { [weak self](isFavorite) in
+        WOWClickLikeAction.requestFavoriteProduct(productId: productId ?? 0,view:bottom_LikeView,btn:likeButton, isFavorite: { [weak self](isFavorite) in
             if let strongSelf = self{
                 
                 strongSelf.likeButton.isSelected = isFavorite ?? false

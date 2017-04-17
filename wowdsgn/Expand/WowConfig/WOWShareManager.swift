@@ -7,9 +7,32 @@
 //
 
 import Foundation
-//import MonkeyKing
-import WowShare
 
+import WowShare
+struct WOWCustomerNeedHelp {
+    
+    static let vc = UIApplication.currentViewController()
+    static var shareBackView = WOWShareBackView(frame:CGRect(x: 0, y: 0, w: MGScreenWidth, h: MGScreenHeight))
+    static func show(_ orderNumber:String){
+        
+        shareBackView.showNeedHelp()
+
+        shareBackView.shareActionBack = {(shareType:WOWShareType)in
+            switch shareType {
+            case .needPhone:
+                WOWTool.callPhone()
+                return
+            case .needCustomer:
+                
+                VCRedirect.goCustomerVC(nil, commodityInfo: nil)
+                return
+            default:break
+            }
+           
+        }
+    }
+    
+}
 struct WOWShareManager {
     
     static let vc = UIApplication.currentViewController()
@@ -30,8 +53,7 @@ struct WOWShareManager {
                     failClosure: { e in
                         share_cancel_deal(e)
                 })
-//                WowShare.share_WechatFriendsImg()
-//                WowShare.share_WechatFriendsImg()
+
                 
                return
             case .wechat:
@@ -45,8 +67,9 @@ struct WOWShareManager {
                
 
                 return
+                default:break
             }
-        
+          
             
 
         }
@@ -104,7 +127,9 @@ struct WOWShareManager {
                     })
                     
                     return
+                default:break
                 }
+               
 
             }) { (error) in
                 print("shibai")
@@ -142,7 +167,9 @@ struct WOWShareManager {
                 })
 
                 return
+            default:break
             }
+            
             
         }
     }

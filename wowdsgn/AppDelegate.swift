@@ -20,7 +20,7 @@ import WowShare
 //import JSPatchHelper
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDelegate {
     
     var window: UIWindow?
     static var rootVC : UIViewController?
@@ -47,12 +47,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appConfig()
         
         QYSDK.shared().registerAppId("00dfd57e3ad2136ef9169314142c8fc1", appName: "尖叫设计Demo")
-        
-        
+        QYSDK.shared().conversationManager().setDelegate(self)
+        let massageCount = QYSDK.shared().conversationManager().allUnreadCount()
+        messageCountView(massageCount)
         ADLaunchView()
         return true
     }
- 
+    
+    func messageCountView(_ count: Int)  {
+        if count == 0 {
+            WOWCustormMessageView.dissMissView()
+        }else {
+            WOWCustormMessageView.show()
+        }
+    }
+
+    // 检测是否有客服新消息
+    func onUnreadCountChanged(_ count: Int) {
+        messageCountView(count)
+    }
+    
     func appConfig(){
     
         let cache_size      = UInt(100 * 1024 * 1024)

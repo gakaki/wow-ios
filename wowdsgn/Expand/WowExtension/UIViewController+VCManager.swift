@@ -474,6 +474,27 @@ public class VCRedirect {
         
     }
 
+    //跳转在线客服页面 source ：用户信息 commodityInfo: 自定义商品信息
+    public class func goCustomerVC(_ source:QYSource?,commodityInfo:QYCommodityInfo?) {
+ 
+        let sessionViewController = QYSDK.shared().sessionViewController()!
+        sessionViewController.sessionTitle = "在线客服"
+        if let source = source {
+            sessionViewController.source = source
+        }
+        if let commodityInfo = commodityInfo {
+            sessionViewController.commodityInfo = commodityInfo
+        }
+
+        sessionViewController.hidesBottomBarWhenPushed = true
+        QYCustomActionConfig.sharedInstance().linkClickBlock = {(str) in
+            print(str ?? "")
+        }
+
+        topNaVC?.pushViewController(sessionViewController, animated: true)
+        
+    }
+
     //    //点击跳转
     class func goToBannerTypeController(_ model: WOWCarouselBanners) {
      

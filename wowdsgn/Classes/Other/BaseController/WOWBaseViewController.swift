@@ -203,13 +203,6 @@ public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZN
         mj_footer.endRefreshing()
         self.isRreshing = false
     }
-    
-
-//MARK:Private Actions
-//    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        UIApplication.shared.keyWindow?.endEditing(true)
-//    }
- 
 
 }
 

@@ -178,10 +178,8 @@ extension WOWMessageController:UITableViewDelegate,UITableViewDataSource{
         if indexPath.section == 1 {
             let source = QYSource()
             source.title =  "消息中心"
-            source.urlString = "https://www.baidu.com"
-            source.customInfo = "hahhahahahahah"
             
-            VCRedirect.goCustomerVC(source, commodityInfo: nil)
+            VCRedirect.goCustomerVC(source, commodityInfo: nil, orderNumber:nil)
 
             return
         }

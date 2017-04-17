@@ -64,6 +64,7 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        messageView.addSubview(WOWCustormMessageView.sharedInstance)
     }
     deinit {
         removeObservers()
@@ -76,29 +77,17 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        MobClick.e(UMengEvent.Product_Detail)
 
+        MobClick.e(UMengEvent.Product_Detail)
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
         addObservers()
-        messageView.addSubview(WOWCustormMessageView.sharedInstance)
+      
     }
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-//        if viewController.isKind(of: self.classForCoder) {
-//            self.navigationController?.setNavigationBarHidden(true, animated: false)
-//        }else {
-//             self.navigationController?.setNavigationBarHidden(false, animated: true)
-//        }
-//        if ([viewController isKindOfClass:[self class]]) {
-//            [navigationController setNavigationBarHidden:YES animated:YES];
-//        }else {
-//            [navigationController setNavigationBarHidden:NO animated:YES];
-//        }
 
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -382,21 +371,23 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
     }
     
     @IBAction func customerClick(_ sender: Any) {
-        let shareUrl = WOWShareUrl + "/item/\(productId ?? 0)"
+        let shareUrl =  "https://" + WOWShareUrl + "/item/\(productId ?? 0)"
         let commodityInfo = QYCommodityInfo()
         commodityInfo.title = productModel?.productTitle
         commodityInfo.desc = productModel?.detailDescription
-        commodityInfo.pictureUrlString = imgUrlArr[0]
+        if imgUrlArr.count > 0 {
+          commodityInfo.pictureUrlString = imgUrlArr[0]
+        }
+      
         commodityInfo.urlString = shareUrl
         commodityInfo.note = productModel?.sellPrice?.toString
         commodityInfo.show = true //访客端是否要在消息中显示商品信息，YES代表显示,NO代表不显示
         
         let source = QYSource()
-        source.title =  "商品详情"
-        source.urlString = shareUrl
-        source.customInfo = "hahhahahahahah" // 自定义的信息
+        source.title        =  "商品详情"
+        source.urlString    = shareUrl
         
-        VCRedirect.goCustomerVC(source, commodityInfo: commodityInfo)
+        VCRedirect.goCustomerVC(source, commodityInfo: commodityInfo,orderNumber:nil)
         
         self.isCustormer = true
      

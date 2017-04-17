@@ -274,6 +274,7 @@ public class VCRedirect {
         
         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
+        vc.isCustormer = true
         vc.productId = pid
         vc.isNeedCustomPop = customPop
         topNaVC?.pushViewController(vc, animated: true)
@@ -474,12 +475,25 @@ public class VCRedirect {
         
     }
 
-    //跳转在线客服页面 source ：用户信息 commodityInfo: 自定义商品信息
-    public class func goCustomerVC(_ source:QYSource?,commodityInfo:QYCommodityInfo?) {
+    //跳转在线客服页面 source ：用户信息 commodityInfo: 自定义商品信息 orderNumber : 订单号    ·
+    public class func goCustomerVC(_ source:QYSource?,commodityInfo:QYCommodityInfo?, orderNumber:String?) {
  
         let sessionViewController = QYSDK.shared().sessionViewController()!
         sessionViewController.sessionTitle = "在线客服"
         if let source = source {
+            let userId      = WOWCustomerInfoModel.init(key: "userId", label: "用户ID", value: WOWUserManager.userID)
+            let userName    = WOWCustomerInfoModel.init(key: "userName", label: "用户名称", value: WOWUserManager.userName)
+            let userPhone   = WOWCustomerInfoModel.init(key: "userPhone", label: "用户手机号码", value: WOWUserManager.userMobile)
+            var userInfoArr =  [userId,userName,userPhone]
+            if let orderNumber = orderNumber {
+                let orderNumber = WOWCustomerInfoModel.init(key: "userId", label: "订单号", value: orderNumber)
+                userInfoArr.append(orderNumber)
+            }
+            
+            let userInfo = QYUserInfo()
+            userInfo.userId = WOWUserManager.userID
+            userInfo.data = userInfoArr.toJSONString() ?? ""
+            QYSDK.shared().setUserInfo(userInfo)
             sessionViewController.source = source
         }
         if let commodityInfo = commodityInfo {
@@ -487,11 +501,22 @@ public class VCRedirect {
         }
 
         sessionViewController.hidesBottomBarWhenPushed = true
-        QYCustomActionConfig.sharedInstance().linkClickBlock = {(str) in
-            print(str ?? "")
+        QYCustomActionConfig.sharedInstance().linkClickBlock = {(str) in //处理聊天 链接点击 自定义事件
+            
+          _ = JLRouterRule.handle_open_url(url: URL.init(string: str!)! )
+            
         }
+        let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action: #selector(backAction))
+
+        sessionViewController.navigationItem.leftBarButtonItem = item
 
         topNaVC?.pushViewController(sessionViewController, animated: true)
+        
+    }
+    
+    @objc class func backAction() {
+        
+        _ = FNUtil.currentTopViewController().navigationController?.popViewController(animated: true)
         
     }
 

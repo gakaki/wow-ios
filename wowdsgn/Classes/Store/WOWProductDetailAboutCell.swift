@@ -29,8 +29,11 @@ class WOWProductDetailAboutCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var dataArr:[WOWProductModel]?
-    
+    var dataArr:[WOWProductModel]?{
+        didSet{
+            collectionView.reloadData()
+        }
+    }
     
     lazy var xzm_footer:XZMRefreshNormalFooter = {
         let f = XZMRefreshNormalFooter()

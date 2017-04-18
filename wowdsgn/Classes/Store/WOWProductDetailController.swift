@@ -66,7 +66,7 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
         super.viewDidAppear(animated)
         messageView.addSubview(WOWCustormMessageView.sharedInstance)
     }
-    deinit {
+    deinit { 
         removeObservers()
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -371,6 +371,7 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
     }
     
     @IBAction func customerClick(_ sender: Any) {
+     
         let shareUrl =  "https://" + WOWShareUrl + "/item/\(productId ?? 0)"
         let commodityInfo = QYCommodityInfo()
         commodityInfo.title = productModel?.productTitle

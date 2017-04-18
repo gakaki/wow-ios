@@ -477,7 +477,10 @@ public class VCRedirect {
 
     //跳转在线客服页面 source ：用户信息 commodityInfo: 自定义商品信息 orderNumber : 订单号    ·
     public class func goCustomerVC(_ source:QYSource?,commodityInfo:QYCommodityInfo?, orderNumber:String?) {
- 
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return
+        }
         let sessionViewController = QYSDK.shared().sessionViewController()!
         sessionViewController.sessionTitle = "在线客服"
         if let source = source {
@@ -490,15 +493,19 @@ public class VCRedirect {
                 userInfoArr.append(orderNumber)
             }
             
+            
             let userInfo = QYUserInfo()
             userInfo.userId = WOWUserManager.userID
             userInfo.data = userInfoArr.toJSONString() ?? ""
+            
             QYSDK.shared().setUserInfo(userInfo)
             sessionViewController.source = source
         }
         if let commodityInfo = commodityInfo {
             sessionViewController.commodityInfo = commodityInfo
         }
+
+        QYSDK.shared().customUIConfig().customerHeadImageUrl = WOWUserManager.userHeadImageUrl
 
         sessionViewController.hidesBottomBarWhenPushed = true
         QYCustomActionConfig.sharedInstance().linkClickBlock = {(str) in //处理聊天 链接点击 自定义事件

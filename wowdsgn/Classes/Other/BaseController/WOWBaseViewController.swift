@@ -232,7 +232,7 @@ extension WOWBaseViewController {
             rightNagationItem.buyCarButton.badgeString = "99+"
         }
         
-        if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 {
+        if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 || QYSDK.shared().conversationManager().allUnreadCount() > 0 {
             rightNagationItem.newView.isHidden = false
         }else {
             rightNagationItem.newView.isHidden = true
@@ -263,7 +263,7 @@ extension WOWBaseViewController {
             rightNagationItem.newView.isHidden = true
             return
         }
-        if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 {
+        if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 || QYSDK.shared().conversationManager().allUnreadCount() > 0 {
             rightNagationItem.newView.isHidden = false
         }else {
             rightNagationItem.newView.isHidden = true
@@ -284,7 +284,7 @@ extension WOWBaseTableViewController {
         }else {
             rightNagationItem.buyCarButton.badgeString = "99+"
         }
-        if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 {
+        if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 || QYSDK.shared().conversationManager().allUnreadCount() > 0 {
             rightNagationItem.newView.isHidden = false
         }else {
             rightNagationItem.newView.isHidden = true
@@ -315,7 +315,7 @@ extension WOWBaseTableViewController {
             rightNagationItem.newView.isHidden = true
             return
         }
-        if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 {
+        if WOWUserManager.systemMsgCount + WOWUserManager.userMsgCount > 0 || QYSDK.shared().conversationManager().allUnreadCount() > 0 {
             rightNagationItem.newView.isHidden = false
         }else {
             rightNagationItem.newView.isHidden = true

@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDeleg
        
         appConfig()
         
-        QYSDK.shared().registerAppId("00dfd57e3ad2136ef9169314142c8fc1", appName: "尖叫设计Demo")
+        QYSDK.shared().registerAppId("2d910b7e1775b42f797b28c701618660", appName: "尖叫设计")
         QYSDK.shared().conversationManager().setDelegate(self)
         let massageCount = QYSDK.shared().conversationManager().allUnreadCount()
         messageCountView(massageCount)
@@ -64,6 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDeleg
 
     // 检测是否有客服新消息
     func onUnreadCountChanged(_ count: Int) {
+        NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
         messageCountView(count)
     }
     
@@ -103,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDeleg
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
         UMessage.registerDeviceToken(deviceToken)
-
+        QYSDK.shared().updateApnsToken(deviceToken)
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         
         // Print it to console

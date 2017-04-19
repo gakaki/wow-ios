@@ -506,15 +506,19 @@ public class VCRedirect {
         }
 
         QYSDK.shared().customUIConfig().customerHeadImageUrl = WOWUserManager.userHeadImageUrl
-
+        QYCustomUIConfig.sharedInstance().autoShowKeyboard  =  false
+        QYSDK.shared().customUIConfig().serviceHeadImage = UIImage.init(named: "me_logo")
         sessionViewController.hidesBottomBarWhenPushed = true
         QYCustomActionConfig.sharedInstance().linkClickBlock = {(str) in //处理聊天 链接点击 自定义事件
             
           _ = JLRouterRule.handle_open_url(url: URL.init(string: str!)! )
             
         }
+        sessionViewController.navigationController?.isNavigationBarHidden = false
+        sessionViewController.automaticallyAdjustsScrollViewInsets = true
         let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action: #selector(backAction))
-
+        
+        sessionViewController.navigationController?.setNavigationBarHidden(false, animated: true)
         sessionViewController.navigationItem.leftBarButtonItem = item
 
         topNaVC?.pushViewController(sessionViewController, animated: true)

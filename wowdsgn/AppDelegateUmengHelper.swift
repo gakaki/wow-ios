@@ -129,6 +129,11 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
         }
     }
     
+    func backAction() {
+        
+        _ = VCRedirect.topNaVC?.popViewController(animated: true)
+        
+    }
     func pushController(userInfo: [AnyHashable : Any]) {
         DLog(userInfo)
         WOWUserManager.systemMsgCount = Calculate.reduce(input: WOWUserManager.systemMsgCount)
@@ -136,6 +141,23 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
         if let dic = dic {
             var type: String?
             var id: String?
+            if dic["nim"] as? Int == 1 {
+////                VCRedirect.topNaVC?.popToRootViewController(animated: false)
+////                VCRedirect.topNaVC?.isNavigationBarHidden = false
+//                
+//                let sessionViewController = QYSDK.shared().sessionViewController()!
+//                sessionViewController.sessionTitle = "在线客服"
+           
+//                let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action: #selector(backAction))
+//                
+//                sessionViewController.navigationItem.leftBarButtonItem = item
+//                FNUtil.currentTopViewController().navigationController?.pushViewController(sessionViewController, animated: true)
+//                
+//                UIApplication.currentViewController()?.pushVC(sessionViewController)
+                
+                VCRedirect.goCustomerVC(nil, commodityInfo: nil, orderNumber:nil)
+                return
+            }
             type = dic["type"] as? String
             id = dic["id"] as? String
             WOWMessageToVc.goVc(type: type, id: id)

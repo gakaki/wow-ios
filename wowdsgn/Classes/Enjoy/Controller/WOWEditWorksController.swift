@@ -35,6 +35,11 @@ class WOWEditWorksController: WOWBaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationShadowImageView?.isHidden = false
+
+    }
     
     override func setUI() {
         super.setUI()

@@ -8,11 +8,13 @@
 //
 
 import UIKit
+import SnapKit
 
+@objc
 protocol WOWChideControllerDelegate:class {
     
     func updateTabsRequsetData()
-
+    
 }
 
 class WOWController: WOWBaseModuleVC {
@@ -25,8 +27,6 @@ class WOWController: WOWBaseModuleVC {
     
     var bottomListArray = [WOWProductModel]() //底部列表数组
     
-    var hidingNavBarManager: HidingNavigationBarManager?
-
     var record_402_index = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
     
     var isOverBottomData :Bool? //底部列表数据是否拿到全部
@@ -35,10 +35,8 @@ class WOWController: WOWBaseModuleVC {
     var isRequest :Bool = false// 判断此页面是不是第一次网络请求
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setUI()
         addObserver()
-
         request()
     }
 
@@ -46,10 +44,8 @@ class WOWController: WOWBaseModuleVC {
         super.viewWillAppear(animated)
         let parmas = ["Secondary_Homepagename": self.title ?? "推荐", "Secondary_Homepageid": tabId ?? 1] as [String : Any]
         MobClick.e2(.Secondary_Homepage_Pv, parmas)
-        
-        hidingNavBarManager?.viewWillAppear(animated)
-        
-//        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationShadowImageView?.isHidden = true
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         
     }
     
@@ -61,20 +57,14 @@ class WOWController: WOWBaseModuleVC {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-              self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-                hidingNavBarManager?.viewWillDisappear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-                hidingNavBarManager?.viewDidLayoutSubviews()
     }
-    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
-        //              hidingNavBarManager?.shouldScrollToTop()
-        hidingNavBarManager?.shouldScrollToTop()
-        return true
-    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         YYWebImageManager.shared().cache?.memoryCache.removeAllObjects()
@@ -114,7 +104,6 @@ class WOWController: WOWBaseModuleVC {
         super.setUI()
         configTableView()
         configBarItem()
-//
 
     }
     func configTableView() {
@@ -133,8 +122,6 @@ class WOWController: WOWBaseModuleVC {
         super.request()
         
         self.requestTop()
-       
-//        self.requestBottom()
         
     }
     
@@ -161,13 +148,8 @@ class WOWController: WOWBaseModuleVC {
                 strongSelf.dataDelegate?.dataSourceArray    =    strongSelf.dataWithHomeModel(result: result)
                 
                 strongSelf.dataArr =  (strongSelf.dataDelegate?.dataSourceArray)!
-         
-
-//                if strongSelf.bottomListArray.count > 0 {// 确保reloadData 数据都存在
-
-                    strongSelf.tableView.reloadData()
+                strongSelf.tableView.reloadData()
                
-//                }
 
                
             }
@@ -239,7 +221,6 @@ class WOWController: WOWBaseModuleVC {
         }
     }
 }
-
 
 
 typealias SuccessLikeClosure            = () ->()

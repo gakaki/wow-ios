@@ -223,20 +223,6 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
                 strongSelf.shareDesc = json["h5Desc"].string ?? ""
                 let shareImg = json["h5ImgUrl"].string ?? ""
                 strongSelf.shareProductImage = shareImg
-                //加载分享图片
-//                strongSelf.placeImageView.yy_setImage(
-//                    with: URL(string:shareImg ),
-//                    placeholder: nil,
-//                    options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
-//                    completion: { [weak self] (img, url, from_type, image_stage,err ) in
-//                        if let strongSelf = self{
-//                            strongSelf.shareProductImage = img
-//                            
-//                            
-//                        }
-//                        
-//                        
-//                })
                 
 
             }

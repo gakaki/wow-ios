@@ -38,7 +38,6 @@ class WOWOtherCenterController: WOWBaseViewController {
     }()
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.navigationShadowImageView?.isHidden = false
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

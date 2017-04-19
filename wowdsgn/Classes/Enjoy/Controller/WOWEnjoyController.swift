@@ -79,7 +79,6 @@ class WOWEnjoyController: WOWBaseViewController {
             }
         }
         
-        
         vc_newEnjoy    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWNewEnjoyController.self)) as? WOWNewEnjoyController
         vc_newEnjoy?.delegate = self
         vc_masterpiece    = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWMasterpieceController.self)) as? WOWMasterpieceController

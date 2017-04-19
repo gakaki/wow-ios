@@ -11,10 +11,10 @@ import SnapKit
 import VTMagic
 
 class WOWHomeControllers: WOWBaseViewController {
-//    var pageMenu:CAPSPageMenu?
     var controllerArray : [UIViewController] = []
     var selectCurrentIndex : Int? = 0
     var v : VCVTMagic!
+    var hidingNavBarManager: HidingNavigationBarManager?
 
     var parameters: [CAPSPageMenuOption]? = nil
     var tabs : [WOWHomeTabs] = []{// 如果设置值 则说明 子首页tab接口请求成功 titleArray  controllerArray 清零 给新的值
@@ -74,7 +74,7 @@ class WOWHomeControllers: WOWBaseViewController {
         super.viewDidLoad()
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "titleView"))
         self.view.backgroundColor = UIColor(hexString: "efeff4")
-
+        
         addObserver()
         // Do any additional setup after loading the view.
     }
@@ -123,11 +123,11 @@ class WOWHomeControllers: WOWBaseViewController {
         
         v.magicView.snp.makeConstraints {[weak self] (make) -> Void in
             if let strongSelf = self {
-                make.size.equalTo(strongSelf.view)
-                
+                make.width.equalTo(strongSelf.view)
+                make.top.equalTo(strongSelf.topLayoutGuide as! ConstraintRelatableTarget)
+                make.bottom.equalTo(strongSelf.view.snp.bottom).offset(0)
             }
         }
-
         
         v.magicView.reloadData()
 
@@ -150,13 +150,12 @@ class WOWHomeControllers: WOWBaseViewController {
                             isEqual = false
                         }else {
                             for model  in array.enumerated() {
-//                                if strongSelf.tabs.count > model.offset {
                                     let oldModel = strongSelf.tabs[model.offset]
                                     if model.element.id == oldModel.id && model.element.name == oldModel.name {
-                                        print("equal")
+                                        DLog("equal")
                                     }else{
                                         isEqual = false
-                                        print("new")
+                                        DLog("new")
                                     }
 
                             }
@@ -174,7 +173,6 @@ class WOWHomeControllers: WOWBaseViewController {
             }
         }) {[weak self] (errorMsg) in
             if self != nil {
-//                strongSelf.configTabs()
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
@@ -209,7 +207,6 @@ class WOWHomeControllers: WOWBaseViewController {
         self.navigationShadowImageView?.isHidden = true
      
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-//        hidingNavBarManager?.viewWillAppear(animated)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -219,11 +216,9 @@ class WOWHomeControllers: WOWBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-//          hidingNavBarManager?.viewWillDisappear(animated)
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        hidingNavBarManager?.viewDidLayoutSubviews()
     }
 
 
@@ -238,10 +233,10 @@ class WOWHomeControllers: WOWBaseViewController {
 
 }
 
-extension WOWHomeControllers:WOWChideControllerDelegate{
+extension WOWHomeControllers:WOWChideControllerDelegate, UIGestureRecognizerDelegate{
 
     func updateTabsRequsetData(){
-        print("request ...")
+        DLog("request ...")
          requestTabs()
     }
 }

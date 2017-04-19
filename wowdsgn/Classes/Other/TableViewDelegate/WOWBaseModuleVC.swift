@@ -124,12 +124,6 @@ class WOWBaseModuleVC: WOWBaseViewController {
                     if let s  = t.moduleContentTmp?["categories"] as? [AnyObject] {
                         t.moduleContentArr    =  Mapper<WowModulePageItemVO>().mapArray(JSONObject:s) ?? [WowModulePageItemVO]()
                     }
-//                case 401:
-//                    if let s  = t.moduleContentTmp?["products"] as? [AnyObject] {
-//                        t.moduleContentArr    =  Mapper<WOWProductModel>().mapArray(JSONObject:s) ?? [WOWProductModel]()
-//                        t.name = (t.moduleContentTmp?["name"] as? String) ?? "本周上新"
-//                        
-//                    }
                     
                 case 201:
                     if let s  = t.moduleContentTmp  {

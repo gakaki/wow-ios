@@ -27,13 +27,13 @@ class WOWCustormMessageView: UIView {
     
     static func dissMissView()  {
         
-        UIView.animate(withDuration: 0.8, animations: {
-            
+//        UIView.animate(withDuration: 0.8, animations: {
+        
             sharedInstance.alpha = 0.0
             
-        }, completion: { (true) in
-            
-        })
+//        }, completion: { (true) in
+//            
+//        })
     }
 
     required init?(coder aDecoder: NSCoder) {

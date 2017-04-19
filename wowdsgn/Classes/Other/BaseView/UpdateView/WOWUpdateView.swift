@@ -29,24 +29,6 @@ struct CheackAppVersion {
         
     }
     
-    static func versionToSum(version:String) ->Int{
-        
-        var array = version.components(separatedBy: ".")
-        
-        var versionSum :Int = 0
-        if array.count == 2 { // 类似于 1.0  2.0  3.0
-            array.append("0")
-            versionSum = Int(array[0])! * 100 + Int(array[1])! * 10 + Int(array[2])!
-        }
-        if array.count == 3 { // 类似于 1.0.1    2.0.2
-            versionSum = Int(array[0])! * 100 + Int(array[1])! * 10 + Int(array[2])!
-        }
-        if array.count == 4 {//  类似于 3.0.1.1
-            versionSum = Int(array[0])! * 1000 + Int(array[1])! * 100 + Int(array[2])! * 10 + Int(array[3])!
-        }
-        return versionSum
-        
-    }
 }
 
 // APP更新的信息

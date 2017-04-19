@@ -30,7 +30,7 @@ class WOWController: WOWBaseModuleVC {
     var record_402_index = [Int]()// 记录tape 为402 的下标，方便刷新数组里的喜欢状态
     
     var isOverBottomData :Bool? //底部列表数据是否拿到全部
-    
+    var TabsIndex : Int = 0
     var tabId : Int? // 对应的顶部标签 ID
     var isRequest :Bool = false// 判断此页面是不是第一次网络请求
     override func viewDidLoad() {
@@ -122,6 +122,10 @@ class WOWController: WOWBaseModuleVC {
         super.request()
         
         self.requestTop()
+
+        if TabsIndex == 0 {
+            self.requestBottom()
+        }
         
     }
     
@@ -175,7 +179,7 @@ class WOWController: WOWBaseModuleVC {
                 
                 let json = JSON(result)
                 DLog(json)
-                strongSelf.mj_footerHome.endRefreshing()
+                strongSelf.endHomeRefresh()
                 
                 let bannerList = Mapper<WOWProductModel>().mapArray(JSONObject:JSON(result)["productVoList"].arrayObject)
                 
@@ -215,7 +219,7 @@ class WOWController: WOWBaseModuleVC {
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
-                strongSelf.endRefresh()
+                strongSelf.endHomeRefresh()
                 WOWHud.dismiss()
             }
         }

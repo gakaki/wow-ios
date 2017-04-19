@@ -23,8 +23,10 @@ struct WOWCustomerNeedHelp {
                 WOWTool.callPhone()
                 return
             case .needCustomer:
+                let source = QYSource()
+                source.title =  "订单详情"
+                VCRedirect.goCustomerVC(source, commodityInfo: nil,orderNumber:orderNumber)
                 
-                VCRedirect.goCustomerVC(nil, commodityInfo: nil)
                 return
             default:break
             }

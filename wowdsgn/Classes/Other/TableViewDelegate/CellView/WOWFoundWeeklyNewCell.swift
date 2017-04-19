@@ -19,7 +19,13 @@ class WOWFoundWeeklyNewCell: UITableViewCell,ModuleViewElement{
     var moduleId: Int! = 0
     var pageTitle: String! = ""
     
-    var data        = [WOWProductModel]()
+    var data        = [WOWProductModel](){
+        didSet{
+            
+            cv.reloadData()
+            
+        }
+    }
     var heightAll   = CGFloat.leastNormalMagnitude
     
     override func awakeFromNib() {

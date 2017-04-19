@@ -92,6 +92,9 @@ class WOWEditOrderController: WOWBaseViewController {
         tableView.register(UINib.nibName(String(describing: WOWTipsCell.self)), forCellReuseIdentifier:String(describing: WOWTipsCell.self))
         //优惠信息
         tableView.register(UINib.nibName(String(describing: WOWOrderRemissionCell.self)), forCellReuseIdentifier:String(describing: WOWOrderRemissionCell.self))
+        //需要帮助
+        tableView.register(UINib.nibName(String(describing: WOWTelCell.self)), forCellReuseIdentifier:String(describing: WOWTelCell.self))
+        
         tableView.keyboardDismissMode = .onDrag
         self.tableView.mj_header = self.mj_header
 
@@ -609,7 +612,7 @@ class WOWEditOrderController: WOWBaseViewController {
 
 extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -694,6 +697,17 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 cell.amountLabel.text = String(format: "－%@", amount)
             }
             returnCell = cell
+        case 5:
+            // 需要帮助 UI
+  
+                let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTelCell.self), for: indexPath) as! WOWTelCell
+                cell.titleLabel.text = "需要帮助"
+                cell.contentView.addTapGesture {(sender) in
+                    WOWCustomerNeedHelp.show("",title: "确认订单")
+                }
+                
+               returnCell = cell
+        
         default:
             break
         }
@@ -725,7 +739,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
-        case 4:     //最后一组
+        case 5:     //最后一组
             return 50
         default:
             return 0.01

@@ -142,15 +142,15 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
     var receiverAddress             : String?   // 收货人地址
     var isComment                   : Bool?     // 待评论
     
-    var paymentStatus                 : Int?// 支付状态
-    var paymentStatusName                 : String?// 支付状态名称
-    var paymentMethod                 : Int?//支付方式
-    var paymentMethodName                 : String?//支付方式名称
-    var totalProductQty                 : Int?//购买的商品总件数
-    var packages                        : [WOWNewForGoodsModel]?//已发货清单列表
+    var paymentStatus                       : Int?// 支付状态
+    var paymentStatusName                   : String?// 支付状态名称
+    var paymentMethod                       : Int?//支付方式
+    var paymentMethodName                   : String?//支付方式名称
+    var totalProductQty                     : Int?//购买的商品总件数
+    var packages                            : [WOWNewForGoodsModel]?//已发货清单列表
     var unShipOutOrderItems                 : [WOWNewProductModel]?//未发货清单列表
     
-    var leftPaySeconds              : Int? // 订单剩余支付时间
+    var leftPaySeconds                      : Int? // 订单剩余支付时间
     
     
     required init?(map: Map) {

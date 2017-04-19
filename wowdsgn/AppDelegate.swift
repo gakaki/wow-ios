@@ -264,7 +264,7 @@ extension AppDelegate{
             }
             
         }) { (errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
 
     }
@@ -392,7 +392,7 @@ extension AppDelegate: AdLaunchViewDelegate {
             }
             
         }) { (errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
         
     }

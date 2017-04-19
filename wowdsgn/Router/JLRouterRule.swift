@@ -155,6 +155,9 @@ public class JLRouterRule {
         // 跳转订单详情
         JLRoutes.global().addRoute("/order") { (params) -> Bool in
             print(params)
+            if let id = params["id"] as? String {
+                VCRedirect.toOrderDetail(orderCode: id)
+            }
             //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
             return true
         }
@@ -163,7 +166,6 @@ public class JLRouterRule {
         JLRoutes.global().add(["/category","/category/:id"]) { (params) -> Bool in
             
             let categoryId = params["id"] as? String
-//            VCRedirect.toVCCategory(categoryId?.toInt())
             VCRedirect.toVCScene(categoryId?.toInt(), entrance: .category)
             print(params)
             return true

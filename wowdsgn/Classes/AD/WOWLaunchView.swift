@@ -15,7 +15,7 @@ class WOWLaunchView: UIView {
         super.draw(rect)
         startTime()
         let delayTime = DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {[unowned self] in
             self.requestCheakVersion()
             self.removeFromSuperview()
         }
@@ -42,6 +42,14 @@ class WOWLaunchView: UIView {
            
             super.removeFromSuperview()
         })
+    }
+    @IBAction func timeClick(sender: UIButton!) {
+        let mainVC = UIStoryboard(name: "Main", bundle:Bundle.main).instantiateInitialViewController()
+        AppDelegate.rootVC = mainVC
+        window?.rootViewController = mainVC
+        self.requestCheakVersion()
+        self.removeFromSuperview()
+
     }
     // 检查更新 接口
     func requestCheakVersion() {

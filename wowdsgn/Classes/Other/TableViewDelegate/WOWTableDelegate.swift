@@ -16,6 +16,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     open var vc : UIViewController?
     open var ViewControllerType  :ControllerViewType?
     var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
+    var lastContentOffset :CGFloat = 0.0
+
     open var cell_heights    = [0:0.h]
     open var dataSourceArray = [WOWHomeModle]()// 主页main的数据源
     open var isOverBottomData :Bool? //底部列表数据是否拿到全部
@@ -132,32 +134,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             return CGFloat.leastNormalMagnitude
         }
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        
-//        let section     = (indexPath as NSIndexPath).section
-//        if section < dataSourceArray.count {
-//            let model = dataSourceArray[section]
-//            let type = model.moduleType ?? 0
-//            let identifier  = ModulePageType.getIdentifier(type)
-//            switch type {
-//            case 301,401,801:// AutoLayout 不完整，给指定数
-//                return getCellHeight(section)
-//            
-//            default:
-//                return tableView.fd_heightForCell(withIdentifier: identifier , configuration: { (cell) in
-//                    
-//                })
-//            }
-//            
-//        }else{
-//            
-//            return tableView.fd_heightForCell(withIdentifier: "HomeBottomCell" , configuration: { (cell) in
-//                
-//            })
-//        }
-//        
-//        
-//    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section < dataSourceArray.count {
@@ -203,7 +180,6 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 
                 cell.indexPath = indexPath
                 cell.pageTitle = vc?.title ?? ""
-//                cell.moduleId = model.moduleId ?? 0
                 
                 let OneCellNumber = ((indexPath as NSIndexPath).section  - dataSourceArray.count + 0) * 2
                 let TwoCellNumber = (((indexPath as NSIndexPath).section  - dataSourceArray.count + 1) * 2) - 1
@@ -630,7 +606,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     }
     // 控制展示  滑到顶部的按钮
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
+        
         let wowcontroller  = self.vc as? WOWBaseModuleVC
             if scrollView.mj_offsetY < wowcontroller?.backTopBtnScrollViewOffsetY {
                 wowcontroller?.topBtn.isHidden = true
@@ -638,7 +614,30 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 wowcontroller?.topBtn.isHidden = false
         }
  
-        
+        switch ViewControllerType ?? .Home {
+        case .Home:
+            let a = scrollView.contentOffset.y
+            
+            if a -  lastContentOffset  > 20 && a > 0{
+                
+                lastContentOffset = a
+                self.vc?.navigationController?.setNavigationBarHidden(true, animated: true)
+
+                break
+            }else if lastContentOffset - a > 20 && (a  <= scrollView.contentSize.height-scrollView.bounds.size.height-20) {
+                lastContentOffset = a
+                
+                self.vc?.navigationController?.setNavigationBarHidden(false, animated: true)
+                    
+                
+                break
+            }
+            break
+        default:
+            break
+        }
+
+
     }
     // 底层 wowdsgn 页脚
     func footerView() -> UIView {

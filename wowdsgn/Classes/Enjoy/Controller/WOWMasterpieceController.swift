@@ -40,9 +40,7 @@ class WOWMasterpieceController: WOWBaseViewController {
             let window = UIApplication.shared.windows.last
             
             window?.addSubview(guideView)
-            window?.addSubview(v)
-//            window?.bringSubview(toFront: v)
-            
+            window?.addSubview(v)            
             
         }
 
@@ -208,6 +206,7 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
         
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
         if scrollView.mj_offsetY < self.backTopBtnScrollViewOffsetY {
             self.topBtn.isHidden = true
         }else{
@@ -223,16 +222,20 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
             lastContentOffset = a
             if self.publishBtn.alpha  >= 0.95 {
                 changeState(alpha: 0.01)
+
             }
- 
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+
             return
         }else if lastContentOffset - a > 20 && (a  <= scrollView.contentSize.height-scrollView.bounds.size.height-20) {
             lastContentOffset = a
             
             if self.publishBtn.alpha < 1 {
                 changeState(alpha: 1)
+
             }
-    
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+
             return
         }
         

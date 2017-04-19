@@ -25,6 +25,7 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
     var promotionNames                       : [String]?         //促销活动的名字
     var promotionProductInfoVos              : [WOWPromotionProductInfoModel]?   //促销信息
     var totalPromotionDeduction              : Double?          //促销优惠金额
+
     
     required init?(map: Map) {
         
@@ -45,6 +46,7 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
         promotionNames                          <- map["promotionNames"]
         promotionProductInfoVos                   <- map["promotionProductInfoVos"]
         totalPromotionDeduction                     <- map["totalPromotionDeduction"]
+
 
     }
     

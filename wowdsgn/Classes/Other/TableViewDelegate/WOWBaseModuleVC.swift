@@ -109,6 +109,13 @@ class WOWBaseModuleVC: WOWBaseViewController {
         request()
 
     }
+    
+    func endHomeRefresh() {
+  
+        mj_footerHome.endRefreshing()
+        self.isRreshing = false
+        
+    }
     // json 数据 转成model
     func dataWithHomeModel(result: AnyObject) -> Array<WOWHomeModle> {
         

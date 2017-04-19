@@ -140,7 +140,9 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
         super.setUI()
         configTable()
         cycleView.delegate = self
-        
+        self.bottomView.layer.borderWidth = 0.5
+        self.bottomView.layer.borderColor = MGRgb(234, g: 234, b: 234).cgColor
+        self.bottomView.clipsToBounds = true
         //        buyCarCount()
     }
 

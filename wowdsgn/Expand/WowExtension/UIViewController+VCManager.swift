@@ -493,29 +493,29 @@ public class VCRedirect {
                 userInfoArr.append(orderNumber)
             }
             
-            
+            // 设置用户的自定义信息
             let userInfo = QYUserInfo()
             userInfo.userId = WOWUserManager.userID
-            userInfo.data = userInfoArr.toJSONString() ?? ""
-            
+            userInfo.data   = userInfoArr.toJSONString() ?? ""
             QYSDK.shared().setUserInfo(userInfo)
+            
             sessionViewController.source = source
         }
         if let commodityInfo = commodityInfo {
             sessionViewController.commodityInfo = commodityInfo
         }
 
-        QYSDK.shared().customUIConfig().customerHeadImageUrl = WOWUserManager.userHeadImageUrl
-        QYCustomUIConfig.sharedInstance().autoShowKeyboard  =  false
-        QYSDK.shared().customUIConfig().serviceHeadImage = UIImage.init(named: "me_logo")
-        sessionViewController.hidesBottomBarWhenPushed = true
+        QYSDK.shared().customUIConfig().customerHeadImageUrl    = WOWUserManager.userHeadImageUrl
+        QYCustomUIConfig.sharedInstance().autoShowKeyboard      =  false
+        QYSDK.shared().customUIConfig().serviceHeadImage        = UIImage.init(named: "me_logo")
+        sessionViewController.hidesBottomBarWhenPushed          = true
         QYCustomActionConfig.sharedInstance().linkClickBlock = {(str) in //处理聊天 链接点击 自定义事件
-            
-          _ = JLRouterRule.handle_open_url(url: URL.init(string: str!)! )
+            if let str = str {
+                _ = JLRouterRule.handle_open_url(url: URL.init(string: str)! )
+            }
             
         }
-        sessionViewController.navigationController?.isNavigationBarHidden = false
-        sessionViewController.automaticallyAdjustsScrollViewInsets = true
+        
         let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action: #selector(backAction))
         
         sessionViewController.navigationController?.setNavigationBarHidden(false, animated: true)

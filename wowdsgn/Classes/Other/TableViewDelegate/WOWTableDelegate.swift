@@ -74,13 +74,13 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     func refreshData(_ sender: Notification)  {
         
         if  let send_obj =  sender.object as? [String:AnyObject] {
-//            bottomListArray.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{ // 底部瀑布流取消掉，
-//                if let strongSelf = self {
-//                    strongSelf.tableView.reloadData()
-                    //                    strongSelf.collectionView.reloadData()
-//                }
+            
+            bottomListArray.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{[weak self] in // 底部瀑布流取消掉，
+                if let strongSelf = self {
+                    strongSelf.tableView.reloadData()
+                }
                 
-//            })
+            })
 
     
             for j in record_402_index { // 遍历自定义产品列表，确保刷新喜欢状态

@@ -48,6 +48,7 @@ class WOWHomeControllers: WOWBaseViewController {
                     
                     HomeTabVC.tabId = tabIdArrray[index]
                 }
+                 HomeTabVC.TabsIndex = index
                 HomeTabVC.delegate = self
                 controllerArray.append(HomeTabVC)
             }
@@ -101,7 +102,7 @@ class WOWHomeControllers: WOWBaseViewController {
             HomeTabVC.title = titleArray[index]
             
             HomeTabVC.delegate = self
-            
+            HomeTabVC.TabsIndex = index
             controllerArray.append(HomeTabVC)
             
         }

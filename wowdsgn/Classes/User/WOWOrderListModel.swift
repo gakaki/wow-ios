@@ -152,7 +152,8 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
     
     var leftPaySeconds                      : Int? // 订单剩余支付时间
     
-    
+    var changedAmount                        : Double?        //商家修改金额
+    var changedAmountType                    : Int?             //商家改价类型 1 减价 2 加价
     required init?(map: Map) {
         
     }
@@ -180,6 +181,8 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
         packages                            <- map["packages"]
         unShipOutOrderItems                 <- map["unShipOutOrderItems"]
         leftPaySeconds                      <- map["leftPaySeconds"]
+        changedAmount                           <- map["changedAmount"]
+        changedAmountType                       <- map["changedAmountType"]
     }
 }
 

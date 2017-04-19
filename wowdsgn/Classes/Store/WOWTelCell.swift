@@ -9,7 +9,8 @@
 import UIKit
 
 class WOWTelCell: UITableViewCell {
-
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var imgNeedHelp: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

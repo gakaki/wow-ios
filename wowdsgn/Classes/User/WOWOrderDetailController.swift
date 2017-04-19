@@ -686,6 +686,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     }
                     
                 }
+                returnCell =  cell
             case 5:
                 
                 returnCell = getCustomerPhoneCell(indexPath: indexPath)
@@ -891,8 +892,15 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     return CellHight.minHight
                 }
                 
-            case 3,4: // 运费 客服电话 cell 页眉高度
+            case 3,5: // 运费 客服电话 cell 页眉高度
                 return 12
+            case 4:
+                if OrderDetailNewaType == .payMent {
+                    return CellHight.headerHight
+                }else{
+                    return 12
+                }
+
             default:
                 return CellHight.headerHight
             }
@@ -1166,12 +1174,14 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
     }
 }
 extension WOWOrderDetailController {
-    
+    // 需要帮助 UI
     func getCustomerPhoneCell(indexPath:IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTelCell.self), for: indexPath) as! WOWTelCell
+        cell.titleLabel.text = "需要帮助"
         cell.contentView.addTapGesture {[unowned self] (sender) in
             WOWCustomerNeedHelp.show(self.orderNewDetailModel?.orderCode ?? "")
         }
+        
         return cell
     }
     

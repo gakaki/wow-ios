@@ -130,7 +130,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case (6 + isHaveLimit + isHavePromotion,_): //客服电话
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTelCell.self), for: indexPath) as! WOWTelCell
-            
+            cell.imgNeedHelp.isHidden = true
             returnCell = cell
         case (6 + isHaveLimit + isHavePromotion + isHaveComment,_): //商品评论
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductCommentCell.self), for: indexPath) as! WOWProductCommentCell

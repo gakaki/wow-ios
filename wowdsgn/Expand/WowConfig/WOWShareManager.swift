@@ -13,7 +13,7 @@ struct WOWCustomerNeedHelp {
     
     static let vc = UIApplication.currentViewController()
     static var shareBackView = WOWShareBackView(frame:CGRect(x: 0, y: 0, w: MGScreenWidth, h: MGScreenHeight))
-    static func show(_ orderNumber:String){
+    static func show(_ orderNumber:String,title:String = "订单详情"){
         
         shareBackView.showNeedHelp()
 
@@ -24,7 +24,7 @@ struct WOWCustomerNeedHelp {
                 return
             case .needCustomer:
                 let source = QYSource()
-                source.title =  "订单详情"
+                source.title =  title
                 VCRedirect.goCustomerVC(source, commodityInfo: nil,orderNumber:orderNumber)
                 
                 return

@@ -58,6 +58,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDeleg
         if count == 0 {
             WOWCustormMessageView.dissMissView()
         }else {
+            //如果未登录状态下，不显示
+            guard WOWUserManager.loginStatus else {
+                 WOWCustormMessageView.dissMissView()
+                return
+            }
             WOWCustormMessageView.show()
         }
     }

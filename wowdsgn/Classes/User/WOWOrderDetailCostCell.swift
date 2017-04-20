@@ -34,6 +34,22 @@ class WOWOrderDetailCostCell: UITableViewCell {
             self.saidImageView.isHidden  = true
             self.freightTypeLabel.text = "优惠"
         }
+        if (indexPath as NSIndexPath).row == 2 {
+            let result = WOWCalPrice.calTotalPrice([orderNewDetailModel.changedAmount ?? 0],counts:[1])
+            var str = ""
+            switch orderNewDetailModel.changedAmountType ?? 0{
+            case 1:
+                str = "-"
+            case 2:
+                str = "+"
+            default:
+                break
+            }
+            self.priceLabel.text       = str + result
+            
+            self.saidImageView.isHidden  = true
+            self.freightTypeLabel.text = "商家改价"
+        }
 
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

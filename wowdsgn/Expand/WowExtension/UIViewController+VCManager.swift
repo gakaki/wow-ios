@@ -483,9 +483,27 @@ public class VCRedirect {
         sessionViewController.sessionTitle = "在线客服"
         if let source = source {
             let userId      = WOWCustomerInfoModel.init(key: "userId", label: "用户ID", value: WOWUserManager.userID)
-            let userName    = WOWCustomerInfoModel.init(key: "userName", label: "用户名称", value: WOWUserManager.userName)
-            let userPhone   = WOWCustomerInfoModel.init(key: "userPhone", label: "用户手机号码", value: WOWUserManager.userMobile)
-            var userInfoArr =  [userId,userName,userPhone]
+            let userName    = WOWCustomerInfoModel.init(key: "userName", label: "名称", value: WOWUserManager.userName)
+            let userPhone   = WOWCustomerInfoModel.init(key: "userPhone", label: "手机号码", value: WOWUserManager.userMobile)
+            let userAgeRange   = WOWCustomerInfoModel.init(key: "userAgeRange", label: "年龄段", value:  WOWAgeRange[WOWUserManager.userAgeRange] ?? "保密")
+           
+            var sexStr = ""
+            switch WOWUserManager.userSex {
+            case 3:
+                sexStr = "保密"
+                break
+            case 1:
+                sexStr = "男"
+                break
+            case 2:
+                sexStr = "女"
+                break
+            default:
+                sexStr = "保密"
+                break
+            }
+            let userSex   = WOWCustomerInfoModel.init(key: "userSex", label: "用户性别", value: sexStr)
+            var userInfoArr =  [userId,userName,userPhone,userSex,userAgeRange]
             if let orderNumber = orderNumber {
                 let orderNumber = WOWCustomerInfoModel.init(key: "userId", label: "订单号", value: orderNumber)
                 userInfoArr.append(orderNumber)
@@ -518,8 +536,15 @@ public class VCRedirect {
         
         sessionViewController.navigationController?.setNavigationBarHidden(false, animated: true)
         sessionViewController.navigationItem.leftBarButtonItem = item
-
-        topNaVC?.pushViewController(sessionViewController, animated: true)
+        
+        if FNUtil.currentTopViewController().isKind(of: QYSessionViewController.classForCoder()){
+            print("为客服聊天界面")
+//           topNaVC?.popToRootViewController(animated: false)
+        }else {
+            topNaVC?.pushViewController(sessionViewController, animated: true)
+        }
+        
+        
         
     }
     

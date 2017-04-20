@@ -61,8 +61,17 @@ class WOWOrderDetailController: WOWBaseViewController{
 
     var orderNewModel               : WOWNewOrderListModel?
 
-    var orderNewDetailModel         : WOWNewOrderDetailModel?
-    
+    var orderNewDetailModel         : WOWNewOrderDetailModel?{
+        didSet{
+            switch orderNewDetailModel?.changedAmountType ?? 0 {
+            case 0:
+                cellNumber = 2
+            default:
+                cellNumber = 3
+            }
+        }
+    }
+    var cellNumber  : Int = 2
     var surePayType                 : PayType = .none
     
     var OrderDetailNewaType         : OrderNewType = .someFinishForGoods
@@ -403,6 +412,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                     strongSelf.orderNewDetailModel = Mapper<WOWNewOrderDetailModel>().map(JSONObject:result)
                     strongSelf.orderCode =  strongSelf.orderNewDetailModel!.orderCode
                     
+                    
                     strongSelf.orderType(strongSelf.orderNewDetailModel)
                     
                     strongSelf.getOrderData()
@@ -529,7 +539,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 return orderNoNumber
                 
             case 3: //运费
-                return 2
+                return cellNumber
             case 4: //支付方式
                 return 3
             default:
@@ -548,7 +558,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 return self.orderGoodsNumber
                 
             case 3: //运费
-                return 2
+                return cellNumber
             default:
                 return 1
             }
@@ -566,7 +576,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             
                 
             case 3: //运费
-                return 2
+                return cellNumber
             default:
                 return 1
             }
@@ -583,7 +593,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 return self.orderGoodsNumber
           
             case 3: //运费
-                return 2
+                return cellNumber
             default:
                 return 1
             }
@@ -605,7 +615,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
                 
             case goodsArray.count + 3 :
-                return 2
+                return cellNumber
             case goodsArray.count + 4 :
                 return 1
             default:

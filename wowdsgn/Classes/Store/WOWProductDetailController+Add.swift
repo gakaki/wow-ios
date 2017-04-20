@@ -130,7 +130,22 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             returnCell = cell
         case (6 + isHaveLimit + isHavePromotion,_): //客服电话
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTelCell.self), for: indexPath) as! WOWTelCell
-            cell.imgNeedHelp.isHidden = true
+
+            cell.contentView.addTapGesture {[unowned self] (sender) in
+                
+                WOWCustomerNeedHelp.shareBackView.showNeedHelp()
+                WOWCustomerNeedHelp.shareBackView.shareActionBack = {(shareType:WOWShareType) in
+                    switch shareType {
+                    case .needPhone:
+                        WOWTool.callPhone()
+                        return
+                    case .needCustomer:
+                        self.gotoCustomerVC()
+                        return
+                        default:break
+                    }
+                }
+            }
             returnCell = cell
         case (6 + isHaveLimit + isHavePromotion + isHaveComment,_): //商品评论
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductCommentCell.self), for: indexPath) as! WOWProductCommentCell

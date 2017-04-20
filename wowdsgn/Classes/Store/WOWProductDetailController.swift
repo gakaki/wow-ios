@@ -374,8 +374,7 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
         }
         
     }
-    
-    @IBAction func customerClick(_ sender: Any) {
+    func gotoCustomerVC(){
         if let productModel = productModel {
             
             let sizeStr = productSpec.productSize(productInfo: productModel)
@@ -403,6 +402,10 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
             self.isCustormer = true
         }
         
+    }
+    
+    @IBAction func customerClick(_ sender: Any) {
+            gotoCustomerVC()
     }
     //MARK:选择规格,有两种视图
     func chooseStyle(_ entrue: carEntrance) {

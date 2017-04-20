@@ -520,8 +520,15 @@ public class VCRedirect {
         
         sessionViewController.navigationController?.setNavigationBarHidden(false, animated: true)
         sessionViewController.navigationItem.leftBarButtonItem = item
-
-        topNaVC?.pushViewController(sessionViewController, animated: true)
+        
+        if FNUtil.currentTopViewController().isKind(of: QYSessionViewController.classForCoder()){
+            print("为客服聊天界面")
+//           topNaVC?.popToRootViewController(animated: false)
+        }else {
+            topNaVC?.pushViewController(sessionViewController, animated: true)
+        }
+        
+        
         
     }
     

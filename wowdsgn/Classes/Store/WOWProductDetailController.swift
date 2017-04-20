@@ -359,7 +359,10 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
     //MARK:分享
     @IBAction func shareClick(_ sender: UIButton) {
         let shareUrl = WOWShareUrl + "/item/\(productId ?? 0)"
-        WOWShareManager.share(productModel?.productTitle, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:imgUrlArr[0] )
+        if imgUrlArr.count > 0 {
+            WOWShareManager.share(productModel?.productTitle, shareText: productModel?.sellingPoint, url:shareUrl,shareImage:imgUrlArr[0] )
+
+        }
     }
     
     //MARK:喜欢

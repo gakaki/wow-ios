@@ -13,9 +13,9 @@ protocol ProductSpecFootViewDelegate: class {
 }
 class WOWProductSpecFootView: UICollectionReusableView {
     @IBOutlet weak var countTextField: UITextField!     //商品数量显示
-    @IBOutlet weak var subButton: UIButton!             //增加数量
-    @IBOutlet weak var addButton: UIButton!             //减少数量
-    
+    @IBOutlet weak var subButton: UIButton!             //减少数量
+    @IBOutlet weak var addButton: UIButton!             //增加数量
+    var availableStock: Int?
     weak var delegate: ProductSpecFootViewDelegate?
 
     override func awakeFromNib() {
@@ -37,6 +37,17 @@ class WOWProductSpecFootView: UICollectionReusableView {
         }else {
             subButton.isEnabled = true
             subButton.setTitleColor(UIColor.black, for: UIControlState())
+        }
+        if count >= availableStock ?? 0{
+            
+            addButton.isEnabled = false
+            addButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
+            
+        }else {
+            
+            addButton.isEnabled = true
+            addButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+            
         }
         self.countTextField.text = "\(count)"
     }

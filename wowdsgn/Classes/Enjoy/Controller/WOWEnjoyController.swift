@@ -21,6 +21,7 @@ class WOWEnjoyController: WOWBaseViewController {
     var isOpen: Bool = false
     var currentCategoryId = 0
     let categoryName = "全部"
+    @IBOutlet weak var magicView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -56,7 +57,8 @@ class WOWEnjoyController: WOWBaseViewController {
     override func setUI() {
         super.setUI()
         self.navigationItem.titleView = navView
-        
+        self.view.backgroundColor = UIColor.white
+
         v                               = VCVTMagic()
         v.magicView.dataSource          = self
         v.magicView.delegate            = self
@@ -74,8 +76,9 @@ class WOWEnjoyController: WOWBaseViewController {
 
         v.magicView.snp.makeConstraints {[weak self] (make) -> Void in
             if let strongSelf = self {
-                make.size.equalTo(strongSelf.view)
-                
+                make.width.equalTo(strongSelf.view)
+                make.top.equalTo(strongSelf.magicView)
+                make.bottom.equalTo(strongSelf.view.snp.bottom).offset(0)
             }
         }
         

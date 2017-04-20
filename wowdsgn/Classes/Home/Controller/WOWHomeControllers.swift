@@ -15,6 +15,7 @@ class WOWHomeControllers: WOWBaseViewController {
     var selectCurrentIndex : Int? = 0
     var v : VCVTMagic!
     var hidingNavBarManager: HidingNavigationBarManager?
+    @IBOutlet weak var magicView: UIView!
 
     var parameters: [CAPSPageMenuOption]? = nil
     var tabs : [WOWHomeTabs] = []{// 如果设置值 则说明 子首页tab接口请求成功 titleArray  controllerArray 清零 给新的值
@@ -74,8 +75,7 @@ class WOWHomeControllers: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "titleView"))
-        self.view.backgroundColor = UIColor(hexString: "efeff4")
-        
+        self.view.backgroundColor = UIColor.white
         addObserver()
         // Do any additional setup after loading the view.
     }
@@ -125,8 +125,9 @@ class WOWHomeControllers: WOWBaseViewController {
         v.magicView.snp.makeConstraints {[weak self] (make) -> Void in
             if let strongSelf = self {
                 make.width.equalTo(strongSelf.view)
-                make.top.equalTo(strongSelf.topLayoutGuide as! ConstraintRelatableTarget)
-                make.bottom.equalTo(strongSelf.view.snp.bottom).offset(0)
+                make.top.equalTo(strongSelf.magicView)
+                make.bottom.equalTo(strongSelf.magicView)
+                
             }
         }
         

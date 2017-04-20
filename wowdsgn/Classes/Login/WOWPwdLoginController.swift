@@ -42,8 +42,7 @@ class WOWPwdLoginController: WOWBaseViewController {
     //MARK:Actions
     @IBAction func regist(_ sender: UIButton) {
 
-        VCRedirect.toRegVC(false, isPresent: isPresent, userInfoFromWechat: nil)
-        
+        VCRedirect.toRegVC(isPresent: isPresent)
     }
     
     

@@ -11,12 +11,25 @@ import UIKit
 class WOWCouponheaderView: UIView {
 
     @IBOutlet weak var noUseButton: UIButton!
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var convertBtn: UIButton!
+    weak var delegate : WOWCouponNumberViewDelegate?
+    
+    
+    @IBAction func convertButtonClick(_ sender: UIButton) {
+        if let text = textField.text {
+            if text.isEmpty {
+                WOWHud.showMsg("请输入优惠码")
+                return
+            }
+            if let del = delegate {
+                textField.resignFirstResponder()
+                del.convertCouponClick(text)
+            }
+        }
+        
+        
     }
-    */
+    
 
 }

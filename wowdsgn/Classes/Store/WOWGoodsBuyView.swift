@@ -292,15 +292,22 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
      */
     private func showResult(count:Int){
         
-        if count <= 1 || count >= productInfo?.availableStock ?? 0{
-            
+        if count <= 1 {
             subButton.isEnabled = false
             subButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
+        }else {
+            subButton.isEnabled = true
+            subButton.setTitleColor(UIColor.black, for: UIControlState())
+        }
+        if count >= productInfo?.availableStock ?? 0{
+            
+            addButton.isEnabled = false
+            addButton.setTitleColor(MGRgb(204, g: 204, b: 204), for: UIControlState.normal)
             
         }else {
             
-            subButton.isEnabled = true
-            subButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+            addButton.isEnabled = true
+            addButton.setTitleColor(UIColor.black, for: UIControlState.normal)
             
         }
         
@@ -348,7 +355,6 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             let weightStr = productSpec.productWeight(productInfo: productInfo)
             let str = String(format:"尺寸：%@ 重量：%@",sizeStr,weightStr)
             sizeTextLabel.text = str
-//            weightLabel.text = productWeight(productInfo: productInfo)
             
             //这个还要判断下产品的状态，只有在上架的状态下才判断产品有没有库存
             if productInfo.productStatus == 1 {
@@ -393,9 +399,9 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
         self.productInfo?.productQty = skuCount
         switch entrance {
         case .addEntrance:
-            startAnimationWithRect(goodsImageView.frame, ImageView: goodsImageView)
-            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.8 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {[weak self](void) in
+//            startAnimationWithRect(goodsImageView.frame, ImageView: goodsImageView)
+
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {[weak self](void) in
                 if let strongSelf = self {
                     if let del = strongSelf.delegate {
                         strongSelf.productInfo?.productQty = strongSelf.skuCount
@@ -510,6 +516,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             if indexPath.section == serialAttributeArr.count - 1 {
                 let searchReusable = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "WOWProductSpecFootView", for: indexPath) as? WOWProductSpecFootView
                 searchReusable?.delegate = self
+                searchReusable?.availableStock = productInfo?.availableStock
                 searchReusable?.showResult(skuCount)
                 reusableView = searchReusable!
             }
@@ -560,11 +567,10 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             if allSelect && productInfo?.productStatus == 1 {
                     if productInfo?.availableStock ?? 0 > skuCount {
                         skuCount += 1
-                    }else {
-                        WOWHud.showMsg("库存不足")
                     }
             }else {
                 skuCount += 1
+
             }
         }
         collectionView.reloadData()

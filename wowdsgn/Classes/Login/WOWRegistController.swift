@@ -11,9 +11,6 @@ import UIKit
 
 class WOWRegistController: WOWBaseViewController {
     var isPresent      :Bool = false
-    var byWechat            :Bool = false
-    var userInfoFromWechat  :Dictionary<String, Any>?
-    
     
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var msgCodeTextField: UITextField!
@@ -42,11 +39,7 @@ class WOWRegistController: WOWBaseViewController {
     
 //MARK:Private Method
     override func setUI() {
-//        configNavItem()
-        navigationItem.title = byWechat ? "绑定手机" :"注册"
-        registButton.setTitle(byWechat ? "绑定" :"注册", for: UIControlState())
-        
-//        navigationItem.title = "绑定手机"
+        navigationItem.title = "注册"
         registButton.setTitle( "确定" , for: UIControlState())
 
     }
@@ -78,8 +71,7 @@ class WOWRegistController: WOWBaseViewController {
             return
         }
         let mobile = phoneTextField.text ?? ""
-        let Api_Code = byWechat ? RequestApi.api_Captcha :RequestApi.api_Sms_Code
-//        sender.isUserInteractionEnabled = false
+        let Api_Code = RequestApi.api_Sms_Code
         WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(Api_Code(mobile:mobile), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
@@ -91,7 +83,6 @@ class WOWRegistController: WOWBaseViewController {
         }) { (errorMsg) in
             LoadView.dissMissView()
             WOWHud.showMsgNoNetWrok(message: errorMsg)
-//                sender.isUserInteractionEnabled = true
         }
     }
     
@@ -133,22 +124,7 @@ class WOWRegistController: WOWBaseViewController {
         var registerTarget = RequestApi.api_Register(account:phoneTextField.text ?? "",
                                                      password:passwdTextField.text ?? "",
                                                      captcha:msgCodeTextField.text ?? "")
-        //如果是通过微信就走微信绑定的接口，如果是注册的话就走注册的接口
-        if let userInfoFromWechat = userInfoFromWechat {
-            //微信的用户信息
-            let param = ["openId":userInfoFromWechat["openid"] as! String,
-                         "wechatNickName":userInfoFromWechat["nickname"] as! String,
-                         "wechatAvatar":userInfoFromWechat["headimgurl"] as! String,
-                         "sex":userInfoFromWechat["sex"] ?? "",
-                         "unionId": userInfoFromWechat["unionid"] as! String,
-                         "country": userInfoFromWechat["country"] ?? "",
-                         "province": userInfoFromWechat["province"] ?? "",
-                         "city": userInfoFromWechat["city"] ]
-             registerTarget = RequestApi.api_WechatBind(mobile: phoneTextField.text ?? "",
-                                                        captcha: msgCodeTextField.text ?? "",
-                                                        password: passwdTextField.text ?? "",
-                                                        userInfoFromWechat: param as AnyObject)
-        }
+
 
         
             WOWNetManager.sharedManager.requestWithTarget(registerTarget, successClosure: { [weak self](result, code)in
@@ -180,7 +156,7 @@ class WOWRegistController: WOWBaseViewController {
         }
         }) {[weak self](errorMsg) in
             if let strongSelf = self{
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
             }
         }
     }

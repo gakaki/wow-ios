@@ -176,7 +176,7 @@ class WOWGuideController: WOWBaseViewController {
 //            toRegVC()
             
             MobClick.e(UMengEvent.Guide_Mobile_Reg)
-            VCRedirect.toRegVC(userInfoFromWechat: nil)
+            VCRedirect.toRegVC()
         }
     }
 

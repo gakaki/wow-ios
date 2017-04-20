@@ -21,7 +21,6 @@ class WOWMasterpieceController: WOWBaseViewController {
     @IBOutlet weak var publishBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -40,8 +39,8 @@ class WOWMasterpieceController: WOWBaseViewController {
             let window = UIApplication.shared.windows.last
             
             window?.addSubview(guideView)
-            window?.addSubview(v)            
-            
+            window?.addSubview(v)
+
         }
 
     }
@@ -224,6 +223,7 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
                 changeState(alpha: 0.01)
 
             }
+            
             self.navigationController?.setNavigationBarHidden(true, animated: true)
 
             return

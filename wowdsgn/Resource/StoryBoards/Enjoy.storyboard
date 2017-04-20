@@ -260,13 +260,29 @@
                     <view key="view" contentMode="scaleToFill" id="YJa-Ek-399">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WHX-Bm-xmY">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mqU-Bx-3Zz" firstAttribute="top" secondItem="WHX-Bm-xmY" secondAttribute="bottom" id="Jex-ph-6eq"/>
+                            <constraint firstItem="WHX-Bm-xmY" firstAttribute="leading" secondItem="YJa-Ek-399" secondAttribute="leading" id="aCk-fL-jvU"/>
+                            <constraint firstItem="WHX-Bm-xmY" firstAttribute="top" secondItem="Mlr-M1-w7x" secondAttribute="bottom" id="jXd-j1-OkZ"/>
+                            <constraint firstAttribute="trailing" secondItem="WHX-Bm-xmY" secondAttribute="trailing" id="mPu-xQ-dYG"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Jzr-HD-aRU"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="magicView" destination="WHX-Bm-xmY" id="xBB-lu-rC0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OLT-Ei-mTN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="14" y="321"/>
+            <point key="canvasLocation" x="13.6" y="320.68965517241384"/>
         </scene>
         <!--最新-->
         <scene sceneID="M1n-YK-P2x">

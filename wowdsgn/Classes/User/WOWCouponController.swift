@@ -34,10 +34,17 @@ class WOWCouponController: WOWBaseViewController {
     
     lazy var couponNumberView:WOWCouponNumberView = {
         let view = Bundle.main.loadNibNamed(String(describing: WOWCouponNumberView.self), owner: self, options: nil)?.last as! WOWCouponNumberView
-        
+        view.delegate = self
+        view.textField.delegate = self
         return view
     }()
-    
+    lazy var couponheaderView:WOWCouponheaderView = {
+        let view = Bundle.main.loadNibNamed(String(describing: WOWCouponheaderView.self), owner: self, options: nil)?.last as! WOWCouponheaderView
+        view.delegate = self
+        view.textField.delegate = self
+        view.noUseButton.addTarget(self, action: #selector(noUserClick(_:)), for:.touchUpInside)
+        return view
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -144,9 +151,12 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate, UITex
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         couponNumberView.textField.resignFirstResponder()
+        couponheaderView.textField.resignFirstResponder()
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         couponNumberView.textField.resignFirstResponder()
+        couponheaderView.textField.resignFirstResponder()
+
         return true
     }
     
@@ -238,7 +248,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate, UITex
             if entrance == .userEntrance {
                 return 84
             }else {
-                return 90
+                return 149
             }
         default:
             return 15
@@ -249,13 +259,12 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate, UITex
         switch section {
         case 0:
             if entrance == .userEntrance {
-                couponNumberView.delegate = self
-                couponNumberView.textField.delegate = self
+
                 return couponNumberView
             }else {
-                let view = Bundle.main.loadNibNamed(String(describing: WOWCouponheaderView.self), owner: self, options: nil)?.last as! WOWCouponheaderView
-                view.noUseButton.addTarget(self, action: #selector(noUserClick(_:)), for:.touchUpInside)
-                return view
+
+                
+                return couponheaderView
             }
         default:
             let view = UIView()

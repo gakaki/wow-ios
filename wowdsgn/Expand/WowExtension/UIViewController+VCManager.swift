@@ -120,12 +120,10 @@ public class VCRedirect {
     }
     
     //跳转注册/绑定微信界面需要传从哪跳转来的
-    public class func toRegVC(_ fromWechat:Bool = false , isPresent:Bool = false,userInfoFromWechat:Dictionary<String, Any>?){
+    public class func toRegVC( isPresent:Bool = false){
         
         let vc = UIStoryboard.initialViewController("Login", identifier:String(describing: WOWRegistController.self)) as! WOWRegistController
         vc.isPresent = isPresent
-        vc.byWechat = fromWechat
-        vc.userInfoFromWechat = userInfoFromWechat
         topNaVC?.pushViewController(vc, animated: true)
     }
     
@@ -663,12 +661,13 @@ extension  UIViewController {
                 if !firstLogin {
                     //FIXME:未写的，先保存用户信息
                     
-                    
                     VCRedirect.toLoginSuccess(isPresent)
                     
                 }else{ //第一次登陆
                     MobClick.e(.Registration_Successful)
-
+                    
+                    TalkingDataAppCpa.onRegister(user_id)
+                    AnalyaticEvent.e2(.Regist,["user":user_id])
                     VCRedirect.toRegInfo(isPresent)
                     
                 }

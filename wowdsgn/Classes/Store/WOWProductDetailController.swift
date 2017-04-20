@@ -376,29 +376,32 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
     }
     
     @IBAction func customerClick(_ sender: Any) {
-     
-        let shareUrl =  "https://" + WOWShareUrl + "/item/\(productId ?? 0)"
-        let commodityInfo = QYCommodityInfo()
-        commodityInfo.title = productModel?.productTitle
-        commodityInfo.desc = productModel?.detailDescription
-        if imgUrlArr.count > 0 {
-          commodityInfo.pictureUrlString = imgUrlArr[0]
+        if let productModel = productModel {
+            
+            let sizeStr = productSpec.productSize(productInfo: productModel)
+            let weightStr = productSpec.productWeight(productInfo: productModel)
+            let str = String(format:"尺寸：%@ 重量：%@",sizeStr,weightStr)
+            
+            let shareUrl =  "https://" + WOWShareUrl + "/item/\(productId ?? 0)"
+            let commodityInfo = QYCommodityInfo()
+            commodityInfo.title = productModel.productTitle
+            commodityInfo.desc = str
+            if imgUrlArr.count > 0 {
+                commodityInfo.pictureUrlString = imgUrlArr[0]
+            }
+            
+            commodityInfo.urlString = shareUrl
+            commodityInfo.note = productModel.sellPrice?.toString
+            commodityInfo.show = true //访客端是否要在消息中显示商品信息，YES代表显示,NO代表不显示
+            
+            let source = QYSource()
+            source.title        =  "商品详情"
+            source.urlString    = shareUrl
+            
+            VCRedirect.goCustomerVC(source, commodityInfo: commodityInfo,orderNumber:nil)
+            
+            self.isCustormer = true
         }
-      
-        commodityInfo.urlString = shareUrl
-        commodityInfo.note = productModel?.sellPrice?.toString
-        commodityInfo.show = true //访客端是否要在消息中显示商品信息，YES代表显示,NO代表不显示
-        
-        let source = QYSource()
-        source.title        =  "商品详情"
-        source.urlString    = shareUrl
-        
-        VCRedirect.goCustomerVC(source, commodityInfo: commodityInfo,orderNumber:nil)
-        
-        self.isCustormer = true
-     
-
-
         
     }
     //MARK:选择规格,有两种视图

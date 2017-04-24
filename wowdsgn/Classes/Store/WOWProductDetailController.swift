@@ -376,6 +376,7 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
     }
     func gotoCustomerVC(){
         if let productModel = productModel {
+            MobClick.e(.online_customer_service_button_product_detail)
             
             let sizeStr = productSpec.productSize(productInfo: productModel)
             let weightStr = productSpec.productWeight(productInfo: productModel)

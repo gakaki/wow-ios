@@ -177,6 +177,7 @@ extension WOWMessageController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //跳转消息中心
         if indexPath.section == 1 {
+            MobClick.e(.online_customer_service_information_center_page)
             let source = QYSource()
             source.title =  "消息中心"
             source.urlString    = ""

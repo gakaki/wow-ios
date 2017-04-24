@@ -701,6 +701,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                 let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTelCell.self), for: indexPath) as! WOWTelCell
                 cell.titleLabel.text = "需要帮助"
                 cell.contentView.addTapGesture {(sender) in
+                    MobClick.e(.contact_customer_service_edit_order)
                     WOWCustomerNeedHelp.show("",title: "确认订单")
                 }
                 

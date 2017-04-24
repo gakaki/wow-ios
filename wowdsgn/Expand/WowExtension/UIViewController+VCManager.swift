@@ -541,6 +541,7 @@ public class VCRedirect {
             print("为客服聊天界面")
 //           topNaVC?.popToRootViewController(animated: false)
         }else {
+            MobClick.e(.online_cutomer_service_detailpage)
             topNaVC?.pushViewController(sessionViewController, animated: true)
         }
         

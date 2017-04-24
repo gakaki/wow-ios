@@ -157,7 +157,26 @@ public enum UMengEvent  {
     case savepicture_clicks                                 //收藏的作品tab点击
     case change_personal_information_clicks_my_homepage         //修改个人信息按钮（个人中心页）
 
-
+    case more_button_picture_details_page                   //更多按钮（作品详情页）
+    case edit_picture_details_page                          //编辑（作品详情页）
+    case delete_picture_details_page                        //删除（作品详情页）
+    case report_picture_details_page                        //举报（作品详情页）
+    case garbage_information_picture_details_page           //垃圾信息（作品详情页）
+    case inappropriate_content_picture_details_page         //内容不当（作品详情页）
+    case reedit_picture_page                                //重新编辑页
+    case cancel_reedit_picture_page                         //取消（重新编辑图片页）
+    case post_reedit_picture_page                           //发布（重新编辑图片页）
+    case double_clicks_picture_details_page                 //作品双击点赞（作品详情页）
+    case double_clicks_masterpiece_page_community_homepage  //作品双击点赞（佳作页）
+    case online_customer_service_button_product_detail      //在线客服按钮（商品详情页）
+    case contact_customer_service_order_detail              //联系客服按钮（订单详情页）
+    case customer_service_phone_order_detail                //客服电话按钮（订单详情页）
+    case online_customer_service_order_detail               //在线客服按钮（订单详情页）
+    case contact_customer_service_edit_order                //联系客服按钮（填写订单页）
+    case customer_service_phone_edit_order                  //客服电话按钮（填写订单页）
+    case online_customer_service_edit_order                 //在线客服按钮（填写订单页）
+    case online_customer_service_information_center_page    //在线客服（消息中心）
+    case online_cutomer_service_detailpage                  //在线客服对话框	
     
 }
 

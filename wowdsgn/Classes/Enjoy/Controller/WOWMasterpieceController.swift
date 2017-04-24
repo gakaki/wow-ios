@@ -48,6 +48,8 @@ class WOWMasterpieceController: WOWBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.isHidden = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+
     }
     //MARK:Lazy
     lazy var topBtn:UIButton = {

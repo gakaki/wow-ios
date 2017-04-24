@@ -20,9 +20,21 @@ struct WOWCustomerNeedHelp {
         shareBackView.shareActionBack = {(shareType:WOWShareType)in
             switch shareType {
             case .needPhone:
+                if title == "确认订单" {
+                    MobClick.e(.customer_service_phone_edit_order)
+                }
+                if title == "订单详情" {
+                    MobClick.e(.customer_service_phone_order_detail)
+                }
                 WOWTool.callPhone()
                 return
             case .needCustomer:
+                if title == "确认订单" {
+                    MobClick.e(.online_customer_service_edit_order)
+                }
+                if title == "订单详情" {
+                    MobClick.e(.online_customer_service_order_detail)
+                }
                 let source = QYSource()
                 source.title =  title
                 VCRedirect.goCustomerVC(source, commodityInfo: nil,orderNumber:orderNumber)

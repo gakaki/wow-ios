@@ -124,16 +124,11 @@ class WOWChoiceClassController: WOWBaseViewController {
                 imagePickerVc?.allowPreview = true // 不预览图片
                 imagePickerVc?.showSelectBtn = true // 展示完成按钮
                 imagePickerVc?.didFinishPickingPhotosHandle = {[weak self](images,asstes,isupdete) in
-                    if let strongSelf = self,let images = images {
+                    if let strongSelf = self,let imagePickerVc = imagePickerVc{
                         MobClick.e(.finishpicturebutton)
                         UIApplication.shared.statusBarStyle = .default
-                        let photoTweaksViewController = PhotoTweaksViewController(image: images[0])
-                        photoTweaksViewController?.delegate = strongSelf
-                        photoTweaksViewController?.autoSaveToLibray = false
-
                         
-                        imagePickerVc?.pushViewController(photoTweaksViewController!, animated: true)
-//
+                        strongSelf.getDispatchPhoto(asset: asstes?[0] as! PHAsset,nav: imagePickerVc)
                 
                     }
                 }
@@ -141,6 +136,31 @@ class WOWChoiceClassController: WOWBaseViewController {
                 present(imagePickerVc!, animated: true, completion: nil)
 
         
+    }
+    // 异步获取到原图
+    func getDispatchPhoto(asset:PHAsset,nav:UINavigationController)  {
+        let options = PHImageRequestOptions()
+        options.isSynchronous = false
+        options.deliveryMode = .highQualityFormat
+        options.isNetworkAccessAllowed = true
+        PHImageManager.default().requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .default, options: options) {[weak self] (result, info) -> Void in
+            if let image = result,let strongSelf = self {
+                // 处理获得的图片
+                let h = image.size.height
+                let w = image.size.width
+                if h > 1000 && w > 1000 {
+                    let photoTweaksViewController = PhotoTweaksViewController(image: image)
+                    photoTweaksViewController?.delegate = strongSelf
+                    photoTweaksViewController?.autoSaveToLibray = false
+                    
+                    nav.pushViewController(photoTweaksViewController!, animated: true)
+                }else {
+//                     print("请重新选择照片")
+                    WOWHud.showMsg("请您上传大于1000*1000px的照片")
+                }
+                
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -188,17 +208,17 @@ extension WOWChoiceClassController:UICollectionViewDelegate,UICollectionViewData
         for model in categoryArr {
             if model == m {
                 if model.isSelect {
-//                    btnRright.isSelected    = false
+
                     btnRright.isEnabled     = false
                     model.isSelect          = false
-//                    classId = model.id ?? 0
+
                     
                 }else {
                     MobClick.e(.sellect_classifiaction_clicks_upload_classified_picture_page)
-//                    btnRright.isSelected    = true
+
                     btnRright.isEnabled     = true
                     model.isSelect          = true
-//                    classId = model.id ?? 0
+
                     
                 }
             }else {
@@ -220,16 +240,7 @@ extension WOWChoiceClassController:TZImagePickerControllerDelegate,PhotoTweaksVi
     func tz_imagePickerControllerDidCancel(_ picker: TZImagePickerController!) {
         picker.dismiss(animated: true, completion: nil)
     }
-//    func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
-//      
-//        let photoTweaksViewController = PhotoTweaksViewController(image: photos[0])
-//        photoTweaksViewController?.delegate = self
-//        photoTweaksViewController?.autoSaveToLibray = true
-//  
-//        
-//        picker?.pushViewController(photoTweaksViewController!, animated: true)
-//
-//    }
+
     
     func photoTweaksController(_ controller: PhotoTweaksViewController, didFinishWithCroppedImage croppedImage: UIImage!, clooseSizeImgId sizeId: Int32) {
       

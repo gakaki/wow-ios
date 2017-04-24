@@ -16,10 +16,10 @@ class WOWClickLikeAction {
     
     static  func likeAnimate(view: UIView, btn: UIButton) {
         if let img = btn.imageView {
-            var x = btn.mj_x + img.mj_x
-            var y = btn.mj_y + img.mj_y
-            var w = img.mj_w
-            var h = img.mj_h
+            let x = btn.mj_x + img.mj_x
+            let y = btn.mj_y + img.mj_y
+            let w = img.mj_w
+            let h = img.mj_h
             let imgView = UIImageView(frame: CGRect.init(x: x, y: y, w: w, h: h))
             imgView.contentMode = .scaleAspectFit
             imgView.image = btn.image(for: .selected)

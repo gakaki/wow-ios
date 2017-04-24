@@ -619,7 +619,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             if skuCount == 0 {
                 skuCount = 1
             }
-            sureButton.setBackgroundColor(MGRgb(32, g: 32, b: 32), forState: .normal)
+            sureButton.setBackgroundColor(MGRgb(255, g: 212, b: 68), forState: .normal)
             sureButton.isEnabled = true
             sureButton.setTitle("确定", for: .normal)
             

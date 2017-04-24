@@ -45,6 +45,7 @@ class WOWMasterpieceCell: UITableViewCell {
             UIApplication.currentViewController()?.toLoginVC(true)
             return
         }
+        MobClick.e(.double_clicks_masterpiece_page_community_homepage)
         requestLike(works: model?.id ?? 0)
         imgWroks.isUserInteractionEnabled = false
         thumbImg.isHidden = false

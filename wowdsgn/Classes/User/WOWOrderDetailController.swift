@@ -1189,6 +1189,7 @@ extension WOWOrderDetailController {
         let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTelCell.self), for: indexPath) as! WOWTelCell
         cell.titleLabel.text = "需要帮助"
         cell.contentView.addTapGesture {[unowned self] (sender) in
+            MobClick.e(.contact_customer_service_order_detail)
             WOWCustomerNeedHelp.show(self.orderNewDetailModel?.orderCode ?? "")
         }
         

@@ -47,8 +47,10 @@ class WOWWorksDetailsController: WOWBaseViewController {
         super.setUI()
         self.makeCustomerImageNavigationItem("work_more", left: false) { [weak self] in
             if let strongSelf = self {
-                let window = UIApplication.shared.windows.last
+                //umeng
+                MobClick.e(.more_button_picture_details_page)
                 
+                let window = UIApplication.shared.windows.last
                 window?.addSubview(strongSelf.backView)
                 window?.bringSubview(toFront: strongSelf.backView)
                 strongSelf.backView.selectView.delegate = self
@@ -221,7 +223,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
         WOWNetManager.sharedManager.requestWithTarget(.api_Works_Delete(worksId: worksId ?? 0), successClosure: {[weak self] (result, code) in
             if let strongSelf = self {
                 WOWHud.showMsg("删除作品")
-                strongSelf.popVC()
+                strongSelf.backAction()
             }
     
         }) { (errorMsg) in
@@ -280,6 +282,7 @@ extension WOWWorksDetailsController:UITableViewDelegate,UITableViewDataSource, W
     }
     
     func doubleTapThumb() {
+        MobClick.e(.double_clicks_picture_details_page)
         if !btnPraiseCount.isSelected {
             requestPraise()
         }
@@ -293,23 +296,28 @@ extension WOWWorksDetailsController: WOWWorkMoreViewDelegate {
             backView.hideView()
             break
         case .delete:   //删除
+            MobClick.e(.delete_picture_details_page)
             backView.hideView()
             deleteAction()
             break
         case .report:    //举报
+            MobClick.e(.report_picture_details_page)
             backView.hideOtherView()
             break
         case .improper:     //内容不当
+            MobClick.e(.inappropriate_content_picture_details_page)
             backView.hideView()
             requestReport(reason: 2)
             break
         case .edit:     //编辑
+            MobClick.e(.edit_picture_details_page)
             backView.hideView()
             if let model = modelData {
                 goEditWorks(model: model)
             }
             break
         case .rubbish:  //垃圾内容
+            MobClick.e(.garbage_information_picture_details_page)
             backView.hideView()
             requestReport(reason: 1)
             break

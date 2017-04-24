@@ -34,6 +34,7 @@ class WOWEditWorksController: WOWBaseViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        MobClick.e(.reedit_picture_page)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -62,7 +63,7 @@ class WOWEditWorksController: WOWBaseViewController {
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "退出", style: .default, handler: {
             [unowned self] action in
-            
+            MobClick.e(.cancel_reedit_picture_page)
             self.dismiss(animated: true) {
             }
             
@@ -91,7 +92,7 @@ class WOWEditWorksController: WOWBaseViewController {
     }
     // MARK: - 发布按钮
     @IBAction func releaseAction(_ sender: Any) {
-        MobClick.e(.post_clicks_post_picture_page)
+        MobClick.e(.post_reedit_picture_page)
         requestPushlish()
         
     }

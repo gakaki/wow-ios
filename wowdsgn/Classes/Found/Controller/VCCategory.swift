@@ -120,8 +120,6 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDataSource, UICollection
     func addTopView(){
         cv.delegate     = self
         cv.dataSource   = self
-        //not add this where add cell in uicollectionview
-        //self.cv.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "reuse_id")
         
         self.cv.backgroundView                      = top_category_image_view
         self.cv.showsHorizontalScrollIndicator      = false

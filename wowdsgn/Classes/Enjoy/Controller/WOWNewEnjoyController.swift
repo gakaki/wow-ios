@@ -117,6 +117,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.isHidden = true
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         kolodaView.isHidden = false
     }
     

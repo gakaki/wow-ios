@@ -14,7 +14,7 @@ class WOWLaunchView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         startTime()
-        let delayTime = DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        let delayTime = DispatchTime.now() + Double(Int64(5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: delayTime) {[unowned self] in
             self.requestCheakVersion()
             self.removeFromSuperview()
@@ -29,9 +29,9 @@ class WOWLaunchView: UIView {
                 self.timeButton.setTitle("跳过 " + String(format:"%.0f",(values?[0])!), for: .normal)
             }
         }) as! POPAnimatableProperty
-        basicAnimation?.duration = 3.0
-        basicAnimation?.fromValue = 3
-        basicAnimation?.toValue = 0
+        basicAnimation?.duration = 5.0
+        basicAnimation?.fromValue = 5
+        basicAnimation?.toValue = 1
         timeButton.pop_add(basicAnimation, forKey: "countdown")
     }
     override func removeFromSuperview() {

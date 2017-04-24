@@ -88,7 +88,7 @@ class WOWEnjoyController: WOWBaseViewController {
         vc_masterpiece?.categoryId = self.currentCategoryId
         vc_masterpiece?.delegate = self
         v.magicView.reloadData()
-       
+
     }
     
     //MARK: -- NetWork

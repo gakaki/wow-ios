@@ -170,7 +170,6 @@ class WOWEditOrderController: WOWBaseViewController {
             if let strongSelf = self {
                 let couponInfo: WOWCouponModel? = model as? WOWCouponModel
                 
-//                if couponInfo?.id != strongSelf.couponModel?.id {
                     strongSelf.couponModel = model as? WOWCouponModel
                     
                     strongSelf.orderSettle?.deductionName = strongSelf.couponModel?.couponTitle
@@ -180,7 +179,6 @@ class WOWEditOrderController: WOWBaseViewController {
                     strongSelf.orderSettle?.deductionName = couponInfo?.title
                     //选择优惠券
                     strongSelf.selectCoupons()
-//                }
                 
             }
         }

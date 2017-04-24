@@ -154,7 +154,6 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         tv.delegate          = self
         tv.dataSource        = self
         tv.register(TvCell.self, forCellReuseIdentifier:String(describing: TvCell.self))
-//        tv.bounces           = false
         tv.showsVerticalScrollIndicator = false
         self.view.addSubview(tv)
     }
@@ -174,7 +173,6 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         
         
         layout.itemSize                        = CGSize(width:cell_width , height: cell_height)
-//      layout.estimatedItemSize               = CGSize(width: cv_width / 2 - CGFloat(2), height: 100 )
 
         layout.minimumInteritemSpacing         = padding
         layout.minimumLineSpacing              = padding
@@ -190,14 +188,9 @@ class VCCategoryChoose: VCBaseVCCategoryFound {
         cv.register(CVCell.self, forCellWithReuseIdentifier:String(describing: CVCell.self))
         cv.showsVerticalScrollIndicator         = false
         cv.showsHorizontalScrollIndicator       = false
-//        cv.scrollEnabled                        = false
         
         cv.addBorderLeft(size: 0.3, color: UIColor(hexString:"EAEAEA")!)
-//        cv.bouncesZoom = true
-//        cv.alwaysBounceVertical = true
-//        cv.bounces                              = false
-//        cv.pagingEnabled                        = true
-//        cv.backgroundColor                      = UIColor.blackColor()
+
         self.view.addSubview(cv)
     }
     
@@ -341,7 +334,6 @@ extension VCCategoryChoose:UICollectionViewDelegate,UICollectionViewDataSource,U
         let m = vo_categories_sub_arr[(indexPath as NSIndexPath).item]
         if let cid = m.categoryID , let _ = m.categoryName{
             
-//            VCRedirect.toVCCategory(cid)
             VCRedirect.toVCScene(cid, entrance: .category)
 
         }

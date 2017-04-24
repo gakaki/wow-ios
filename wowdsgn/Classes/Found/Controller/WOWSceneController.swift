@@ -98,7 +98,7 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
     
     override func request(){
         super.request()
-        
+        //区分入口。分类，场景，标签同样页面布局
         switch entrance {
         case .category:
             requestCategory()
@@ -112,6 +112,7 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
         
     }
     
+    //请求分类数据
     func requestCategory() {
         let cid = self.ob_cid
         
@@ -173,6 +174,7 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
         
     }
     
+    //请求场景数据
     func requestScene() {
         var params              = [String: Any]()
         let prats               = ["category"]
@@ -212,6 +214,7 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
 
     }
     
+    //请求标签数据
     func requestTag() {
         var params              = [String: Any]()
         let prats               = ["category"]

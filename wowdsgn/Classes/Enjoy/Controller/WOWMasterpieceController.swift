@@ -223,9 +223,10 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
                 changeState(alpha: 0.01)
 
             }
-            
+//            let vc = self.magic as! VCVTMagic
+//            vc.magicView.navigationHeight = 0
             self.navigationController?.setNavigationBarHidden(true, animated: true)
-
+            
             return
         }else if lastContentOffset - a > 20 && (a  <= scrollView.contentSize.height-scrollView.bounds.size.height-20) {
             lastContentOffset = a
@@ -234,6 +235,8 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
                 changeState(alpha: 1)
 
             }
+//            let vc = self.magic as! VCVTMagic
+//            vc.magicView.navigationHeight = 44
             self.navigationController?.setNavigationBarHidden(false, animated: true)
 
             return

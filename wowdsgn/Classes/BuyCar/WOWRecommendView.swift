@@ -46,7 +46,7 @@ class WOWRecommendView: UIView,UITableViewDelegate,UITableViewDataSource,HomeBot
             pageIndex = 1
             isRreshing = true
         }
-        LoadView.dissMissView()
+//        LoadView.dissMissView()
         requestBottom()
 
     }

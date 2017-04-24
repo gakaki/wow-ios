@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDeleg
         ImageCache.default.maxMemoryCost                            = cache_size
         URLCache.shared.diskCapacity                                = Int(cache_size)
         URLCache.shared.memoryCapacity                              = Int(cache_size)
-
+        
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {

@@ -431,7 +431,7 @@ class WOWEditOrderController: WOWBaseViewController {
             
             }) { (errorMsg) in
                 
-                LoadView.dissMissView()
+//                LoadView.dissMissView()
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
         
@@ -542,7 +542,7 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
         }) { (errorMsg) in
-            LoadView.dissMissView()
+//            LoadView.dissMissView()
             WOWHud.showMsgNoNetWrok(message: errorMsg)
 
         }

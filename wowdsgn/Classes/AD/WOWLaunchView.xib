@@ -38,7 +38,7 @@
                                 <constraint firstAttribute="height" constant="25" id="tNk-G8-724"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal">
+                            <state key="normal" title="跳过 5">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>

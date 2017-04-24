@@ -26,12 +26,22 @@ class WOWLaunchView: UIView {
         let basicAnimation = POPBasicAnimation.linear()
         basicAnimation?.property = POPAnimatableProperty.property(withName: "linearCountdownAnimation", initializer: {(property) in
             property?.writeBlock = { [unowned self](object,values) in//在这里设置动画内容
-                self.timeButton.setTitle("跳过 " + String(format:"%.0f",(values?[0])!), for: .normal)
+                if let value = values?[0] {
+                    if value < 1 {
+                    
+                        self.timeButton.setTitle("跳过 ", for: .normal)
+                    }else {
+                        
+                        self.timeButton.setTitle("跳过 " + String(format:"%.0f",value), for: .normal)
+
+                    }
+                }
+                
             }
         }) as! POPAnimatableProperty
         basicAnimation?.duration = 5.0
         basicAnimation?.fromValue = 5
-        basicAnimation?.toValue = 1
+        basicAnimation?.toValue = 0
         timeButton.pop_add(basicAnimation, forKey: "countdown")
     }
     override func removeFromSuperview() {

@@ -105,7 +105,7 @@ class WOWBaseModuleVC: WOWBaseViewController {
         
         // 关闭动画， 防止下拉刷新此界面再次出来
 
-        LoadView.dissMissView()
+//        LoadView.dissMissView()
         request()
 
     }

@@ -50,6 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDeleg
         QYSDK.shared().conversationManager().setDelegate(self)
         let massageCount = QYSDK.shared().conversationManager().allUnreadCount()
         messageCountView(massageCount)
+        IQKeyboardManager.sharedManager().disabledDistanceHandlingClasses.append(QYSessionViewController.classForCoder() as! UIViewController.Type)
+
         ADLaunchView()
         return true
     }

@@ -19,7 +19,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
     @IBOutlet var bottomView: UIView!
     
     var isBoolFormReleaseVC : Bool = false // 是否从发布页进来 默认为false
-    
+
     var worksId : Int?
     var modelData : WOWWorksDetailsModel?
     

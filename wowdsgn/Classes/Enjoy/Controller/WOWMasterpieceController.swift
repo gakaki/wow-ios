@@ -28,6 +28,7 @@ class WOWMasterpieceController: WOWBaseViewController {
         MobClick.e(.masterpiece_page_community_homepage)
     }
     override func viewWillAppear(_ animated: Bool) {
+        hideNavigationBar = true
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.isHidden = true
         if !UserDefaults.standard.bool(forKey: "FirstTime_Master") {
@@ -48,7 +49,7 @@ class WOWMasterpieceController: WOWBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationShadowImageView?.isHidden = false
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+//        self.navigationController?.setNavigationBarHidden(false, animated: true)
 
     }
     //MARK:Lazy
@@ -227,7 +228,7 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
             }
 //            let vc = self.magic as! VCVTMagic
 //            vc.magicView.navigationHeight = 0
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
+//            self.navigationController?.setNavigationBarHidden(true, animated: true)
             
             return
         }else if lastContentOffset - a > 20 && (a  <= scrollView.contentSize.height-scrollView.bounds.size.height-20) {
@@ -239,7 +240,7 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
             }
 //            let vc = self.magic as! VCVTMagic
 //            vc.magicView.navigationHeight = 44
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
+//            self.navigationController?.setNavigationBarHidden(false, animated: true)
 
             return
         }

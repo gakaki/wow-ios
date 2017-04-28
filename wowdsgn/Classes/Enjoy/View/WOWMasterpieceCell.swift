@@ -12,6 +12,10 @@ class WOWMasterpieceCell: UITableViewCell {
 
     @IBOutlet weak var imgWroks: UIImageView!
     @IBOutlet weak var thumbImg: UIImageView!
+    @IBOutlet weak var headImg: UIImageView!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var sexLabel: UILabel!
+    @IBOutlet weak var startLabel: UILabel!
     var model: WOWFineWroksModel?
     
     override func awakeFromNib() {

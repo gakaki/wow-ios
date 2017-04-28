@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QDu-1s-RJp">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QDu-1s-RJp">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +19,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gQF-Eq-1Ea" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-305" y="442"/>
+            <point key="canvasLocation" x="-605" y="465"/>
         </scene>
         <!--编辑订单-->
         <scene sceneID="mqd-hk-z57">
@@ -130,7 +130,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Z6e-3O-4Cr">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="t5S-nt-7u6" id="X6y-we-0vg"/>
@@ -138,10 +138,10 @@
                                 </connections>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccY-3m-yCX" userLabel="bottomView">
-                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkW-n9-3vb">
-                                        <rect key="frame" x="15" y="0.0" width="60" height="0.0"/>
+                                        <rect key="frame" x="15" y="0.0" width="60" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="QFo-hb-STh"/>
                                         </constraints>
@@ -157,19 +157,19 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="合计：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHI-be-nCo">
-                                        <rect key="frame" x="201" y="-8" width="40" height="16"/>
+                                        <rect key="frame" x="201" y="17" width="40" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="        " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGR-Qa-bZR">
-                                        <rect key="frame" x="241" y="-8" width="29" height="16"/>
+                                        <rect key="frame" x="241" y="17" width="29" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6y-vj-XDz">
-                                        <rect key="frame" x="285" y="0.0" width="90" height="0.0"/>
+                                        <rect key="frame" x="285" y="0.0" width="90" height="50"/>
                                         <color key="backgroundColor" red="1" green="0.83137254900000002" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="VGs-ju-gcA"/>
@@ -203,7 +203,7 @@
                                     <constraint firstItem="k6y-vj-XDz" firstAttribute="leading" secondItem="jGR-Qa-bZR" secondAttribute="trailing" constant="15" id="SrZ-O4-zBY"/>
                                     <constraint firstAttribute="trailing" secondItem="k6y-vj-XDz" secondAttribute="trailing" id="WHy-O7-hI4"/>
                                     <constraint firstItem="bkW-n9-3vb" firstAttribute="leading" secondItem="ccY-3m-yCX" secondAttribute="leading" constant="15" id="Wmg-PR-W2n"/>
-                                    <constraint firstAttribute="height" id="XHN-8i-K0I"/>
+                                    <constraint firstAttribute="height" constant="50" id="XHN-8i-K0I"/>
                                     <constraint firstItem="k6y-vj-XDz" firstAttribute="top" secondItem="ccY-3m-yCX" secondAttribute="top" id="Y7i-RM-H9l"/>
                                     <constraint firstItem="bkW-n9-3vb" firstAttribute="top" secondItem="ccY-3m-yCX" secondAttribute="top" id="hdm-J6-tab"/>
                                     <constraint firstItem="jGR-Qa-bZR" firstAttribute="centerY" secondItem="ccY-3m-yCX" secondAttribute="centerY" id="kn3-pS-Bt9"/>
@@ -226,7 +226,7 @@
                     <navigationItem key="navigationItem" title="购物车" id="GdU-x6-BgS"/>
                     <connections>
                         <outlet property="allButton" destination="bkW-n9-3vb" id="8Gt-et-gh3"/>
-                        <outlet property="bottomHeight" destination="XHN-8i-K0I" id="w0f-kb-fbZ"/>
+                        <outlet property="bottomHeight" destination="w0l-zB-BAS" id="cD8-TI-4Ed"/>
                         <outlet property="bottomView" destination="ccY-3m-yCX" id="9yI-lp-1rz"/>
                         <outlet property="endButton" destination="k6y-vj-XDz" id="t6K-5o-W9E"/>
                         <outlet property="tableView" destination="Z6e-3O-4Cr" id="8IL-uN-041"/>
@@ -235,25 +235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lKZ-bP-kn1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-145" y="680"/>
-        </scene>
-        <!--商品清单-->
-        <scene sceneID="YNJ-DT-B4T">
-            <objects>
-                <tableViewController storyboardIdentifier="WOWCarGoodsListController" title="商品清单" id="Ebu-7G-X7W" customClass="WOWCarGoodsListController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Nb5-zr-68R">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <connections>
-                            <outlet property="dataSource" destination="Ebu-7G-X7W" id="5Ro-yp-SbP"/>
-                            <outlet property="delegate" destination="Ebu-7G-X7W" id="BaS-c6-WHj"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yQO-fa-lux" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="828" y="428"/>
+            <point key="canvasLocation" x="-196" y="374"/>
         </scene>
         <!--订单确认-->
         <scene sceneID="cfl-lC-mPJ">

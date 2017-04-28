@@ -56,7 +56,7 @@ struct WOWShareManager {
 
     static func share(_ title:String?,shareText:String?,url:String?,shareImage:Any!){
         shareBackView.show()
-        let shareNewText = "尖叫设计，生活即风格－600元新人礼包等你来拿！"
+        let shareNewText = "尖叫设计，生活即风格-新人专享8.5折券，等你来拿！"
         shareBackView.shareActionBack = {(shareType:WOWShareType)in
             switch shareType {
             case .friends:

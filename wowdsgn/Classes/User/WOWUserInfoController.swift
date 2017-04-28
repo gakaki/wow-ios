@@ -35,10 +35,9 @@ class WOWUserInfoController: WOWBaseTableViewController {
     @IBOutlet weak var space: NSLayoutConstraint!
     @IBOutlet weak var arrowImg: UIImageView!
     
-    var  backGroundMaskView : UIView!
-    var  backGroundWindow : UIWindow!
+//    var  backGroundMaskView : UIView!
+//    var  backGroundWindow : UIWindow!
     
-//    var editInfoAction:WOWActionClosure?
     var addressInfo                     :WOWAddressListModel?
 
     
@@ -61,10 +60,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
         return v
     }()
     
-    lazy var pickerContainerView :WOWPickerView = {
-        let v = Bundle.main.loadNibNamed("WOWPickerView", owner: self, options: nil)?.last as! WOWPickerView
-        return v
-    }()
+//    lazy var pickerContainerView :WOWPickerView = {
+//        let v = Bundle.main.loadNibNamed("WOWPickerView", owner: self, options: nil)?.last as! WOWPickerView
+//        return v
+//    }()
     
     //个人资料
     lazy var aboutView:WOWAboutHeaderView = {
@@ -87,13 +86,20 @@ class WOWUserInfoController: WOWBaseTableViewController {
         return v
     }()
     
+    
+    lazy var backView:WOWPickerBackView = {[unowned self] in
+        let v = WOWPickerBackView(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight))
+        v.pickerView.pickerView.delegate = self
+        v.pickerView.sureButton.addTarget(self, action:#selector(surePicker), for:.touchUpInside)
+        return v
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         MobClick.e(.Personal_Information)
         
         addObserver()
-//        configUserInfo()
        
 
 
@@ -111,7 +117,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
         super.viewWillAppear(animated)
     
         configUserInfo()
-        configPickerView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -119,8 +124,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
         
         
         removeObserver()
-        backGroundMaskView.removeFromSuperview()
-        pickerContainerView.removeFromSuperview()
+
         
         IQKeyboardManager.sharedManager().enable = true
 
@@ -131,12 +135,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
         super.didReceiveMemoryWarning()
     }
     fileprivate func addObserver(){
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(loginSuccess), name:WOWLoginSuccessNotificationKey, object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(exitLogin), name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object:nil)
         
     }
     fileprivate func removeObserver() {
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name:WOWLoginSuccessNotificationKey, object: nil)
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name(rawValue: WOWExitLoginNotificationKey), object: nil)
     }
     override func setUI() {
@@ -148,29 +150,12 @@ class WOWUserInfoController: WOWBaseTableViewController {
         
     }
     
-    fileprivate func configPickerView(){
+    fileprivate func showPickerView(){
+        let window = UIApplication.shared.windows.last
         
-        backGroundMaskView = UIView()
-        backGroundMaskView.frame = CGRect(x: 0, y: 0 , width: MGScreenWidth, height: MGScreenHeight)
-        backGroundMaskView.backgroundColor = UIColor.black
-        backGroundMaskView.alpha = 0.2
-        
-
-        backGroundMaskView.addTapGesture(target: self, action: #selector(cancelPicker))
-        
-        pickerContainerView.frame = CGRect(x: 0, y: MGScreenHeight,width: UIApplication.currentViewController()?.view.w ?? MGScreenWidth, height: PickerViewHeight)
-        
-
-        pickerContainerView.pickerView.delegate = self
-        pickerContainerView.cancelButton.addTarget(self, action:#selector(cancelPicker), for:.touchUpInside)
-        pickerContainerView.sureButton.addTarget(self, action:#selector(surePicker), for:.touchUpInside)
-
-        
-        backGroundWindow = UIApplication.shared.keyWindow
-        
-        backGroundWindow.addSubview(backGroundMaskView)
-        backGroundWindow.addSubview(pickerContainerView)
-        backGroundMaskView.isHidden = true
+        window?.addSubview(backView)
+        window?.bringSubview(toFront: backView)
+        backView.show()
 
     }
     
@@ -247,16 +232,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
     func loginSuccess(){
         configUserInfo()
     }
-    func cancelPicker(){
 
-        self.backGroundMaskView.isHidden = true
-        UIView.animate(withDuration: 0.3){
-            self.pickerContainerView.mj_y = MGScreenHeight
-        }
-    }
     
     func surePicker() {
-        let row = pickerContainerView.pickerView.selectedRow(inComponent: 0)
+        let row = backView.pickerView.pickerView.selectedRow(inComponent: 0)
         
         if editingGroupAndRow == [0:3] {
             
@@ -276,7 +255,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
             starTextField?.text = pickDataArr[row + 1]
         }
         requestEditUserInfo()
-        cancelPicker()
+        backView.hideView()
     }
     
     func bindMobile()  {
@@ -448,44 +427,44 @@ extension WOWUserInfoController{
         case (0,0):
             showPicture()
         case (0,3):
-            pickDataArr = WOWSex
-            
-            self.pickerContainerView.pickerView.reloadComponent(0)
-            if  sex == 0 {
-                pickerContainerView.pickerView.selectRow(2, inComponent: 0, animated: true)
-            }else{
-                pickerContainerView.pickerView.selectRow(sex - 1, inComponent: 0, animated: true)
-            }
-           
-            self.pickerContainerView.pickerView.reloadComponent(0)
-            showPickerView()
             editingGroupAndRow = [0:3]
 
-        case (0,4):
-            pickDataArr = WOWAgeRange
-            self.pickerContainerView.pickerView.reloadComponent(0)
-            pickerContainerView.pickerView.selectRow(age, inComponent: 0, animated: true)
-            self.pickerContainerView.pickerView.reloadComponent(0)
-
+            pickDataArr = WOWSex
+            
+            if  sex == 0 {
+                backView.pickerView.pickerView.selectRow(2, inComponent: 0, animated: true)
+            }else{
+                backView.pickerView.pickerView.selectRow(sex - 1, inComponent: 0, animated: true)
+            }
+           
+            backView.pickerView.pickerView.reloadComponent(0)
             showPickerView()
+
+        case (0,4):
             editingGroupAndRow = [0:4]
+
+            pickDataArr = WOWAgeRange
+            backView.pickerView.pickerView.selectRow(age, inComponent: 0, animated: true)
+            backView.pickerView.pickerView.reloadComponent(0)
+            showPickerView()
+
         case (0,5):
+            editingGroupAndRow = [0:5]
             pickDataArr = WOWConstellation
-            self.pickerContainerView.pickerView.reloadComponent(0)
             if star == 0 {
                 
-                pickerContainerView.pickerView.selectRow(star, inComponent: 0, animated: true)
+                backView.pickerView.pickerView.selectRow(star, inComponent: 0, animated: true)
           
             }else {
                 
-                pickerContainerView.pickerView.selectRow(star - 1, inComponent: 0, animated: true)
+                backView.pickerView.pickerView.selectRow(star - 1, inComponent: 0, animated: true)
          
             }
 
             
-            self.pickerContainerView.pickerView.reloadComponent(0)
+            backView.pickerView.pickerView.reloadComponent(0)
             showPickerView()
-            editingGroupAndRow = [0:5]
+
         case (0, 7):
             
             let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWAddressController.self)) as! WOWAddressController
@@ -547,15 +526,7 @@ extension WOWUserInfoController{
         }
     }
     
-    fileprivate func showPickerView(){
-        
-        self.backGroundMaskView.isHidden = false
-        
-        UIView.animate(withDuration: 0.3){
-            self.pickerContainerView.mj_y = self.view.h - PickerViewHeight + 64
 
-        }
-    }
     fileprivate func showPicture(){
         let actionSheetController: UIAlertController = UIAlertController(title: "更改头像", message: nil, preferredStyle: .actionSheet)
         let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .cancel) { action -> Void in

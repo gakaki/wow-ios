@@ -41,7 +41,11 @@ class WOWController: WOWBaseModuleVC {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+//        hideNavigationBar = true
+//        super.viewWillAppear(animated)
+        
+        
+        beginPageView()
         let parmas = ["Secondary_Homepagename": self.title ?? "推荐", "Secondary_Homepageid": tabId ?? 1] as [String : Any]
         MobClick.e2(.Secondary_Homepage_Pv, parmas)
         self.navigationShadowImageView?.isHidden = true

@@ -55,7 +55,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rTH-Uk-g43" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1505" y="3"/>
+            <point key="canvasLocation" x="-1967" y="-39"/>
         </scene>
         <!--Praise Controller-->
         <scene sceneID="hRX-va-QwO">
@@ -88,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nyx-Ng-21Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-730.39999999999998" y="17.541229385307346"/>
+            <point key="canvasLocation" x="-1290" y="-23"/>
         </scene>
         <!--Collect Controller-->
         <scene sceneID="WWv-g5-5pg">
@@ -188,5 +188,170 @@
             </objects>
             <point key="canvasLocation" x="936.79999999999995" y="7.6461769115442282"/>
         </scene>
+        <!--新增地址-->
+        <scene sceneID="o2h-3O-Jam">
+            <objects>
+                <tableViewController storyboardIdentifier="WOWAddAddressController" title="新增地址" id="lRh-aZ-tL8" customClass="WOWAddAddressController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="20" sectionFooterHeight="28" id="xAt-EC-xJd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <sections>
+                            <tableViewSection id="nS5-JX-sA8">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="60" id="hvJ-TC-Trz">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hvJ-TC-Trz" id="UZB-vq-xKw">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="refund_barter" translatesAutoresizingMaskIntoConstraints="NO" id="XCw-lp-Uof">
+                                                    <rect key="frame" x="12" y="15" width="30" height="30"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退货退款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cyh-9K-w8l">
+                                                    <rect key="frame" x="54" y="10" width="62" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="3Wd-Dd-vOM"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="v7a-SQ-5i3">
+                                                    <rect key="frame" x="351" y="22" width="9" height="16"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已收到货，需要退还已收到的货物" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="du6-Tt-fBr">
+                                                    <rect key="frame" x="54" y="33" width="184" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="cdO-sB-wFc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Cyh-9K-w8l" firstAttribute="top" secondItem="UZB-vq-xKw" secondAttribute="top" constant="10" id="3vu-wB-6lf"/>
+                                                <constraint firstItem="XCw-lp-Uof" firstAttribute="leading" secondItem="UZB-vq-xKw" secondAttribute="leading" constant="12" id="9n7-vx-O7y"/>
+                                                <constraint firstItem="v7a-SQ-5i3" firstAttribute="centerY" secondItem="UZB-vq-xKw" secondAttribute="centerY" id="cDR-ek-Rtu"/>
+                                                <constraint firstItem="du6-Tt-fBr" firstAttribute="leading" secondItem="XCw-lp-Uof" secondAttribute="trailing" constant="12" id="hpR-fC-KYI"/>
+                                                <constraint firstItem="XCw-lp-Uof" firstAttribute="centerY" secondItem="UZB-vq-xKw" secondAttribute="centerY" id="ieP-fn-7J4"/>
+                                                <constraint firstItem="du6-Tt-fBr" firstAttribute="top" secondItem="Cyh-9K-w8l" secondAttribute="bottom" constant="2" id="jgm-J9-S3O"/>
+                                                <constraint firstItem="Cyh-9K-w8l" firstAttribute="leading" secondItem="XCw-lp-Uof" secondAttribute="trailing" constant="12" id="nmd-np-x7h"/>
+                                                <constraint firstAttribute="trailing" secondItem="v7a-SQ-5i3" secondAttribute="trailing" constant="15" id="tgN-I8-5rx"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="60" id="iKn-5k-VnM">
+                                        <rect key="frame" x="0.0" y="60" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iKn-5k-VnM" id="Kur-dw-MRx">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="refund" translatesAutoresizingMaskIntoConstraints="NO" id="qnG-7F-FN0">
+                                                    <rect key="frame" x="12" y="15" width="30" height="30"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仅退款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0H6-hc-WZn">
+                                                    <rect key="frame" x="54" y="10" width="46" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="iUO-XW-Tzg"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="JJt-wc-WuF">
+                                                    <rect key="frame" x="351" y="22" width="9" height="16"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已收到货，需要退还已收到的货物" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lf9-eM-Afx">
+                                                    <rect key="frame" x="54" y="33" width="184" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="2qp-FN-eUP"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0H6-hc-WZn" firstAttribute="leading" secondItem="qnG-7F-FN0" secondAttribute="trailing" constant="12" id="B04-7Z-n1V"/>
+                                                <constraint firstItem="lf9-eM-Afx" firstAttribute="top" secondItem="0H6-hc-WZn" secondAttribute="bottom" constant="2" id="N3v-Oj-giC"/>
+                                                <constraint firstItem="qnG-7F-FN0" firstAttribute="leading" secondItem="Kur-dw-MRx" secondAttribute="leading" constant="12" id="SWO-C6-1uD"/>
+                                                <constraint firstItem="lf9-eM-Afx" firstAttribute="leading" secondItem="qnG-7F-FN0" secondAttribute="trailing" constant="12" id="eCJ-a2-pMx"/>
+                                                <constraint firstItem="qnG-7F-FN0" firstAttribute="centerY" secondItem="Kur-dw-MRx" secondAttribute="centerY" id="f2U-b5-5N7"/>
+                                                <constraint firstAttribute="trailing" secondItem="JJt-wc-WuF" secondAttribute="trailing" constant="15" id="smO-Gi-5XN"/>
+                                                <constraint firstItem="JJt-wc-WuF" firstAttribute="centerY" secondItem="Kur-dw-MRx" secondAttribute="centerY" id="uha-vl-qto"/>
+                                                <constraint firstItem="0H6-hc-WZn" firstAttribute="top" secondItem="Kur-dw-MRx" secondAttribute="top" constant="10" id="wbu-Ui-FL1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="60" id="8KQ-fh-1nN">
+                                        <rect key="frame" x="0.0" y="120" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8KQ-fh-1nN" id="n8z-rF-T2g">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="barter" translatesAutoresizingMaskIntoConstraints="NO" id="RnD-SA-O0Q">
+                                                    <rect key="frame" x="12" y="15" width="30" height="30"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="换货" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5P-Ix-qc3">
+                                                    <rect key="frame" x="54" y="10" width="31" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="mgS-ee-ycF"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="85S-JA-OCU">
+                                                    <rect key="frame" x="351" y="22" width="9" height="16"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已收到货，需要退还已收到的货物" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xh4-bA-nwg">
+                                                    <rect key="frame" x="54" y="33" width="184" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="4Nt-Ug-n9b"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RnD-SA-O0Q" firstAttribute="centerY" secondItem="n8z-rF-T2g" secondAttribute="centerY" id="K7v-rF-Wi8"/>
+                                                <constraint firstItem="xh4-bA-nwg" firstAttribute="top" secondItem="s5P-Ix-qc3" secondAttribute="bottom" constant="2" id="Qvq-uQ-2yO"/>
+                                                <constraint firstItem="xh4-bA-nwg" firstAttribute="leading" secondItem="RnD-SA-O0Q" secondAttribute="trailing" constant="12" id="aId-vQ-oo3"/>
+                                                <constraint firstItem="85S-JA-OCU" firstAttribute="centerY" secondItem="n8z-rF-T2g" secondAttribute="centerY" id="dBe-lv-Vce"/>
+                                                <constraint firstItem="s5P-Ix-qc3" firstAttribute="leading" secondItem="RnD-SA-O0Q" secondAttribute="trailing" constant="12" id="hAF-aO-VTw"/>
+                                                <constraint firstItem="RnD-SA-O0Q" firstAttribute="leading" secondItem="n8z-rF-T2g" secondAttribute="leading" constant="12" id="rOb-qi-yfP"/>
+                                                <constraint firstAttribute="trailing" secondItem="85S-JA-OCU" secondAttribute="trailing" constant="15" id="rs9-DQ-zzE"/>
+                                                <constraint firstItem="s5P-Ix-qc3" firstAttribute="top" secondItem="n8z-rF-T2g" secondAttribute="top" constant="10" id="tgW-w5-IhK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="lRh-aZ-tL8" id="3MC-Bh-6uC"/>
+                            <outlet property="delegate" destination="lRh-aZ-tL8" id="Pmw-ym-g6g"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lxR-qH-PIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="122.40000000000001" y="700.29985007496259"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="barter" width="30" height="30"/>
+        <image name="next_arrow" width="9" height="16"/>
+        <image name="refund" width="30" height="30"/>
+        <image name="refund_barter" width="30" height="30"/>
+    </resources>
 </document>

@@ -9,11 +9,11 @@
 import Foundation
 
 /*
-enum SNVError: ErrorType {
+enum SNVError: Error {
     case ControllerNotFound(description:String)
 }
 
-@ob class PageControllerDataSource:NSObject{
+@objc class PageControllerDataSource:NSObject{
     
     private var viewIdsToViewControllers:[String:UIViewController] = [String:UIViewController]()
     private var viewControllerIdentifiers : [String] = []
@@ -24,21 +24,21 @@ enum SNVError: ErrorType {
         assert(viewControllersIds.count > 0)
         super.init()
         self.viewControllerIdentifiers +=  viewControllersIds
-        self.storyBoard = UIStoryboard(name:storyboardName, bundle:NSBundle.mainBundle())
+        self.storyBoard = UIStoryboard(name:storyboardName, bundle:Bundle.mainBundle())
         pageController.dataSource = self
-        for (index,identifier) in self.viewControllerIdentifiers.enumerate() {
-            self.viewIdsToViewControllers["\(index)"] = self.storyBoard.instantiateViewControllerWithIdentifier(identifier)
+        for (index,identifier) in self.viewControllerIdentifiers.enumerated() {
+            self.viewIdsToViewControllers["\(index)"] = self.storyBoard.instantiateViewController(withIdentifier: identifier)
             controllers.append(self.viewIdsToViewControllers["\(index)"]!)
         }
-        pageController.setViewControllers([controllers[0]], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+        pageController.setViewControllers([controllers[0]], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
     }
     
 }
 
 extension PageControllerDataSource:UIPageViewControllerDataSource{
-    @objc func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        let vcIndex = controllers.indexOf(viewController)
-        if vcIndex >= controllers.count - 1{
+    @objc func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        let vcIndex = controllers.index(of: viewController)
+        if vcIndex! >= controllers.count - 1{
             return nil
         }else{
             return controllers[vcIndex! + 1]
@@ -61,8 +61,8 @@ extension PageControllerDataSource:UIPageViewControllerDataSource{
     }
     
     @objc func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        let vcIndex = controllers.indexOf(viewController)
-        if vcIndex <= 0{
+        let vcIndex = controllers.index(of: viewController)
+        if vcIndex! <= 0{
             return nil
         }else{
             return controllers[vcIndex! - 1]
@@ -94,4 +94,4 @@ extension PageControllerDataSource:UIPageViewControllerDataSource{
         throw SNVError.ControllerNotFound(description: "Not found controller:\(controller) in collection:\(self.viewIdsToViewControllers)")
     }
 }
- */
+*/

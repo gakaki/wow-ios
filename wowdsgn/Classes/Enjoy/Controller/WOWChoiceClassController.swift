@@ -19,9 +19,6 @@ class WOWChoiceClassController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "选择分类"
-
-    
-        
         let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action:#selector(navBack))
         navigationItem.leftBarButtonItem = item
     
@@ -204,7 +201,7 @@ extension WOWChoiceClassController:UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
      
         let m = categoryArr[indexPath.row]
-        classId = m.id ?? 0
+        classId = indexPath.row
         for model in categoryArr {
             if model == m {
                 if model.isSelect {
@@ -245,7 +242,7 @@ extension WOWChoiceClassController:TZImagePickerControllerDelegate,PhotoTweaksVi
     func photoTweaksController(_ controller: PhotoTweaksViewController, didFinishWithCroppedImage croppedImage: UIImage!, clooseSizeImgId sizeId: Int32) {
       
         if categoryArr.count > 0 {
-            VCRedirect.bingReleaseWorks(photo: croppedImage, instagramCategoryId: classId ?? 0, sizeImgId: Int(sizeId))
+            VCRedirect.bingReleaseWorks(photo: croppedImage, instagramCategoryId: classId ?? 0, sizeImgId: Int(sizeId), categoryArray: categoryArr)
         }
         
    

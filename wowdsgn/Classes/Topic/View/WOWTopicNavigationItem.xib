@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,6 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sBu-Mb-evA" customClass="MIBadgeButton" customModule="wow_vendor_ui">
+                    <rect key="frame" x="98" y="0.0" width="35" height="35"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="35" id="BhJ-N3-vEX"/>
                         <constraint firstAttribute="height" constant="35" id="wWL-A7-veo"/>
@@ -20,22 +24,25 @@
                     <state key="normal" image="buy"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHO-Fa-i1e">
+                    <rect key="frame" x="53" y="0.0" width="35" height="35"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="35" id="Uje-G7-ZVl"/>
                         <constraint firstAttribute="height" constant="35" id="xhL-kU-fds"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <state key="normal" image="icon_share"/>
+                    <state key="normal" image="share-black"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PzQ-58-Zq4">
+                    <rect key="frame" x="8" y="0.0" width="35" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="8f2-dK-eEG"/>
                         <constraint firstAttribute="width" constant="35" id="IwU-r7-7QD"/>
                     </constraints>
-                    <state key="normal" image="Thumb-black"/>
+                    <state key="normal" image="praise-black"/>
                     <state key="selected" image="Thumb-active"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOC-QX-LeV">
+                    <rect key="frame" x="43" y="17.5" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -65,8 +72,8 @@
     </objects>
     <resources>
         <image name="Thumb-active" width="30" height="30"/>
-        <image name="Thumb-black" width="30" height="30"/>
         <image name="buy" width="30" height="30"/>
-        <image name="icon_share" width="30" height="30"/>
+        <image name="praise-black" width="30" height="30"/>
+        <image name="share-black" width="30" height="30"/>
     </resources>
 </document>

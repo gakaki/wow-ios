@@ -30,10 +30,10 @@ class WOWBuyCarController: WOWBaseViewController {
              */
             if dataArr.count == 0 {
                 bottomView.isHidden = true
-                bottomHeight.constant = 0
+                bottomHeight.constant = -50
             }else{
                 bottomView.isHidden = false
-                bottomHeight.constant = 50
+                bottomHeight.constant = 0
             }
         }
     }
@@ -302,7 +302,6 @@ class WOWBuyCarController: WOWBaseViewController {
                 let model = Mapper<WOWCarModel>().map(JSONObject:result)
                 if let arr = model?.shoppingCartResult {
                     strongSelf.dataArr = arr
-                    strongSelf.bottomView.isHidden = false
                     //重新计算购物车数量
                     WOWUserManager.userCarCount = 0
                     for product in arr {
@@ -344,7 +343,6 @@ class WOWBuyCarController: WOWBaseViewController {
                     strongSelf.allbuttonIsSelect()
                 }else {
                     strongSelf.dataArr = []
-                    strongSelf.bottomView.isHidden = true
                 }
                 strongSelf.endRefresh()
                 

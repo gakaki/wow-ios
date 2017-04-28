@@ -19,5 +19,10 @@ class WOWEnjoyNavView: UIView {
         // Drawing code
     }
     */
-
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.frame = CGRect(x: 0, y: 0, width: 114, height: 44)
+    
+        // Initialization code
+    }
 }

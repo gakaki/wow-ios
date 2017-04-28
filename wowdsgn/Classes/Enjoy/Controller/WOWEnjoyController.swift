@@ -21,9 +21,9 @@ class WOWEnjoyController: WOWBaseViewController {
     var isOpen: Bool = false
     var currentCategoryId = 0
     let categoryName = "全部"
-    @IBOutlet weak var magicView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.edgesForExtendedLayout = .all
         request()
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -38,6 +38,7 @@ class WOWEnjoyController: WOWBaseViewController {
         super.viewWillDisappear(animated)
     }
     override func viewWillAppear(_ animated: Bool) {
+        hideNavigationBar = true
         super.viewWillAppear(animated)
 
     }
@@ -47,7 +48,7 @@ class WOWEnjoyController: WOWBaseViewController {
         v.lbTitle.text = "全部"
         return v
     }()
-    lazy var backView:WOWCategoryBackView = {
+    lazy var backView:WOWCategoryBackView = {[unowned self] in
         let v = WOWCategoryBackView(frame:CGRect(x: 0,y: 64,width: MGScreenWidth,height: MGScreenHeight - 64))
         v.selectView.delegate = self
         v.dismissButton.addTarget(self, action: #selector(dismissClick), for:.touchUpInside)
@@ -56,29 +57,33 @@ class WOWEnjoyController: WOWBaseViewController {
     
     override func setUI() {
         super.setUI()
-        self.navigationItem.titleView = navView
         self.view.backgroundColor = UIColor.white
 
         v                               = VCVTMagic()
         v.magicView.dataSource          = self
         v.magicView.delegate            = self
         
-        v.magicView.layoutStyle         = .divide
+        v.magicView.layoutStyle         = .center
         v.magicView.switchStyle         = .default
-        
-        v.magicView.sliderWidth         = 50.w
+        v.magicView.itemSpacing         = 35
+        v.magicView.sliderWidth         = 45.w
         v.magicView.sliderColor         = WowColor.black
         v.magicView.sliderHeight        = 3.w
         v.magicView.isSwitchAnimated        = false
         v.magicView.isScrollEnabled         = true
+        v.magicView.navigationInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 114)
+        v.magicView.leftNavigatoinItem = navView
+        v.magicView.isAgainstStatusBar = true
+        v.magicView.navigationHeight = 44
+        v.magicView.isSeparatorHidden = true
         self.addChildViewController(v)
         self.view.addSubview(v.magicView)
-
         v.magicView.snp.makeConstraints {[weak self] (make) -> Void in
             if let strongSelf = self {
                 make.width.equalTo(strongSelf.view)
-                make.top.equalTo(strongSelf.magicView)
+                make.top.equalTo(strongSelf.view)
                 make.bottom.equalTo(strongSelf.view.snp.bottom).offset(0)
+                make.left.equalTo(strongSelf.view)
             }
         }
         
@@ -143,9 +148,11 @@ class WOWEnjoyController: WOWBaseViewController {
             if let strongSelf = self {
                 if strongSelf.isOpen {
                     strongSelf.navView.arrowImg.transform = CGAffineTransform.identity
+                    strongSelf.v.magicView.menuBar?.isHidden = false
 
                 }else {
                     strongSelf.navView.arrowImg.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
+                    strongSelf.v.magicView.menuBar?.isHidden = true
 
                 }
             }
@@ -193,8 +200,8 @@ extension WOWEnjoyController:VTMagicViewDataSource, VTMagicViewDelegate{
         if ( button == nil) {
             let width           = self.view.frame.width / 3
             let b               = UIButton(type: .custom)
-            b.frame             = CGRect(x: 0, y: 0, width: width, height: 50)
-            b.titleLabel!.font  =  UIFont.systemFont(ofSize: 14)
+            b.frame             = CGRect(x: 0, y: 0, width: width, height: 44)
+            b.titleLabel!.font  =  UIFont.mediumScaleFontSize(17)
             b.setTitleColor(WowColor.grayLight, for: UIControlState())
             b.setTitleColor(WowColor.black, for: .selected)
             b.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)

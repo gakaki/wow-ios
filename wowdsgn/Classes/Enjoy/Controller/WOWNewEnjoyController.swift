@@ -26,6 +26,7 @@ class WOWNewEnjoyController: WOWBaseViewController {
         let v = Bundle.main.loadNibNamed(String(describing: WOWNewGuideView.self), owner: self, options: nil)?.last as! WOWNewGuideView
         return v
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addObserver()
@@ -115,9 +116,9 @@ class WOWNewEnjoyController: WOWBaseViewController {
 
     }
     override func viewWillAppear(_ animated: Bool) {
+        hideNavigationBar =  true
         super.viewWillAppear(animated)
         self.navigationShadowImageView?.isHidden = true
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
         kolodaView.isHidden = false
     }
     
@@ -256,7 +257,10 @@ extension WOWNewEnjoyController: KolodaViewDataSource {
         if self.fineWroksArr.count > index {
           imgStr = self.fineWroksArr[index].pic ?? ""
         }
-        return WOWCustomKoloda(frame: CGRect(x: 0, y: 0, w: MGScreenWidth - 36, h: MGScreenWidth - 20), imgStr)
+        let customKoloda = Bundle.main.loadNibNamed(String(describing: WOWCustomKoloda.self), owner: self, options: nil)?.last as! WOWCustomKoloda
+
+        customKoloda.workImg.set_webimage_url(imgStr)
+        return customKoloda
     }
     
  

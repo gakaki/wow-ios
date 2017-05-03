@@ -17,18 +17,40 @@ class WOWCustomKoloda: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.frame = CGRect(x: 0, y: 0, w: MGScreenWidth * 0.88, h: MGScreenWidth * 0.88 + 70)
         self.layer.shadowOffset = CGSize(width: 0, height: 2)  //设置图层阴影的偏移量
         self.layer.shadowOpacity = 0.1  //将图层阴影的不透明度设为 0.7
         self.layer.shadowRadius = 4 //将图层阴影的范围设为 5
         self.layer.shadowColor = UIColor.black.cgColor      //设置图层阴影的颜色
         self.backgroundColor = UIColor.white
-
+        
+        headImg.borderRadius(20)
+        let borColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
+        headImg.borderColor(1, borderColor: borColor)
         // Initialization code
     }
-
-    func showData() {
-        
+    
+    func showData(works: WOWFineWroksModel) {
+        workImg.set_webimage_url(works.pic)
+        headImg.set_webimage_url_user(works.avatar)
+        userName.text = works.nickName
+        if let constellation = works.constellation {
+            startLabel.text = WOWConstellation[constellation]
+        }else {
+            startLabel.text = ""
+        }
+        switch works.sex ?? 3{
+        case 1:
+            sexLabel.backgroundColor = UIColor.init(hexString: "#70B7FF")
+        case 2:
+            sexLabel.backgroundColor = UIColor.init(hexString: "FF8DBC")
+        default:
+            sexLabel.backgroundColor = UIColor.init(hexString: "#808080")
+        }
+        if let ageRange = works.ageRange {
+            sexLabel.text = WOWAgeRange[ageRange]
+        }else {
+            sexLabel.text = "保密"
+        }
     }
 
 }

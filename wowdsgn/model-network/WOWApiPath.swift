@@ -34,7 +34,7 @@ let urlItunes = "https://itunes.apple.com/cn/app/jian-jiao-she-ji/id1110300308?m
 let URL_CheckVersion                    = "v1/version/check" 
 
 //1.app首页
-let URL_AD                              = "v1/page/startupimg"
+let URL_AD                              = "v2/page/startupimg"
 let URL_category                        = "v1/category/sub-category"
 let URL_producty_by_category            = "/v1/product/category/products"
 let URL_category_subCategory_with_image = "v1/category/img-category"
@@ -276,5 +276,6 @@ let URL_CollectWorks            = "v1/instagram/user/collect"       // 收藏作
 let URL_UpdateDescription       = "v1/instagram/updateDescription"      //修改作品描述
 let URL_Report                  = "v1/instagram/report"                 //举报
 let URL_Works_Delete            = "v1/instagram/del"                    //删除
+let URL_Works_Banners           = "v1/instagram/outstandingBanners"     //佳作轮播
 
 

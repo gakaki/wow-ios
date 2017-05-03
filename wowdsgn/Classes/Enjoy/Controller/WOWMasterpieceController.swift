@@ -11,10 +11,14 @@ import UIKit
 class WOWMasterpieceController: WOWBaseViewController {
     @IBOutlet weak var tableView: UITableView!
     let cellID = String(describing: WOWMasterpieceCell.self)
+    let bannerID = String(describing: HomeBrannerCell.self)
     var categoryId = 0
     var fineWroksArr = [WOWFineWroksModel]()
+    var bannerArr = [WOWHomeModle]()
     var lastContentOffset :CGFloat = 0.0
+    var numberOfSection = 1
     let pageSize   = 10
+    var cell_heights: [Int: CGFloat]   = [0:0]
     weak var delegate:WOWChideControllerDelegate?
     var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
 
@@ -140,12 +144,31 @@ class WOWMasterpieceController: WOWBaseViewController {
             }
         }
         
+        if pageIndex == 1 {
+            requestBanner()
+        }
+        
 
     }
+    
+    func requestBanner() {
+        WOWNetManager.sharedManager.requestWithTarget(.api_Works_Banners, successClosure: {[weak self] (result, code) in
+            if let strongSelf = self {
+                strongSelf.bannerArr = Mapper<WOWHomeModle>().mapArray(JSONObject:JSON(result)["banners"].arrayObject) ?? [WOWHomeModle]()
+                if strongSelf.bannerArr.count > 0 {
+                    strongSelf.numberOfSection = 2
+                }
+                strongSelf.tableView.reloadData()
+            }
+        }) { (errorMsg) in
+            
+            
+        }
+    }
+    
     fileprivate func configTable(){
-        tableView.estimatedRowHeight = MGScreenWidth
-        tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.register(UINib.nibName(cellID), forCellReuseIdentifier:cellID)
+        tableView.register(UINib.nibName(bannerID), forCellReuseIdentifier:bannerID)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.mj_header          = mj_header
@@ -153,6 +176,13 @@ class WOWMasterpieceController: WOWBaseViewController {
         self.tableView.backgroundColor = UIColor.white
         self.tableView.separatorColor = UIColor.white
         
+    }
+    func getCellHeight(_ sectionIndex:Int) -> CGFloat{
+        if let h = cell_heights[sectionIndex] {
+            return h
+        }else{
+            return CGFloat.leastNormalMagnitude
+        }
     }
     
     //MARK: -- Action
@@ -181,21 +211,78 @@ class WOWMasterpieceController: WOWBaseViewController {
 
 }
 
-extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
+extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate ,HomeBrannerDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return numberOfSection
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fineWroksArr.count
+        if numberOfSection  == 1{
+            return fineWroksArr.count
+
+        }else {
+            if section == 0 {
+                return 1
+            }else {
+                return fineWroksArr.count
+
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWMasterpieceCell
+        if numberOfSection == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWMasterpieceCell
+            cell_heights[0] = MGScreenWidth + 10
+            cell.showData(fineWroksArr[indexPath.row])
+            return cell
+        }else {
+            if indexPath.section == 0 {
+                let cell                = tableView.dequeueReusableCell(withIdentifier: bannerID, for: indexPath) as! HomeBrannerCell
+                let model = bannerArr[0]
+                if let banners = model.moduleContent?.banners{
+                    
+                    cell.reloadBanner(banners)
+                    cell.delegate = self
+                    cell.moduleId = model.moduleId
+                    cell.pageTitle = self.title
+                }
+                cell.indexPathSection = indexPath.section
+                cell_heights[0]  = cell.heightAll
+                return cell
+
+            }else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWMasterpieceCell
+                cell_heights[1] = MGScreenWidth + 10
+                cell.showData(fineWroksArr[indexPath.row])
+                return cell
+            }
+        }
+
         
-        cell.showData(fineWroksArr[indexPath.row])
-        return cell
-        
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return getCellHeight(indexPath.section)
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if numberOfSection  == 1{
+            return 0
+            
+        }else {
+            if section == 0 {
+                return 10
+            }else {
+                return 0
+                
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        return view
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
@@ -226,9 +313,6 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
                 changeState(alpha: 0.01)
 
             }
-//            let vc = self.magic as! VCVTMagic
-//            vc.magicView.navigationHeight = 0
-//            self.navigationController?.setNavigationBarHidden(true, animated: true)
             
             return
         }else if lastContentOffset - a > 20 && (a  <= scrollView.contentSize.height-scrollView.bounds.size.height-20) {
@@ -238,9 +322,6 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
                 changeState(alpha: 1)
 
             }
-//            let vc = self.magic as! VCVTMagic
-//            vc.magicView.navigationHeight = 44
-//            self.navigationController?.setNavigationBarHidden(false, animated: true)
 
             return
         }
@@ -257,5 +338,10 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate {
         }
       
     }
+    
+    func gotoVCFormLinkType(model: WOWCarouselBanners) {
+        VCRedirect.goToBannerTypeController(model)
+    }
+
 
 }

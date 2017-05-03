@@ -253,13 +253,11 @@ extension WOWNewEnjoyController: KolodaViewDataSource {
     }
     
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
-        var imgStr = ""
-        if self.fineWroksArr.count > index {
-          imgStr = self.fineWroksArr[index].pic ?? ""
-        }
-        let customKoloda = Bundle.main.loadNibNamed(String(describing: WOWCustomKoloda.self), owner: self, options: nil)?.last as! WOWCustomKoloda
 
-        customKoloda.workImg.set_webimage_url(imgStr)
+        let customKoloda = Bundle.main.loadNibNamed(String(describing: WOWCustomKoloda.self), owner: self, options: nil)?.last as! WOWCustomKoloda
+        if self.fineWroksArr.count > index {
+            customKoloda.showData(works: fineWroksArr[index])
+        }
         return customKoloda
     }
     

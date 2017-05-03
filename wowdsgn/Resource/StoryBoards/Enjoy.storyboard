@@ -118,6 +118,7 @@
         <!--Choice Class Controller-->
         <scene sceneID="py9-Ya-eN8">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ti7-wa-ec6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="WOWChoiceClassController" id="B0N-au-49Y" customClass="WOWChoiceClassController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0SO-mE-0SE"/>
@@ -151,7 +152,6 @@
                         <outlet property="collectionView" destination="Uvc-I1-pbH" id="iTS-Vy-5SW"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ti7-wa-ec6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3938.4000000000001" y="-312.59370314842579"/>
         </scene>
@@ -282,10 +282,11 @@
             </objects>
             <point key="canvasLocation" x="-2946.4000000000001" y="-394.45277361319341"/>
         </scene>
-        <!--View Controller-->
+        <!--Works Activity Controller-->
         <scene sceneID="X35-cs-Pt5">
             <objects>
-                <viewController id="YRq-P6-a6h" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YIa-I2-jcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="YRq-P6-a6h" customClass="WOWWorksActivityController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g3J-2v-0Na"/>
                         <viewControllerLayoutGuide type="bottom" id="66g-Pn-0E6"/>
@@ -294,34 +295,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rmJ-HE-u3q">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="adF-VZ-m02">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sTL-8V-J6b">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="oxr-PC-3KU">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mf-37-X14">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="n4N-lm-ZDs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="发布"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1mf-37-X14" firstAttribute="leading" secondItem="vyh-LC-QfY" secondAttribute="leading" id="2fj-6O-wFx"/>
+                            <constraint firstItem="1mf-37-X14" firstAttribute="top" secondItem="adF-VZ-m02" secondAttribute="bottom" id="KFc-bf-JtU"/>
+                            <constraint firstAttribute="trailing" secondItem="1mf-37-X14" secondAttribute="trailing" id="OfF-fs-jSL"/>
+                            <constraint firstAttribute="trailing" secondItem="adF-VZ-m02" secondAttribute="trailing" id="PWB-br-DQ9"/>
+                            <constraint firstItem="1mf-37-X14" firstAttribute="top" secondItem="adF-VZ-m02" secondAttribute="bottom" id="QKo-8J-JCD"/>
+                            <constraint firstItem="66g-Pn-0E6" firstAttribute="top" secondItem="1mf-37-X14" secondAttribute="bottom" id="Rzi-Nr-o0l"/>
+                            <constraint firstItem="adF-VZ-m02" firstAttribute="leading" secondItem="vyh-LC-QfY" secondAttribute="leading" id="fPS-d3-N14"/>
+                            <constraint firstItem="adF-VZ-m02" firstAttribute="top" secondItem="vyh-LC-QfY" secondAttribute="top" id="hbD-cI-WkV"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tabelView" destination="adF-VZ-m02" id="CW5-pE-sCh"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YIa-I2-jcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1950" y="398"/>
+            <point key="canvasLocation" x="-1951.2" y="397.15142428785612"/>
         </scene>
         <!--生活创意-->
         <scene sceneID="8Yv-Yp-6LN">
@@ -423,10 +428,10 @@
                                 <rect key="frame" x="22.5" y="20" width="330" height="406"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_empty" translatesAutoresizingMaskIntoConstraints="NO" id="iMK-Lf-Ijx">
-                                        <rect key="frame" x="48" y="87" width="234" height="232"/>
+                                        <rect key="frame" x="48" y="57" width="234" height="232"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前没有新的作品，先去看看佳作吧" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wF0-0b-k0R">
-                                        <rect key="frame" x="43" y="339" width="245" height="18"/>
+                                        <rect key="frame" x="43" y="309" width="245" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -437,7 +442,7 @@
                                     <constraint firstItem="wF0-0b-k0R" firstAttribute="centerX" secondItem="oxD-kB-NvO" secondAttribute="centerX" id="F3h-Qd-0ee"/>
                                     <constraint firstItem="iMK-Lf-Ijx" firstAttribute="centerX" secondItem="oxD-kB-NvO" secondAttribute="centerX" id="mKH-MZ-OcP"/>
                                     <constraint firstItem="wF0-0b-k0R" firstAttribute="top" secondItem="iMK-Lf-Ijx" secondAttribute="bottom" constant="20" id="tQD-uQ-Le0"/>
-                                    <constraint firstItem="iMK-Lf-Ijx" firstAttribute="centerY" secondItem="oxD-kB-NvO" secondAttribute="centerY" id="z6j-W6-6df"/>
+                                    <constraint firstItem="iMK-Lf-Ijx" firstAttribute="centerY" secondItem="oxD-kB-NvO" secondAttribute="centerY" constant="-30" id="z6j-W6-6df"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5O-Ag-IQN" customClass="CustomKolodaView" customModule="wowdsgn" customModuleProvider="target">
@@ -479,6 +484,7 @@
         <!--佳作-->
         <scene sceneID="wTE-1D-W7K">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ov2-RR-QWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="WOWMasterpieceController" title="佳作" id="yGc-p3-Epc" customClass="WOWMasterpieceController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d1K-3L-oLg"/>
@@ -522,13 +528,13 @@
                         <outlet property="tableView" destination="mqb-ZK-rQa" id="KL1-YP-xK2"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ov2-RR-QWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1864.8" y="224.4377811094453"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6uc-ai-aJM">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e2B-Zt-T3Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="WOWEditWorksNavController" id="zmv-1C-BLB" customClass="WOWNavigationController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Y8R-lA-61h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -538,13 +544,13 @@
                         <segue destination="A9M-x8-1TI" kind="relationship" relationship="rootViewController" id="2kw-hF-pZb"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e2B-Zt-T3Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3882" y="443"/>
         </scene>
         <!--Edit Works Controller-->
         <scene sceneID="etG-WR-myv">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fuy-Z6-Ezd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="WOWEditWorksController" id="A9M-x8-1TI" customClass="WOWEditWorksController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gz9-Tw-Tug"/>
@@ -620,7 +626,6 @@
                         <outlet property="textView" destination="daz-Vy-8cB" id="owc-np-opv"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fuy-Z6-Ezd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2834.4000000000001" y="476.31184407796104"/>
         </scene>

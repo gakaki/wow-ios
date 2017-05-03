@@ -288,6 +288,8 @@ public enum RequestApi{
     case api_Report(instagramId: Int, reason: Int)
     
     case api_Works_Delete(worksId: Int)
+    
+    case api_Works_Banners
 }
 
 extension RequestApi:TargetType{
@@ -593,6 +595,8 @@ extension RequestApi:TargetType{
             return URL_Report
         case .api_Works_Delete:
             return URL_Works_Delete
+        case .api_Works_Banners:
+            return URL_Works_Banners
 
         }
     }
@@ -634,7 +638,8 @@ extension RequestApi:TargetType{
             .api_GetWorksDetails,
             .api_UserStatistics,
             .api_WorksList,
-            .api_getInstagramList:
+            .api_getInstagramList,
+            .api_Works_Banners:
             return .GET
 
         default:

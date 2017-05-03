@@ -360,24 +360,16 @@ extension AppDelegate{
 }
 
 //ADLaunchView 广告view
-extension AppDelegate: AdLaunchViewDelegate {
-    func adLaunchView(_ launchView: AdLaunchView, bannerImageDidClick imageURL: String) {
-//        let urls = "http://www.desgard.com/"
-//        if let url: URL = URL(string: urls) {
-//            UIApplication.shared.openURL(url)
-//        }
-        
-    }
+extension AppDelegate {
     
     func fetchADImage(){
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_AD, successClosure: {[weak self] (result, code) in
             
-            var r                     =  JSON(result)["startupImageList"]
-            let res                   =  Mapper<WOWVOAd>().mapArray(JSONObject:r.arrayObject) ?? [WOWVOAd]()
+            let r                     =  JSON(result)["startupImage"]
+            let res                   =  Mapper<WOWCarouselBanners>().map(JSONObject:r.object)
             if let strongSelf = self {
-                if let imgUrl = res.first?.imgUrl {
-                    //                Defaults[.pic_ad] = imgUrl
+                if let imgUrl = res?.bannerImgSrc {
                     strongSelf.lunchView.backgroundImg.yy_setImage(
                         with: URL(string:imgUrl.webp_url()),
                         placeholder: UIImage(named: "Artboard"),
@@ -394,7 +386,16 @@ extension AppDelegate: AdLaunchViewDelegate {
                             
                     })
 
-                    
+                    strongSelf.lunchView.backgroundImg.addTapGesture(action: { (tap) in
+                        if let res = res {
+                            let mainVC = UIStoryboard(name: "Main", bundle:Bundle.main).instantiateInitialViewController()
+                            AppDelegate.rootVC = mainVC
+                            strongSelf.window?.rootViewController = mainVC
+                            strongSelf.lunchView.removeView()
+                            VCRedirect.goToBannerTypeController(res)
+
+                        }
+                    })
                 }
             }
             

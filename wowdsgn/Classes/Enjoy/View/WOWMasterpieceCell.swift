@@ -31,12 +31,36 @@ class WOWMasterpieceCell: UITableViewCell {
         imgWroks.addGestureRecognizer(doubleTap)
         singleTap.require(toFail: doubleTap)
         
+        headImg.borderRadius(20)
+        let borColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
+        headImg.borderColor(1, borderColor: borColor)
+        
     }
     
 
     func showData(_ m : WOWFineWroksModel)  {
         model = m
-        imgWroks.set_webimage_url(m.pic ?? "")
+        imgWroks.set_webimage_url(m.pic)
+        headImg.set_webimage_url_user(m.avatar)
+        userName.text = m.nickName
+        if let constellation = m.constellation {
+            startLabel.text = WOWConstellation[constellation]
+        }else {
+            startLabel.text = ""
+        }
+        switch m.sex ?? 3{
+        case 1:
+            sexLabel.backgroundColor = UIColor.init(hexString: "#70B7FF")
+        case 2:
+            sexLabel.backgroundColor = UIColor.init(hexString: "FF8DBC")
+        default:
+            sexLabel.backgroundColor = UIColor.init(hexString: "#808080")
+        }
+        if let ageRange = m.ageRange {
+            sexLabel.text = WOWAgeRange[ageRange]
+        }else {
+            sexLabel.text = "保密"
+        }
 
     }
     //单击手势事件

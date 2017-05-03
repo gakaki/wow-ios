@@ -48,7 +48,7 @@
                                 <constraint firstAttribute="height" constant="16" id="ol7-ne-1eo"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yW4-lc-P60">
@@ -57,7 +57,7 @@
                                 <constraint firstAttribute="height" constant="16" id="bdZ-bm-l0e"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -71,6 +71,7 @@
                         <constraint firstItem="AwO-Dj-rUr" firstAttribute="centerY" secondItem="B0P-AX-xXv" secondAttribute="centerY" id="cEx-eS-QBx"/>
                         <constraint firstItem="yW4-lc-P60" firstAttribute="leading" secondItem="g3n-52-g7A" secondAttribute="trailing" constant="10" id="jjg-4m-dbS"/>
                         <constraint firstItem="g3n-52-g7A" firstAttribute="bottom" secondItem="AwO-Dj-rUr" secondAttribute="bottom" id="nMx-94-6Tn"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Atc-6K-She" secondAttribute="trailing" constant="15" id="nxv-GF-fE4"/>
                         <constraint firstAttribute="height" constant="70" id="prl-Tw-Rcz"/>
                     </constraints>
                 </view>

@@ -108,12 +108,7 @@ public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZN
         
         MobClick.endLogPageView(self.title)
     }
-//
-//    func hideNavSeprator(isHiden:Bool = true) {
-//        navigationController?.navigationBar.setBackgroundImage(UIImage.imageWithColor(UIColor.whiteColor(), size:CGSizeMake(MGScreenWidth, 1)), forBarPosition: UIBarPosition.Any, barMetrics: UIBarMetrics.Default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//    }
-//    
+    
     func setCustomerBack() {
         if navigationController?.viewControllers.count > 1 {
             let item = UIBarButtonItem(image:UIImage(named: "nav_backArrow"), style:.plain, target: self, action:#selector(navBack))
@@ -193,8 +188,6 @@ public class WOWBaseViewController: UIViewController,DZNEmptyDataSetDelegate,DZN
            isRreshing = true
         }
         // 关闭动画， 防止下拉刷新此界面再次出来
-//        LoadView.sharedInstance.dissMissView()
-//        LoadView.dissMissView()
         request()
     }
     

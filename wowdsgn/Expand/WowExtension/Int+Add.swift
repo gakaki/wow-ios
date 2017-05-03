@@ -16,7 +16,7 @@ extension Int {
     func intToThousand() -> String {
         if self >= 1000 {
             let result:Float = Float(self/1000)
-            return String(format: ".1fK", result)
+            return String(format: "%.1fK", result)
         }else {
             return "\(self)"
         }

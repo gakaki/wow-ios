@@ -18,7 +18,13 @@ class WOWFineWroksModel: WOWBaseModel,Mappable {
     var collectCounts                   :  Int?
     var likeCounts                      :  Int?
     var pic                             :  String?
-
+    var endUserId                       :  Int?
+    var avatar                          :  String?
+    var nickName                        :  String?
+    var constellation                   :  Int?
+    var ageRange                        :  Int?
+    var sex                             :   Int?
+    
     required init?(map: Map) {
         
     }
@@ -32,7 +38,12 @@ class WOWFineWroksModel: WOWBaseModel,Mappable {
         collectCounts                                           <- map["collectCounts"]
         likeCounts                                              <- map["likeCounts"]
         pic                                                     <- map["pic"]
-        
+        endUserId                                               <- map["endUserId"]
+        avatar                                                  <- map["avatar"]
+        nickName                                                <- map["nickName"]
+        constellation                                           <- map["constellation"]
+        ageRange                                                <- map["ageRange"]
+        sex                                                     <- map["sex"]
     }
 
 }

@@ -20,9 +20,7 @@ class VCBaseNavCart:WOWBaseViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        
-    }
+
     deinit {
         removeObservers()
     }
@@ -40,7 +38,7 @@ class VCBaseNavCart:WOWBaseViewController{
     let offset_width = CGFloat(10)
 
     func config_btn_back(){
-        let image       = UIImage(named: "top_back")! as UIImage
+        let image       = UIImage(named: "back_top")! as UIImage
         let button      = UIButton(type:.custom)
         button.frame    = CGRect(x: offset_width, y: offset_icon(), width: btn_width_height, height: btn_width_height)
         button .setBackgroundImage(image, for: UIControlState())
@@ -49,7 +47,7 @@ class VCBaseNavCart:WOWBaseViewController{
     }
     
     func config_btn_cart(){
-        let image       = UIImage(named: "top_car")! as UIImage
+        let image       = UIImage(named: "car_top")! as UIImage
         carEntranceButton      = MIBadgeButton(type: .custom)
         carEntranceButton.frame    = CGRect(x: self.view.frame.width - btn_width_height - offset_width, y: offset_icon(), width: btn_width_height, height: btn_width_height)
         carEntranceButton .setBackgroundImage(image, for: UIControlState())
@@ -58,7 +56,7 @@ class VCBaseNavCart:WOWBaseViewController{
     }
     
     func config_btn_msg(){
-        let image       = UIImage(named: "message_topic")! as UIImage
+        let image       = UIImage(named: "message_top")! as UIImage
         let button      = UIButton(type:.custom)
         button.frame    = CGRect(x: self.view.frame.width - 2*(btn_width_height + offset_width), y: offset_icon(), width: btn_width_height, height: btn_width_height)
         button .setBackgroundImage(image, for: UIControlState())

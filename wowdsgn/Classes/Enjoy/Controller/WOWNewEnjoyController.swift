@@ -226,7 +226,6 @@ extension WOWNewEnjoyController: KolodaViewDelegate {
     }
 
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
-        
         let model = fineWroksArr[index]
         if direction == .left {
             MobClick.e(.dislike_clicks_latest_picture_page)

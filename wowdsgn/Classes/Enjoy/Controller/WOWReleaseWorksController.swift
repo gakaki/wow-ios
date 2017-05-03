@@ -17,6 +17,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
     @IBOutlet weak var imgPhoto: UIImageView!
     @IBOutlet weak var categoryTap: UIView!
     @IBOutlet weak var categoryLabel: UILabel!
+    
     var modelData : WOWWorksDetailsModel?
     var instagramCategoryId:Int?
     var indexRow: Int = 0
@@ -155,7 +156,6 @@ class WOWReleaseWorksController: WOWBaseViewController {
             
         }) { (error) in
             WOWHud.dismiss()
-            print("upload error...")
         }
 
     }

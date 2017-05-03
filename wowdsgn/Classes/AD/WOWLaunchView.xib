@@ -14,13 +14,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Artboard" translatesAutoresizingMaskIntoConstraints="NO" id="wm5-t0-b0v">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                </imageView>
                 <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Artboard" translatesAutoresizingMaskIntoConstraints="NO" id="HFn-ZA-zTG">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTX-H2-G7y">
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTX-H2-G7y">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="applogo" translatesAutoresizingMaskIntoConstraints="NO" id="zEI-4p-vhd">
@@ -30,31 +27,14 @@
                                 <constraint firstAttribute="height" constant="140" id="e8q-oM-zu5"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tHH-xI-GVk">
-                            <rect key="frame" x="310" y="40" width="50" height="25"/>
-                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="50" id="QoS-X2-1S1"/>
-                                <constraint firstAttribute="height" constant="25" id="tNk-G8-724"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal" title="跳过 5">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="timeClickWithSender:" destination="lJl-gH-6sJ" eventType="touchUpInside" id="CvL-BQ-Q9K"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="zEI-4p-vhd" firstAttribute="centerY" secondItem="PTX-H2-G7y" secondAttribute="centerY" id="8BH-2a-7cH"/>
                         <constraint firstItem="zEI-4p-vhd" firstAttribute="centerX" secondItem="PTX-H2-G7y" secondAttribute="centerX" id="XdO-yB-CmI"/>
-                        <constraint firstAttribute="trailing" secondItem="tHH-xI-GVk" secondAttribute="trailing" constant="15" id="ouz-lj-Yac"/>
-                        <constraint firstItem="tHH-xI-GVk" firstAttribute="top" secondItem="PTX-H2-G7y" secondAttribute="top" constant="40" id="tLu-KL-vLL"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaL-wM-23Y">
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaL-wM-23Y">
                     <rect key="frame" x="0.0" y="333.5" width="375" height="333.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生活即风格 | Enjoy The Difference" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YW8-Te-9YG">
@@ -73,25 +53,38 @@
                         <constraint firstAttribute="bottom" secondItem="YW8-Te-9YG" secondAttribute="bottom" constant="43.5" id="fmw-p6-rN3"/>
                     </constraints>
                 </view>
+                <button opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tHH-xI-GVk">
+                    <rect key="frame" x="310" y="40" width="50" height="25"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="QoS-X2-1S1"/>
+                        <constraint firstAttribute="height" constant="25" id="tNk-G8-724"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="跳过 5">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="timeClickWithSender:" destination="lJl-gH-6sJ" eventType="touchUpInside" id="CvL-BQ-Q9K"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="PTX-H2-G7y" secondAttribute="trailing" id="7wu-TT-RGd"/>
                 <constraint firstItem="IaL-wM-23Y" firstAttribute="top" secondItem="PTX-H2-G7y" secondAttribute="bottom" id="C2H-fu-rYW"/>
                 <constraint firstItem="HFn-ZA-zTG" firstAttribute="top" secondItem="lJl-gH-6sJ" secondAttribute="top" id="Egh-zf-We3"/>
-                <constraint firstAttribute="trailing" secondItem="wm5-t0-b0v" secondAttribute="trailing" id="Tyw-hH-ez8"/>
+                <constraint firstAttribute="trailing" secondItem="tHH-xI-GVk" secondAttribute="trailing" constant="15" id="UIq-7b-lx6"/>
                 <constraint firstItem="IaL-wM-23Y" firstAttribute="width" secondItem="PTX-H2-G7y" secondAttribute="width" id="UsZ-fw-ffg"/>
+                <constraint firstItem="tHH-xI-GVk" firstAttribute="top" secondItem="lJl-gH-6sJ" secondAttribute="top" constant="40" id="XUW-Jg-ohJ"/>
                 <constraint firstItem="PTX-H2-G7y" firstAttribute="top" secondItem="lJl-gH-6sJ" secondAttribute="top" id="ZWa-SC-fFQ"/>
-                <constraint firstAttribute="bottom" secondItem="wm5-t0-b0v" secondAttribute="bottom" id="eDz-NB-jM4"/>
                 <constraint firstItem="IaL-wM-23Y" firstAttribute="leading" secondItem="lJl-gH-6sJ" secondAttribute="leading" id="exk-Ei-nbt"/>
                 <constraint firstAttribute="bottom" secondItem="HFn-ZA-zTG" secondAttribute="bottom" id="nWu-SE-Q1l"/>
                 <constraint firstAttribute="bottom" secondItem="IaL-wM-23Y" secondAttribute="bottom" id="nkd-CH-YyD"/>
-                <constraint firstItem="wm5-t0-b0v" firstAttribute="top" secondItem="lJl-gH-6sJ" secondAttribute="top" id="ohl-wn-pDA"/>
                 <constraint firstItem="IaL-wM-23Y" firstAttribute="height" secondItem="PTX-H2-G7y" secondAttribute="height" id="rnz-9E-olG"/>
                 <constraint firstItem="IaL-wM-23Y" firstAttribute="top" secondItem="PTX-H2-G7y" secondAttribute="bottom" id="sA1-mA-WCa"/>
                 <constraint firstItem="HFn-ZA-zTG" firstAttribute="leading" secondItem="lJl-gH-6sJ" secondAttribute="leading" id="sbk-UU-QB3"/>
                 <constraint firstAttribute="trailing" secondItem="IaL-wM-23Y" secondAttribute="trailing" id="vXz-mN-6cM"/>
-                <constraint firstItem="wm5-t0-b0v" firstAttribute="leading" secondItem="lJl-gH-6sJ" secondAttribute="leading" id="xkG-H4-D30"/>
                 <constraint firstItem="PTX-H2-G7y" firstAttribute="leading" secondItem="lJl-gH-6sJ" secondAttribute="leading" id="xtc-sy-puT"/>
                 <constraint firstAttribute="trailing" secondItem="HFn-ZA-zTG" secondAttribute="trailing" id="zyk-aH-mYt"/>
             </constraints>
@@ -99,7 +92,7 @@
                 <outlet property="backgroundImg" destination="HFn-ZA-zTG" id="5so-UZ-lbK"/>
                 <outlet property="timeButton" destination="tHH-xI-GVk" id="UDY-py-XTB"/>
             </connections>
-            <point key="canvasLocation" x="258" y="-868"/>
+            <point key="canvasLocation" x="159" y="-934"/>
         </view>
     </objects>
     <resources>

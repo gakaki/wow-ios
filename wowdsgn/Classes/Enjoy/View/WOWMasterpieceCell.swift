@@ -42,6 +42,9 @@ class WOWMasterpieceCell: UITableViewCell {
         model = m
         imgWroks.set_webimage_url(m.pic)
         headImg.set_webimage_url_user(m.avatar)
+        headImg.addTapGesture { (tap) in
+            VCRedirect.goOtherCenter(endUserId: m.endUserId ?? 0)
+        }
         userName.text = m.nickName
         if let constellation = m.constellation {
             startLabel.text = WOWConstellation[constellation]

@@ -68,7 +68,7 @@ class WOWClickLikeAction {
             
         }) { (errorMsg) in
             WOWHud.dismiss()
-            WOWHud.showMsg("网络错误")
+            WOWHud.showMsg(errorMsg)
             
         }
         
@@ -105,7 +105,7 @@ class WOWClickLikeAction {
             WOWHud.dismiss()
         }) { (errorMsg) in
             WOWHud.dismiss()
-            WOWHud.showMsg("网络错误")
+            WOWHud.showMsg(errorMsg)
         }
     }
     
@@ -203,7 +203,7 @@ class WOWClickLikeAction {
             
         }) { (errorMsg) in
             WOWHud.dismiss()
-            WOWHud.showMsg("网络错误")
+            WOWHud.showMsg(errorMsg)
             
         }
         
@@ -238,10 +238,8 @@ class WOWClickLikeAction {
                 isFavorite(true)
             
         }) { (errorMsg) in
-                
-                
-                WOWHud.dismiss()
-            
+            WOWHud.dismiss()
+            WOWHud.showWarnMsg(errorMsg)
         }
 
     }
@@ -276,7 +274,8 @@ class WOWClickLikeAction {
             
             
             WOWHud.dismiss()
-            
+            WOWHud.showWarnMsg(errorMsg)
+
         }
         
     }

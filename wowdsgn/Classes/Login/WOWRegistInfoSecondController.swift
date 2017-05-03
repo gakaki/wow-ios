@@ -169,7 +169,6 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
         
         MobClick.e(UMengEvent.Bind_Other_Succ)
 
-//        print("\(sex)","\(ageRow)","\(starRow)")
         let params = ["sex":String(sex),"ageRange":String(ageRow),"constellation":String(starRow),"industry":jobTextField.text ?? ""]
         WOWNetManager.sharedManager.requestWithTarget(.api_Change(param:params ), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{

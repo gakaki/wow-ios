@@ -14,9 +14,13 @@ class WOWEditWorksController: WOWBaseViewController {
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var textView: KMPlaceholderTextView!
     @IBOutlet weak var imgPhoto: UIImageView!
+    @IBOutlet weak var categoryTap: UIView!
+    @IBOutlet weak var categoryLabel: UILabel!
+    
     var modelData : WOWWorksDetailsModel!
     var instagramCategoryId:Int?
     var action:WOWActionClosure?
+    
 
     var imgSizeId : Int?
     
@@ -48,6 +52,7 @@ class WOWEditWorksController: WOWBaseViewController {
         limitTextLength(textView)
         imgHeightLayou.constant = modelData.picHeight
         imgPhoto.set_webimage_url(modelData.pic ?? "")
+        categoryLabel.text = modelData.categoryName
     }
     func tap(gestureRecognizer: UIPanGestureRecognizer)  {
         self.view.endEditing(true)

@@ -10,6 +10,11 @@ import UIKit
 
 class WOWWorksAllCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
+    var itemWidth:CGFloat{
+        get{
+            return ( MGScreenWidth - 9) / 2
+        }
+    }
     var dataArr  = [WOWWorksListModel]() {
         didSet{
             collectionView.reloadData()
@@ -62,4 +67,10 @@ class WOWWorksAllCell: UITableViewCell, UICollectionViewDataSource, UICollection
         // Configure the view for the selected state
     }
     
+}
+//MARK: Delegate
+extension WOWWorksAllCell:CollectionViewWaterfallLayoutDelegate{
+    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        return CGSize(width: itemWidth,height: itemWidth)
+    }
 }

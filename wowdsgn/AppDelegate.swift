@@ -388,6 +388,7 @@ extension AppDelegate {
 
                     strongSelf.lunchView.backgroundImg.addTapGesture(action: { (tap) in
                         if let res = res {
+                            //设置主视图
                             let mainVC = UIStoryboard(name: "Main", bundle:Bundle.main).instantiateInitialViewController()
                             AppDelegate.rootVC = mainVC
                             strongSelf.window?.rootViewController = mainVC

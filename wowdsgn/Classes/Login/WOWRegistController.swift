@@ -63,7 +63,7 @@ class WOWRegistController: WOWBaseViewController {
 
     
 //MARK:Actions
-    @IBAction func msgCodeButtonClick(_ sender: AnyObject) {
+    @IBAction func msgCodeButtonClick(_ sender: UIButton) {
         
         MobClick.e(UMengEvent.Bind_Mobile_Validate)
 
@@ -72,17 +72,15 @@ class WOWRegistController: WOWBaseViewController {
         }
         let mobile = phoneTextField.text ?? ""
         let Api_Code = RequestApi.api_Sms_Code
-        WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(Api_Code(mobile:mobile), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
-                WOWHud.dismiss()
                 WOWHud.showMsg("验证码发送成功")
                 
                 strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.white, mainTitleColor: UIColor.black, countBGColor:UIColor.white, countTitleColor:GrayColorlevel3, handle: nil)
             }
         }) { (errorMsg) in
-//            LoadView.dissMissView()
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
+
         }
     }
     
@@ -104,19 +102,16 @@ class WOWRegistController: WOWBaseViewController {
         
         if (passwdTextField.text?.length)! < 6 {
             WOWHud.showMsg("密码不能少于6位")
-            tipsLabel.text = "密码不能少于6位"
             return
         }
         if (passwdTextField.text?.length)! > 20 {
             WOWHud.showMsg("密码不能大于20位")
-            tipsLabel.text = "密码不能大于20位"
             return
         }
         
         
         if agreeProtocol == false{
             WOWHud.showMsg("请阅读并同意用户协议")
-            tipsLabel.text = "请阅读并同意用户协议"
             return
         }
         //FIXME:这个接口应该扩充一个字段 wechattoken 不带的话就是注册，带的话就是绑定 wowusermanager.wechatoken

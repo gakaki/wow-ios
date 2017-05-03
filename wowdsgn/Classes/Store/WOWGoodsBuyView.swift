@@ -1,4 +1,4 @@
-
+ 
 //
 //  WOWGoodsBuyView.swift
 //  WowDsgn
@@ -245,6 +245,7 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
             }else{
                 collectionView.isHidden = true
                 numberView.isHidden = false
+                return
             }
             //把选出的产品对应的sku选中，😔这个循环太烦了。
             if let attributes = productInfo?.attributes {

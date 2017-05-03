@@ -543,6 +543,7 @@ class WOWEditOrderController: WOWBaseViewController {
             
         }) { (errorMsg) in
 //            LoadView.dissMissView()
+            WOWHud.dismiss()
             WOWHud.showMsgNoNetWrok(message: errorMsg)
 
         }

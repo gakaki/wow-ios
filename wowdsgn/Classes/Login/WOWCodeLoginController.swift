@@ -55,7 +55,7 @@ class WOWCodeLoginController: WOWBaseViewController {
             return
         }
         let mobile = phoneTextField.text ?? ""
-        WOWHud.showLoadingSV()
+       
         WOWNetManager.sharedManager.requestWithTarget(.api_LoginCaptcha(mobile:mobile), successClosure: {[weak self] (result, code) in
             if let strongSelf = self{
                 WOWHud.dismiss()
@@ -64,6 +64,7 @@ class WOWCodeLoginController: WOWBaseViewController {
             }
         }) { (errorMsg) in
 //              LoadView.dissMissView()
+            WOWHud.dismiss()
             WOWHud.showMsgNoNetWrok(message: errorMsg)
         }
 

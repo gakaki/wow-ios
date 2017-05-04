@@ -11,6 +11,7 @@ import StoreKit
 
 class WOWUserController: WOWBaseTableViewController {
     
+    @IBOutlet weak var outGoodsView: UIView!
     @IBOutlet weak var allOrderView : UIView!
     @IBOutlet weak var noPayView    : UIView!
     @IBOutlet weak var noSendView   : UIView!
@@ -95,6 +96,11 @@ class WOWUserController: WOWBaseTableViewController {
         noCommentView.addTapGesture {[weak self](tap) in
             if let strongSelf = self{
                 strongSelf.goOrder(4)
+            }
+        }
+        outGoodsView.addTapGesture {[weak self](tap) in
+            if let strongSelf = self{
+               print("退换货")
             }
         }
     }

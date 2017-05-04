@@ -472,7 +472,20 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
         
     }
-
+    //申请售后页面
+    class func goApplyAfterSales(sendType:AfterType = .sendGoods) {
+        let vc = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWApplyAfterController.self)) as! WOWApplyAfterController
+        vc.sendType = sendType
+        topNaVC?.pushViewController(vc, animated: true)
+        
+    }
+    //仅退款页面
+    class func goOnlyRefund() {
+        let vc = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWOnlyRefundViewController.self)) as! WOWOnlyRefundViewController
+        
+        topNaVC?.pushViewController(vc, animated: true)
+        
+    }
     //跳转在线客服页面 source ：用户信息 commodityInfo: 自定义商品信息 orderNumber : 订单号    ·
     public class func goCustomerVC(_ source:QYSource?,commodityInfo:QYCommodityInfo?, orderNumber:String?) {
         guard WOWUserManager.loginStatus else{

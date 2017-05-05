@@ -45,7 +45,7 @@
                 <outlet property="lbName" destination="LY4-sj-muT" id="QHD-RZ-jwJ"/>
                 <outlet property="lineView" destination="wcr-Gl-X2b" id="37g-6q-F18"/>
             </connections>
-            <point key="canvasLocation" x="-209" y="93"/>
+            <point key="canvasLocation" x="-130" y="74"/>
         </tableViewCell>
     </objects>
 </document>

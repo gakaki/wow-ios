@@ -82,9 +82,11 @@ class WOWPayBackView: UIView {
         UIView.animate(withDuration: 0.3, animations: { [unowned self] in
             self.backClear.y = self.h + 10
             self.alpha = 0
-        }, completion: { (ret) in
-            self.removeFromSuperview()
-        }) 
+        }, completion: {[weak self] (ret) in
+            if let strongSelf = self  {
+                strongSelf.removeFromSuperview()
+            }
+        })
     }
     
     

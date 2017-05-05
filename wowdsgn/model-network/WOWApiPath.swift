@@ -277,5 +277,6 @@ let URL_UpdateDescription       = "v1/instagram/updateDescription"      //修改
 let URL_Report                  = "v1/instagram/report"                 //举报
 let URL_Works_Delete            = "v1/instagram/del"                    //删除
 let URL_Works_Banners           = "v1/instagram/outstandingBanners"     //佳作轮播
-
+let URL_Works_Topic             = "v1/instagram/topic"                  //社区活动页
+let URL_InstagramList           = "v1/instagram/list"                     //活动作品列表
 

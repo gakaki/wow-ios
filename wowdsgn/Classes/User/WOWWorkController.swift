@@ -77,7 +77,6 @@ class WOWWorkController: WOWBaseViewController {
     
     
     //MARK: - DZNEmptyDataSetDelegate,DZNEmptyDataSetSource
-    
     func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
         let view = Bundle.main.loadNibNamed(String(describing: WOWWorkdEmptyView.self), owner: self, options: nil)?.last as! WOWWorkdEmptyView
         view.lbEmpty.text = "还没有发布任何内容"

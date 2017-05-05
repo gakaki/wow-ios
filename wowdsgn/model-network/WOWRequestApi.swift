@@ -290,6 +290,10 @@ public enum RequestApi{
     case api_Works_Delete(worksId: Int)
     
     case api_Works_Banners
+    
+    case api_Works_Topic(topicId: Int)
+    
+    case api_InstagramList(params: [String: Any])
 }
 
 extension RequestApi:TargetType{
@@ -597,6 +601,10 @@ extension RequestApi:TargetType{
             return URL_Works_Delete
         case .api_Works_Banners:
             return URL_Works_Banners
+        case .api_Works_Topic:
+            return URL_Works_Topic
+        case .api_InstagramList:
+            return URL_InstagramList
 
         }
     }
@@ -639,7 +647,9 @@ extension RequestApi:TargetType{
             .api_UserStatistics,
             .api_WorksList,
             .api_getInstagramList,
-            .api_Works_Banners:
+            .api_Works_Banners,
+            .api_Works_Topic,
+            .api_InstagramList:
             return .GET
 
         default:
@@ -910,6 +920,11 @@ extension RequestApi:TargetType{
                 params = ["instagramId":instagramId,"reason":reason]
             case let .api_Works_Delete(worksId):         //删除作品
                 params = ["id": worksId]
+            case let .api_Works_Topic(topicId):
+                params = ["topicId": topicId]
+            case let .api_InstagramList(param):
+                params = param
+            
             default:
                 break
 

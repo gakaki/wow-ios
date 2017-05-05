@@ -472,6 +472,21 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
         
     }
+    
+    //作品活动详情页面
+    public class func goWorksActivity() {
+        let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWWorksActivityController.self)) as! WOWWorksActivityController
+
+        topNaVC?.pushViewController(vc, animated: true)
+
+    }
+    //作品详情页
+    public class func goWorksActivityDetail(topicId: Int) {
+        let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWActitvityDetailController.self)) as! WOWActitvityDetailController
+        vc.topicId = topicId
+        topNaVC?.pushViewController(vc, animated: true)
+        
+    }
 
     //跳转在线客服页面 source ：用户信息 commodityInfo: 自定义商品信息 orderNumber : 订单号    ·
     public class func goCustomerVC(_ source:QYSource?,commodityInfo:QYCommodityInfo?, orderNumber:String?) {

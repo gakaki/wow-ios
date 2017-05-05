@@ -68,7 +68,8 @@ class WOWMasterpieceCell: UITableViewCell {
     }
     //单击手势事件
     func singleTapClick(tap: UITapGestureRecognizer)  {
-        VCRedirect.bingWorksDetails(worksId: model?.id ?? 0)
+//        VCRedirect.bingWorksDetails(worksId: model?.id ?? 0)
+        VCRedirect.goWorksActivity()
     }
     //双击手势事件
     func doubleTapClick(tap: UITapGestureRecognizer)  {
@@ -88,12 +89,17 @@ class WOWMasterpieceCell: UITableViewCell {
         }) { (finish) in
             
         }
-        UIView.animate(withDuration: 1/8, delay: 7/8, options: .curveLinear, animations: { [unowned self] in
-            self.thumbImg.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-            self.thumbImg.alpha = 0
-        }) { [unowned self](finish)  in
-            self.thumbImg.isHidden = true
-            self.imgWroks.isUserInteractionEnabled = true
+        UIView.animate(withDuration: 1/8, delay: 7/8, options: .curveLinear, animations: { [weak self] in
+            if let strongSelf = self  {
+                strongSelf.thumbImg.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                strongSelf.thumbImg.alpha = 0
+            }
+        }) { [weak self](finish)  in
+            if let strongSelf = self  {
+                strongSelf.thumbImg.isHidden = true
+                strongSelf.imgWroks.isUserInteractionEnabled = true
+            }
+
         }
     }
     //喜欢某个作品

@@ -15,8 +15,11 @@ class WOWLaunchView: UIView {
         super.draw(rect)
         startTime()
         let delayTime = DispatchTime.now() + Double(Int64(5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-        DispatchQueue.main.asyncAfter(deadline: delayTime) {[unowned self] in
-            self.removeView()
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {[weak self] in
+            if let strongSelf = self {
+                strongSelf.removeView()
+
+            }
         }
         
 

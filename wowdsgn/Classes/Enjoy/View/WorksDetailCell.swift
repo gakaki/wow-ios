@@ -63,18 +63,27 @@ class WorksDetailCell: UITableViewCell {
         thumbImg.isHidden = false
         thumbImg.alpha = 0
         thumbImg.transform = CGAffineTransform(scaleX: 0, y: 0)
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveLinear, animations: {[unowned self] in
-            self.thumbImg.transform = CGAffineTransform(scaleX: 1, y: 1)
-            self.thumbImg.alpha = 1
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveLinear, animations: {[weak self] in
+            if  let strongSelf = self {
+                strongSelf.thumbImg.transform = CGAffineTransform(scaleX: 1, y: 1)
+                strongSelf.thumbImg.alpha = 1
+            }
+        
         }) { (finish) in
             
         }
-        UIView.animate(withDuration: 1/8, delay: 7/8, options: .curveLinear, animations: { [unowned self] in
-            self.thumbImg.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-            self.thumbImg.alpha = 0
-        }) { [unowned self](finish)  in
-            self.thumbImg.isHidden = true
-            self.imgPhoto.isUserInteractionEnabled = true
+        UIView.animate(withDuration: 1/8, delay: 7/8, options: .curveLinear, animations: { [weak self] in
+            if let strongSelf = self {
+                strongSelf.thumbImg.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                strongSelf.thumbImg.alpha = 0
+            }
+  
+        }) { [weak self](finish)  in
+            if let strongSelf = self {
+                strongSelf.thumbImg.isHidden = true
+                strongSelf.imgPhoto.isUserInteractionEnabled = true
+            }
+
         }
     }
 

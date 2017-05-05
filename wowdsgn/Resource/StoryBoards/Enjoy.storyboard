@@ -286,7 +286,7 @@
         <scene sceneID="X35-cs-Pt5">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YIa-I2-jcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="YRq-P6-a6h" customClass="WOWWorksActivityController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWWorksActivityController" id="YRq-P6-a6h" customClass="WOWWorksActivityController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g3J-2v-0Na"/>
                         <viewControllerLayoutGuide type="bottom" id="66g-Pn-0E6"/>
@@ -299,14 +299,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mf-37-X14">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mf-37-X14">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
-                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.83137254901960778" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="n4N-lm-ZDs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="发布"/>
+                                <state key="normal" title="提交作品">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="publishActionWithSender:" destination="YRq-P6-a6h" eventType="touchUpInside" id="UoC-uM-KJY"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -322,16 +327,17 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tabelView" destination="adF-VZ-m02" id="CW5-pE-sCh"/>
+                        <outlet property="publishBtn" destination="1mf-37-X14" id="pz0-Ja-lXc"/>
+                        <outlet property="tableView" destination="adF-VZ-m02" id="Iww-M4-YtE"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-1990" y="397"/>
+            <point key="canvasLocation" x="-1860" y="365"/>
         </scene>
-        <!--View Controller-->
+        <!--Actitvity Detail Controller-->
         <scene sceneID="muo-8m-AyF">
             <objects>
-                <viewController id="mVK-Kd-E9i" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WOWActitvityDetailController" id="mVK-Kd-E9i" customClass="WOWActitvityDetailController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bWf-cf-rvt"/>
                         <viewControllerLayoutGuide type="bottom" id="Afb-fD-l4x"/>
@@ -348,6 +354,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="1vo-ue-uHe" id="De0-Mz-P9V"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5aQ-mZ-yQM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -642,11 +651,8 @@
                                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="wix-p1-PKt">
-                                        <rect key="frame" x="351" y="17" width="9" height="16"/>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KkC-KW-qC6">
-                                        <rect key="frame" x="341" y="26" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="370" y="26" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -655,15 +661,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="baY-YT-k72" firstAttribute="leading" secondItem="A02-3O-xwZ" secondAttribute="leading" constant="15" id="8zm-ZX-bdh"/>
-                                    <constraint firstAttribute="trailing" secondItem="wix-p1-PKt" secondAttribute="trailing" constant="15" id="Bkc-eR-t0k"/>
                                     <constraint firstItem="KkC-KW-qC6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="baY-YT-k72" secondAttribute="trailing" constant="10" id="Cxl-cX-bhA"/>
                                     <constraint firstItem="Ssh-z4-7X2" firstAttribute="leading" secondItem="A02-3O-xwZ" secondAttribute="leading" constant="15" id="Ie6-to-582"/>
                                     <constraint firstAttribute="height" constant="51" id="RCK-t6-8XI"/>
+                                    <constraint firstAttribute="trailing" secondItem="KkC-KW-qC6" secondAttribute="trailing" constant="5" id="ZOu-9E-a8n"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="51" id="cAs-Rf-OYo"/>
                                     <constraint firstAttribute="trailing" secondItem="Ssh-z4-7X2" secondAttribute="trailing" id="clm-gT-7fS"/>
-                                    <constraint firstItem="wix-p1-PKt" firstAttribute="centerY" secondItem="A02-3O-xwZ" secondAttribute="centerY" id="d6h-ky-bJy"/>
                                     <constraint firstItem="Ssh-z4-7X2" firstAttribute="top" secondItem="A02-3O-xwZ" secondAttribute="top" id="neh-KY-Jbb"/>
-                                    <constraint firstItem="wix-p1-PKt" firstAttribute="leading" secondItem="KkC-KW-qC6" secondAttribute="trailing" constant="10" id="olt-Du-bWn"/>
                                     <constraint firstItem="KkC-KW-qC6" firstAttribute="centerY" secondItem="A02-3O-xwZ" secondAttribute="centerY" id="xIj-2e-S1H"/>
                                     <constraint firstItem="baY-YT-k72" firstAttribute="centerY" secondItem="A02-3O-xwZ" secondAttribute="centerY" id="xbN-0F-kSB"/>
                                 </constraints>
@@ -699,7 +703,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-2927" y="479"/>
+            <point key="canvasLocation" x="-2710" y="435"/>
         </scene>
     </scenes>
     <resources>

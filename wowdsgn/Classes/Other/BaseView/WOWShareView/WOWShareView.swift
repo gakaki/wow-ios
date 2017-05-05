@@ -194,10 +194,12 @@ class WOWShareBackView:UIView{
         UIView.animate(withDuration: 0.3,animations: { [unowned self] in
             self.alpha = 0
             self.backClear.y = MGScreenHeight + 10;
-        }, completion: { (ret) in
-            self.backClear.removeFromSuperview()
-            self.sharePhotoView.removeFromSuperview()
-            self.removeFromSuperview()
+        }, completion: {[weak self] (ret) in
+            if let strongSelf = self  {
+                strongSelf.backClear.removeFromSuperview()
+                strongSelf.sharePhotoView.removeFromSuperview()
+                strongSelf.removeFromSuperview()
+            }
         })
     }
 }

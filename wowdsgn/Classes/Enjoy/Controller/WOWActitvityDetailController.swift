@@ -12,11 +12,13 @@ class WOWActitvityDetailController: WOWBaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    let titleCellID = "WOWWorksTitleCell"
-    
+    let CellID = "WOWWorksActivityDetailCell"
+    var topicId = 0
+    var topicModel: WOWActivityModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        request()
         // Do any additional setup after loading the view.
     }
     
@@ -24,30 +26,37 @@ class WOWActitvityDetailController: WOWBaseViewController {
         super.setUI()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.sectionIndexColor = GrayColorlevel1
+        tableView.estimatedRowHeight = 300
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.mj_header = mj_header
-        tableView.mj_footer = mj_footer
+        tableView.separatorStyle = .none
         tableView.clearRestCell()
-        tableView.register(UINib.nibName(titleCellID), forCellReuseIdentifier:titleCellID)
+        tableView.register(UINib.nibName(CellID), forCellReuseIdentifier:CellID)
         
     }
     
-    override func loadMore() {
-        
-    }
     
     //MARK: -- NET
     override func request() {
         super.request()
+        WOWNetManager.sharedManager.requestWithTarget(.api_Works_Topic(topicId: topicId), successClosure: {[weak self] (result, code) in
+            
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                let r                             =  JSON(result)
+                strongSelf.topicModel          =  Mapper<WOWActivityModel>().map(JSONObject: r.object )
+                strongSelf.tableView.reloadData()
+            }
+            
+        }) {[weak self](errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                WOWHud.showWarnMsg(errorMsg)
+            }
+
+        }
     }
-    
-    func requestTitle() {
-        
-    }
-    
-    func requestWorks() {
-        
-    }
+
     
     
     override func didReceiveMemoryWarning() {
@@ -61,7 +70,7 @@ class WOWActitvityDetailController: WOWBaseViewController {
 extension WOWActitvityDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,10 +78,10 @@ extension WOWActitvityDetailController:UITableViewDelegate,UITableViewDataSource
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell                = tableView.dequeueReusableCell(withIdentifier: titleCellID, for: indexPath) as! WOWWorksTitleCell
+            let cell                = tableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath) as! WOWWorksActivityDetailCell
+            cell.showData(model: topicModel)
             return cell
 
-        
         
     }
     

@@ -21,7 +21,9 @@ class WOWWorksTitleCell: UITableViewCell, UICollectionViewDataSource, UICollecti
     @IBOutlet weak var picHeight: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sortHeadView: UIView!
-    @IBOutlet weak var sortBtn: UIButton!
+    @IBOutlet weak var sortBtn: UIButton!       //排序
+    @IBOutlet weak var moreBtnH: NSLayoutConstraint!    //了解更多高度
+    @IBOutlet weak var moreBtnBottom: NSLayoutConstraint!   //了解更多距底部高度
     weak var delegate: WOWWorksTitleCellDelegate?
     
     var topicId = 0
@@ -68,9 +70,13 @@ class WOWWorksTitleCell: UITableViewCell, UICollectionViewDataSource, UICollecti
     func showData(topic: WOWActivityModel?, array dataArray: [WOWWorksListModel], lineN lineNum: Int) {
         if let model = topic {
             if lineNum < 4 {
-//                moreBtn.isHidden = true
+                moreBtn.isHidden = true
+                moreBtnH.constant = 0
+                moreBtnBottom.constant = 0
             }else {
                 moreBtn.isHidden = false
+                moreBtnH.constant = 24
+                moreBtnBottom.constant = 20
 
             }
             topicId = model.id ?? 0
@@ -89,7 +95,7 @@ class WOWWorksTitleCell: UITableViewCell, UICollectionViewDataSource, UICollecti
                 timeLabel.text = String(format: "距离活动开始还有%i天", model.offset ?? 0)
 
             }
-            titleLabel.text = model.title
+            titleLabel.text = model.subhead
             contentLabel.text = model.content
             
         }
@@ -112,7 +118,7 @@ class WOWWorksTitleCell: UITableViewCell, UICollectionViewDataSource, UICollecti
         collectionView.emptyDataSetDelegate = self
         collectionView.emptyDataSetSource = self
         collectionView.register(UINib.nibName(String(describing: WOWWorksCell.self)), forCellWithReuseIdentifier:String(describing: WOWWorksCell.self))
-        
+        collectionView.isScrollEnabled = false
     }
     
     //显示视图+

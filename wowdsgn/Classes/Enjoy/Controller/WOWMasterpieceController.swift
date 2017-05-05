@@ -157,11 +157,19 @@ class WOWMasterpieceController: WOWBaseViewController {
                 strongSelf.bannerArr = Mapper<WOWHomeModle>().mapArray(JSONObject:JSON(result)["banners"].arrayObject) ?? [WOWHomeModle]()
                 if strongSelf.bannerArr.count > 0 {
                     strongSelf.numberOfSection = 2
+                }else{
+                    strongSelf.numberOfSection = 1
+
                 }
                 strongSelf.tableView.reloadData()
             }
-        }) { (errorMsg) in
-            
+        }) { [weak self](errorMsg) in
+            if let strongSelf = self {
+                strongSelf.bannerArr = [WOWHomeModle]()
+                strongSelf.numberOfSection = 1
+                strongSelf.tableView.reloadData()
+
+            }
             
         }
     }

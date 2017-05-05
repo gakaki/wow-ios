@@ -294,6 +294,8 @@ public enum RequestApi{
     case api_Works_Topic(topicId: Int)
     
     case api_InstagramList(params: [String: Any])
+    
+    case api_PublishTopicWorks(params: [String: Any])
 }
 
 extension RequestApi:TargetType{
@@ -605,6 +607,8 @@ extension RequestApi:TargetType{
             return URL_Works_Topic
         case .api_InstagramList:
             return URL_InstagramList
+        case .api_PublishTopicWorks:
+            return URL_PublishTopicWorks
 
         }
     }
@@ -924,7 +928,8 @@ extension RequestApi:TargetType{
                 params = ["topicId": topicId]
             case let .api_InstagramList(param):
                 params = param
-            
+            case let .api_PublishTopicWorks(param):
+                params = param
             default:
                 break
 
@@ -1006,3 +1011,4 @@ extension RequestApi:TargetType{
         return user_Agent
     }
 }
+    

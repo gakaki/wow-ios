@@ -40,7 +40,7 @@ class WOWWorksActivityDetailCell: UITableViewCell {
                 timeLabel.text = String(format: "距离活动开始还有%i天", model.offset ?? 0)
                 
             }
-            titleLabel.text = model.title
+            titleLabel.text = model.subhead
             contentLabel.text = model.content
             
         }

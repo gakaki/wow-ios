@@ -46,11 +46,11 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ti9-AD-tNV">
                                 <rect key="frame" x="15" y="265" width="345" height="0.0"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3w-6g-wMH">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3w-6g-wMH">
                                 <rect key="frame" x="15" y="295" width="62" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="62" id="Pcd-gg-rre"/>
@@ -134,7 +134,7 @@
                             <constraint firstAttribute="trailing" secondItem="DpP-Jz-f9Y" secondAttribute="trailing" id="jw8-Hn-8Bq"/>
                         </constraints>
                     </view>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="LRa-G9-aPJ">
+                    <collectionView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="LRa-G9-aPJ">
                         <rect key="frame" x="0.0" y="399" width="375" height="365.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ldv-Ir-PlF">
@@ -164,6 +164,8 @@
                 <outlet property="collectionView" destination="LRa-G9-aPJ" id="6kp-Lk-KRQ"/>
                 <outlet property="contentLabel" destination="hTR-5y-IsS" id="h55-07-skf"/>
                 <outlet property="moreBtn" destination="q3w-6g-wMH" id="Lnk-HL-bwP"/>
+                <outlet property="moreBtnBottom" destination="ufE-Zl-VQt" id="keL-Pd-0zv"/>
+                <outlet property="moreBtnH" destination="pb4-wA-LUQ" id="3gr-5H-Bqu"/>
                 <outlet property="picHeight" destination="iRU-5S-Rqh" id="kDV-gs-kaq"/>
                 <outlet property="picNumLabel" destination="FJC-y4-0vt" id="4a7-hU-mVr"/>
                 <outlet property="sortBtn" destination="DpP-Jz-f9Y" id="wrc-Ry-hHk"/>

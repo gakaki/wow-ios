@@ -17,12 +17,19 @@ class WOWReleaseWorksController: WOWBaseViewController {
     @IBOutlet weak var imgPhoto: UIImageView!
     @IBOutlet weak var categoryTap: UIView!
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var activityLabel: UILabel!
+    @IBOutlet weak var arrowImg: UIImageView!
+    @IBOutlet weak var rightSpace: NSLayoutConstraint!
     
     var modelData : WOWWorksDetailsModel?
     var instagramCategoryId:Int?
     var indexRow: Int = 0
     var categoryArr = [WOWEnjoyCategoryModel]()
     var imgSizeId : Int?
+    var instagramCategoryName: String?
+    var type:Int = 0    //type = 0时从选择分类页过来。否则从活动页过来
+    var topicId: Int = 0        //活动专题id
+    var activityName: String?   //活动名称
 
     lazy var backView:WOWPickerBackView = {[unowned self] in
         let v = WOWPickerBackView(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight))
@@ -43,12 +50,25 @@ class WOWReleaseWorksController: WOWBaseViewController {
         navigationItem.rightBarButtonItem = itemReghit
 
         let tapGestureRecognizer = UIPanGestureRecognizer.init(target: self, action:  #selector(tap))
-    
+        
         self.view.addGestureRecognizer(tapGestureRecognizer)
-        categoryLabel.text = categoryArr[indexRow].categoryName
-        categoryTap.addTapGesture {[unowned self] (tap) in
-            self.showPickerView()
+        if type == 0 {
+            //正常分类过来的时候右边是分类
+            categoryLabel.text = categoryArr[indexRow].categoryName
+            instagramCategoryId = categoryArr[indexRow].id
+            arrowImg.isHidden = false
+            rightSpace.constant = 34
+            categoryTap.addTapGesture {[unowned self] (tap) in
+                self.showPickerView()
+            }
+        }else {
+            //是活动的时候左边是分类，右边是活动名称
+            categoryLabel.text = activityName   //填写活动名称
+            activityLabel.text = instagramCategoryName      //分类名称
+            arrowImg.isHidden = true
+            rightSpace.constant = 5
         }
+
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -132,6 +152,34 @@ class WOWReleaseWorksController: WOWBaseViewController {
         }
 
     }
+    //活动发布作品
+    func requestPushTopicWorks(pic:String ,des:String){
+        
+        var params = [String: Any]()
+        params = ["instagramCategoryId": instagramCategoryId ?? 0  ,"pic": pic ,"description":des , "measurement":imgSizeId  ?? 1, "topicId": topicId]
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_PublishTopicWorks(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            if let strongSelf = self{
+                let r = JSON(result)
+                print(r)
+                
+                strongSelf.modelData    =    Mapper<WOWWorksDetailsModel>().map(JSONObject:result)
+                
+                strongSelf.toWorksDetails(worksId:strongSelf.modelData?.id ?? 0)
+                
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if self != nil{
+                
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                
+            }
+        }
+        
+    }
+    
     // MARK: - 发布按钮
     @IBAction func releaseAction(_ sender: Any) {
             MobClick.e(.post_clicks_post_picture_page)
@@ -150,7 +198,13 @@ class WOWReleaseWorksController: WOWBaseViewController {
         WOWUploadManager.uploadShareImg(photo, successClosure: {[weak self] (url) in
             
             if let strongSelf = self {
-                strongSelf.requestPushWorks(pic: url ?? "", des: des)
+                if strongSelf.type == 0 {
+                    strongSelf.requestPushWorks(pic: url ?? "", des: des)
+
+                }else {
+                    strongSelf.requestPushTopicWorks(pic: url ?? "", des: des)
+
+                }
             }
             
             

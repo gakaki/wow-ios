@@ -68,8 +68,7 @@ class WOWMasterpieceCell: UITableViewCell {
     }
     //单击手势事件
     func singleTapClick(tap: UITapGestureRecognizer)  {
-//        VCRedirect.bingWorksDetails(worksId: model?.id ?? 0)
-        VCRedirect.goWorksActivity()
+        VCRedirect.bingWorksDetails(worksId: model?.id ?? 0)
     }
     //双击手势事件
     func doubleTapClick(tap: UITapGestureRecognizer)  {

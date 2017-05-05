@@ -463,20 +463,32 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
     }
     //发布作品页
-    class func bingReleaseWorks(photo:UIImage!, instagramCategoryId: Int, sizeImgId: Int, categoryArray: Array<WOWEnjoyCategoryModel>) {
+    class func bingReleaseWorks(photo:UIImage!, indexRow: Int, sizeImgId: Int, categoryArray: Array<WOWEnjoyCategoryModel>) {
         let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWReleaseWorksController.self)) as! WOWReleaseWorksController
         vc.photo = photo
-        vc.indexRow = instagramCategoryId
+        vc.indexRow = indexRow
         vc.imgSizeId = sizeImgId
         vc.categoryArr = categoryArray
         topNaVC?.pushViewController(vc, animated: true)
         
     }
+    class func goReleaseWorks(photo:UIImage!, instagramCategoryId: Int?, sizeImgId: Int, instagramCategoryName: String?, type: Int, topicId: Int, activityName: String?) {
+        let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWReleaseWorksController.self)) as! WOWReleaseWorksController
+        vc.photo = photo
+        vc.instagramCategoryId = instagramCategoryId
+        vc.imgSizeId = sizeImgId
+        vc.instagramCategoryName = instagramCategoryName
+        vc.type = type
+        vc.topicId = topicId
+        vc.activityName = activityName
+        topNaVC?.pushViewController(vc, animated: true)
+    }
+    
     
     //作品活动详情页面
-    public class func goWorksActivity() {
+    public class func goWorksActivity(topicId: Int) {
         let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWWorksActivityController.self)) as! WOWWorksActivityController
-
+        vc.topicId = topicId
         topNaVC?.pushViewController(vc, animated: true)
 
     }
@@ -636,6 +648,8 @@ public class VCRedirect {
                 case 16:// 跳转标签分类
                     
                     VCRedirect.bingWorksDetails(worksId: id)
+                case 17:
+                    VCRedirect.goWorksActivity(topicId: id)
 
                 default:
                     WOWHud.showMsg("请您更新最新版本")

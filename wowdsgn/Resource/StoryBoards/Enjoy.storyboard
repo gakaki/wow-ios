@@ -118,7 +118,6 @@
         <!--Choice Class Controller-->
         <scene sceneID="py9-Ya-eN8">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ti7-wa-ec6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="WOWChoiceClassController" id="B0N-au-49Y" customClass="WOWChoiceClassController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0SO-mE-0SE"/>
@@ -152,6 +151,7 @@
                         <outlet property="collectionView" destination="Uvc-I1-pbH" id="iTS-Vy-5SW"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ti7-wa-ec6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3938.4000000000001" y="-312.59370314842579"/>
         </scene>
@@ -245,8 +245,8 @@
                                     <constraint firstItem="Gz6-n8-tgb" firstAttribute="centerY" secondItem="ynb-Wd-0Jz" secondAttribute="centerY" id="cnq-T6-XbE"/>
                                     <constraint firstItem="2tK-3X-H2U" firstAttribute="centerY" secondItem="ynb-Wd-0Jz" secondAttribute="centerY" id="d1r-6P-V8K"/>
                                     <constraint firstAttribute="height" constant="51" id="jRA-fd-mbH"/>
-                                    <constraint firstItem="4Kr-RC-reZ" firstAttribute="leading" secondItem="Gz6-n8-tgb" secondAttribute="trailing" constant="10" id="pXW-4M-2Bd"/>
                                     <constraint firstItem="2tK-3X-H2U" firstAttribute="leading" secondItem="ynb-Wd-0Jz" secondAttribute="leading" constant="15" id="qYx-Il-htl"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gz6-n8-tgb" secondAttribute="trailing" constant="34" id="xfY-4O-rkm"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -270,11 +270,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityLabel" destination="2tK-3X-H2U" id="um8-LD-4LK"/>
+                        <outlet property="arrowImg" destination="4Kr-RC-reZ" id="MfZ-hO-WyK"/>
                         <outlet property="categoryLabel" destination="Gz6-n8-tgb" id="EmW-EZ-Jod"/>
                         <outlet property="categoryTap" destination="ynb-Wd-0Jz" id="pWZ-7m-8g7"/>
                         <outlet property="imgHeightLayou" destination="6nl-AQ-ivH" id="fKd-2W-X8G"/>
                         <outlet property="imgPhoto" destination="mvA-e7-LgU" id="68E-Jh-BH7"/>
                         <outlet property="numberLabel" destination="3do-01-04G" id="DPu-Hb-hYf"/>
+                        <outlet property="rightSpace" destination="xfY-4O-rkm" id="OjX-zQ-7XP"/>
                         <outlet property="textView" destination="SS8-b6-nRB" id="dve-sI-kse"/>
                     </connections>
                 </viewController>
@@ -285,7 +288,6 @@
         <!--Works Activity Controller-->
         <scene sceneID="X35-cs-Pt5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YIa-I2-jcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="WOWWorksActivityController" id="YRq-P6-a6h" customClass="WOWWorksActivityController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g3J-2v-0Na"/>
@@ -331,6 +333,7 @@
                         <outlet property="tableView" destination="adF-VZ-m02" id="Iww-M4-YtE"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YIa-I2-jcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1860" y="365"/>
         </scene>
@@ -346,13 +349,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1vo-ue-uHe">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1vo-ue-uHe">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1vo-ue-uHe" firstAttribute="leading" secondItem="PlF-04-fv8" secondAttribute="leading" id="p56-HQ-PJx"/>
+                            <constraint firstItem="Afb-fD-l4x" firstAttribute="top" secondItem="1vo-ue-uHe" secondAttribute="bottom" id="s8t-wT-lcD"/>
+                            <constraint firstAttribute="trailing" secondItem="1vo-ue-uHe" secondAttribute="trailing" id="vUC-4D-Nkc"/>
+                            <constraint firstItem="1vo-ue-uHe" firstAttribute="top" secondItem="PlF-04-fv8" secondAttribute="top" id="xFh-8R-kPF"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="1vo-ue-uHe" id="De0-Mz-P9V"/>
@@ -479,7 +487,7 @@
                                     <constraint firstItem="iMK-Lf-Ijx" firstAttribute="centerY" secondItem="oxD-kB-NvO" secondAttribute="centerY" constant="-30" id="z6j-W6-6df"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5O-Ag-IQN" customClass="CustomKolodaView" customModule="wowdsgn" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5O-Ag-IQN" customClass="CustomKolodaView" customModule="wowdsgn" customModuleProvider="target">
                                 <rect key="frame" x="22.5" y="20" width="330" height="406"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -518,7 +526,6 @@
         <!--佳作-->
         <scene sceneID="wTE-1D-W7K">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ov2-RR-QWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="WOWMasterpieceController" title="佳作" id="yGc-p3-Epc" customClass="WOWMasterpieceController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d1K-3L-oLg"/>
@@ -532,7 +539,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7f-Ph-La1">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7f-Ph-La1">
                                 <rect key="frame" x="287" y="580" width="70" height="70"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -562,13 +569,13 @@
                         <outlet property="tableView" destination="mqb-ZK-rQa" id="KL1-YP-xK2"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ov2-RR-QWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1864.8" y="224.4377811094453"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6uc-ai-aJM">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e2B-Zt-T3Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="WOWEditWorksNavController" id="zmv-1C-BLB" customClass="WOWNavigationController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Y8R-lA-61h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -578,13 +585,13 @@
                         <segue destination="A9M-x8-1TI" kind="relationship" relationship="rootViewController" id="2kw-hF-pZb"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e2B-Zt-T3Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3882" y="443"/>
         </scene>
         <!--Edit Works Controller-->
         <scene sceneID="etG-WR-myv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fuy-Z6-Ezd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="WOWEditWorksController" id="A9M-x8-1TI" customClass="WOWEditWorksController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gz9-Tw-Tug"/>
@@ -702,6 +709,7 @@
                         <outlet property="textView" destination="daz-Vy-8cB" id="owc-np-opv"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fuy-Z6-Ezd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2710" y="435"/>
         </scene>

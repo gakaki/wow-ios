@@ -16,6 +16,8 @@ class WOWActivityModel: WOWBaseModel ,Mappable {
     var img                             :  String?
     var title                           :  String?
     var content                         :  String?
+    var subhead                         :  String?
+    var categoryName                    :  String?
     var offset                          :  Int?     //距离开始/结束天数
     var status                          :  Int?     //0-未开始,1-未结束,2-已结束
     var instagramQty                    :  Int?     //作品数
@@ -31,6 +33,8 @@ class WOWActivityModel: WOWBaseModel ,Mappable {
         instagramCategoryId                                     <- map["instagramCategoryId"]
         img                                                     <- map["img"]
         title                                                   <- map["title"]
+        categoryName                                            <- map["categoryName"]
+        subhead                                                 <- map["subhead"]
         content                                                 <- map["content"]
         offset                                                  <- map["offset"]
         status                                                  <- map["status"]

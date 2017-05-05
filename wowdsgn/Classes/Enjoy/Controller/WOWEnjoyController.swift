@@ -53,8 +53,8 @@ class WOWEnjoyController: WOWBaseViewController {
     }()
     
     lazy var rightNavItem:UIImageView = {
-        let v = UIImageView.init(frame: CGRect.init(x: 0, y: 0, w: 30, h: 30))
-        
+        let v = UIImageView.init(frame: CGRect.init(x: 0, y: 0, w: 50, h: 30))
+        v.contentMode = .center
         v.image = UIImage.init(named: "camera_class")
         v.addTapGesture(action: { [weak self](sender) in
             if let strongSelf = self {
@@ -93,7 +93,8 @@ class WOWEnjoyController: WOWBaseViewController {
         v.magicView.sliderHeight        = 3.w
         v.magicView.isSwitchAnimated        = false
         v.magicView.isScrollEnabled         = true
-        v.magicView.navigationInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 114)
+        v.magicView.isMenuScrollEnabled     = false 
+        v.magicView.navigationInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 40)
         v.magicView.leftNavigatoinItem  = navView
         v.magicView.rightNavigatoinItem = rightNavItem
         v.magicView.isAgainstStatusBar = true
@@ -147,6 +148,8 @@ class WOWEnjoyController: WOWBaseViewController {
         requestClass()
 
     }
+    
+    
    func requestClass() {
     
         
@@ -169,6 +172,10 @@ class WOWEnjoyController: WOWBaseViewController {
         
     }
     func chooseClassAction() {
+        guard WOWUserManager.loginStatus else{
+            toLoginVC(true)
+            return
+        }
         let window = UIApplication.shared.windows.last
         
         window?.addSubview(chooseClassView)
@@ -203,10 +210,11 @@ class WOWEnjoyController: WOWBaseViewController {
                 if strongSelf.isOpen {
                     strongSelf.navView.arrowImg.transform = CGAffineTransform.identity
                     strongSelf.v.magicView.menuBar?.isHidden = false
-
+                    strongSelf.v.magicView.rightNavigatoinItem?.isHidden = false
                 }else {
                     strongSelf.navView.arrowImg.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
                     strongSelf.v.magicView.menuBar?.isHidden = true
+                    strongSelf.v.magicView.rightNavigatoinItem?.isHidden = true
 
                 }
             }
@@ -252,7 +260,7 @@ extension WOWEnjoyController:VTMagicViewDataSource, VTMagicViewDelegate{
         let button = magicView .dequeueReusableItem(withIdentifier: self.identifier_magic_view_bar_item)
         
         if ( button == nil) {
-            let width           = self.view.frame.width / 3
+            let width           = 50
             let b               = UIButton(type: .custom)
             b.frame             = CGRect(x: 0, y: 0, width: width, height: 44)
             b.titleLabel!.font  =  UIFont.mediumScaleFontSize(17)
@@ -391,7 +399,7 @@ extension WOWEnjoyController:TZImagePickerControllerDelegate,PhotoTweaksViewCont
     func photoTweaksController(_ controller: PhotoTweaksViewController, didFinishWithCroppedImage croppedImage: UIImage!, clooseSizeImgId sizeId: Int32) {
         
         if categoryArr.count > 0 {
-            VCRedirect.bingReleaseWorks(photo: croppedImage, instagramCategoryId: classId ?? 0, sizeImgId: Int(sizeId), categoryArray: chooseClassArr)
+            VCRedirect.bingReleaseWorks(photo: croppedImage, indexRow: classId ?? 0, sizeImgId: Int(sizeId), categoryArray: chooseClassArr)
         }
         
         

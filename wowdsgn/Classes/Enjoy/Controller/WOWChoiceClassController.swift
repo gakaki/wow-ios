@@ -12,9 +12,9 @@ class WOWChoiceClassController: WOWBaseViewController {
     var categoryArr = [WOWEnjoyCategoryModel]()
     @IBOutlet weak var collectionView: UICollectionView!
     var px = (MGScreenWidth - (80 * 3)) / 4
-    var instagramCategoryId:Int?
+    var instagramCategoryId:Int?        //分类id
     var btnRright = UIButton()
-    var classId : Int?
+    var indexRow : Int?     //当前数组下标
 //    var imgSizeId : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -201,7 +201,7 @@ extension WOWChoiceClassController:UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
      
         let m = categoryArr[indexPath.row]
-        classId = indexPath.row
+        indexRow = indexPath.row
         for model in categoryArr {
             if model == m {
                 if model.isSelect {
@@ -242,7 +242,7 @@ extension WOWChoiceClassController:TZImagePickerControllerDelegate,PhotoTweaksVi
     func photoTweaksController(_ controller: PhotoTweaksViewController, didFinishWithCroppedImage croppedImage: UIImage!, clooseSizeImgId sizeId: Int32) {
       
         if categoryArr.count > 0 {
-            VCRedirect.bingReleaseWorks(photo: croppedImage, instagramCategoryId: classId ?? 0, sizeImgId: Int(sizeId), categoryArray: categoryArr)
+            VCRedirect.bingReleaseWorks(photo: croppedImage, indexRow: indexRow ?? 0, sizeImgId: Int(sizeId), categoryArray: categoryArr)
         }
         
    

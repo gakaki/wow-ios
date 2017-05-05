@@ -14,32 +14,20 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5U7-wi-bKV">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add_guide" translatesAutoresizingMaskIntoConstraints="NO" id="LJO-Mj-zG2">
-                    <rect key="frame" x="335" y="607" width="64" height="64"/>
-                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mas_guide" translatesAutoresizingMaskIntoConstraints="NO" id="Fht-YL-Nt8">
-                    <rect key="frame" x="108" y="301" width="291" height="303"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                 </imageView>
             </subviews>
             <constraints>
-                <constraint firstItem="5U7-wi-bKV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="EdJ-iZ-qFe"/>
-                <constraint firstAttribute="trailing" secondItem="LJO-Mj-zG2" secondAttribute="trailing" constant="15" id="MvT-Sj-AdB"/>
-                <constraint firstAttribute="trailing" secondItem="Fht-YL-Nt8" secondAttribute="trailing" constant="15" id="N5d-UD-yEV"/>
-                <constraint firstItem="LJO-Mj-zG2" firstAttribute="top" secondItem="Fht-YL-Nt8" secondAttribute="bottom" constant="3" id="Z9w-Qc-X9p"/>
-                <constraint firstAttribute="trailing" secondItem="5U7-wi-bKV" secondAttribute="trailing" id="gIE-UE-Wi8"/>
-                <constraint firstAttribute="bottom" secondItem="5U7-wi-bKV" secondAttribute="bottom" id="oGt-uL-WGB"/>
-                <constraint firstItem="5U7-wi-bKV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="p01-49-L3h"/>
-                <constraint firstAttribute="bottom" secondItem="LJO-Mj-zG2" secondAttribute="bottom" constant="65" id="zbh-0z-5Sx"/>
+                <constraint firstAttribute="trailing" secondItem="Fht-YL-Nt8" secondAttribute="trailing" id="1O0-Yd-XRa"/>
+                <constraint firstItem="Fht-YL-Nt8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4Lo-oA-VAA"/>
+                <constraint firstItem="Fht-YL-Nt8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="EXk-ux-xIZ"/>
+                <constraint firstAttribute="bottom" secondItem="Fht-YL-Nt8" secondAttribute="bottom" id="o9K-JC-KbT"/>
             </constraints>
             <point key="canvasLocation" x="-146" y="21"/>
         </view>
     </objects>
     <resources>
-        <image name="add_guide" width="64" height="64"/>
-        <image name="mas_guide" width="291" height="303"/>
+        <image name="mas_guide" width="750" height="1334"/>
     </resources>
 </document>

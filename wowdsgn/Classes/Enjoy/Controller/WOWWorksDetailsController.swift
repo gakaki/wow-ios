@@ -82,7 +82,7 @@ class WOWWorksDetailsController: WOWBaseViewController {
         if self.isBoolFormReleaseVC {
 
             self.navigationController?.dismiss(animated: true) {
-                _ = FNUtil.currentTopViewController().navigationController?.popViewController(animated: true)
+//                _ = FNUtil.currentTopViewController().navigationController?.popViewController(animated: true)
             }
     
         }else {

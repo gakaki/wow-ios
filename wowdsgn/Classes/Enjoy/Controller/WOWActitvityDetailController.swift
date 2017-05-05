@@ -45,6 +45,7 @@ class WOWActitvityDetailController: WOWBaseViewController {
                 strongSelf.endRefresh()
                 let r                             =  JSON(result)
                 strongSelf.topicModel          =  Mapper<WOWActivityModel>().map(JSONObject: r.object )
+                strongSelf.title = strongSelf.topicModel?.title
                 strongSelf.tableView.reloadData()
             }
             

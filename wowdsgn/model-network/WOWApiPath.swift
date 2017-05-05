@@ -279,4 +279,5 @@ let URL_Works_Delete            = "v1/instagram/del"                    //删除
 let URL_Works_Banners           = "v1/instagram/outstandingBanners"     //佳作轮播
 let URL_Works_Topic             = "v1/instagram/topic"                  //社区活动页
 let URL_InstagramList           = "v1/instagram/list"                     //活动作品列表
+let URL_PublishTopicWorks       = "v1/instagram/topicInstagram/publish"     //发布活动作品
 

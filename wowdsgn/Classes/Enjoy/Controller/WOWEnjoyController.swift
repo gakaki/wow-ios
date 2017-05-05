@@ -16,14 +16,17 @@ class WOWEnjoyController: WOWBaseViewController {
     var toMagicPage : Int = 0
     var isOpenRouter : Bool = false
     var categoryArr = [WOWEnjoyCategoryModel]()
+    var chooseClassArr = [WOWEnjoyCategoryModel]()
     var vc_newEnjoy:WOWNewEnjoyController?
     var vc_masterpiece:WOWMasterpieceController?
     var isOpen: Bool = false
     var currentCategoryId = 0
     let categoryName = "全部"
+    var classId : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = .all
+
         request()
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -48,13 +51,32 @@ class WOWEnjoyController: WOWBaseViewController {
         v.lbTitle.text = "全部"
         return v
     }()
+    
+    lazy var rightNavItem:UIImageView = {
+        let v = UIImageView.init(frame: CGRect.init(x: 0, y: 0, w: 30, h: 30))
+        
+        v.image = UIImage.init(named: "camera_class")
+        v.addTapGesture(action: { [weak self](sender) in
+            if let strongSelf = self {
+                 strongSelf.chooseClassAction()
+            }
+           
+        })
+        return v
+    }()
     lazy var backView:WOWCategoryBackView = {[unowned self] in
         let v = WOWCategoryBackView(frame:CGRect(x: 0,y: 64,width: MGScreenWidth,height: MGScreenHeight - 64))
         v.selectView.delegate = self
         v.dismissButton.addTarget(self, action: #selector(dismissClick), for:.touchUpInside)
         return v
     }()
-    
+    lazy var chooseClassView:WOWChooseClassBackView = {[unowned self] in
+//        let v = WOWChooseClassBackView(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight)) self.chooseClassArr.count
+        let v = WOWChooseClassBackView.init(frame: CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight), cellNumber: self.chooseClassArr.count)
+        v.dismissButton.addTarget(self, action: #selector(dismissChooseClassClick), for:.touchUpInside)
+        v.delegate = self 
+        return v
+    }()
     override func setUI() {
         super.setUI()
         self.view.backgroundColor = UIColor.white
@@ -72,7 +94,8 @@ class WOWEnjoyController: WOWBaseViewController {
         v.magicView.isSwitchAnimated        = false
         v.magicView.isScrollEnabled         = true
         v.magicView.navigationInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 114)
-        v.magicView.leftNavigatoinItem = navView
+        v.magicView.leftNavigatoinItem  = navView
+        v.magicView.rightNavigatoinItem = rightNavItem
         v.magicView.isAgainstStatusBar = true
         v.magicView.navigationHeight = 44
         v.magicView.isSeparatorHidden = true
@@ -121,11 +144,38 @@ class WOWEnjoyController: WOWBaseViewController {
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
-
+        requestClass()
 
     }
-
-  
+   func requestClass() {
+    
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_getCategory, successClosure: {[weak self](result, code) in
+            WOWHud.dismiss()
+            
+            if let strongSelf = self{
+                let r                             =  JSON(result)
+                strongSelf.chooseClassArr          =  Mapper<WOWEnjoyCategoryModel>().mapArray(JSONObject: r.arrayObject ) ?? [WOWEnjoyCategoryModel]()
+                strongSelf.chooseClassView.selectView.categoryArr = strongSelf.chooseClassArr
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                WOWHud.showMsgNoNetWrok(message: errorMsg)
+            }
+        }
+        
+        
+    }
+    func chooseClassAction() {
+        let window = UIApplication.shared.windows.last
+        
+        window?.addSubview(chooseClassView)
+        window?.bringSubview(toFront: chooseClassView)
+        chooseClassView.show()
+        
+    }
     
     //MARK: --privite 
     func categoryClick()  {
@@ -136,6 +186,10 @@ class WOWEnjoyController: WOWBaseViewController {
     func dismissClick()  {
         changeButtonState()
 
+    }
+    func dismissChooseClassClick()  {
+         chooseClassView.hideView()
+        
     }
     //更改箭头
     func changeButtonState() {
@@ -263,5 +317,98 @@ extension WOWEnjoyController:WOWSelectCategoryDelegate, WOWChideControllerDelega
     
     func updateTabsRequsetData(){
         request()
+    }
+}
+extension WOWEnjoyController:TZImagePickerControllerDelegate,PhotoTweaksViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
+    func cloosePhotos() {
+        
+        let imagePickerVc = TZImagePickerController.init(maxImagesCount: 1, columnNumber: 4, delegate: self, pushPhotoPickerVc: true)
+        imagePickerVc?.isSelectOriginalPhoto            = false
+        
+        imagePickerVc?.barItemTextColor                 = UIColor.black
+        imagePickerVc?.naviTitleColor                   = UIColor.black
+        imagePickerVc?.navigationBar.barTintColor       = UIColor.black
+        imagePickerVc?.navigationBar.tintColor          = UIColor.black
+        
+        imagePickerVc?.navigationController?.navigationBar.isTranslucent = false
+        imagePickerVc?.automaticallyAdjustsScrollViewInsets = true
+        
+        
+        imagePickerVc?.allowTakePicture     = true // 拍照按钮将隐藏,用户将不能在选择器中拍照
+        imagePickerVc?.allowPickingVideo    = false// 用户将不能选择发送视频
+        imagePickerVc?.allowPickingImage    = true // 用户可以选择发送图片
+        imagePickerVc?.allowPickingOriginalPhoto = false// 用户不能选择发送原图
+        imagePickerVc?.sortAscendingByModificationDate = false// 是否按照时间排序
+        imagePickerVc?.autoDismiss = false // 不自动dismiss
+        imagePickerVc?.allowPreview = true // 不预览图片
+        imagePickerVc?.showSelectBtn = true // 展示完成按钮
+        imagePickerVc?.didFinishPickingPhotosHandle = {[weak self](images,asstes,isupdete) in
+            if let strongSelf = self,let imagePickerVc = imagePickerVc{
+                MobClick.e(.finishpicturebutton)
+                UIApplication.shared.statusBarStyle = .default
+                
+                strongSelf.getDispatchPhoto(asset: asstes?[0] as! PHAsset,nav: imagePickerVc)
+                
+            }
+        }
+        MobClick.e(.select_picture_page)
+        present(imagePickerVc!, animated: true, completion: nil)
+        
+        
+    }
+    // 异步获取到原图
+    func getDispatchPhoto(asset:PHAsset,nav:UINavigationController)  {
+        let options = PHImageRequestOptions()
+        options.isSynchronous = false
+        options.deliveryMode = .highQualityFormat
+        options.isNetworkAccessAllowed = true
+        PHImageManager.default().requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .default, options: options) {[weak self] (result, info) -> Void in
+            if let image = result,let strongSelf = self {
+                // 处理获得的图片
+                let h = image.size.height
+                let w = image.size.width
+                if h > 1000 && w > 1000 {
+                    let photoTweaksViewController = PhotoTweaksViewController(image: image)
+                    photoTweaksViewController?.delegate = strongSelf
+                    photoTweaksViewController?.autoSaveToLibray = false
+                    
+                    nav.pushViewController(photoTweaksViewController!, animated: true)
+                }else {
+                    //                     print("请重新选择照片")
+                    WOWHud.showMsg("请您上传大于1000*1000px的照片")
+                }
+                
+            }
+        }
+    }
+    
+    func tz_imagePickerControllerDidCancel(_ picker: TZImagePickerController!) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func photoTweaksController(_ controller: PhotoTweaksViewController, didFinishWithCroppedImage croppedImage: UIImage!, clooseSizeImgId sizeId: Int32) {
+        
+        if categoryArr.count > 0 {
+            VCRedirect.bingReleaseWorks(photo: croppedImage, instagramCategoryId: classId ?? 0, sizeImgId: Int(sizeId), categoryArray: chooseClassArr)
+        }
+        
+        
+    }
+    
+    func photoTweaksControllerDidCancel(_ controller: PhotoTweaksViewController) {
+        controller.navigationController?.popViewController(animated: true)
+        
+    }
+
+
+}
+
+extension WOWEnjoyController:ChooseClassBackDelegate{
+    func didSelectItem(_ classId:Int) {
+         self.classId = classId
+        dismissChooseClassClick()
+        cloosePhotos()
     }
 }

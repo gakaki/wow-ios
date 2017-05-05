@@ -12,6 +12,7 @@ protocol ChooseClassBackDelegate:class{
 
     func didSelectItem(_ classId:Int)
 }
+var px = Int((MGScreenWidth - 30 - (80 * 3)) / 4)
 class WOWChooseClassBackView: UIView,ChooseClassDelegate,CAAnimationDelegate {
     
    
@@ -54,7 +55,7 @@ class WOWChooseClassBackView: UIView,ChooseClassDelegate,CAAnimationDelegate {
             
             addSubview(selectView)
             let a = ((cellNumber % 3) == 0 ? (cellNumber / 3) : ((cellNumber / 3) + 1))
-            let hight = (a * 127) + 85
+            let hight = (a * 127) + 85 + ((a - 1) * px)
             let maxH = Int(MGScreenHeight - 110)
             let h = (hight > maxH ? maxH  : hight)
           
@@ -148,7 +149,7 @@ protocol ChooseClassDelegate:class{
 }
 class WOWChooseClassView: UIView, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
-    var px = (MGScreenWidth - 30 - (80 * 3)) / 4
+ 
     @IBOutlet weak var collectionView: UICollectionView!
     var categoryArr = [WOWEnjoyCategoryModel](){// 为true 则是从专题详情内点击进来
         didSet{
@@ -216,13 +217,14 @@ class WOWChooseClassView: UIView, UICollectionViewDelegate, UICollectionViewData
         
           return CGSize(width: 80 ,height: 127)
         }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 8
-//    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return CGFloat(px)
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-           return UIEdgeInsetsMake(0, px,15, px)
+           return UIEdgeInsetsMake(0, CGFloat(px),15, CGFloat(px))
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WOWRefundTextCell: UITableViewCell {
+class WOWRefundTextCell: WOWStyleNoneCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textView: KMPlaceholderTextView!

@@ -51,12 +51,12 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
             collectionView.reloadData()
         }
     }
-    
+    var lbPlaceholder = "请写下您的购物体验和使用感受"
     var modelPhotosData               :    UserPhotoManage? // 记录当前cell上面选择的图片信息
     var userCommentData:    UserCommentManage?{// 用户评论信息 包含，评论内容，评论的图片信息
         didSet{
             if userCommentData?.comments == "" {
-                inputTextView.placeholderText = "请写下您的购物体验和使用感受"
+                inputTextView.placeholderText = lbPlaceholder
                 inputTextView.text = ""
             }else{
                 inputTextView.placeholderText = ""

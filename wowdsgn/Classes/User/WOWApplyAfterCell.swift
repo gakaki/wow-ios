@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WOWApplyAfterCell: UITableViewCell {
+class WOWApplyAfterCell: WOWStyleNoneCell {
 
     @IBOutlet weak var imgAicon: UIImageView!
     @IBOutlet weak var lbTitle: UILabel!

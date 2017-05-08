@@ -324,7 +324,7 @@ extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
             
             productDetailAboutCell.collectionView.xzm_footer = nil
             productDetailAboutCell.endRefresh()
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
         
     }

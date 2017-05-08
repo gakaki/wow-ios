@@ -338,7 +338,7 @@ class WOWContentTopicController: WOWBaseViewController {
         }){[weak self] (errorMsg) in
             if let strongSelf = self {
                 strongSelf.endRefresh()
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
             }
             
         }

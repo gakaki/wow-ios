@@ -106,7 +106,6 @@ class WOWMasterpieceController: WOWBaseViewController {
         params = ["categoryId": categoryId   ,"type": 0 ,"startRows":(pageIndex-1) * 10,"pageSize":pageSize]
 
         WOWNetManager.sharedManager.requestWithTarget(.api_getInstagramList(params: params), successClosure: {[weak self] (result, code) in
-            WOWHud.dismiss()
             if let strongSelf = self{
                 strongSelf.endRefresh()
                 
@@ -138,6 +137,10 @@ class WOWMasterpieceController: WOWBaseViewController {
             if let strongSelf = self{
                 strongSelf.endRefresh()
                 WOWHud.showWarnMsg(errorMsg)
+                strongSelf.fineWroksArr = []
+                strongSelf.tableView.mj_footer = nil
+                strongSelf.tableView.reloadData()
+
                 if strongSelf.pageIndex > 1 {
                     strongSelf.pageIndex -= 1
                 }

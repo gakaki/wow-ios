@@ -178,6 +178,17 @@ public enum UMengEvent  {
     case online_customer_service_information_center_page    //在线客服（消息中心）
     case online_cutomer_service_detailpage                  //在线客服对话框	
     
+    case user_avatar_masterpiece_page_community_homepage                //用户头像（佳作页社区首页）
+    case user_avatar_lastest_picture_page                       //用户头像（最新图片页）
+    case sellect_classifiaction_clicks_post_picture_page        //选择分类（编辑文字页发布）
+    case post_picture_activity_page                             //晒图活动页
+    case share_post_picture_activity_page                       //分享（晒图活动页）
+    case learn_more_post_picture_activity_page                  //了解更多（晒图活动页）
+    case rank_clicks_post_picture_activity_page                 //排序按钮（晒图活动页）
+    case picture_clicks_post_picture_activity_page              //图片（晒图活动页）
+    case learn_more_detail_page_post_picture_activity_page      //晒图信息详情页
+    case product_recommend_clicks                               //产品（为你推荐模块）
+    
 }
 
 

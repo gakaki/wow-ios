@@ -43,6 +43,7 @@ class WOWMasterpieceCell: UITableViewCell {
         imgWroks.set_webimage_url(m.pic)
         headImg.set_webimage_url_user(m.avatar)
         headImg.addTapGesture { (tap) in
+            MobClick.e(.user_avatar_masterpiece_page_community_homepage)
             VCRedirect.goOtherCenter(endUserId: m.endUserId ?? 0)
         }
         userName.text = m.nickName

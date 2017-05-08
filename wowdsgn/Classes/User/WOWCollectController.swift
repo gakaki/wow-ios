@@ -79,6 +79,8 @@ class WOWCollectController: WOWBaseViewController {
     
     func customViewForEmptyDataSet(_ scrollView: UIScrollView!) -> UIView! {
         let view = Bundle.main.loadNibNamed(String(describing: WOWWorkdEmptyView.self), owner: self, options: nil)?.last as! WOWWorkdEmptyView
+        view.frame = CGRect(x: 0, y: 0, w: self.view.w, h: self.view.h)
+
         view.lbEmpty.text = "还没有收藏任何作品"
         return view
     }

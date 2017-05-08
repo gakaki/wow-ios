@@ -592,7 +592,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
             
             }) { (errorMsg) in
                 
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
 
         }
      

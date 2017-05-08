@@ -51,7 +51,7 @@ class WOWBindMobileFirstController: WOWBaseViewController {
             }
         }) { (errorMsg) in
              sender.isUserInteractionEnabled = true
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
         
         
@@ -71,7 +71,7 @@ class WOWBindMobileFirstController: WOWBaseViewController {
                 VCRedirect.bingMobileSecond(entrance: .bindMobile)
             }
         }) {(errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
 
         }
     }

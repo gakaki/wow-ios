@@ -104,10 +104,12 @@ class WOWWorksTitleCell: UITableViewCell, UICollectionViewDataSource, UICollecti
 
     
     @IBAction func sortAction(sender: UIButton) {
+        MobClick.e(.rank_clicks_post_picture_activity_page)
         showSortView()
     }
     
     @IBAction func moreAction(sender: UIButton) {
+        MobClick.e(.learn_more_post_picture_activity_page)
         VCRedirect.goWorksActivityDetail(topicId: topicId)
     }
     
@@ -178,6 +180,7 @@ class WOWWorksTitleCell: UITableViewCell, UICollectionViewDataSource, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        MobClick.e(.picture_clicks_post_picture_activity_page)
         let model = dataArr[(indexPath as NSIndexPath).row]
         VCRedirect.bingWorksDetails(worksId: model.id ?? 0)
         

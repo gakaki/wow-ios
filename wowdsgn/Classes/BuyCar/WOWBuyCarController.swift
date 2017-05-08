@@ -355,7 +355,7 @@ class WOWBuyCarController: WOWBaseViewController {
             }) {[weak self] (errorMsg) in
                 if let strongSelf = self{
                     strongSelf.endRefresh()
-                    WOWHud.showMsgNoNetWrok(message: errorMsg)
+                    WOWHud.showWarnMsg(errorMsg)
                 }
         }
     }
@@ -388,7 +388,7 @@ class WOWBuyCarController: WOWBaseViewController {
                 strongSelf.allbuttonIsSelect()
             }
         }) { (errorMsg) in
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
     }
     
@@ -460,7 +460,7 @@ class WOWBuyCarController: WOWBaseViewController {
            
 
             }) { (errorMsg) in
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
         }
     }
     
@@ -497,7 +497,7 @@ class WOWBuyCarController: WOWBaseViewController {
                 strongSelf.tableView.reloadData()
             }
         }) { (errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
     
     }

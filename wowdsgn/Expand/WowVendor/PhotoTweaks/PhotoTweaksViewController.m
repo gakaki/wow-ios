@@ -243,6 +243,11 @@
     return UIStatusBarStyleDefault;
 }
 
+- (void)dealloc
+{
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

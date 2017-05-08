@@ -65,7 +65,7 @@ class WOWCodeLoginController: WOWBaseViewController {
         }) { (errorMsg) in
 //              LoadView.dissMissView()
             WOWHud.dismiss()
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
 
         
@@ -112,7 +112,7 @@ class WOWCodeLoginController: WOWBaseViewController {
         }) {[weak self] (errorMsg) in
             if self != nil{
                 WOWHud.dismiss()
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
             }
         }
     }

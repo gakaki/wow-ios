@@ -37,6 +37,7 @@ class WOWCustomKoloda: UIView {
         workImg.set_webimage_url(works.pic) //作品图片
         headImg.set_webimage_url_user(works.avatar)  //作者头像
         headImg.addTapGesture { (tap) in        //增加头像点击事件
+            MobClick.e(.user_avatar_lastest_picture_page)
             VCRedirect.goOtherCenter(endUserId: works.endUserId ?? 0)
         }
         userName.text = works.nickName  //作者昵称

@@ -183,7 +183,7 @@ class WOWRegistInfoSecondController: WOWBaseTableViewController {
             }
         }) {[weak self] (errorMsg) in
             if let _ = self{
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
             }
         }
         

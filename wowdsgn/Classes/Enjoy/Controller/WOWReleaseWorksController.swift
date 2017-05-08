@@ -59,6 +59,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
             arrowImg.isHidden = false
             rightSpace.constant = 34
             categoryTap.addTapGesture {[unowned self] (tap) in
+                MobClick.e(.sellect_classifiaction_clicks_post_picture_page)
                 self.showPickerView()
             }
         }else {
@@ -126,13 +127,15 @@ class WOWReleaseWorksController: WOWBaseViewController {
     }
     
     //MARK: - NET
+
+    
     func requestPushWorks(pic:String ,des:String){
         
         var params = [String: Any]()
         params = ["instagramCategoryId": instagramCategoryId ?? 0  ,"pic": pic ,"description":des , "measurement":imgSizeId  ?? 1]
 
         WOWNetManager.sharedManager.requestWithTarget(.api_PushWorks(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
-            WOWHud.dismiss()
+         
             if let strongSelf = self{
                 let r = JSON(result)
                 print(r)
@@ -144,11 +147,11 @@ class WOWReleaseWorksController: WOWBaseViewController {
                 
             }
         }) {[weak self] (errorMsg) in
-            if self != nil{
+      
              
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
                 
-            }
+            
         }
 
     }
@@ -159,7 +162,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
         params = ["instagramCategoryId": instagramCategoryId ?? 0  ,"pic": pic ,"description":des , "measurement":imgSizeId  ?? 1, "topicId": topicId]
         
         WOWNetManager.sharedManager.requestWithTarget(.api_PublishTopicWorks(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
-            WOWHud.dismiss()
+         
             if let strongSelf = self{
                 let r = JSON(result)
                 print(r)
@@ -171,11 +174,9 @@ class WOWReleaseWorksController: WOWBaseViewController {
                 
             }
         }) {[weak self] (errorMsg) in
-            if self != nil{
+            
+                WOWHud.showWarnMsg(errorMsg)
                 
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
-                
-            }
         }
         
     }
@@ -193,11 +194,11 @@ class WOWReleaseWorksController: WOWBaseViewController {
             return
         }
         textView.resignFirstResponder()
-        
         WOWHud.showLoadingSV()
         WOWUploadManager.uploadShareImg(photo, successClosure: {[weak self] (url) in
             
             if let strongSelf = self {
+                WOWHud.showLoadingSV()
                 if strongSelf.type == 0 {
                     strongSelf.requestPushWorks(pic: url ?? "", des: des)
 

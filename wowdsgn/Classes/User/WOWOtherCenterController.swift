@@ -131,7 +131,7 @@ class WOWOtherCenterController: WOWBaseViewController {
             }
             
         }) { (errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
 
     }

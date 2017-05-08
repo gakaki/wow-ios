@@ -33,6 +33,10 @@ class WOWWorksActivityController: WOWBaseViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        MobClick.e(.post_picture_activity_page)
+    }
     override func setUI() {
         super.setUI()
         tableView.delegate = self
@@ -45,6 +49,7 @@ class WOWWorksActivityController: WOWBaseViewController {
         self.makeCustomerImageNavigationItem("share-black", left: false, handler: {[weak self] in
 
             if let strongSelf = self {
+                MobClick.e(.share_post_picture_activity_page)
                 let shareUrl = WOWShareUrl + "/instagram/community/\(strongSelf.topicId )"
                 WOWShareManager.share(strongSelf.topicModel?.subhead, shareText: strongSelf.topicModel?.content, url:shareUrl,shareImage:strongSelf.topicModel?.img ?? UIImage(named: "me_logo")!)
             }

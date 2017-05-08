@@ -178,7 +178,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
 //                }
             }
         }) { (errorMsg) in
-           WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
 
     }

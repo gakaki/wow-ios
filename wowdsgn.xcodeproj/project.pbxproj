@@ -3490,6 +3490,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/wowdsgn/Expand/lib_frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wowdsgn.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -71,7 +71,7 @@ class WOWMsgCodeController: WOWBaseViewController {
                 strongSelf.msgCodeButton.startTimer(60, title: "重新获取", mainBGColor: UIColor.white, mainTitleColor: UIColor.black, countBGColor:UIColor.white, countTitleColor:GrayColorlevel3, handle: nil)
             }
         }) { (errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
 
     
@@ -127,7 +127,7 @@ class WOWMsgCodeController: WOWBaseViewController {
         }) {[weak self](errorMsg) in
             if self != nil{
 //                strongSelf.tipsLabel.text = errorMsg
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
             }
         }
     }

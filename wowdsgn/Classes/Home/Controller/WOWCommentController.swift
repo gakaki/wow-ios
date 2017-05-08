@@ -178,7 +178,7 @@ class WOWCommentController: WOWBaseViewController {
             }
             
         }){[weak self] (errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
 
         }
     }

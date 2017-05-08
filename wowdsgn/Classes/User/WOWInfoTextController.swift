@@ -113,7 +113,7 @@ class WOWInfoTextController: WOWBaseTableViewController {
                 
             }
         }) { (errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
             DLog(errorMsg)
 
         }

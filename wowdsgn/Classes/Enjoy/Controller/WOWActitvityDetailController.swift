@@ -22,6 +22,11 @@ class WOWActitvityDetailController: WOWBaseViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        MobClick.e(.learn_more_detail_page_post_picture_activity_page)
+    }
+    
     override func setUI() {
         super.setUI()
         tableView.delegate = self

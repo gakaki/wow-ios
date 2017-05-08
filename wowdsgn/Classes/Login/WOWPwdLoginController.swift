@@ -95,7 +95,7 @@ class WOWPwdLoginController: WOWBaseViewController {
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
             }
         }
     }

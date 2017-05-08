@@ -114,7 +114,7 @@ class WOWAddressController: WOWBaseViewController {
                     }
                 }
             }) { (errorMsg) in
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
             }
             
             return
@@ -134,7 +134,7 @@ class WOWAddressController: WOWBaseViewController {
                 }
             }
         }) {(errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
     }
     //编辑收货地址

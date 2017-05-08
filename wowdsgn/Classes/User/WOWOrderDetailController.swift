@@ -208,7 +208,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                     NotificationCenter.postNotificationNameOnMainThread(WOWUpdateOrderListAllNotificationKey, object: nil)
                 }
             }) { (errorMsg) in
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
             }
         }
 
@@ -385,7 +385,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                      NotificationCenter.postNotificationNameOnMainThread(WOWUpdateOrderListAllNotificationKey, object: nil)
                 }
             }) { (errorMsg) in
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
             }
         }
         
@@ -452,7 +452,7 @@ extension WOWOrderDetailController{
                 }
                 
             }) { (errorMsg) in
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
             }
         }
         
@@ -508,7 +508,7 @@ extension WOWOrderDetailController{
             }
             
         }) { (errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
     }
 }

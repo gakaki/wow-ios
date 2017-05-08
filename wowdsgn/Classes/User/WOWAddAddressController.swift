@@ -290,7 +290,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
                 }
             }
         }) { (errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
 
     }
@@ -306,7 +306,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
                 }
             }
         }) { (errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
 
         }
         

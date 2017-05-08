@@ -17,6 +17,7 @@ extension Int {
         if self >= 1000 {
             let sum = Float(self)
             let result:Float = Float(sum/1000)
+            
             return String(format: "%.1fK", result)
         }else {
             return "\(self)"

@@ -99,43 +99,43 @@ class WOWChoiceClassController: WOWBaseViewController {
         print("点击了下一步")
     }
     func cloosePhotos() {
-
-                let imagePickerVc = TZImagePickerController.init(maxImagesCount: 1, columnNumber: 4, delegate: self, pushPhotoPickerVc: true)
-                imagePickerVc?.isSelectOriginalPhoto            = false
         
-                imagePickerVc?.barItemTextColor                 = UIColor.black
-                imagePickerVc?.naviTitleColor                   = UIColor.black
-                imagePickerVc?.navigationBar.barTintColor       = UIColor.black
-                imagePickerVc?.navigationBar.tintColor          = UIColor.black
+        let imagePickerVc = TZImagePickerController.init(maxImagesCount: 1, columnNumber: 4, delegate: self, pushPhotoPickerVc: true)
+        imagePickerVc?.isSelectOriginalPhoto            = false
         
-                imagePickerVc?.navigationController?.navigationBar.isTranslucent = false
-                imagePickerVc?.automaticallyAdjustsScrollViewInsets = true
+        imagePickerVc?.barItemTextColor                 = UIColor.black
+        imagePickerVc?.naviTitleColor                   = UIColor.black
+        imagePickerVc?.navigationBar.barTintColor       = UIColor.black
+        imagePickerVc?.navigationBar.tintColor          = UIColor.black
+        
+        imagePickerVc?.navigationController?.navigationBar.isTranslucent = false
+        imagePickerVc?.automaticallyAdjustsScrollViewInsets = true
         
         
-                imagePickerVc?.allowTakePicture     = true // 拍照按钮将隐藏,用户将不能在选择器中拍照
-                imagePickerVc?.allowPickingVideo    = false// 用户将不能选择发送视频
-                imagePickerVc?.allowPickingImage    = true // 用户可以选择发送图片
-                imagePickerVc?.allowPickingOriginalPhoto = false// 用户不能选择发送原图
-                imagePickerVc?.sortAscendingByModificationDate = false// 是否按照时间排序
-                imagePickerVc?.autoDismiss = false // 不自动dismiss
-                imagePickerVc?.allowPreview = true // 不预览图片
-                imagePickerVc?.showSelectBtn = true // 展示完成按钮
-                imagePickerVc?.didFinishPickingPhotosHandle = {[weak self](images,asstes,isupdete) in
-                    if let strongSelf = self,let imagePickerVc = imagePickerVc{
-                        MobClick.e(.finishpicturebutton)
-                        UIApplication.shared.statusBarStyle = .default
-                        
-                        strongSelf.getDispatchPhoto(asset: asstes?[0] as! PHAsset,nav: imagePickerVc)
+        imagePickerVc?.allowTakePicture     = true // 拍照按钮将隐藏,用户将不能在选择器中拍照
+        imagePickerVc?.allowPickingVideo    = false// 用户将不能选择发送视频
+        imagePickerVc?.allowPickingImage    = true // 用户可以选择发送图片
+        imagePickerVc?.allowPickingOriginalPhoto = false// 用户不能选择发送原图
+        imagePickerVc?.sortAscendingByModificationDate = false// 是否按照时间排序
+        imagePickerVc?.autoDismiss = false // 不自动dismiss
+        imagePickerVc?.allowPreview = true // 不预览图片
+        imagePickerVc?.showSelectBtn = true // 展示完成按钮
+        imagePickerVc?.didFinishPickingPhotosHandle = {[weak self](images,asstes,isupdete) in
+            if let strongSelf = self{
+                MobClick.e(.finishpicturebutton)
+                UIApplication.shared.statusBarStyle = .default
                 
-                    }
-                }
-                MobClick.e(.select_picture_page)
-                present(imagePickerVc!, animated: true, completion: nil)
-
+                strongSelf.getDispatchPhoto(asset: asstes?[0] as! PHAsset)
+                
+            }
+        }
+        MobClick.e(.select_picture_page)
+        present(imagePickerVc!, animated: true, completion: nil)
+        
         
     }
     // 异步获取到原图
-    func getDispatchPhoto(asset:PHAsset,nav:UINavigationController)  {
+    func getDispatchPhoto(asset:PHAsset)  {
         let options = PHImageRequestOptions()
         options.isSynchronous = false
         options.deliveryMode = .highQualityFormat
@@ -149,10 +149,9 @@ class WOWChoiceClassController: WOWBaseViewController {
                     let photoTweaksViewController = PhotoTweaksViewController(image: image)
                     photoTweaksViewController?.delegate = strongSelf
                     photoTweaksViewController?.autoSaveToLibray = false
-                    
-                    nav.pushViewController(photoTweaksViewController!, animated: true)
+                    FNUtil.currentTopViewController().pushVC(photoTweaksViewController!)
                 }else {
-//                     print("请重新选择照片")
+                    //                     print("请重新选择照片")
                     WOWHud.showMsg("请您上传大于1000*1000px的照片")
                 }
                 

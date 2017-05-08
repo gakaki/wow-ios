@@ -22,6 +22,8 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
     weak var delegate:UpdateBuyCarListDelegate?
     
     var isNeedCustomPop                 : Bool = false             //是否需要转场动画
+    var isFromCustomVC                  : Bool = false             //是否从客服聊天自定义事件点击进来
+
     //Param
     var productId                       : Int?                  //产品id
     var productModel                    : WOWProductModel?      //产品model
@@ -65,13 +67,14 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messageView.addSubview(WOWCustormMessageView.sharedInstance)
+        self.isCustormer = false
     }
     deinit { 
         removeObservers()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-            if isCustormer {
+            if isCustormer || isFromCustomVC{
                 self.navigationController?.setNavigationBarHidden(false, animated: true)
             }
     }

@@ -112,7 +112,10 @@ class WOWChooseClassBackView: UIView,ChooseClassDelegate,CAAnimationDelegate {
 
             hideView()
         }
-        
+        func clooseAction() {
+            hideView()
+        }
+
         func hideView(){
             selectView.snp.updateConstraints {[unowned self] (make) in
               make.centerY.equalTo(self).offset(Int(self.h) + Int(self.selectView.h/2))
@@ -146,6 +149,8 @@ protocol ChooseClassDelegate:class{
     func updataChooseClassViewHight(_ hight: CGFloat)
     
     func didSelectItem(_ classId:Int)
+    
+    func clooseAction()
 }
 class WOWChooseClassView: UIView, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
@@ -157,7 +162,7 @@ class WOWChooseClassView: UIView, UICollectionViewDelegate, UICollectionViewData
 //            self.updateCollectionViewHight(hight: self.collectionView.collectionViewLayout.collectionViewContentSize.height)
         }
     }
-    
+    @IBOutlet weak var btnCloose: UIButton!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     weak var delegate : ChooseClassDelegate?
     override init(frame: CGRect) {
@@ -174,6 +179,13 @@ class WOWChooseClassView: UIView, UICollectionViewDelegate, UICollectionViewData
         super.awakeFromNib()
         
         configTable()
+        
+    }
+    @IBAction func clooseClickAction(_ sender: UIButton) {
+        
+        if let del = delegate {
+            del.clooseAction()
+        }
         
     }
     func updateCollectionViewHight(hight: CGFloat){

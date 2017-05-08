@@ -411,7 +411,40 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v1S-CR-iPd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2565.5999999999999" y="770.46476761619192"/>
+            <point key="canvasLocation" x="2175" y="771"/>
+        </scene>
+        <!--After Detail Controller-->
+        <scene sceneID="S8y-wE-CNF">
+            <objects>
+                <viewController storyboardIdentifier="WOWAfterDetailController" id="XqY-y6-jhs" customClass="WOWAfterDetailController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pjq-zc-n9Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="XeR-Oo-Edd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mnN-DA-AgB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NP9-dC-bcy">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NP9-dC-bcy" firstAttribute="leading" secondItem="mnN-DA-AgB" secondAttribute="leading" id="5UW-Dj-TWE"/>
+                            <constraint firstItem="XeR-Oo-Edd" firstAttribute="top" secondItem="NP9-dC-bcy" secondAttribute="bottom" id="TH4-Fe-1vg"/>
+                            <constraint firstItem="NP9-dC-bcy" firstAttribute="top" secondItem="mnN-DA-AgB" secondAttribute="top" id="rqu-ra-ob9"/>
+                            <constraint firstAttribute="trailing" secondItem="NP9-dC-bcy" secondAttribute="trailing" id="xmf-7T-IUF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="NP9-dC-bcy" id="5jf-Gt-bxg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Oz-bo-99i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2917.5999999999999" y="770.46476761619192"/>
         </scene>
     </scenes>
     <resources>

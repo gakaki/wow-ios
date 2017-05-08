@@ -11,12 +11,12 @@ enum PushType {
     
     case ShopComment
     case FeebdBack
-    
+    case RefundReason
 }
 protocol PushCommentDelegate:class {
     func pushImagePickerController(collectionViewTag: Int)
 }
-class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
+class WOWPushCommentCell: WOWStyleNoneCell,TZImagePickerControllerDelegate {
     
     @IBOutlet weak var topView: UIView!
     
@@ -30,6 +30,9 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
             case .FeebdBack:
                 topView.isHidden    = true
                 TopHightConstraint.constant     = 0
+            case .RefundReason:
+                topView.isHidden    = true
+                TopHightConstraint.constant     = 40
 //                LeftHightConstraint.constant    = 15
             default: break
             }
@@ -56,10 +59,10 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
     var userCommentData:    UserCommentManage?{// 用户评论信息 包含，评论内容，评论的图片信息
         didSet{
             if userCommentData?.comments == "" {
-                inputTextView.placeholderText = lbPlaceholder
+                inputTextView.placeholder = lbPlaceholder
                 inputTextView.text = ""
             }else{
-                inputTextView.placeholderText = ""
+                inputTextView.placeholder = ""
                 inputTextView.text = userCommentData?.comments ?? ""
             }
         
@@ -101,7 +104,7 @@ class WOWPushCommentCell: UITableViewCell,TZImagePickerControllerDelegate {
         // Initialization code
 
         inputTextView.delegate = self
-        
+//        inputTextView.placeholderText = lbPlaceholder
         collectionView.register(UINib.nibName(String(describing: WOWSingPhotoCVCell.self)), forCellWithReuseIdentifier:String(describing: WOWSingPhotoCVCell.self))
     
         collectionView.delegate                         = self

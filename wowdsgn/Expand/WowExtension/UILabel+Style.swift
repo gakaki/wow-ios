@@ -22,7 +22,7 @@ extension UILabel {
 
         }
     }
-    // 指定的字体加横线
+    // 指定的字体改变颜色字体
     func strokeWithText( _ str1:String,str2:String,str2Font:CGFloat,str2Color:UIColor){
         
         let  mustr1 = NSMutableAttributedString.init(string: str1 + str2)

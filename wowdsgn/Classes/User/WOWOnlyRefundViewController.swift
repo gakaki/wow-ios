@@ -66,6 +66,7 @@ class WOWOnlyRefundViewController: WOWBaseViewController,UITableViewDelegate,UIT
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = indexPath.row
         switch index {
@@ -86,7 +87,7 @@ class WOWOnlyRefundViewController: WOWBaseViewController,UITableViewDelegate,UIT
             
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWPushCommentCell.self), for: indexPath) as! WOWPushCommentCell
-            cell.cellType           = .FeebdBack
+            cell.cellType           = .RefundReason
             cell.delegate           = self
             cell.lbPlaceholder      = "请输入退款说明"
             cell.userCommentData    = self.commentManage
@@ -99,23 +100,22 @@ class WOWOnlyRefundViewController: WOWBaseViewController,UITableViewDelegate,UIT
                 
                 cell.dataImageArr = [UIImage]()
             }
-            
+            cell.collectionView.isHidden = true
 
-//            let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWRefundTextCell", for: indexPath) as! WOWRefundTextCell
-//            cell.lbGoodsType.text   = "退款金额"
-//            cell.lbType.text        = "298.00"
-//            cell.collectionView.isHidden = true
             return cell
             
         }
         
     }
+
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
         switch row {
         case 1:
           self.showPickerView()
         default:
+            VCRedirect.goAfterDetail()
             break
         }
       

@@ -352,11 +352,11 @@ extension WOWEnjoyController:TZImagePickerControllerDelegate,PhotoTweaksViewCont
         imagePickerVc?.allowPreview = true // 不预览图片
         imagePickerVc?.showSelectBtn = true // 展示完成按钮
         imagePickerVc?.didFinishPickingPhotosHandle = {[weak self](images,asstes,isupdete) in
-            if let strongSelf = self,let imagePickerVc = imagePickerVc{
+            if let strongSelf = self{
                 MobClick.e(.finishpicturebutton)
                 UIApplication.shared.statusBarStyle = .default
                 
-                strongSelf.getDispatchPhoto(asset: asstes?[0] as! PHAsset,nav: imagePickerVc)
+                strongSelf.getDispatchPhoto(asset: asstes?[0] as! PHAsset)
                 
             }
         }
@@ -366,7 +366,7 @@ extension WOWEnjoyController:TZImagePickerControllerDelegate,PhotoTweaksViewCont
         
     }
     // 异步获取到原图
-    func getDispatchPhoto(asset:PHAsset,nav:UINavigationController)  {
+    func getDispatchPhoto(asset:PHAsset)  {
         let options = PHImageRequestOptions()
         options.isSynchronous = false
         options.deliveryMode = .highQualityFormat
@@ -380,8 +380,8 @@ extension WOWEnjoyController:TZImagePickerControllerDelegate,PhotoTweaksViewCont
                     let photoTweaksViewController = PhotoTweaksViewController(image: image)
                     photoTweaksViewController?.delegate = strongSelf
                     photoTweaksViewController?.autoSaveToLibray = false
-                    
-                    nav.pushViewController(photoTweaksViewController!, animated: true)
+                    FNUtil.currentTopViewController().pushVC(photoTweaksViewController!)
+//                    FNUtil.currentTopViewController().navigationController?.pushViewController(photoTweaksViewController!, animated: true)
                 }else {
                     //                     print("请重新选择照片")
                     WOWHud.showMsg("请您上传大于1000*1000px的照片")

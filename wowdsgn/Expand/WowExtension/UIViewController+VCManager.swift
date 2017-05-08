@@ -268,13 +268,14 @@ public class VCRedirect {
     /*
      ** 商品详情页面
      */
-    public class func toVCProduct( _ pid: Int?, customPop: Bool = false){
+    public class func toVCProduct( _ pid: Int?, customPop: Bool = false, isFromCustomVC: Bool = false){
         
         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
-        vc.isCustormer = true
+//        vc.isCustormer = true
         vc.productId = pid
         vc.isNeedCustomPop = customPop
+        vc.isFromCustomVC  = isFromCustomVC
         topNaVC?.pushViewController(vc, animated: true)
     }
     
@@ -554,7 +555,19 @@ public class VCRedirect {
         sessionViewController.hidesBottomBarWhenPushed          = true
         QYCustomActionConfig.sharedInstance().linkClickBlock = {(str) in //处理聊天 链接点击 自定义事件
             if let str = str {
-                _ = JLRouterRule.handle_open_url(url: URL.init(string: str)! )
+                if str.contains("wowdsgn.com/item/") {
+                    let array = str.components(separatedBy: "item/")
+                    if array.count > 1{
+                         toVCProduct(str.components(separatedBy: "item/")[1].toInt(), isFromCustomVC: true)
+                    }
+                   
+
+
+                }else {
+                   _ = JLRouterRule.handle_open_url(url: URL.init(string: str)! )
+                
+                }
+             
             }
             
         }

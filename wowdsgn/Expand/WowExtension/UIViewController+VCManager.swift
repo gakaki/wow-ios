@@ -493,7 +493,14 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
         
     }
-
+    //协商详情页面
+    class func goNogotiateDetails() {
+        
+        let vc = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWNogotiateDetailsController.self)) as! WOWNogotiateDetailsController
+        
+        topNaVC?.pushViewController(vc, animated: true)
+        
+    }
     //跳转在线客服页面 source ：用户信息 commodityInfo: 自定义商品信息 orderNumber : 订单号    ·
     public class func goCustomerVC(_ source:QYSource?,commodityInfo:QYCommodityInfo?, orderNumber:String?) {
         guard WOWUserManager.loginStatus else{

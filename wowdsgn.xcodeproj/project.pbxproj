@@ -404,6 +404,11 @@
 		2DB95DF71EBC7EE700B2176A /* WOWReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95DF11EBC7EE600B2176A /* WOWReviewCell.swift */; };
 		2DB95DF81EBC7EE700B2176A /* WOWReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB95DF21EBC7EE600B2176A /* WOWReviewCell.xib */; };
 		2DB95DFA1EBC80D800B2176A /* WOWAfterDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95DF91EBC80D800B2176A /* WOWAfterDetailController.swift */; };
+		2DB95DFD1EC0046800B2176A /* WOWReturnGoodsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95DFB1EC0046800B2176A /* WOWReturnGoodsCell.swift */; };
+		2DB95DFE1EC0046800B2176A /* WOWReturnGoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB95DFC1EC0046800B2176A /* WOWReturnGoodsCell.xib */; };
+		2DB95E011EC00D6A00B2176A /* WOWNegotiateDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95DFF1EC00D6A00B2176A /* WOWNegotiateDetailCell.swift */; };
+		2DB95E021EC00D6A00B2176A /* WOWNegotiateDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB95E001EC00D6A00B2176A /* WOWNegotiateDetailCell.xib */; };
+		2DB95E041EC0109B00B2176A /* WOWNogotiateDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E031EC0109B00B2176A /* WOWNogotiateDetailsController.swift */; };
 		2DCB3BCC1DE6D36E0022528E /* WOWUserCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB3BCA1DE6D36E0022528E /* WOWUserCommentVC.swift */; };
 		2DCB3BD21DE6D4000022528E /* WOWPushCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB3BCE1DE6D4000022528E /* WOWPushCommentCell.swift */; };
 		2DCB3BD31DE6D4000022528E /* WOWPushCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DCB3BCF1DE6D4000022528E /* WOWPushCommentCell.xib */; };
@@ -1051,6 +1056,11 @@
 		2DB95DF11EBC7EE600B2176A /* WOWReviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWReviewCell.swift; sourceTree = "<group>"; };
 		2DB95DF21EBC7EE600B2176A /* WOWReviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWReviewCell.xib; sourceTree = "<group>"; };
 		2DB95DF91EBC80D800B2176A /* WOWAfterDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWAfterDetailController.swift; sourceTree = "<group>"; };
+		2DB95DFB1EC0046800B2176A /* WOWReturnGoodsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWReturnGoodsCell.swift; sourceTree = "<group>"; };
+		2DB95DFC1EC0046800B2176A /* WOWReturnGoodsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWReturnGoodsCell.xib; sourceTree = "<group>"; };
+		2DB95DFF1EC00D6A00B2176A /* WOWNegotiateDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWNegotiateDetailCell.swift; sourceTree = "<group>"; };
+		2DB95E001EC00D6A00B2176A /* WOWNegotiateDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWNegotiateDetailCell.xib; sourceTree = "<group>"; };
+		2DB95E031EC0109B00B2176A /* WOWNogotiateDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWNogotiateDetailsController.swift; sourceTree = "<group>"; };
 		2DCB3BCA1DE6D36E0022528E /* WOWUserCommentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUserCommentVC.swift; sourceTree = "<group>"; };
 		2DCB3BCE1DE6D4000022528E /* WOWPushCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWPushCommentCell.swift; sourceTree = "<group>"; };
 		2DCB3BCF1DE6D4000022528E /* WOWPushCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWPushCommentCell.xib; sourceTree = "<group>"; };
@@ -2098,7 +2108,6 @@
 		2D509A8E1DB5D4800047CD13 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2DB95DEC1EBC7EE600B2176A /* WOWAfterDetailCell */,
 				069D30D21DB47ADC00A059D0 /* WOWOrderEmptyView.swift */,
 				069D30D31DB47ADC00A059D0 /* WOWOrderEmptyView.xib */,
 				069D30B41DB47ADC00A059D0 /* WOWAddressCell.swift */,
@@ -2152,6 +2161,7 @@
 				2DB95DA51EB9D9E100B2176A /* WOWRefundReasonCell.xib */,
 				2DB95DA81EBAC5EB00B2176A /* WOWRefundTextCell.swift */,
 				2DB95DA91EBAC5EB00B2176A /* WOWRefundTextCell.xib */,
+				2DB95DEC1EBC7EE600B2176A /* WOWAfterDetailCell */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2424,6 +2434,7 @@
 				2DB95D9C1EB9C41300B2176A /* WOWApplyAfterController.swift */,
 				2DB95D9E1EB9D4B000B2176A /* WOWOnlyRefundViewController.swift */,
 				2DB95DF91EBC80D800B2176A /* WOWAfterDetailController.swift */,
+				2DB95E031EC0109B00B2176A /* WOWNogotiateDetailsController.swift */,
 			);
 			name = ApplyAfterSales;
 			sourceTree = "<group>";
@@ -2437,6 +2448,10 @@
 				2DB95DF01EBC7EE600B2176A /* WOWLineFormatCell.xib */,
 				2DB95DF11EBC7EE600B2176A /* WOWReviewCell.swift */,
 				2DB95DF21EBC7EE600B2176A /* WOWReviewCell.xib */,
+				2DB95DFB1EC0046800B2176A /* WOWReturnGoodsCell.swift */,
+				2DB95DFC1EC0046800B2176A /* WOWReturnGoodsCell.xib */,
+				2DB95DFF1EC00D6A00B2176A /* WOWNegotiateDetailCell.swift */,
+				2DB95E001EC00D6A00B2176A /* WOWNegotiateDetailCell.xib */,
 			);
 			path = WOWAfterDetailCell;
 			sourceTree = "<group>";
@@ -2910,6 +2925,7 @@
 				2D562C9C1E16038500E702CE /* SVFooterView.xib in Resources */,
 				2D562CA51E16038500E702CE /* SVPriceCell.xib in Resources */,
 				069D31BA1DB47ADD00A059D0 /* WOWOrderCell.xib in Resources */,
+				2DB95E021EC00D6A00B2176A /* WOWNegotiateDetailCell.xib in Resources */,
 				6338F4EE1E972DB1006D0890 /* WOWNewGuideView.xib in Resources */,
 				069D32C61DB47ADD00A059D0 /* WOWOrderDetailSThreeCell.xib in Resources */,
 				069D33401DB47ADE00A059D0 /* Designer.storyboard in Resources */,
@@ -2968,6 +2984,7 @@
 				069D32541DB47ADD00A059D0 /* WOWPickerView.xib in Resources */,
 				2DB95DF81EBC7EE700B2176A /* WOWReviewCell.xib in Resources */,
 				069D31C11DB47ADD00A059D0 /* WOWProductOrderCell.xib in Resources */,
+				2DB95DFE1EC0046800B2176A /* WOWReturnGoodsCell.xib in Resources */,
 				06A5C4571E13B1F500FE0A7A /* index.html in Resources */,
 				069D32571DB47ADD00A059D0 /* WOWShareView.xib in Resources */,
 				2D4E49231EA0B23400A4F786 /* WOWCustomer.xib in Resources */,
@@ -3079,6 +3096,7 @@
 				2DDA4DD81DDEFE2E00E7A7E8 /* Cell_801_Product.swift in Sources */,
 				2D509A531DB5D3120047CD13 /* WOWMenuModel.swift in Sources */,
 				2D562C9B1E16038500E702CE /* SVFooterView.swift in Sources */,
+				2DB95E011EC00D6A00B2176A /* WOWNegotiateDetailCell.swift in Sources */,
 				2D4E491E1EA09C7200A4F786 /* WOWCustormerMessageCell.swift in Sources */,
 				069D327F1DB47ADD00A059D0 /* WOWProductDetailPriceCell.swift in Sources */,
 				2D509A681DB5D3120047CD13 /* WowControllerSepratorCell.swift in Sources */,
@@ -3119,6 +3137,7 @@
 				069D31B11DB47ADD00A059D0 /* WOWBuyCarNormalCell.swift in Sources */,
 				63803AE11DC0843A000AA259 /* WOWProductSpecFootView.swift in Sources */,
 				2DB95D9F1EB9D4B000B2176A /* WOWOnlyRefundViewController.swift in Sources */,
+				2DB95DFD1EC0046800B2176A /* WOWReturnGoodsCell.swift in Sources */,
 				069D31AE1DB47ADD00A059D0 /* WOWBuyCarHeadView.swift in Sources */,
 				069D31AC1DB47ADD00A059D0 /* WOWBuyCarFootView.swift in Sources */,
 				069D324A1DB47ADD00A059D0 /* WOWBaseStyleCell.swift in Sources */,
@@ -3134,6 +3153,7 @@
 				069D32E21DB47ADD00A059D0 /* WOWBuyCarMananger.swift in Sources */,
 				069D32A91DB47ADD00A059D0 /* WOWAddAddressController.swift in Sources */,
 				069D32EA1DB47ADD00A059D0 /* WOWSearchManager.swift in Sources */,
+				2DB95E041EC0109B00B2176A /* WOWNogotiateDetailsController.swift in Sources */,
 				069D31DA1DB47ADD00A059D0 /* VCBuy.swift in Sources */,
 				069D31E21DB47ADD00A059D0 /* VCMe.swift in Sources */,
 				069D32AE1DB47ADD00A059D0 /* WOWAddressListModel.swift in Sources */,

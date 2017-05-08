@@ -425,9 +425,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NP9-dC-bcy">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="NP9-dC-bcy">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -445,6 +445,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Oz-bo-99i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2917.5999999999999" y="770.46476761619192"/>
+        </scene>
+        <!--Nogotiate Details Controller-->
+        <scene sceneID="LaZ-Nx-tv2">
+            <objects>
+                <viewController storyboardIdentifier="WOWNogotiateDetailsController" id="wFS-Fn-bZD" customClass="WOWNogotiateDetailsController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RjR-Lk-dIb"/>
+                        <viewControllerLayoutGuide type="bottom" id="bvu-sH-cNU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wrs-Cd-lBf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Zx3-ao-BfH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zx3-ao-BfH" firstAttribute="leading" secondItem="wrs-Cd-lBf" secondAttribute="leading" id="MzU-Ov-wYF"/>
+                            <constraint firstItem="Zx3-ao-BfH" firstAttribute="top" secondItem="wrs-Cd-lBf" secondAttribute="top" id="Q5e-SP-axJ"/>
+                            <constraint firstItem="bvu-sH-cNU" firstAttribute="top" secondItem="Zx3-ao-BfH" secondAttribute="bottom" id="jmF-P4-iI6"/>
+                            <constraint firstAttribute="trailing" secondItem="Zx3-ao-BfH" secondAttribute="trailing" id="v8J-3p-iue"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Zx3-ao-BfH" id="L9g-e1-ba3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BOb-ss-UlE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3621.5999999999999" y="771.36431784107947"/>
         </scene>
     </scenes>
     <resources>

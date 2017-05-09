@@ -11,13 +11,17 @@ import UIKit
 class WOWLaunchView: UIView {
     @IBOutlet weak var backgroundImg: UIImageView!
     @IBOutlet weak var timeButton: UIButton!
+    var isCheackUpdate : Bool = false
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         startTime()
         let delayTime = DispatchTime.now() + Double(Int64(5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: delayTime) {[weak self] in
             if let strongSelf = self {
-                strongSelf.removeView()
+                if strongSelf.isCheackUpdate == false {
+                    strongSelf.removeView()
+                }
+            
 
             }
         }
@@ -58,16 +62,19 @@ class WOWLaunchView: UIView {
     }
     @IBAction func timeClick(sender: UIButton!) {
 
-        removeView()
+        if isCheackUpdate == false {
+            self.removeView()
+        }
 
     }
     func removeView() {
+        
         self.requestCheakVersion()
         self.removeFromSuperview()
     }
     // 检查更新 接口
     func requestCheakVersion() {
-
+        self.isCheackUpdate = true
         let params = ["appType": 1, "platForm": 2,"version":ez.appVersion ?? "5.0"] as [String : Any]
         
         WOWNetManager.sharedManager.requestWithTarget(.api_checkVersion(params: params as [String : AnyObject]?), successClosure: {[weak self] (result, code) in

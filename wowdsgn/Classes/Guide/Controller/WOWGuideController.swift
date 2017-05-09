@@ -41,7 +41,7 @@ class WOWGuideController: WOWBaseViewController {
             var title1 = "加入我们"
             var title2 = "先逛逛"
             var backGroundColor1 = MGRgb(32, g: 32, b: 32)
-            var backGroundColor2 = UIColor.white
+            var backGroundColor2 = UIColor.init(hexString: "#F5F5F5")
             var titleColor1 = UIColor.white
             var titleColor2 = UIColor.black
             

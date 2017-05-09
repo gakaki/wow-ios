@@ -66,6 +66,7 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     
     var moduleId: Int! = 0
     var pageTitle: String! = ""
+    var moduleType: Int = 0     //如果为0是瀑布流，如果不为0则是纵向产品组
     
     var oneModel : WOWProductModel? = nil
     var twoModel : WOWProductModel? = nil
@@ -73,13 +74,28 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     @IBAction func clickOneBtn(_ sender: UIButton!) {
         
         if let del = delegate{
-            let index: Int = sender.tag 
-            //Mob 纵向产品组模块 banner点击
-            let productId = String(format: "%i_%@_%i", moduleId, pageTitle, oneModel?.productId ?? 0)
-            let productName = String(format: "%i_%@_%@", moduleId, pageTitle, oneModel?.productName ?? "")
-            let productPosition = String(format: "%i_%@_%i", moduleId, pageTitle, index)
-            let params = ["ModuleID_Secondary_Homepagename_Productid": productId, "ModuleID_Secondary_Homepagename_Productname": productName, "ModuleID_Secondary_Homepagename_Productposition": productPosition]
-            MobClick.e2(.Productlist_Portrait, params)
+            let index: Int = sender.tag
+            if moduleType == 402 {
+                //Mob 纵向产品组模块 banner点击
+                let productId = String(format: "%i_%@_%i", moduleId, pageTitle, oneModel?.productId ?? 0)
+                let productName = String(format: "%i_%@_%@", moduleId, pageTitle, oneModel?.productName ?? "")
+                let productPosition = String(format: "%i_%@_%i", moduleId, pageTitle, index)
+                let params = ["ModuleID_Secondary_Homepagename_Productid": productId, "ModuleID_Secondary_Homepagename_Productname": productName, "ModuleID_Secondary_Homepagename_Productposition": productPosition]
+                MobClick.e2(.Productlist_Portrait, params)
+            }else {
+                let productName = oneModel?.productName
+                let productId = oneModel?.productId
+                let params = ["productName": productName ?? "", "productId": productId ?? 0] as [String : Any]
+                if pageTitle == "购物车" {
+                    MobClick.e2(.product_recommend_shoppingcart_clicks, params)
+
+                }else {
+
+                    MobClick.e2(.product_recommend_clicks, params)
+                }
+
+            }
+
             
             del.goToProductDetailVC(oneModel?.productId)
         }
@@ -89,13 +105,28 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
         
         if let del = delegate{
             let index: Int = sender.tag
+            if moduleType == 402 {
+                //Mob 纵向产品组模块 banner点击
+                let productId = String(format: "%i_%@_%i", moduleId, pageTitle, twoModel?.productId ?? 0)
+                let productName = String(format: "%i_%@_%@", moduleId, pageTitle, twoModel?.productName ?? "")
+                let productPosition = String(format: "%i_%@_%i", moduleId, pageTitle, index)
+                let params = ["ModuleID_Secondary_Homepagename_Productid": productId, "ModuleID_Secondary_Homepagename_Productname": productName, "ModuleID_Secondary_Homepagename_Productposition": productPosition]
+                MobClick.e2(.Productlist_Portrait, params)
+            
+            }else {
+                let productName = twoModel?.productName
+                let productId = twoModel?.productId
+                let params = ["productName": productName ?? "", "productId": productId ?? 0] as [String : Any]
+                if pageTitle == "购物车" {
+                    
+                    MobClick.e2(.product_recommend_shoppingcart_clicks, params)
 
-            //Mob 纵向产品组模块 banner点击
-            let productId = String(format: "%i_%@_%i", moduleId, pageTitle, twoModel?.productId ?? 0)
-            let productName = String(format: "%i_%@_%@", moduleId, pageTitle, twoModel?.productName ?? "")
-            let productPosition = String(format: "%i_%@_%i", moduleId, pageTitle, index)
-            let params = ["ModuleID_Secondary_Homepagename_Productid": productId, "ModuleID_Secondary_Homepagename_Productname": productName, "ModuleID_Secondary_Homepagename_Productposition": productPosition]
-            MobClick.e2(.Productlist_Portrait, params)
+                }else {
+
+                    MobClick.e2(.product_recommend_clicks, params)
+                }
+
+            }
             
             del.goToProductDetailVC(twoModel?.productId)
             

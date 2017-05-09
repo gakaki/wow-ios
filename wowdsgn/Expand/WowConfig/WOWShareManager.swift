@@ -56,12 +56,12 @@ struct WOWShareManager {
 
     static func share(_ title:String?,shareText:String?,url:String?,shareImage:Any!){
         shareBackView.show()
-        let shareNewText = "尖叫设计，生活即风格-新人专享8.5折券，等你来拿！"
+//        let shareNewText = "尖叫设计，生活即风格-新人专享8.5折券，等你来拿！"
         shareBackView.shareActionBack = {(shareType:WOWShareType)in
             switch shareType {
             case .friends:
                 
-                WowShare.share_friends(title ?? "", shareText: shareNewText, url: url, shareImage: shareImage, successClosure: {
+                WowShare.share_friends(title ?? "", shareText: shareText, url: url, shareImage: shareImage, successClosure: {
                     WOWHud.showMsg("分享成功")
                 },
                     failClosure: { e in
@@ -72,7 +72,7 @@ struct WOWShareManager {
                return
             case .wechat:
                 
-                WowShare.share_text(title ?? "", shareText: shareNewText, url: url, shareImage: shareImage, successClosure: {
+                WowShare.share_text(title ?? "", shareText: shareText, url: url, shareImage: shareImage, successClosure: {
                         WOWHud.showMsg("分享成功")
                 },
                  failClosure: { e in

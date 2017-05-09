@@ -159,11 +159,11 @@ class WOWBrandHomeController: WOWBaseViewController {
         case .brandEntrance:
             
             let shareUrl = WOWShareUrl + "/brand/\(brandID ?? 0)"
-            WOWShareManager.share(brandModel?.brandEname, shareText: brandModel?.desc, url:shareUrl,shareImage:brandModel?.image ?? UIImage(named: "me_logo")!)
+            WOWShareManager.share(brandModel?.brandEname, shareText: WowShareText, url:shareUrl,shareImage:brandModel?.image ?? UIImage(named: "me_logo")!)
         case .designerEntrance:
             
             let shareUrl = WOWShareUrl + "/designer/\(designerId ?? 0)"
-            WOWShareManager.share(designerModel?.designerName, shareText: designerModel?.designerDesc, url:shareUrl,shareImage:designerModel?.designerPhoto ?? UIImage(named: "me_logo")!)
+            WOWShareManager.share(designerModel?.designerName, shareText: WowShareText, url:shareUrl,shareImage:designerModel?.designerPhoto ?? UIImage(named: "me_logo")!)
             
         }
 

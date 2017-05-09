@@ -176,7 +176,7 @@ extension WOWNewEnjoyController: KolodaViewDelegate {
     }
     
     func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -> Bool {
-        return true
+        return false
     }
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
         let model = fineWroksArr[index]

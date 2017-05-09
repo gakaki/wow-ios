@@ -50,8 +50,8 @@ class WOWWorksActivityController: WOWBaseViewController {
 
             if let strongSelf = self {
                 MobClick.e(.share_post_picture_activity_page)
-                let shareUrl = WOWShareUrl + "/instagram/community/\(strongSelf.topicId )"
-                WOWShareManager.share(strongSelf.topicModel?.subhead, shareText: strongSelf.topicModel?.content, url:shareUrl,shareImage:strongSelf.topicModel?.img ?? UIImage(named: "me_logo")!)
+                let shareUrl = WOWShareUrl + "/instagram/community?id=\(strongSelf.topicId )"
+                WOWShareManager.share(strongSelf.topicModel?.title, shareText: strongSelf.topicModel?.content, url:shareUrl,shareImage:strongSelf.topicModel?.img ?? UIImage(named: "me_logo")!)
             }
 
         })
@@ -203,7 +203,7 @@ class WOWWorksActivityController: WOWBaseViewController {
                 //内容高度
                 var contentH = strongSelf.topicModel?.content?.heightWithConstrainedWidth(MGScreenWidth - 30, font: UIFont.systemFont(ofSize: 15), lineSpace: 1) ?? 0
                 //单行高度
-                let lineH = (strongSelf.topicModel?.content?.size(UIFont.systemFont(ofSize: 15)).height ?? 1) + 1
+                let lineH :CGFloat = 18.9
                 //计算一共多少行
                 strongSelf.line = Int(contentH/lineH)
                 if strongSelf.line > 4 {

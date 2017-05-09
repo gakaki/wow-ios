@@ -289,6 +289,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             
             cell.pageTitle = vc?.title ?? ""
             cell.moduleId = model.moduleId ?? 0
+            cell.moduleType = 402
             let OneCellNumber = indexPath.row * 2
             let TwoCellNumber = ((indexPath.row + 1) * 2) - 1
             let productsArray = model.moduleContentProduct?.products ?? []

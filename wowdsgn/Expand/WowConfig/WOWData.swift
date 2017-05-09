@@ -62,7 +62,7 @@ let WOWEmptyNoDataText   = "暂无数据"
 
 /***********************************Test***************************************/
 let WOWTestStr = "不可救药的理想主义者"
-
+let WowShareText = "尖叫设计，生活即风格 - 即刻下载app，领取新人专享礼包！"
 
 
 typealias WOWActionClosure         = () -> ()

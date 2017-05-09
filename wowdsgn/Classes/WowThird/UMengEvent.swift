@@ -188,6 +188,8 @@ public enum UMengEvent  {
     case picture_clicks_post_picture_activity_page              //图片（晒图活动页）
     case learn_more_detail_page_post_picture_activity_page      //晒图信息详情页
     case product_recommend_clicks                               //产品（为你推荐模块）
+    case product_recommend_shoppingcart_clicks                  //产品（购物车为你推荐）
+    
     
 }
 

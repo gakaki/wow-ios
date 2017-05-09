@@ -8,8 +8,8 @@
 
 import UIKit
 
-class WOWNogotiateDetailsController: WOWBaseViewController,UITableViewDataSource,UITableViewDelegate {
-    @IBOutlet weak var tableView: UITableView!
+class WOWNogotiateDetailsController: WOWApplyAfterBaseController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "协商详情"
@@ -18,22 +18,18 @@ class WOWNogotiateDetailsController: WOWBaseViewController,UITableViewDataSource
     override func setUI() {
         super.setUI()
         
-        tableView.backgroundColor = GrayColorLevel5
-        tableView.delegate      = self
-        tableView.dataSource    = self
+
         tableView.register(UINib.nibName("WOWNegotiateDetailCell"), forCellReuseIdentifier: "WOWNegotiateDetailCell")
 
-        self.tableView.rowHeight            = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight   = 150
         
     }
-    func numberOfSections(in tableView: UITableView) -> Int {
+   override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWNegotiateDetailCell", for: indexPath) as! WOWNegotiateDetailCell
         
@@ -41,7 +37,7 @@ class WOWNogotiateDetailsController: WOWBaseViewController,UITableViewDataSource
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        VCRedirect.goOnlyRefund()
+                VCRedirect.goMoneyFromController()
     }
     
     override func didReceiveMemoryWarning() {

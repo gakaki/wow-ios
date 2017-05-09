@@ -8,9 +8,9 @@
 
 import UIKit
 
-class WOWOnlyRefundViewController: WOWBaseViewController,UITableViewDelegate,UITableViewDataSource {
+class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
 
-    @IBOutlet weak var tableView: UITableView!
+
     var commentManage           : UserCommentManage = UserCommentManage() // 记录用户的 操作信息 ，包括 评论， 图片的选择
     var photoMange              : UserPhotoManage?  // 记录选择 图片 的信息，
     var reasonArray  = ["不喜欢","不开心","不要了"]
@@ -22,15 +22,12 @@ class WOWOnlyRefundViewController: WOWBaseViewController,UITableViewDelegate,UIT
     }
     override func setUI() {
         super.setUI()
-        tableView.backgroundColor = GrayColorLevel5
-        tableView.delegate      = self
-        tableView.dataSource    = self
+
         tableView.register(UINib.nibName("WOWGoodsTypeCell"), forCellReuseIdentifier: "WOWGoodsTypeCell")
         tableView.register(UINib.nibName("WOWRefundReasonCell"), forCellReuseIdentifier: "WOWRefundReasonCell")
         tableView.register(UINib.nibName("WOWRefundTextCell"), forCellReuseIdentifier: "WOWRefundTextCell")
         tableView.register(UINib.nibName("WOWPushCommentCell"), forCellReuseIdentifier: "WOWPushCommentCell")
-        self.tableView.rowHeight            = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight   = 60
+
     }
     lazy var backView:WOWPickerBackView = {[unowned self] in
         let v = WOWPickerBackView(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight))
@@ -60,14 +57,14 @@ class WOWOnlyRefundViewController: WOWBaseViewController,UITableViewDelegate,UIT
         backView.hideView()
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
+   override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  override  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = indexPath.row
         switch index {
         case 0:

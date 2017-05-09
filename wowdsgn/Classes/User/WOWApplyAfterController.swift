@@ -11,8 +11,8 @@ enum AfterType {
     case toSendGoods    // 待发货
     case sendGoods      // 以发货
 }
-class WOWApplyAfterController: WOWBaseViewController,UITableViewDataSource,UITableViewDelegate {
-    @IBOutlet weak var tableView: UITableView!
+class WOWApplyAfterController: WOWApplyAfterBaseController {
+   
     var sendType                : AfterType = .toSendGoods{
         didSet{
             switch sendType {
@@ -48,20 +48,17 @@ class WOWApplyAfterController: WOWBaseViewController,UITableViewDataSource,UITab
     }
     override func setUI() {
         super.setUI()
-        tableView.backgroundColor = GrayColorLevel5
-        tableView.delegate      = self
-        tableView.dataSource    = self
+
         tableView.register(UINib.nibName("WOWApplyAfterCell"), forCellReuseIdentifier: "WOWApplyAfterCell")
-        self.tableView.rowHeight            = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight   = 60
+
     }
-    func numberOfSections(in tableView: UITableView) -> Int {
+   override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellLineNumber
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = indexPath.row
 
             let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWApplyAfterCell", for: indexPath) as! WOWApplyAfterCell

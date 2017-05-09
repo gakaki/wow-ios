@@ -84,7 +84,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
         
     }
     @IBAction func clickAfterAction(_ sender: Any) {
-        VCRedirect.goApplyAfterSales(sendType: .toSendGoods)
+        VCRedirect.goApplyAfterSales(sendType: .sendGoods)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

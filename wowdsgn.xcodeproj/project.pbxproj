@@ -409,6 +409,14 @@
 		2DB95E011EC00D6A00B2176A /* WOWNegotiateDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95DFF1EC00D6A00B2176A /* WOWNegotiateDetailCell.swift */; };
 		2DB95E021EC00D6A00B2176A /* WOWNegotiateDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB95E001EC00D6A00B2176A /* WOWNegotiateDetailCell.xib */; };
 		2DB95E041EC0109B00B2176A /* WOWNogotiateDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E031EC0109B00B2176A /* WOWNogotiateDetailsController.swift */; };
+		2DB95E6A1EC1A50900B2176A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E661EC1A50900B2176A /* Timeline.swift */; };
+		2DB95E6B1EC1A50900B2176A /* TimelinePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E671EC1A50900B2176A /* TimelinePoint.swift */; };
+		2DB95E6C1EC1A50900B2176A /* WOWTimerLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E681EC1A50900B2176A /* WOWTimerLineCell.swift */; };
+		2DB95E6D1EC1A50900B2176A /* WOWTimerLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB95E691EC1A50900B2176A /* WOWTimerLineCell.xib */; };
+		2DB95E741EC1AA5700B2176A /* WOWMoneyTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E721EC1AA5700B2176A /* WOWMoneyTopCell.swift */; };
+		2DB95E751EC1AA5700B2176A /* WOWMoneyTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB95E731EC1AA5700B2176A /* WOWMoneyTopCell.xib */; };
+		2DB95E771EC1AAB600B2176A /* WOWMoneyFromController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E761EC1AAB600B2176A /* WOWMoneyFromController.swift */; };
+		2DB95E791EC1AE6600B2176A /* WOWApplyAfterBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E781EC1AE6600B2176A /* WOWApplyAfterBaseController.swift */; };
 		2DCB3BCC1DE6D36E0022528E /* WOWUserCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB3BCA1DE6D36E0022528E /* WOWUserCommentVC.swift */; };
 		2DCB3BD21DE6D4000022528E /* WOWPushCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB3BCE1DE6D4000022528E /* WOWPushCommentCell.swift */; };
 		2DCB3BD31DE6D4000022528E /* WOWPushCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DCB3BCF1DE6D4000022528E /* WOWPushCommentCell.xib */; };
@@ -1061,6 +1069,14 @@
 		2DB95DFF1EC00D6A00B2176A /* WOWNegotiateDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWNegotiateDetailCell.swift; sourceTree = "<group>"; };
 		2DB95E001EC00D6A00B2176A /* WOWNegotiateDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWNegotiateDetailCell.xib; sourceTree = "<group>"; };
 		2DB95E031EC0109B00B2176A /* WOWNogotiateDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWNogotiateDetailsController.swift; sourceTree = "<group>"; };
+		2DB95E661EC1A50900B2176A /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
+		2DB95E671EC1A50900B2176A /* TimelinePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePoint.swift; sourceTree = "<group>"; };
+		2DB95E681EC1A50900B2176A /* WOWTimerLineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWTimerLineCell.swift; sourceTree = "<group>"; };
+		2DB95E691EC1A50900B2176A /* WOWTimerLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWTimerLineCell.xib; sourceTree = "<group>"; };
+		2DB95E721EC1AA5700B2176A /* WOWMoneyTopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWMoneyTopCell.swift; sourceTree = "<group>"; };
+		2DB95E731EC1AA5700B2176A /* WOWMoneyTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWMoneyTopCell.xib; sourceTree = "<group>"; };
+		2DB95E761EC1AAB600B2176A /* WOWMoneyFromController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWMoneyFromController.swift; sourceTree = "<group>"; };
+		2DB95E781EC1AE6600B2176A /* WOWApplyAfterBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWApplyAfterBaseController.swift; sourceTree = "<group>"; };
 		2DCB3BCA1DE6D36E0022528E /* WOWUserCommentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWUserCommentVC.swift; sourceTree = "<group>"; };
 		2DCB3BCE1DE6D4000022528E /* WOWPushCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWPushCommentCell.swift; sourceTree = "<group>"; };
 		2DCB3BCF1DE6D4000022528E /* WOWPushCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWPushCommentCell.xib; sourceTree = "<group>"; };
@@ -2432,9 +2448,11 @@
 			isa = PBXGroup;
 			children = (
 				2DB95D9C1EB9C41300B2176A /* WOWApplyAfterController.swift */,
+				2DB95E781EC1AE6600B2176A /* WOWApplyAfterBaseController.swift */,
 				2DB95D9E1EB9D4B000B2176A /* WOWOnlyRefundViewController.swift */,
 				2DB95DF91EBC80D800B2176A /* WOWAfterDetailController.swift */,
 				2DB95E031EC0109B00B2176A /* WOWNogotiateDetailsController.swift */,
+				2DB95E761EC1AAB600B2176A /* WOWMoneyFromController.swift */,
 			);
 			name = ApplyAfterSales;
 			sourceTree = "<group>";
@@ -2442,6 +2460,8 @@
 		2DB95DEC1EBC7EE600B2176A /* WOWAfterDetailCell */ = {
 			isa = PBXGroup;
 			children = (
+				2DB95E661EC1A50900B2176A /* Timeline.swift */,
+				2DB95E671EC1A50900B2176A /* TimelinePoint.swift */,
 				2DB95DED1EBC7EE600B2176A /* WOWLineDetaliCell.swift */,
 				2DB95DEE1EBC7EE600B2176A /* WOWLineDetaliCell.xib */,
 				2DB95DEF1EBC7EE600B2176A /* WOWLineFormatCell.swift */,
@@ -2452,6 +2472,10 @@
 				2DB95DFC1EC0046800B2176A /* WOWReturnGoodsCell.xib */,
 				2DB95DFF1EC00D6A00B2176A /* WOWNegotiateDetailCell.swift */,
 				2DB95E001EC00D6A00B2176A /* WOWNegotiateDetailCell.xib */,
+				2DB95E721EC1AA5700B2176A /* WOWMoneyTopCell.swift */,
+				2DB95E731EC1AA5700B2176A /* WOWMoneyTopCell.xib */,
+				2DB95E681EC1A50900B2176A /* WOWTimerLineCell.swift */,
+				2DB95E691EC1A50900B2176A /* WOWTimerLineCell.xib */,
 			);
 			path = WOWAfterDetailCell;
 			sourceTree = "<group>";
@@ -2950,6 +2974,7 @@
 				2DDA4DE51DDEFE2E00E7A7E8 /* WOWFoundWeeklyNewCell.xib in Resources */,
 				2DB95DF61EBC7EE600B2176A /* WOWLineFormatCell.xib in Resources */,
 				2D96759F1E76711400F0C0F6 /* Cell_105_Banner.xib in Resources */,
+				2DB95E6D1EC1A50900B2176A /* WOWTimerLineCell.xib in Resources */,
 				069D32AC1DB47ADD00A059D0 /* WOWAddressCell.xib in Resources */,
 				069D31AD1DB47ADD00A059D0 /* WOWBuyCarFootView.xib in Resources */,
 				2DA9DD401DFA959C00E7C172 /* WOWRecommendView.xib in Resources */,
@@ -2991,6 +3016,7 @@
 				2D0077691E529F980033108D /* Cell_106_Item.xib in Resources */,
 				069D333A1DB47ADE00A059D0 /* city.json in Resources */,
 				2D26FD2B1E2479F1006D75F4 /* SVCloosePriceCell.xib in Resources */,
+				2DB95E751EC1AA5700B2176A /* WOWMoneyTopCell.xib in Resources */,
 				63D87B181E6D074000B1E698 /* WOWTopicHeaderView.xib in Resources */,
 				63EC14811E2CC2F30027BEFD /* WOWSearchBrandView.xib in Resources */,
 				2DDC99B61DDAEE2C00201856 /* WOWHotColumnCell.xib in Resources */,
@@ -3082,6 +3108,7 @@
 				63546E1B1E84F6B400DB7F82 /* WOWSelectCategoryCell.swift in Sources */,
 				2D509A611DB5D3120047CD13 /* HomeFormReusableView.swift in Sources */,
 				63A2F5991DF931E2002DF56F /* WOWMessageController.swift in Sources */,
+				2DB95E741EC1AA5700B2176A /* WOWMoneyTopCell.swift in Sources */,
 				63306CDA1E8A1519005E0B32 /* WOWWorkController.swift in Sources */,
 				069D33551DB47B3E00A059D0 /* WOWNetManager.swift in Sources */,
 				069D32651DB47ADD00A059D0 /* WOWDesignerModel.swift in Sources */,
@@ -3146,6 +3173,7 @@
 				2D670E901E85246F00D7A8EB /* WOWReleaseWorksController.swift in Sources */,
 				069D31EC1DB47ADD00A059D0 /* WOWFoundCategoryCell.swift in Sources */,
 				2D00775A1E5199340033108D /* Cell_107_BrandZone.swift in Sources */,
+				2DB95E6C1EC1A50900B2176A /* WOWTimerLineCell.swift in Sources */,
 				069D32F01DB47ADD00A059D0 /* Int+Add.swift in Sources */,
 				63306CDC1E8A15A4005E0B32 /* WOWPraiseController.swift in Sources */,
 				2DDA4DDB1DDEFE2E00E7A7E8 /* WOW_Cell_102_Item.swift in Sources */,
@@ -3244,6 +3272,7 @@
 				2D509A551DB5D3120047CD13 /* WOWSceneModel.swift in Sources */,
 				2DDC99B91DDAEFF900201856 /* WOWColumnCVCelll.swift in Sources */,
 				2DDA4DE11DDEFE2E00E7A7E8 /* WOWCountDownView.swift in Sources */,
+				2DB95E771EC1AAB600B2176A /* WOWMoneyFromController.swift in Sources */,
 				2D509A141DB5D30B0047CD13 /* WOWController.swift in Sources */,
 				069D32421DB47ADD00A059D0 /* WOWTabBarController.swift in Sources */,
 				069D32B51DB47ADD00A059D0 /* WOWFavoriteListModel.swift in Sources */,
@@ -3273,6 +3302,7 @@
 				63F3DA961DEC0059009CE52D /* WOWOrderRemissionView.swift in Sources */,
 				2D670E8B1E851AF900D7A8EB /* PhotoTweakView.m in Sources */,
 				069D32371DB47ADD00A059D0 /* WOWRegistController.swift in Sources */,
+				2DB95E791EC1AE6600B2176A /* WOWApplyAfterBaseController.swift in Sources */,
 				06C869AB1DD19C8E004C05E3 /* Config3rd.swift in Sources */,
 				631FA9A01EA09ECB00E18EC9 /* WOWEditWorksController.swift in Sources */,
 				069D325E1DB47ADD00A059D0 /* WOWBrandHomeController.swift in Sources */,
@@ -3343,9 +3373,11 @@
 				06A5C45B1E13B1F500FE0A7A /* WowWebView.swift in Sources */,
 				2D670E7D1E8505EE00D7A8EB /* WOWSharePhotoView.swift in Sources */,
 				069D31D01DB47ADD00A059D0 /* WOWFavDesigner.swift in Sources */,
+				2DB95E6B1EC1A50900B2176A /* TimelinePoint.swift in Sources */,
 				069D31C21DB47ADD00A059D0 /* WOWSelectPayView.swift in Sources */,
 				631FA9A91EA0D47800E18EC9 /* PhotoViewCell.swift in Sources */,
 				069D33231DB47ADE00A059D0 /* TagCellLayout.swift in Sources */,
+				2DB95E6A1EC1A50900B2176A /* Timeline.swift in Sources */,
 				2D764FE51DD06974008D6746 /* WOWCheckUpdate.swift in Sources */,
 				069D32A11DB47ADD00A059D0 /* ModelTopic.swift in Sources */,
 				069D32AF1DB47ADD00A059D0 /* WOWCopyrightController.swift in Sources */,

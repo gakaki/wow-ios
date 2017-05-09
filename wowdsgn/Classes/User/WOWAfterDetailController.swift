@@ -8,8 +8,8 @@
 
 import UIKit
 
-class WOWAfterDetailController: WOWBaseViewController,UITableViewDataSource,UITableViewDelegate {
-    @IBOutlet weak var tableView: UITableView!
+class WOWAfterDetailController: WOWApplyAfterBaseController {
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "售后详情"
@@ -18,25 +18,22 @@ class WOWAfterDetailController: WOWBaseViewController,UITableViewDataSource,UITa
     override func setUI() {
         super.setUI()
         
-        tableView.backgroundColor = GrayColorLevel5
-        tableView.delegate      = self
-        tableView.dataSource    = self
+
         tableView.register(UINib.nibName("WOWLineDetaliCell"), forCellReuseIdentifier: "WOWLineDetaliCell")
         tableView.register(UINib.nibName("WOWLineFormatCell"), forCellReuseIdentifier: "WOWLineFormatCell")
         tableView.register(UINib.nibName("WOWReviewCell"), forCellReuseIdentifier: "WOWReviewCell")
         tableView.register(UINib.nibName("WOWTelCell"), forCellReuseIdentifier: "WOWTelCell")
         tableView.register(UINib.nibName("WOWReturnGoodsCell"), forCellReuseIdentifier: "WOWReturnGoodsCell")
-        self.tableView.rowHeight            = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight   = 60
+
         
     }
-    func numberOfSections(in tableView: UITableView) -> Int {
+   override func numberOfSections(in tableView: UITableView) -> Int {
         return 7
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
         switch section {
         case 0:
@@ -85,10 +82,10 @@ class WOWAfterDetailController: WOWBaseViewController,UITableViewDataSource,UITa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         VCRedirect.goNogotiateDetails()
     }
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+   override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10
     }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
     }
     override func didReceiveMemoryWarning() {

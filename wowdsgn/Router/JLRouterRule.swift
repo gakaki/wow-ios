@@ -256,7 +256,7 @@ public class JLRouterRule {
             return true
         }
         // 跳转活动详情页
-        JLRoutes.global().addRoute("/instagram/community/:id") { (params) -> Bool in
+        JLRoutes.global().add(["/instagram/community","/instagram/community/:id"]) { (params) -> Bool in
             print(params)
             if let topicId = params["id"] as? String {
                 

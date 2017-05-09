@@ -186,6 +186,8 @@ class WOWMasterpieceController: WOWBaseViewController {
         tableView.mj_footer          = mj_footer
         self.tableView.backgroundColor = UIColor.white
         self.tableView.separatorColor = UIColor.white
+        self.tableView.rowHeight          = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 410
         
     }
     func getCellHeight(_ sectionIndex:Int) -> CGFloat{
@@ -252,7 +254,6 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate ,
                 let cell                = tableView.dequeueReusableCell(withIdentifier: bannerID, for: indexPath) as! HomeBrannerCell
                 let model = bannerArr[0]
                 if let banners = model.moduleContent?.banners{
-                    
                     cell.reloadBanner(banners)
                     cell.delegate = self
                     cell.moduleId = model.moduleId
@@ -272,9 +273,9 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate ,
 
         
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return getCellHeight(indexPath.section)
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return getCellHeight(indexPath.section)
+//    }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if numberOfSection  == 1{

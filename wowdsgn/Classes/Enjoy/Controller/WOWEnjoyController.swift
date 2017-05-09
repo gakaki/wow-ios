@@ -180,6 +180,13 @@ class WOWEnjoyController: WOWBaseViewController {
         
         window?.addSubview(chooseClassView)
         window?.bringSubview(toFront: chooseClassView)
+    
+        for model in chooseClassArr {
+            
+            model.isSelect          = false
+            
+        }
+        self.chooseClassView.selectView.categoryArr = self.chooseClassArr
         chooseClassView.show()
         
     }

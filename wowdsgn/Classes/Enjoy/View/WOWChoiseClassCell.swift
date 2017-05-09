@@ -35,6 +35,7 @@ class WOWChoiseClassCell: UICollectionViewCell {
             imgClassIcon.image = UIImage.init(named: "placeholder_product")
         }
         if m.isSelect {
+
             imgChoiseSelect.isHidden = false
         }else {
             imgChoiseSelect.isHidden = true

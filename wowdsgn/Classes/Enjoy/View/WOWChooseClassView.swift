@@ -241,10 +241,34 @@ class WOWChooseClassView: UIView, UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let classId = indexPath.row
-        if let del = delegate {
-            del.didSelectItem(classId)
+        let m = categoryArr[indexPath.row]
+
+        for model in categoryArr {
+            if model == m {
+                if model.isSelect {
+
+                    model.isSelect          = false
+                    
+                    
+                }else {
+                    MobClick.e(.sellect_classifiaction_clicks_upload_classified_picture_page)
+                    model.isSelect          = true
+                    
+                }
+            }else {
+                model.isSelect = false
+            }
         }
+
+        collectionView.reloadData()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            let classId = indexPath.row
+            if let del = self.delegate {
+                del.didSelectItem(classId)
+            }
+        }
+      
     }
 
 }

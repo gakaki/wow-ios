@@ -26,14 +26,14 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jiantou" translatesAutoresizingMaskIntoConstraints="NO" id="jq7-JV-qCg">
-                    <rect key="frame" x="37" y="10" width="24" height="24"/>
+                    <rect key="frame" x="15" y="10" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="Khi-cw-DLd"/>
                         <constraint firstAttribute="width" constant="24" id="Pg1-xc-Nyo"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-BN-ZLD">
-                    <rect key="frame" x="37" y="22" width="0.0" height="0.0"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-BN-ZLD">
+                    <rect key="frame" x="15" y="22" width="0.0" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="183.5" id="WjY-dy-G2b"/>
                     </constraints>
@@ -46,9 +46,9 @@
                 <constraint firstItem="jq7-JV-qCg" firstAttribute="leading" secondItem="c9R-BN-ZLD" secondAttribute="trailing" id="IId-p3-QeW"/>
                 <constraint firstItem="c9R-BN-ZLD" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NHW-Fa-E3F"/>
                 <constraint firstItem="JTc-b0-W9Z" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="PQh-bj-aQH"/>
+                <constraint firstItem="c9R-BN-ZLD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="ZpF-Vp-soE"/>
                 <constraint firstItem="JTc-b0-W9Z" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dnS-T5-KS4"/>
                 <constraint firstItem="jq7-JV-qCg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hB4-SO-YoS"/>
-                <constraint firstItem="c9R-BN-ZLD" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-20" id="rhr-c3-1d3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

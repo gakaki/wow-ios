@@ -15,7 +15,7 @@ class WOWOtherCenterController: WOWBaseViewController {
     var userModel: WOWStatisticsModel?
     var dataArr  = [WOWWorksListModel]()
     
-    let pageSize   = 18
+    let pageSize   = 15
     
     override func viewDidLoad() {
         super.viewDidLoad()

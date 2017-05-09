@@ -221,25 +221,25 @@ class WOWWorksActivityController: WOWBaseViewController {
                     let color = UIColor.init(hexString: "#000000", alpha: 0.3)
                     strongSelf.publishBtn.setTitleColor(color, for: .normal)
                     strongSelf.publishBtn.setBackgroundColor(UIColor.init(hexString: "#FFD444")!, forState: .normal)
-                    strongSelf.publishBtn.isEnabled = false
+                    strongSelf.publishBtn.isUserInteractionEnabled = false
                 case 1:
                     strongSelf.publishBtn.setTitle("提交作品", for: .normal)
                     strongSelf.publishBtn.setTitleColor(UIColor.black, for: .normal)
                     strongSelf.publishBtn.setBackgroundColor(UIColor.init(hexString: "#FFD444")!, forState: .normal)
-                    strongSelf.publishBtn.isEnabled = true
+                    strongSelf.publishBtn.isUserInteractionEnabled = true
 
                 case 2:
                     strongSelf.publishBtn.setTitle("已结束", for: .normal)
-                    strongSelf.publishBtn.setTitleColor(UIColor.init(hexString: "#CCCCCC"), for: .normal)
-                    strongSelf.publishBtn.setBackgroundColor(UIColor.init(hexString: "#FFD444")!, forState: .normal)
-                    strongSelf.publishBtn.isEnabled = false
+                    strongSelf.publishBtn.setTitleColor(UIColor.init(hexString: "#FFFFFF"), for: .normal)
+                    strongSelf.publishBtn.setBackgroundColor(UIColor.init(hexString: "#CCCCCC")!, forState: .normal)
+                    strongSelf.publishBtn.isUserInteractionEnabled = false
 
                 default:
                     strongSelf.publishBtn.setTitle("活动未开始", for: .normal)
                     let color = UIColor.init(hexString: "#000000", alpha: 0.3)
                     strongSelf.publishBtn.setTitleColor(color, for: .normal)
                     strongSelf.publishBtn.setBackgroundColor(UIColor.init(hexString: "#FFD444")!, forState: .normal)
-                    strongSelf.publishBtn.isEnabled = false
+                    strongSelf.publishBtn.isUserInteractionEnabled = false
 
                     
                 }

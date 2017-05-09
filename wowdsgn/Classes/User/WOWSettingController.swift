@@ -64,7 +64,7 @@ class WOWSettingController: WOWBaseTableViewController {
                     print("disk size in bytes: \(size)")
 
                 })
-                
+        
                 //清楚yywebimage cache
                 if let c  = YYWebImageManager.shared().cache{
                     // get cache capacity

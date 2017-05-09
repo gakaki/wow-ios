@@ -43,7 +43,8 @@ class WOWPraiseOneCell: UITableViewCell {
     
     func showData(model: WOWWorksListModel?) {
         if let model = model {
-            imgView.set_webimage_url(model.pic)
+            let url = webpUrl(model.pic)
+            imgView.set_webimage_url_base(url, place_holder_name: "placeholder_product")
             numLabel.text = String(format: "%i", model.likeCounts ?? 0)
             dataArr = model.userList ?? [WOWStatisticsModel]()
             cv_width.constant = (36.w + 15) * CGFloat(dataArr.count)
@@ -54,6 +55,16 @@ class WOWPraiseOneCell: UITableViewCell {
                 bottomView.isHidden = true
             }
         }
+    }
+    func webpUrl(_ url:String?) -> String {
+        var res = url ?? ""
+        if ( res.length <= 0 ){
+            return ""
+        }else{
+            res     = "\(url!)?imageView2/0/w/700/format/webp/q/90"
+            
+        }
+        return res
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

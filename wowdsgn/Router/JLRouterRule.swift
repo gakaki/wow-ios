@@ -65,7 +65,7 @@ public class JLRouterRule {
         JLRoutes.setVerboseLoggingEnabled(true)
         
         // 跳转首页
-        JLRoutes.global().add(["/","/main/:page"]) { (params) -> Bool in
+        JLRoutes.global().add(["/main","/main/:page", "/"]) { (params) -> Bool in
             print(params)
             
             //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
@@ -255,6 +255,17 @@ public class JLRouterRule {
             
             return true
         }
+        // 跳转活动详情页
+        JLRoutes.global().addRoute("/instagram/community/:id") { (params) -> Bool in
+            print(params)
+            if let topicId = params["id"] as? String {
+                
+                VCRedirect.goWorksActivity(topicId: topicId.toInt() ?? 0)
 
+                
+            }
+            
+            return true
+        }
     }
 }

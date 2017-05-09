@@ -94,7 +94,8 @@ class WOWWorksDetailsController: WOWBaseViewController {
     func deleteAction()  {
         
         let alertController = UIAlertController(title: "",
-                                                message: "删除帖子？", preferredStyle: .alert)
+                                                message: "是否删除作品？",
+                                                preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "删除", style: .default, handler: {
            [unowned self] action  in

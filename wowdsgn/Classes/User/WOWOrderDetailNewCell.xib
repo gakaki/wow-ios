@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,11 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WOWOrderDetailNewCell" customModule="wowdsgn" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="88" id="KGk-i7-Jjw" customClass="WOWOrderDetailNewCell" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXJ-fB-5XR">
@@ -31,9 +31,9 @@
                             <constraint firstAttribute="width" constant="40" id="nVZ-SW-6Hv"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="au4-E8-Hsl">
-                        <rect key="frame" x="360" y="55" width="0.0" height="0.0"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="au4-E8-Hsl">
+                        <rect key="frame" x="349.5" y="40.5" width="10.5" height="14.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfy-mV-4mc" customClass="TagListView" customModule="wowdsgn">
-                        <rect key="frame" x="65" y="22" width="287" height="33"/>
+                        <rect key="frame" x="65" y="22" width="276.5" height="16"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="AW9-gJ-SVK"/>
@@ -60,23 +60,40 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1RK-q5-zWm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISq-cE-jDD">
+                        <rect key="frame" x="290" y="50" width="70" height="26"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="CFR-gO-y5B"/>
+                            <constraint firstAttribute="width" constant="70" id="RfW-Jz-MpW"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="申请售后">
+                            <color key="titleColor" red="0.28846530920060326" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="clickAfterAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kjx-rb-zC6"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="R4R-2a-Q5F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="18K-oz-swY"/>
                     <constraint firstItem="fXJ-fB-5XR" firstAttribute="leading" secondItem="R4R-2a-Q5F" secondAttribute="trailing" constant="10" id="3SS-9I-c93"/>
                     <constraint firstItem="au4-E8-Hsl" firstAttribute="bottom" secondItem="R4R-2a-Q5F" secondAttribute="bottom" id="5k9-o6-yFg"/>
-                    <constraint firstAttribute="bottom" secondItem="vfy-mV-4mc" secondAttribute="bottom" constant="14" id="9TA-qM-YX3"/>
+                    <constraint firstItem="ISq-cE-jDD" firstAttribute="top" secondItem="vfy-mV-4mc" secondAttribute="bottom" constant="12" id="DHK-ik-8s2"/>
                     <constraint firstItem="1RK-q5-zWm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="F8U-gd-TRq"/>
                     <constraint firstItem="R4R-2a-Q5F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="GkR-aB-5Rv"/>
                     <constraint firstItem="GgV-4n-hot" firstAttribute="top" secondItem="R4R-2a-Q5F" secondAttribute="top" id="LKR-HW-yNs"/>
                     <constraint firstItem="fXJ-fB-5XR" firstAttribute="top" secondItem="R4R-2a-Q5F" secondAttribute="top" constant="-2" id="Mer-59-oUy"/>
                     <constraint firstItem="1RK-q5-zWm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="PBQ-Rm-AO9"/>
+                    <constraint firstAttribute="bottom" secondItem="ISq-cE-jDD" secondAttribute="bottom" constant="13.5" id="R8V-GW-vYW"/>
                     <constraint firstItem="GgV-4n-hot" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fXJ-fB-5XR" secondAttribute="trailing" constant="8" id="Ufk-md-KDA"/>
                     <constraint firstAttribute="trailing" secondItem="1RK-q5-zWm" secondAttribute="trailing" id="UgW-Xd-tsg"/>
-                    <constraint firstItem="au4-E8-Hsl" firstAttribute="leading" secondItem="vfy-mV-4mc" secondAttribute="trailing" constant="8" id="c8X-P8-Mf7"/>
+                    <constraint firstAttribute="trailing" secondItem="ISq-cE-jDD" secondAttribute="trailing" constant="15" id="WZe-8y-EPX"/>
+                    <constraint firstItem="au4-E8-Hsl" firstAttribute="leading" secondItem="vfy-mV-4mc" secondAttribute="trailing" priority="750" constant="8" id="c8X-P8-Mf7"/>
                     <constraint firstItem="vfy-mV-4mc" firstAttribute="top" secondItem="fXJ-fB-5XR" secondAttribute="bottom" constant="9" id="i0o-N8-WGl"/>
                     <constraint firstItem="vfy-mV-4mc" firstAttribute="leading" secondItem="R4R-2a-Q5F" secondAttribute="trailing" constant="10" id="ibl-cv-wYX"/>
                     <constraint firstAttribute="bottom" secondItem="1RK-q5-zWm" secondAttribute="bottom" id="lX1-gB-FS8"/>
@@ -85,6 +102,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="btnAfterSales" destination="ISq-cE-jDD" id="WgT-2n-h5d"/>
                 <outlet property="goodsNumber" destination="au4-E8-Hsl" id="waB-j2-Xnk"/>
                 <outlet property="priceLabel" destination="GgV-4n-hot" id="Wgk-oh-hxB"/>
                 <outlet property="singsTagView" destination="vfy-mV-4mc" id="LAN-4s-R91"/>
@@ -92,7 +110,7 @@
                 <outlet property="titleImageView" destination="R4R-2a-Q5F" id="QFz-tG-t7E"/>
                 <outlet property="titleLabel" destination="fXJ-fB-5XR" id="Nzv-kP-xwT"/>
             </connections>
-            <point key="canvasLocation" x="86" y="71"/>
+            <point key="canvasLocation" x="85.5" y="80"/>
         </tableViewCell>
     </objects>
 </document>

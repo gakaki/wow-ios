@@ -97,5 +97,17 @@ extension UIViewController {
         
     }
     
+    // 跳转蒙版VC
+    func presentToMaskViewController(viewControllerToPresent:UIViewController,completion: (() -> Swift.Void)? = nil) {
+        
+        viewControllerToPresent.providesPresentationContextTransitionStyle = true
+        
+        viewControllerToPresent.definesPresentationContext = true
+        
+        viewControllerToPresent.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        
+        self.present(viewControllerToPresent, animated: false, completion: completion)
+        
+    }
     
 }

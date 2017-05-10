@@ -473,6 +473,7 @@ public class VCRedirect {
         topNaVC?.pushViewController(vc, animated: true)
         
     }
+
     class func goReleaseWorks(photo:UIImage!, instagramCategoryId: Int?, sizeImgId: Int, instagramCategoryName: String?, type: Int, topicId: Int, activityName: String?) {
         let vc = UIStoryboard.initialViewController("Enjoy", identifier:String(describing: WOWReleaseWorksController.self)) as! WOWReleaseWorksController
         vc.photo = photo
@@ -501,6 +502,45 @@ public class VCRedirect {
         
     }
 
+    //申请售后页面
+    class func goApplyAfterSales(sendType:AfterType = .sendGoods) {
+     
+        let vc = WOWApplyAfterController()
+        vc.sendType = sendType
+        topNaVC?.pushViewController(vc, animated: true)
+        
+    }
+    //仅退款页面
+    class func goOnlyRefund() {
+ 
+        let vc = WOWOnlyRefundViewController()
+        topNaVC?.pushViewController(vc, animated: true)
+        
+    }
+    //仅退款页面
+    class func goAfterDetail() {
+  
+        let vc = WOWAfterDetailController()
+        topNaVC?.pushViewController(vc, animated: true)
+        
+    }
+    //协商详情页面
+    class func goNogotiateDetails() {
+        
+
+
+        let vc = WOWNogotiateDetailsController()
+        topNaVC?.pushViewController(vc, animated: true)
+        
+    }
+    //协商详情页面
+    class func goMoneyFromController() {
+//        
+//        let vc = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWMoneyFromController.self)) as! WOWMoneyFromController
+        let vc = WOWMoneyFromController()
+        topNaVC?.pushViewController(vc, animated: true)
+        
+    }
     //跳转在线客服页面 source ：用户信息 commodityInfo: 自定义商品信息 orderNumber : 订单号    ·
     public class func goCustomerVC(_ source:QYSource?,commodityInfo:QYCommodityInfo?, orderNumber:String?) {
         guard WOWUserManager.loginStatus else{

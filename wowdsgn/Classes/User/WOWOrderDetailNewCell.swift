@@ -18,6 +18,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
     @IBOutlet weak var goodsNumber: UILabel!
     @IBOutlet weak var tapView: UIView!
     
+    @IBOutlet weak var btnAfterSales: UIButton!
     @IBOutlet weak var singsTagView: TagListView!
     var orderNewDetailModel : WOWNewOrderDetailModel!
     weak var delegeta: WOWOrderDetailNewCellDelegate?
@@ -26,6 +27,9 @@ class WOWOrderDetailNewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+//        btnAfterSales
+        btnAfterSales.addBorder(width: 0.5, color: UIColor.init(hexString: "cccccc")!)
+//        btnAfterSales.isHidden = true 
     }
     // 产品UI数据
     func productData(model : WOWNewProductModel!){
@@ -78,6 +82,9 @@ class WOWOrderDetailNewCell: UITableViewCell {
             }
         }
         
+    }
+    @IBAction func clickAfterAction(_ sender: Any) {
+        VCRedirect.goApplyAfterSales(sendType: .sendGoods)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

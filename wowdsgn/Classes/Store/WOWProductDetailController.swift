@@ -76,6 +76,7 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
         super.viewWillDisappear(animated)
             if isCustormer || isFromCustomVC{
                 self.navigationController?.setNavigationBarHidden(false, animated: true)
+
             }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -402,7 +403,7 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
             source.urlString    = shareUrl
             
             VCRedirect.goCustomerVC(source, commodityInfo: commodityInfo,orderNumber:nil)
-            
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
             self.isCustormer = true
         }
         

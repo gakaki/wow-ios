@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="353" id="KGk-i7-Jjw" customClass="WOWRefundTextCell" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="253"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="253"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退款说明" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBt-KD-mPo">
+                        <rect key="frame" x="15" y="10" width="57.5" height="22.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2j1-RF-2t3">
+                        <rect key="frame" x="15" y="32.5" width="360" height="220"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRc-Qk-sPN">
+                                <rect key="frame" x="0.0" y="0.0" width="360" height="120"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fe1-Oy-img" customClass="KMPlaceholderTextView" customModule="wowdsgn">
+                                        <rect key="frame" x="0.0" y="5" width="360" height="115"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="115" id="eCH-mr-N6f"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                <color key="value" white="0.53638343209999995" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入退款说明"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/140" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGX-Pm-aIB">
+                                        <rect key="frame" x="302" y="97" width="50" height="14.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="zy1-oY-1bd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="FGX-Pm-aIB" secondAttribute="trailing" constant="8" id="Am3-RV-EYy"/>
+                                    <constraint firstItem="fe1-Oy-img" firstAttribute="leading" secondItem="SRc-Qk-sPN" secondAttribute="leading" id="AvI-NQ-RAk"/>
+                                    <constraint firstAttribute="height" constant="120" id="L9K-rq-QjZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="fe1-Oy-img" secondAttribute="trailing" id="Yvb-Bf-pmR"/>
+                                    <constraint firstItem="fe1-Oy-img" firstAttribute="top" secondItem="SRc-Qk-sPN" secondAttribute="top" constant="5" id="ikp-1X-loQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="fe1-Oy-img" secondAttribute="bottom" id="iow-Li-cS4"/>
+                                    <constraint firstAttribute="bottom" secondItem="FGX-Pm-aIB" secondAttribute="bottom" constant="8" id="orj-yF-M9Y"/>
+                                </constraints>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ol1-Ae-iLz">
+                                <rect key="frame" x="0.0" y="120" width="360" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="MOk-BU-YEP"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Lk1-s3-EWL">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                            </collectionView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="2j1-RF-2t3" secondAttribute="bottom" id="25d-VP-dKI"/>
+                    <constraint firstItem="VBt-KD-mPo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="3aZ-GD-p8P"/>
+                    <constraint firstItem="VBt-KD-mPo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="9t9-gl-ZNe"/>
+                    <constraint firstItem="2j1-RF-2t3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Ey5-Hr-oiD"/>
+                    <constraint firstAttribute="trailing" secondItem="2j1-RF-2t3" secondAttribute="trailing" id="cFx-ZV-09k"/>
+                    <constraint firstItem="2j1-RF-2t3" firstAttribute="top" secondItem="VBt-KD-mPo" secondAttribute="bottom" id="pBb-5m-zOs"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="collectionView" destination="Ol1-Ae-iLz" id="dSX-8E-Tia"/>
+                <outlet property="textView" destination="fe1-Oy-img" id="qwH-27-jhi"/>
+            </connections>
+            <point key="canvasLocation" x="-72" y="141"/>
+        </tableViewCell>
+    </objects>
+</document>

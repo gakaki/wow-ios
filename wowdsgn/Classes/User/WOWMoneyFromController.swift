@@ -26,8 +26,12 @@ class WOWMoneyFromController: WOWApplyAfterBaseController {
     }
     override func setUI() {
         super.setUI()
-        tableView.register(UINib.init(nibName: "WOWTimerLineCell", bundle: Bundle.main), forCellReuseIdentifier: "WOWTimerLineCell")
-        tableView.register(UINib.init(nibName: "WOWMoneyTopCell", bundle: Bundle.main), forCellReuseIdentifier: "WOWMoneyTopCell")
+//        tableView.register(UINib.init(nibName: "WOWTimerLineCell", bundle: Bundle.main), forCellReuseIdentifier: "WOWTimerLineCell")
+        
+        tableView.register(UINib.nibName("WOWTimerLineCell"), forCellReuseIdentifier: "WOWTimerLineCell")
+        
+        tableView.register(UINib.nibName("WOWMoneyTopCell"), forCellReuseIdentifier: "WOWMoneyTopCell")
+//        tableView.register(UINib.init(nibName: "WOWMoneyTopCell", bundle: Bundle.main), forCellReuseIdentifier: "WOWMoneyTopCell")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

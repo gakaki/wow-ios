@@ -13,6 +13,7 @@ class Cell_107_Item: UICollectionViewCell {
     @IBOutlet weak var imgProductBanner: UIImageView!
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbPrice: UILabel!
+    @IBOutlet weak var lbOriginalPrice: UILabel!
     var model : WOWProductModel? {
         didSet{
             if let imageName = model?.productImg{
@@ -21,18 +22,19 @@ class Cell_107_Item: UICollectionViewCell {
             lbTitle.text = model?.productTitle
 
             let sellPriceStr = "¥" + String(describing: NSDecimalNumber(value: model?.sellPrice ?? 0))
-            
+            lbPrice.text = sellPriceStr
             if let originalPrice = model?.originalprice { // 如果有 原价 且大于现价
                 let originalPriceStr = String(describing: NSDecimalNumber(value: originalPrice))
 
                 if originalPrice > model?.sellPrice {
-                    lbPrice.strokeWithText(sellPriceStr , str2: "¥" + originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+
+                    lbOriginalPrice.setStrokeWithText(originalPriceStr)
                 }else{
-                    lbPrice.text = sellPriceStr
+                    lbOriginalPrice.text = ""
                 }
                 
             }else{ // 没有原价 则显示现价
-                lbPrice.text = sellPriceStr 
+                lbOriginalPrice.text = ""
             }
 
         }

@@ -2455,8 +2455,8 @@
 		2DB95D9B1EB9C3A600B2176A /* ApplyAfterSales */ = {
 			isa = PBXGroup;
 			children = (
-				2DB95D9C1EB9C41300B2176A /* WOWApplyAfterController.swift */,
 				2DB95E781EC1AE6600B2176A /* WOWApplyAfterBaseController.swift */,
+				2DB95D9C1EB9C41300B2176A /* WOWApplyAfterController.swift */,
 				2DB95D9E1EB9D4B000B2176A /* WOWOnlyRefundViewController.swift */,
 				2DB95DF91EBC80D800B2176A /* WOWAfterDetailController.swift */,
 				2DB95E031EC0109B00B2176A /* WOWNogotiateDetailsController.swift */,

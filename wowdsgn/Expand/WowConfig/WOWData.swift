@@ -74,5 +74,12 @@ let WOWAgeRange:[Int:String] = [0:"保密", 1:"60后", 2:"70后", 3:"80后", 4:"
 
 let WOWSex:[Int:String] = [1:"男",2:"女",3:"保密"]
 
+let RefundArray:[Int:String] = [1:"尺码拍错／不喜欢／不想要",2:"空包裹",3:"未按约定时间发货",4: "快递／物流一直未送到",5: "退运费",6: "做工有瑕疵",7: "质量问题（开胶／掉色)",8: "尺寸／型号／功能／颜色／图案／款式与商品页面描述不符",9: "少件／漏发",10: "卖家发错货",11: "包装／商品破损／污渍／变形",12: "未按约定时间发货",13: "7天无理由退换货",14: "平台发错货"]
 
-//let WOWTestUID   = "20"
+let WOWOnlyRefund = [RefundArray[0]]
+let WOWOnlyRefundNoReceived = [RefundArray[0],RefundArray[1],RefundArray[2],RefundArray[3]]
+let WOWOnlyRefundReceived   = [RefundArray[0],RefundArray[5],RefundArray[6],RefundArray[7],RefundArray[8],RefundArray[9],RefundArray[10],RefundArray[11]]
+let WOWRefundAllReceived    = [RefundArray[12],RefundArray[5],RefundArray[6],RefundArray[7],RefundArray[8],RefundArray[9],RefundArray[10]]
+let WOWReturnGoodsReceived  = [RefundArray[0],RefundArray[13],RefundArray[5],RefundArray[6],RefundArray[7],RefundArray[9],RefundArray[10]]
+
+

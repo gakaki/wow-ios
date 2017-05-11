@@ -37,6 +37,9 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     @IBOutlet weak var priceLbOne: UILabel!// 第一个 价格
     @IBOutlet weak var priceLbTwo: UILabel!// 第二个 价格
     
+    @IBOutlet weak var originalPriceOne: UILabel!// 第一个 价格
+    @IBOutlet weak var originalPriceTwo: UILabel!// 第二个 价格
+    
     @IBOutlet weak var lbTitleOne: UILabel!// 第一个 标题
     @IBOutlet weak var lbTitleTwo: UILabel!// 第二个 标题
     
@@ -171,17 +174,20 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
         productIdOne        = model.productId
         // 格式化 价格小数点
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
+        priceLbOne.text = sellPrice
         var originalPriceStr = ""
         if let originalPrice = model.originalprice {
             originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
             if originalPrice > model.sellPrice {
-                priceLbOne.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+
+                originalPriceOne.setStrokeWithText(originalPriceStr)
             }else{
-                priceLbOne.text = sellPrice
+               originalPriceOne.text = ""
             }
 
         }else{
-            priceLbOne.text = sellPrice
+            originalPriceOne.text = ""
+
         }
         if WOWUserManager.loginStatus {
             if (model.favorite == true) {
@@ -214,17 +220,21 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
         productIdTwo = model.productId
         // 格式化 价格小数点
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
+        priceLbTwo.text = sellPrice
         var originalPriceStr = ""
         if let originalPrice = model.originalprice {
             originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
             if originalPrice > model.sellPrice {
-             priceLbTwo.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
+                
+                originalPriceTwo.setStrokeWithText(originalPriceStr)
+                
             }else{
-                priceLbTwo.text = sellPrice
+                
+                originalPriceTwo.text = ""
             }
            
         }else{
-            priceLbTwo.text = sellPrice
+             originalPriceTwo.text = ""
         }
      
         if WOWUserManager.loginStatus {

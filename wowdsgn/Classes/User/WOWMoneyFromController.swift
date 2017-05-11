@@ -7,15 +7,15 @@
 //
 
 import UIKit
-let colorDefult = UIColor.red
-let colorDone   = UIColor.darkGray
+
+
 class WOWMoneyFromController: WOWApplyAfterBaseController {
 
     
     let data : [(TimelinePoint, UIColor, UIColor)]
-        = [(TimelinePoint(color: colorDefult, filled: true),UIColor.clear,colorDefult),
-           (TimelinePoint(color: colorDefult, filled: true),colorDefult,colorDone),
-           (TimelinePoint(color: colorDone, filled: true),colorDone,UIColor.clear)]
+        = [(TimelinePoint(color: YellowColor, filled: true),UIColor.clear,YellowColor),
+           (TimelinePoint(color: YellowColor, filled: true),YellowColor,SeprateColor),
+           (TimelinePoint(color: SeprateColor, filled: true),SeprateColor,UIColor.clear)]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "钱款去向"
@@ -26,8 +26,12 @@ class WOWMoneyFromController: WOWApplyAfterBaseController {
     }
     override func setUI() {
         super.setUI()
-        tableView.register(UINib.init(nibName: "WOWTimerLineCell", bundle: Bundle.main), forCellReuseIdentifier: "WOWTimerLineCell")
-        tableView.register(UINib.init(nibName: "WOWMoneyTopCell", bundle: Bundle.main), forCellReuseIdentifier: "WOWMoneyTopCell")
+//        tableView.register(UINib.init(nibName: "WOWTimerLineCell", bundle: Bundle.main), forCellReuseIdentifier: "WOWTimerLineCell")
+        
+        tableView.register(UINib.nibName("WOWTimerLineCell"), forCellReuseIdentifier: "WOWTimerLineCell")
+        
+        tableView.register(UINib.nibName("WOWMoneyTopCell"), forCellReuseIdentifier: "WOWMoneyTopCell")
+//        tableView.register(UINib.init(nibName: "WOWMoneyTopCell", bundle: Bundle.main), forCellReuseIdentifier: "WOWMoneyTopCell")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

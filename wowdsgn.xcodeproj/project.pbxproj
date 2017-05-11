@@ -412,10 +412,7 @@
 		2DB95E6B1EC1A50900B2176A /* TimelinePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E671EC1A50900B2176A /* TimelinePoint.swift */; };
 		2DB95E6C1EC1A50900B2176A /* WOWTimerLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E681EC1A50900B2176A /* WOWTimerLineCell.swift */; };
 		2DB95E6D1EC1A50900B2176A /* WOWTimerLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB95E691EC1A50900B2176A /* WOWTimerLineCell.xib */; };
-<<<<<<< HEAD
 		2DB95E741EC1AA5700B2176A /* WOWMoneyTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E721EC1AA5700B2176A /* WOWMoneyTopCell.swift */; };
-=======
->>>>>>> 1e005a042248b5d91746a4f56310ee21fa1f07fa
 		2DB95E771EC1AAB600B2176A /* WOWMoneyFromController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E761EC1AAB600B2176A /* WOWMoneyFromController.swift */; };
 		2DB95E791EC1AE6600B2176A /* WOWApplyAfterBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB95E781EC1AE6600B2176A /* WOWApplyAfterBaseController.swift */; };
 		2DCB3BCC1DE6D36E0022528E /* WOWUserCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCB3BCA1DE6D36E0022528E /* WOWUserCommentVC.swift */; };

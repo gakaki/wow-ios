@@ -258,7 +258,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                 confirmReceive(orderNewModel.orderCode ?? "")
             case 4:
                 goCommentVC(orderNewModel.orderCode ?? "")
-                DLog("待评价")
+                print("待评价")
             default:
                 break
             }
@@ -1133,7 +1133,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         
         switch OrderDetailNewaType {
         case .someFinishForGoods:
-            DLog("")
+            print("")
             
         case .payMent,.noForGoods:
             

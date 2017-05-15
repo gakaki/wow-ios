@@ -34,9 +34,9 @@ class WOWTimerLineCell: WOWStyleNoneCell {
         
         timelinePoint.position = CGPoint(x: timeline.leftMargin + timeline.width / 2, y: lbApply.frame.origin.y + lbApply.intrinsicContentSize.height / 2 - timelinePoint.diameter / 2)
         
-        timeline.start  = CGPoint(x: timelinePoint.position.x + timelinePoint.diameter / 2, y: 0)
+        timeline.start = CGPoint(x: timelinePoint.position.x + timelinePoint.diameter / 2, y: 0)
         timeline.middle = CGPoint(x: timeline.start.x, y: timelinePoint.position.y)
-        timeline.end    = CGPoint(x: timeline.start.x, y: self.bounds.size.height)
+        timeline.end = CGPoint(x: timeline.start.x, y: self.bounds.size.height)
         timeline.draw(view: self.contentView)
         
         timelinePoint.draw(view: self.contentView)

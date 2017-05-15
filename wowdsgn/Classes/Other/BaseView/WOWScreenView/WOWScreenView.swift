@@ -252,7 +252,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
 
     }
     func clearAction()  {
-        DLog("clear")
+        print("clear")
         cloosePriceModel.minPrice = nil
         cloosePriceModel.maxPrice = nil
         screenColorArr.removeAll()

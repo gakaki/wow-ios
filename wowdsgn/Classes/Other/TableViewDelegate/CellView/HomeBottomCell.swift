@@ -37,9 +37,6 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     @IBOutlet weak var priceLbOne: UILabel!// 第一个 价格
     @IBOutlet weak var priceLbTwo: UILabel!// 第二个 价格
     
-    @IBOutlet weak var originalPriceOne: UILabel!// 第一个 价格
-    @IBOutlet weak var originalPriceTwo: UILabel!// 第二个 价格
-    
     @IBOutlet weak var lbTitleOne: UILabel!// 第一个 标题
     @IBOutlet weak var lbTitleTwo: UILabel!// 第二个 标题
     
@@ -143,7 +140,7 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     @IBAction func favoriteActionOne(_ sender: AnyObject) {
         WOWClickLikeAction.requestFavoriteProduct(productId: productIdOne ?? 0,view: oneBaseView,btn: btnIsLikeOne , isFavorite: { (isFavorite) in
             
-            DLog("完成请求")
+            print("完成请求")
             
         })
         
@@ -151,7 +148,7 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     @IBAction func favoriteActionTwo(_ sender: AnyObject) {
         WOWClickLikeAction.requestFavoriteProduct(productId: productIdTwo ?? 0,view: twoBaseView,btn: btnIsLikeTwo, isFavorite: { (isFavorite) in
             
-            DLog("完成请求")
+            print("完成请求")
             
         })
         
@@ -174,20 +171,17 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
         productIdOne        = model.productId
         // 格式化 价格小数点
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
-        priceLbOne.text = sellPrice
         var originalPriceStr = ""
         if let originalPrice = model.originalprice {
             originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
             if originalPrice > model.sellPrice {
-
-                originalPriceOne.setStrokeWithText(originalPriceStr)
+                priceLbOne.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
             }else{
-               originalPriceOne.text = ""
+                priceLbOne.text = sellPrice
             }
 
         }else{
-            originalPriceOne.text = ""
-
+            priceLbOne.text = sellPrice
         }
         if WOWUserManager.loginStatus {
             if (model.favorite == true) {
@@ -220,21 +214,17 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
         productIdTwo = model.productId
         // 格式化 价格小数点
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
-        priceLbTwo.text = sellPrice
         var originalPriceStr = ""
         if let originalPrice = model.originalprice {
             originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
             if originalPrice > model.sellPrice {
-                
-                originalPriceTwo.setStrokeWithText(originalPriceStr)
-                
+             priceLbTwo.strokeWithText(sellPrice , str2: originalPriceStr , str2Font: 11, str2Color: UIColor.init(hexString: "CCCCCC")!)
             }else{
-                
-                originalPriceTwo.text = ""
+                priceLbTwo.text = sellPrice
             }
            
         }else{
-             originalPriceTwo.text = ""
+            priceLbTwo.text = sellPrice
         }
      
         if WOWUserManager.loginStatus {

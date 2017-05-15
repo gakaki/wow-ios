@@ -109,7 +109,7 @@ extension VCShopping:VTMagicViewDataSource{
     }
     
     func buttonAction(){
-        DLog("button")
+        print("button")
     }
     
     func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{

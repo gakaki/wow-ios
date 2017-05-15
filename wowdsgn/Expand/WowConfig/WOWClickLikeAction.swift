@@ -230,7 +230,7 @@ class WOWClickLikeAction {
             WOWHud.dismiss()
         
                 let favorite = JSON(result)
-                DLog(favorite)
+                print(favorite)
             if type == 1 {
                 likeAnimate(view: view, btn: btn)
             }
@@ -264,7 +264,7 @@ class WOWClickLikeAction {
             WOWHud.dismiss()
             
             let favorite = JSON(result)
-            DLog(favorite)
+            print(favorite)
             if type == 1 {
                 likeAnimate(view: view, btn: btn)
             }

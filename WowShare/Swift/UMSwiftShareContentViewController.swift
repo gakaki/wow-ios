@@ -55,7 +55,9 @@ public class UMSwiftShareContentViewController: UIViewController {
 
             UMSocialManager.default().share(to: platformType, messageObject: messageObject, currentViewController: self, completion: { (shareResponse, error) -> Void in
                 if error != nil {
+                    print("Share Fail with error ：%@", error)
                 }else{
+                    print("Share succeed")
                 }
 
             })

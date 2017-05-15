@@ -34,7 +34,7 @@ extension UILabel {
         // 颜色
         mustr1 .addAttribute(NSForegroundColorAttributeName, value: str2Color, range: str1Range)
         // 线条
-//        mustr1 .addAttribute(NSStrikethroughStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: str1Range)
+        mustr1 .addAttribute(NSStrikethroughStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: str1Range)
         // 字体
         mustr1 .addAttribute(NSFontAttributeName, value:UIFont.systemFont(ofSize: str2Font), range: str1Range)
         

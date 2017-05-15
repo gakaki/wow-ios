@@ -58,7 +58,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                     }else{
                         self.tableView.register(c.self, forCellReuseIdentifier:cellName)
                     }
-                    DLog("\(k) = \(c)")
+                    print("\(k) = \(c)")
                 }
             }
 
@@ -729,7 +729,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                 }
 
                 if is402 {
-                    DLog("跳转对应的产品组的详情页\(id)")
+                    print("跳转对应的产品组的详情页\(id)")
                     
                     VCRedirect.goToProductGroup(id)
                     
@@ -762,7 +762,7 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         if is402 {
             v.btnMore.isHidden = false
             v.btnMore.addAction {// 点击更多跳转对应的产品组详情页
-                DLog("跳转对应的产品组的详情页\(id)")
+                print("跳转对应的产品组的详情页\(id)")
                 VCRedirect.goToProductGroup(id)
 
             }

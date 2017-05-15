@@ -61,7 +61,7 @@ class WOWSettingController: WOWBaseTableViewController {
                 cache.cleanExpiredDiskCache()
                 cache.clearMemoryCache()
                 KingfisherManager.shared.cache.calculateDiskCacheSize(completion: { (size) in
-                    DLog("disk size in bytes: \(size)")
+                    print("disk size in bytes: \(size)")
 
                 })
         
@@ -146,7 +146,7 @@ class WOWSettingController: WOWBaseTableViewController {
     func cancleWecha()  {
         
         WowShare.cancle { (con) in
-            DLog("清楚微信缓存")
+            print("清楚微信缓存")
         }
     }
     

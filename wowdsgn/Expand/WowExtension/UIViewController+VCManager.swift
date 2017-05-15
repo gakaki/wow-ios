@@ -618,7 +618,7 @@ public class VCRedirect {
         sessionViewController.navigationItem.leftBarButtonItem = item
         
         if FNUtil.currentTopViewController().isKind(of: QYSessionViewController.classForCoder()){
-            DLog("为客服聊天界面")
+            print("为客服聊天界面")
 //           topNaVC?.popToRootViewController(animated: false)
         }else {
             MobClick.e(.online_cutomer_service_detailpage)
@@ -647,27 +647,27 @@ public class VCRedirect {
                     }
                     
                 case 2:
-                    DLog("专题详情页（商品列表）")
+                    print("专题详情页（商品列表）")
                 case 3:
-                    DLog("专题详情页（图文混排）")
+                    print("专题详情页（图文混排）")
                 case 4:
-                    DLog("品牌详情页")
+                    print("品牌详情页")
                     VCRedirect.toBrand(brand_id: id)
                     
                 case 5:
-                    DLog("设计师详情页")
+                    print("设计师详情页")
                     VCRedirect.toDesigner(designerId: id)
                     
                 case 6:
-                    DLog("商品详情页")
+                    print("商品详情页")
                     VCRedirect.toVCProduct(id)
                     
                 case 7:
-                    DLog("分类详情页")
+                    print("分类详情页")
                     
                 case 8:// 专题详情
                     VCRedirect.toTopicList(topicId: id)
-                    DLog("场景还是专题")
+                    print("场景还是专题")
                 case 9:// 专题详情
                     
                     VCRedirect.toToPidDetail(topicId: id)
@@ -709,7 +709,7 @@ public class VCRedirect {
                     let vc = UIStoryboard.initialViewController("User", identifier:"WOWAboutController") as! WOWAboutController
                    
                     topNaVC?.pushViewController(vc, animated: true)
-                    DLog("其他")
+                    print("其他")
                 }
                 
             }

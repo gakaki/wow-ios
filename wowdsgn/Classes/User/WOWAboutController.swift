@@ -16,7 +16,7 @@ class WOWAboutController: WOWBaseViewController {
     let cellId = "WOWAboutCell"
     override func viewDidLoad() {
         super.viewDidLoad()
-        DLog(CheackAppVersion.cheackResult ?? 2)
+        print(CheackAppVersion.cheackResult ?? 2)
     }
 
     override func didReceiveMemoryWarning() {

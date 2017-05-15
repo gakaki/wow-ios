@@ -117,7 +117,7 @@ class PhotoViewCell: UICollectionViewCell {
     deinit {
         downloadTask?.cancel()
         downloadTask = nil
-        DLog("\(self.debugDescription) --- 销毁")
+        print("\(self.debugDescription) --- 销毁")
     }
     //MARK:- private 初始设置
     fileprivate func commonInit() {
@@ -160,7 +160,7 @@ class PhotoViewCell: UICollectionViewCell {
     
     // 双击放大至最大 或者 缩小至最小
     func handleDoubleTap(_ ges: UITapGestureRecognizer) {
-        //        DLog("double---------")
+        //        print("double---------")
         if imageView.image == nil { return }
         
         if scrollView.zoomScale <= scrollView.minimumZoomScale { // 放大
@@ -218,7 +218,7 @@ extension PhotoViewCell {
         // 加载网路图片
         guard let urlString = photo.imageUrlString, let url = URL(string: urlString.webp_url()) else {
 //            assert(false, "设置的url不合法")
-            DLog("设置的url不合法")
+            print("设置的url不合法")
             return
         }
         // 添加提示框

@@ -27,18 +27,18 @@ public class JLRouterRule {
                 if JLRoutes.canRouteURL(url_replaced) {
                     return JLRoutes.global().routeURL(url_replaced)
                 }else{
-                    DLog("该url 未能被打开 \(url_replaced.absoluteString) ")
+                    print("该url 未能被打开 \(url_replaced.absoluteString) ")
                     
                     return false
                 }
             }
             else {
-                DLog("该url非指定域名")
+                print("该url非指定域名",host)
                 return false
             }
         }else{
             //没有url
-            DLog("无url 无host")
+            print("无url 无host",url.absoluteString)
             return false
         }
 
@@ -66,7 +66,7 @@ public class JLRouterRule {
         
         // 跳转首页
         JLRoutes.global().add(["/main","/main/:page", "/"]) { (params) -> Bool in
-            DLog(params)
+            print(params)
             
             //        FNUtil.currentTopViewController().present(alert, animated: true, completion: nil)
             let page = params["page"] as? String
@@ -93,16 +93,16 @@ public class JLRouterRule {
         
         // 跳转产品
         JLRoutes.global().add(["/item","/item/:id"]) { (params) -> Bool in
-            DLog(params)
+            print(params)
             let productId = params["id"] as? String
             VCRedirect.toVCProduct(productId?.toInt())
-            DLog(params)
+            print(params)
             return true
         }
 
         // 跳转商品详情页(产品详情)
         JLRoutes.global().add(["/contenttopic","/contenttopic/:id","/topic/content/:id"]) { (params) -> Bool in
-            DLog(params)
+            print(params)
             let id              = params["id"] as? String
             let toPicId         = id?.toInt() ?? 0
             VCRedirect.toToPidDetail(topicId: toPicId)
@@ -111,7 +111,7 @@ public class JLRouterRule {
         
         // 跳转商品列表详情页(系列品)
         JLRoutes.global().add(["/producttopic","/producttopic/:id","/topic/product/:id"]) { (params) -> Bool in
-            DLog(params)
+            print(params)
             let id              = params["id"] as? String
             let toPicId         = id?.toInt() ?? 0
             VCRedirect.toTopicList(topicId: toPicId)
@@ -120,7 +120,7 @@ public class JLRouterRule {
         
         // 跳转品牌详情页
         JLRoutes.global().add(["/brand","/brand/:id"]) { (params) -> Bool in
-            DLog(params)
+            print(params)
             if let id = params["id"] as? String {
                 VCRedirect.toBrand(brand_id: id.toInt())
             }
@@ -129,7 +129,7 @@ public class JLRouterRule {
         
         // 跳转设计师详情页
         JLRoutes.global().add(["/designer","/designer/:id"]) { (params) -> Bool in
-            DLog(params)
+            print(params)
             if let id = params["id"] as? String {
                 VCRedirect.toDesigner(designerId: id.toInt())
             }
@@ -138,7 +138,7 @@ public class JLRouterRule {
 
         // 跳转优惠券列表
         JLRoutes.global().addRoute("/coupon") { (params) -> Bool in
-            DLog(params)
+            print(params)
             VCRedirect.toCouponVC()
 
             return true
@@ -146,7 +146,7 @@ public class JLRouterRule {
         
         // 跳转订单列表
         JLRoutes.global().addRoute("/order/list") { (params) -> Bool in
-            DLog(params)
+            print(params)
             VCRedirect.toOrderList()
             return true
         }
@@ -154,7 +154,7 @@ public class JLRouterRule {
         
         // 跳转订单详情
         JLRoutes.global().addRoute("/order") { (params) -> Bool in
-            DLog(params)
+            print(params)
             if let id = params["id"] as? String {
                 VCRedirect.toOrderDetail(orderCode: id)
             }
@@ -167,7 +167,7 @@ public class JLRouterRule {
             
             let categoryId = params["id"] as? String
             VCRedirect.toVCScene(categoryId?.toInt(), entrance: .category)
-            DLog(params)
+            print(params)
             return true
         }
         
@@ -189,7 +189,7 @@ public class JLRouterRule {
         
         //领券
         JLRoutes.global().addRoute("/coupon/obtain/:couponId") { (params) -> Bool in
-            DLog(params)
+            print(params)
             if let couponId = params["couponId"] as? String {
                 VCRedirect.getCoupon(couponId.toInt() ?? 0)
             }
@@ -198,7 +198,7 @@ public class JLRouterRule {
         }
         //佳作 最新
         JLRoutes.global().addRoute("/instagram/tab/:id") { (params) -> Bool in
-            DLog(params)
+            print(params)
             if let typeId = params["id"] as? String {
                 
                 if typeId.toInt() == 0 { // 跳佳作
@@ -213,7 +213,7 @@ public class JLRouterRule {
         }
         //用户中心页
         JLRoutes.global().addRoute("/instagram/user/:id") { (params) -> Bool in
-            DLog(params)
+            print(params)
             if let userId = params["id"] as? String {
                 
                  VCRedirect.goOtherCenter(endUserId: userId.toInt() ?? 0)
@@ -224,7 +224,7 @@ public class JLRouterRule {
         }
         //用户作品详情页
         JLRoutes.global().addRoute("/instagram/photo/:id") { (params) -> Bool in
-            DLog(params)
+            print(params)
             if let worksId = params["id"] as? String {
                 
                  VCRedirect.bingWorksDetails(worksId: worksId.toInt() ?? 0)
@@ -235,7 +235,7 @@ public class JLRouterRule {
         }
         // 跳转场景分类页
         JLRoutes.global().addRoute("/product/scene/:id") { (params) -> Bool in
-            DLog(params)
+            print(params)
             if let sceneId = params["id"] as? String {
                 
                   VCRedirect.toVCScene(sceneId.toInt() ?? 0, entrance: .scene)
@@ -246,7 +246,7 @@ public class JLRouterRule {
         }
         // 跳转标签分类页
         JLRoutes.global().addRoute("/product/tag/:id") { (params) -> Bool in
-            DLog(params)
+            print(params)
             if let tagId = params["id"] as? String {
                 
                  VCRedirect.toVCScene(tagId.toInt() ?? 0, entrance: .tag)
@@ -257,7 +257,7 @@ public class JLRouterRule {
         }
         // 跳转活动详情页
         JLRoutes.global().add(["/instagram/community","/instagram/community/:id"]) { (params) -> Bool in
-            DLog(params)
+            print(params)
             if let topicId = params["id"] as? String {
                 
                 VCRedirect.goWorksActivity(topicId: topicId.toInt() ?? 0)

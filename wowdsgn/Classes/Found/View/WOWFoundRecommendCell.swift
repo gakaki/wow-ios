@@ -78,8 +78,8 @@ class WOWFoundRecommendCell: UITableViewCell {
         self.iv.addTapGesture {[weak self] (tap) in
             if let strongSelf = self {
                 if let del = strongSelf.delegate {
-                      DLog(strongSelf.iv.frame)
-                     DLog(strongSelf.btnLike.frame)
+                      print(strongSelf.iv.frame)
+                     print(strongSelf.btnLike.frame)
                     del.toProductDetail(p.productId)
                 }
             }

@@ -282,7 +282,7 @@ extension WOWEnjoyController:VTMagicViewDataSource, VTMagicViewDelegate{
     }
     
     func buttonAction(){
-        DLog("button")
+        print("button")
     }
     
     func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
@@ -295,9 +295,10 @@ extension WOWEnjoyController:VTMagicViewDataSource, VTMagicViewDelegate{
       
     }
     func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
-     
+        print("viewDidAppear:", pageIndex);
         
         if let b = magicView.menuItem(at: pageIndex) {
+            print("  button asc is ", b)
             
             switch pageIndex {
             case  0: break
@@ -310,6 +311,7 @@ extension WOWEnjoyController:VTMagicViewDataSource, VTMagicViewDelegate{
         }
     }
     func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){
+        print("didSelectItemAtIndex:", itemIndex);
         
     }
 }
@@ -388,7 +390,7 @@ extension WOWEnjoyController:TZImagePickerControllerDelegate,PhotoTweaksViewCont
                     FNUtil.currentTopViewController().pushVC(photoTweaksViewController!)
 //                    FNUtil.currentTopViewController().navigationController?.pushViewController(photoTweaksViewController!, animated: true)
                 }else {
-                    //                     DLog("请重新选择照片")
+                    //                     print("请重新选择照片")
                     WOWHud.showMsg("请您上传大于1000*1000px的照片")
                 }
                 

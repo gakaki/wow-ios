@@ -36,7 +36,7 @@ class VCCategoryProducts:WOWBaseProductsController
         }
 
     }
-    //分类列表数据
+    
     func requestCategory() {
         if query_categoryId == 0 {
             params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":self.sceneId]
@@ -72,7 +72,7 @@ class VCCategoryProducts:WOWBaseProductsController
             params["sceneIds"] = screenScreenArr
             
         }
-        DLog(params)
+        print(params)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Product_By_Category(params : params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self {
@@ -116,7 +116,7 @@ class VCCategoryProducts:WOWBaseProductsController
         }
 
     }
-    //场景列表数据
+    
     func requestScene() {
         if query_categoryId == 0 {
             params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":self.sceneId]
@@ -152,7 +152,7 @@ class VCCategoryProducts:WOWBaseProductsController
             params["sceneIds"] = screenScreenArr
             
         }
-        DLog(params)
+        print(params)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_SceneProduct(params : params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self {
@@ -197,7 +197,7 @@ class VCCategoryProducts:WOWBaseProductsController
         }
 
     }
-    //标签列表数据
+    
     func requestTag() {
         if query_categoryId == 0 {
             params = ["sort": currentTypeIndex.rawValue ,"currentPage": pageIndex,"pageSize":currentPageSize,"order":currentSortType.rawValue,"id":self.sceneId]
@@ -233,7 +233,7 @@ class VCCategoryProducts:WOWBaseProductsController
             params["sceneIds"] = screenScreenArr
             
         }
-        DLog(params)
+        print(params)
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_TagProduct(params : params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self {

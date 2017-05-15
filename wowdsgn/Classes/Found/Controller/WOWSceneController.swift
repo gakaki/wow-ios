@@ -85,7 +85,7 @@ class WOWSceneController: VCBaseVCCategoryFound,CollectionViewWaterfallLayoutDel
         // 筛选回调
         screenView.screenAction = {[unowned self] (dic) in
             
-            DLog(dic)
+            print(dic)
             
             self.getScreenConditions(dicResult: dic as! [String:AnyObject])
             

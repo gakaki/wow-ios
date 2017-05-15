@@ -5,7 +5,7 @@ import UIKit
 public extension TalkingData {
     public static func e(_ structEvent:StructDataEvent , _ params: [String : Any] ){
         let event_name = String(describing: structEvent)
-        DLog(event_name)
+        print(event_name)
         TalkingData.trackEvent(event_name, label: "AppStore", parameters: params)
     }
     

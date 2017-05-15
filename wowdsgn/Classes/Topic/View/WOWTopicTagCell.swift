@@ -52,7 +52,7 @@ class WOWTopicTagCell: UITableViewCell ,TagListViewDelegate{
                 if title == tag.name ?? "" {
                     if let del = delegate {
                         del.tagGoTopic(tag.id, tagTitle: tag.name)
-                        DLog(tag.id)
+                        print(tag.id)
                     }
                     return
                 }

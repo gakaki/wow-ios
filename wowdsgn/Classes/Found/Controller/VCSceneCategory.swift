@@ -43,8 +43,8 @@ class VCSceneCategory:UIViewController{
     dynamic var data1 = [1,2,3,4,5,6]
     
     dynamic func combine(){
-        DLog("combine method")
-        DLog(data1.count)
+        print("combine method")
+        print(data1.count)
     }
 }
 

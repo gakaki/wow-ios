@@ -76,7 +76,9 @@ class WOWFavBrand: WOWBaseViewController {
     }
     
     //MARK:Action
- 
+    func goStore() -> Void {
+        print("去逛逛")
+    }
     fileprivate func addObserver(){
         
         NotificationCenter.default.addObserver(self, selector:#selector(request), name:NSNotification.Name(rawValue: WOWRefreshFavoritNotificationKey), object:nil)

@@ -155,7 +155,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     }
     
     func cancel(){
-        DLog("cancel")
+        print("cancel")
         cityTextField.resignFirstResponder()
     }
     

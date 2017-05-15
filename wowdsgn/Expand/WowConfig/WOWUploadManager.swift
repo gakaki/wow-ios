@@ -83,7 +83,7 @@ class WOWUploadManager {
                 successClosure(serverUrl)
 
             }else{
-                DLog("上传头像格式错误")
+                print("上传头像格式错误")
             }
             
            
@@ -108,7 +108,7 @@ class WOWUploadManager {
                 
             }else{
                 
-                DLog("上传头像格式错误")
+                print("上传头像格式错误")
                 
             }
             

@@ -165,7 +165,7 @@ extension WOWOnlyRefundViewController:PushCommentDelegate,TZImagePickerControlle
                         // 拿到url数组，赋值给Model数据层
                         //                        strongSelf.commentArr[collectionViewTag].commentImgs = urlArray
                         strongSelf.commentManage.commentImgs = urlArray
-                        DLog(urlArray)
+                        print(urlArray)
                         
                     }
                     

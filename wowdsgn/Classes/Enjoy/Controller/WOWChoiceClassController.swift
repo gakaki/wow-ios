@@ -96,7 +96,7 @@ class WOWChoiceClassController: WOWBaseViewController {
     func nextAction()  {
         MobClick.e(.next_clicks_upload_classified_picture_page)
         cloosePhotos()
-        DLog("点击了下一步")
+        print("点击了下一步")
     }
     func cloosePhotos() {
         
@@ -151,7 +151,7 @@ class WOWChoiceClassController: WOWBaseViewController {
                     photoTweaksViewController?.autoSaveToLibray = false
                     FNUtil.currentTopViewController().pushVC(photoTweaksViewController!)
                 }else {
-                    //                     DLog("请重新选择照片")
+                    //                     print("请重新选择照片")
                     WOWHud.showMsg("请您上传大于1000*1000px的照片")
                 }
                 

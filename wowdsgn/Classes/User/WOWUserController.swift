@@ -100,7 +100,7 @@ class WOWUserController: WOWBaseTableViewController {
         }
         outGoodsView.addTapGesture {[weak self](tap) in
             if let strongSelf = self{
-               DLog("退换货")
+               print("退换货")
             }
         }
     }

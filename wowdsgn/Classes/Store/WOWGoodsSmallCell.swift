@@ -150,7 +150,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
 
             WOWClickLikeAction.requestFavoriteProduct(productId: productId ?? 0,view: viewBottom,btn: sender, isFavorite: {(isFavorite) in
                 //                if let strongSelf = self{
-                DLog("请求成功")
+                print("请求成功")
                 //                      strongSelf.likeBtn.selected = !strongSelf.likeBtn.selected
                 //                }
 

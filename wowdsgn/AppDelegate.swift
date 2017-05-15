@@ -104,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDeleg
     func asyncLoad(){
 
         DispatchQueue.global(qos: .background).async {
-            DLog("task" + "\(Thread.current)")
+            print("task" + "\(Thread.current)")
             CityDataManager.data
         }
     }
@@ -115,7 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,QYConversationManagerDeleg
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         
         // Print it to console
-        DLog("APNs device token: \(deviceTokenString)")
+        print("APNs device token: \(deviceTokenString)")
         WOWUserManager.deviceToken = deviceTokenString
        
         

@@ -124,7 +124,7 @@ class WOWSearchSortController: BaseScreenViewController{
     
     func configScreen() {
         screenView.screenAction = {[unowned self] (dic) in
-            DLog(dic)
+            print(dic)
             self.getScreenConditions(dicResult: dic as! [String:AnyObject])
             
             self.refreshSubView(self.ob_tab_index.value)
@@ -183,6 +183,7 @@ extension WOWSearchSortController:VTMagicViewDataSource{
     func magicView(_ magicView: VTMagicView, menuItemAt itemIndex: UInt) -> UIButton{
         
         let b = TooglePriceBtn(title:"价格\(itemIndex)",frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 3, height: 50)) { (asc) in
+            print("you clicket status is "  , asc)
         }
         b.btnIndex = itemIndex
         if ( itemIndex <= 1) {

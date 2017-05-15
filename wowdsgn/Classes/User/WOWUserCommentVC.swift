@@ -140,7 +140,7 @@ class WOWUserCommentVC: WOWBaseViewController,TZImagePickerControllerDelegate,Pu
                         // 拿到url数组，赋值给Model数据层
                         strongSelf.commentArr[collectionViewTag].commentImgs = urlArray
                         
-                        DLog(urlArray)
+                        print(urlArray)
                         
                     }
                 

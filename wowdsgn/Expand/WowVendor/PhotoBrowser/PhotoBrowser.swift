@@ -151,7 +151,7 @@ open class PhotoBrowser: UIViewController {
     }
     
     deinit {
-        DLog("\(self.debugDescription) --- 销毁")
+        print("\(self.debugDescription) --- 销毁")
     }
     
     open override func viewDidLoad() {
@@ -173,7 +173,7 @@ open class PhotoBrowser: UIViewController {
 
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        DLog("视图布局完成")
+//        print("视图布局完成")
         
         if isOritenting {
             currentIndex(currentIndex, animated: false)
@@ -349,7 +349,7 @@ extension PhotoBrowser {
             
             let beginFrame = window.convert(sourceImageView.frame, from: sourceImageView)
             
-//            DLog("\(beginFrame) --- \(sourceImageView.frame)")
+//            print("\(beginFrame) --- \(sourceImageView.frame)")
             
             let sourceViewSnap = snapView(sourceImageView)
             //
@@ -444,11 +444,11 @@ extension PhotoBrowser {
             let window = UIApplication.shared.keyWindow!
             window.addSubview(currentImageSnap)
             //        let beginFrame = window.convertRect(currentImageView.frame, toView: window)
-            //        DLog(beginFrame)
+            //        print(beginFrame)
             currentImageSnap.frame = currentImageView.frame
-//            DLog(currentImageView.frame)
+//            print(currentImageView.frame)
             let endFrame = sourceImageView.convert(sourceImageView.frame, to: window)
-//            DLog(endFrame)
+//            print(endFrame)
             // 将要退出
             delegate?.photoBrowserWillEndDisplay(currentIndex)
             
@@ -539,7 +539,7 @@ extension PhotoBrowser: UICollectionViewDelegate, UICollectionViewDataSource, UI
         if isOritenting { return }
         // 向下取整
         currentIndex = Int(scrollView.contentOffset.x / scrollView.zj_width + 0.5)
-//                DLog(currentIndex)
+//                print(currentIndex)
     }
     
 }

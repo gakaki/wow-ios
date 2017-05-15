@@ -179,7 +179,7 @@ class MODULE_TYPE_CATEGORIES_MORE_CV_CELL_302:UITableViewCell,UICollectionViewDe
         cv.showsHorizontalScrollIndicator     = false
         
         self.addSubview(cv)
-        DLog("\(self.heightAll)")
+        print("\(self.heightAll)")
         cv.snp.makeConstraints { [weak self](make) in
             if let strongSelf = self {
                 make.height.equalTo(strongSelf.heightAll)

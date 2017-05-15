@@ -65,7 +65,7 @@ class BaseScreenViewController: WOWBaseViewController {
         
     }
     deinit {
-        DLog("销毁")
+        print("销毁")
     }
     override func setUI() {
         super.setUI()

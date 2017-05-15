@@ -170,16 +170,16 @@ extension WOWOrderController:OrderCellDelegate{
     func OrderCellClick(_ type: OrderCellAction,model:WOWNewOrderListModel,cell:WOWOrderListCell) {
         switch type {
         case .comment:
-            DLog("评价")
+            print("评价")
             
             goCommentVC(model.orderCode ?? "") // 前往评价页
 //            goOrderDetailAction(model.orderCode ?? "") // 前往详情页 评价
 
         case .delete:
-            DLog("删除")
+            print("删除")
 //            deleteOrder(model,cell: cell)
         case .pay:
-            DLog("支付")
+            print("支付")
 //            payOrder(model.id ?? "",model: model)
             goOrderDetailAction(model.orderCode ?? "")
         case .showTrans:

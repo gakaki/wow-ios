@@ -72,7 +72,7 @@ class WOWSearchChildController: WOWBaseProductsController{
             params["sceneIds"] = screenScreenArr
             
         }
-        DLog(params)
+        print(params)
 
         WOWNetManager.sharedManager.requestWithTarget(.api_SearchResult(params : params as [String : AnyObject]), successClosure: { [weak self](result, code) in
             let json = JSON(result)

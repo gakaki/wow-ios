@@ -39,7 +39,7 @@ class WOWRecommendView: UIView,UITableViewDelegate,UITableViewDataSource,HomeBot
     }()
 
     func pullToRefresh(){
-        DLog("下来刷新")
+        print("下来刷新")
         if isRreshing {
             return
         }else{
@@ -59,7 +59,7 @@ class WOWRecommendView: UIView,UITableViewDelegate,UITableViewDataSource,HomeBot
         }
         requestBottom()
 
-        DLog("上拉加载")
+        print("上拉加载")
     }
     func endRefresh() {
         mj_header.endRefreshing()

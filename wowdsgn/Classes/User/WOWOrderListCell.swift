@@ -53,7 +53,7 @@ class WOWOrderListCell: UITableViewCell {
         collectionView.addTapGesture (action: {[weak self] (tap) in
             
             if let strongSelf = self {
-               print("你点击了")
+               DLog("你点击了")
                 strongSelf.delegate?.clickGoToDetail(orderCoder: strongSelf.orderIdLabel.text ?? "")
             }
             

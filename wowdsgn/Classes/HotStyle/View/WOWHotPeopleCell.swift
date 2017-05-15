@@ -45,7 +45,7 @@ class WOWHotPeopleCell: UITableViewCell,ModuleViewElement,TagListViewDelegate {
                 }
             }
         }
-        print("点击了\(tagView.tag)")
+        DLog("点击了\(tagView.tag)")
         
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

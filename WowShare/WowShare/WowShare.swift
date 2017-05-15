@@ -140,7 +140,6 @@ public class WowShare {
                 if let e = error {
                     failClosure(e )
                 }else{
-                    print("Share succeed")
                     successClosure()
                 }
     
@@ -177,7 +176,6 @@ public class WowShare {
                 if let e = error {
                     failClosure(e )
                 }else{
-                    print("Share succeed")
                     successClosure()
                 }
 

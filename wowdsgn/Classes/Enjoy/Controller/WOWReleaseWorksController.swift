@@ -138,7 +138,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
          
             if let strongSelf = self{
                 let r = JSON(result)
-                print(r)
+                DLog(r)
                 
                 strongSelf.modelData    =    Mapper<WOWWorksDetailsModel>().map(JSONObject:result)
                 
@@ -165,7 +165,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
          
             if let strongSelf = self{
                 let r = JSON(result)
-                print(r)
+                DLog(r)
                 
                 strongSelf.modelData    =    Mapper<WOWWorksDetailsModel>().map(JSONObject:result)
                 

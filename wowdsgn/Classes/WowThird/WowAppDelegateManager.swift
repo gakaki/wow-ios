@@ -35,7 +35,7 @@ public class WowAppDelegateManager  {
             if ( modules.count > 0 ){
                 for i in 0...modules.count {
                     if modules[i] == module {
-                        print("同类型 module 已经有一个了 不能再次add! module name is \(module)")
+                        DLog("同类型 module 已经有一个了 不能再次add! module name is \(module)")
                         return
                     }
                 }
@@ -59,9 +59,9 @@ public class WowAppDelegateManager  {
 //            self.add(module)
 //        }
 //    }
-    public  func printAll() {
+    public  func DLogAll() {
         for var e in self.modules {
-            print("\(e)")
+            DLog("\(e)")
         }
     }
 

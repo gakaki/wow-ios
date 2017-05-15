@@ -9,9 +9,9 @@
 import UIKit
 enum PushType {
     
-    case ShopComment
-    case FeebdBack
-    case RefundReason
+    case ShopComment // 商品评论
+    case FeebdBack  // 意见反馈
+    case RefundReason // 退换货理由
 }
 protocol PushCommentDelegate:class {
     func pushImagePickerController(collectionViewTag: Int)
@@ -21,9 +21,10 @@ class WOWPushCommentCell: WOWStyleNoneCell,TZImagePickerControllerDelegate {
     @IBOutlet weak var topView: UIView!
     
     @IBOutlet weak var imgProduct: UIImageView!
-    @IBOutlet weak var TopHightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var LeftHightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var TopHightConstraint: NSLayoutConstraint! // 顶部View 高度
+
     
+    @IBOutlet weak var textViewLeftConstraint: NSLayoutConstraint! // textView 距离左边距
     var cellType : PushType = .ShopComment{
         didSet{
             switch cellType {
@@ -31,9 +32,9 @@ class WOWPushCommentCell: WOWStyleNoneCell,TZImagePickerControllerDelegate {
                 topView.isHidden    = true
                 TopHightConstraint.constant     = 0
             case .RefundReason:
-                topView.isHidden    = true
-                TopHightConstraint.constant     = 40
-//                LeftHightConstraint.constant    = 15
+                topView.isHidden                    = true
+                TopHightConstraint.constant         = 40
+                textViewLeftConstraint.constant     = 10
             default: break
             }
         }
@@ -59,11 +60,11 @@ class WOWPushCommentCell: WOWStyleNoneCell,TZImagePickerControllerDelegate {
     var userCommentData:    UserCommentManage?{// 用户评论信息 包含，评论内容，评论的图片信息
         didSet{
             if userCommentData?.comments == "" {
-                inputTextView.placeholder = lbPlaceholder
-                inputTextView.text = ""
+                inputTextView.placeholder   = lbPlaceholder
+                inputTextView.text          = ""
             }else{
-                inputTextView.placeholder = ""
-                inputTextView.text = userCommentData?.comments ?? ""
+                inputTextView.placeholder   = ""
+                inputTextView.text          = userCommentData?.comments ?? ""
             }
         
         }
@@ -104,7 +105,7 @@ class WOWPushCommentCell: WOWStyleNoneCell,TZImagePickerControllerDelegate {
         // Initialization code
 
         inputTextView.delegate = self
-//        inputTextView.placeholderText = lbPlaceholder
+
         collectionView.register(UINib.nibName(String(describing: WOWSingPhotoCVCell.self)), forCellWithReuseIdentifier:String(describing: WOWSingPhotoCVCell.self))
     
         collectionView.delegate                         = self

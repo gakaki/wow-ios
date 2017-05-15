@@ -155,7 +155,7 @@ extension WOWLeaveTipsController:PushCommentDelegate,TZImagePickerControllerDele
                         // 拿到url数组，赋值给Model数据层
 //                        strongSelf.commentArr[collectionViewTag].commentImgs = urlArray
                         strongSelf.commentManage.commentImgs = urlArray
-                        print(urlArray)
+                        DLog(urlArray)
                         
                     }
                     

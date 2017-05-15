@@ -71,7 +71,7 @@ class WOWCommentController: WOWBaseViewController {
     }
     override func navBack() {
         super.navBack()
-        print("返回")
+        DLog("返回")
     }
     
     @IBAction func sendButtonClick(_ sender: UIButton) {

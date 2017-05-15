@@ -60,7 +60,7 @@ struct ModulePageType {
     static func getPageView( _ pageType:Int ) -> ModuleViewElement?
     {
         if let p = d[pageType] {
-            print( p )
+            DLog( p )
         }
         return nil
     }

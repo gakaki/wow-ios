@@ -73,7 +73,7 @@ extension HolderTextView {
     fileprivate func limitTextLength(_ textView: UITextView){
         
         let toBeString = textView.text as NSString
-        print("tobeString：\(toBeString)")
+        DLog("tobeString：\(toBeString)")
         
         if (toBeString.length > maxLength) {
             textView.text = toBeString.substring(to: maxLength)

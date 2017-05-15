@@ -143,7 +143,7 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     @IBAction func favoriteActionOne(_ sender: AnyObject) {
         WOWClickLikeAction.requestFavoriteProduct(productId: productIdOne ?? 0,view: oneBaseView,btn: btnIsLikeOne , isFavorite: { (isFavorite) in
             
-            print("完成请求")
+            DLog("完成请求")
             
         })
         
@@ -151,7 +151,7 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     @IBAction func favoriteActionTwo(_ sender: AnyObject) {
         WOWClickLikeAction.requestFavoriteProduct(productId: productIdTwo ?? 0,view: twoBaseView,btn: btnIsLikeTwo, isFavorite: { (isFavorite) in
             
-            print("完成请求")
+            DLog("完成请求")
             
         })
         

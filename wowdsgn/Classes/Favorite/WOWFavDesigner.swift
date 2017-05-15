@@ -83,9 +83,7 @@ class WOWFavDesigner: WOWBaseViewController {
     }
     
     //MARK:Action
-    func goStore() -> Void {
-        print("去逛逛")
-    }
+
     
     //MARK:Network
     override func request() {

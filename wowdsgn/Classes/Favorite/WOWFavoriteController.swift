@@ -120,7 +120,7 @@ extension WOWFavoriteController:VTMagicViewDataSource{
     }
     
     func buttonAction(){
-        print("button")
+        DLog("button")
     }
     
     func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
@@ -144,11 +144,8 @@ extension WOWFavoriteController:VTMagicViewDataSource{
 
 extension WOWFavoriteController:VTMagicViewDelegate{
     func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
-        print("viewDidAppear:", pageIndex);
         
         if let b = magicView.menuItem(at: pageIndex) {
-            print("  button asc is ", b)
-            
             switch pageIndex {
             case  0: break
             case  1:
@@ -162,7 +159,6 @@ extension WOWFavoriteController:VTMagicViewDelegate{
         }
     }
     func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){
-        print("didSelectItemAtIndex:", itemIndex);
         
     }
     

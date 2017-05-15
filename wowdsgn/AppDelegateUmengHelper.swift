@@ -15,7 +15,7 @@ import UIKit
 public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UIApplicationDelegate  {
     
     public func init_umessage(_ launchOptions:[AnyHashable: Any]?){
-        print("init_umessage")
+        DLog("init_umessage")
         
         if Platform.isSimulator == false {
             //初始化方法,也可以使用(void)startWithAppkey:(NSString *)appKey launchOptions:(NSDictionary * )launchOptions httpsenable:(BOOL)value;这个方法，方便设置https请求。
@@ -81,7 +81,7 @@ public class AppDelegateUmengHelper:NSObject,UNUserNotificationCenterDelegate,UI
             //handle url
             
             let d = " get url is \(url) , url string is \(url.absoluteString)"
-            print(d)
+            DLog(d)
             
             return true
         }

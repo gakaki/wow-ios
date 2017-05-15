@@ -12,7 +12,7 @@ public extension MobClick {
 
     public static func e(_ countEvent:UMengEvent ){
         let event_name = String(describing: countEvent)
-//        print(event_name)
+//        DLog(event_name)
         MobClick.event(event_name)
         TalkingData.trackEvent(event_name, label: "AppStore")
 
@@ -20,7 +20,7 @@ public extension MobClick {
 
     public static func e2(_ structEvent:UMengEvent , _ params: [String : Any] ){
         let event_name = String(describing: structEvent)
-        print(event_name)
+        DLog(event_name)
         MobClick.event(event_name, attributes: params)
         TalkingData.trackEvent(event_name, label: "AppStore", parameters: params)
 

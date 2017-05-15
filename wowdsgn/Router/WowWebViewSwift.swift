@@ -33,10 +33,10 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         
 //        if decidePolicyFor.navigationType == .linkActivated {
         
-            print("webView:\(webView) decidePolicyForNavigationAction:\(decidePolicyFor) decisionHandler:\(decisionHandler)")
+            DLog("webView:\(webView) decidePolicyForNavigationAction:\(decidePolicyFor) decisionHandler:\(decisionHandler)")
         can()
             if let url = decidePolicyFor.request.url {
-                print(url.absoluteString)
+                DLog(url.absoluteString)
                 
                 let res = JLRouterRule.handle_open_url(url: url)
                 if  res == true {
@@ -84,21 +84,21 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         
         bridge.registerHandler("Wow.router.product_detail") { (args:[Any]) -> (Bool, [Any]?) in
             if let product_id = args.first as? Int , args.count == 1 {
-                print(product_id)
+                DLog(product_id)
                 return (true, nil)
             }
             return (false, nil)
         }
         bridge.registerHandler("Wow.router.product_detail") { (args:[Any]) -> (Bool, [Any]?) in
             if let product_id = args.first as? Int , args.count == 1 {
-                print(product_id)
+                DLog(product_id)
                 return (true, nil)
             }
             return (false, nil)
         }
         bridge.registerHandler("Wow.router.product_detail") { (args:[Any]) -> (Bool, [Any]?) in
             if let product_id = args.first as? Int , args.count == 1 {
-                print(product_id)
+                DLog(product_id)
                 return (true, nil)
             }
             return (false, nil)

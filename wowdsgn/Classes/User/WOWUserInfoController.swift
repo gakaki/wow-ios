@@ -585,7 +585,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
                 strongSelf.headImageUrl = result ?? ""
                 strongSelf.requestEditUserInfo()
                 NotificationCenter.postNotificationNameOnMainThread(WOWUpdateUserHeaderImageNotificationKey, object: nil ,userInfo:["image":image])
-                print(result ?? "")
+                DLog(result ?? "")
             }
             
             

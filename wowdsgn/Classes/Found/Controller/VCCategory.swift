@@ -105,7 +105,7 @@ class VCCategory:VCBaseVCCategoryFound, UICollectionViewDataSource, UICollection
         // 筛选回调
         screenView.screenAction = {[unowned self] (dic) in
             
-            print(dic)
+            DLog(dic)
             
             self.getScreenConditions(dicResult: dic as! [String:AnyObject])
             

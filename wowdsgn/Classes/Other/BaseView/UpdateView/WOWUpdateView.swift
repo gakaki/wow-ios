@@ -171,7 +171,7 @@ class WOWUpdateView: UIView,UITableViewDelegate,UITableViewDataSource{
                 WOWHud.showMsg("为了您更好的体验，请您更新版本")
             }
         case 1:
-            print("点击更新")
+            DLog("点击更新")
             GoToItunesApp.show()
         default:break
         }

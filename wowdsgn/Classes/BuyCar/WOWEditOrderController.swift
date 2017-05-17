@@ -37,7 +37,7 @@ class WOWEditOrderController: WOWBaseViewController {
     //时间戳，用来验证唯一
     let timeInterval = Date().timeIntervalSince1970
     
-    fileprivate var tipsTextField           : HolderTextView!
+    fileprivate var tipsTextField           : UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +85,7 @@ class WOWEditOrderController: WOWBaseViewController {
         //选择地址
         tableView.register(UINib.nibName(String(describing: WOWOrderAddressCell.self)), forCellReuseIdentifier:String(describing: WOWOrderAddressCell.self))
         //产品列表
-        tableView.register(UINib.nibName(String(describing: WOWProductOrderCell.self)), forCellReuseIdentifier:String(describing: WOWProductOrderCell.self))
+        tableView.register(UINib.nibName(String(describing: WOWOrderCell.self)), forCellReuseIdentifier:String(describing: WOWOrderCell.self))
         //选择优惠
         tableView.register(UINib.nibName(String(describing: WOWOrderFreightCell.self)), forCellReuseIdentifier:String(describing: WOWOrderFreightCell.self))
         //备注信息
@@ -305,7 +305,7 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
             }) { (errorMsg) in
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
         }
     }
     
@@ -322,7 +322,7 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
         }) { (errorMsg) in
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
         }
     }
     
@@ -341,6 +341,7 @@ class WOWEditOrderController: WOWBaseViewController {
         
         //往服务端传过去价格确保价格一致性
         var productPriceGroup = ""
+        //产品id和价格拼接一个字符串，传给后台校验
         if let arr = productArr {
             if arr.count > 0 {
                 for product in arr.enumerated() {
@@ -355,6 +356,7 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
         }
+        //是否使用促销，如果参加促销，就把促销id传给后台。
         if isPromotion {
             var promotionIds = [String]()
             if let promotionProductInfoVos = orderSettle?.promotionProductInfoVos {
@@ -373,7 +375,7 @@ class WOWEditOrderController: WOWBaseViewController {
                 "orderToken": timeInterval as AnyObject
             ]
 
-        }else {
+        }else {       //没有参加促销。是否使用优惠券。如果使用优惠券就把优惠券id传过去
             if let endUserCouponId = couponModel?.id {
                 
                 params = [
@@ -431,8 +433,7 @@ class WOWEditOrderController: WOWBaseViewController {
             
             }) { (errorMsg) in
                 
-//                LoadView.dissMissView()
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
+                WOWHud.showWarnMsg(errorMsg)
         }
         
       
@@ -542,9 +543,7 @@ class WOWEditOrderController: WOWBaseViewController {
             }
             
         }) { (errorMsg) in
-//            LoadView.dissMissView()
-            WOWHud.dismiss()
-            WOWHud.showMsgNoNetWrok(message: errorMsg)
+            WOWHud.showWarnMsg(errorMsg)
 
         }
     }
@@ -619,7 +618,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         case 0:     //地址
             return 1
         case 1:     //商品清单
-            return productArr?.count ?? 0
+            return 1
         case 2:   //优惠券 如果促销金额 = 0不显示促销
             return orderSettle?.totalPromotionDeduction == 0 ? 1 : 2
         case 3:     //订单备注
@@ -639,7 +638,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             cell.showData(addressInfo)
             returnCell = cell
         case 1: //商品清单
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductOrderCell.self), for: indexPath) as! WOWProductOrderCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderCell.self), for: indexPath) as! WOWOrderCell
             if let productArr = productArr {
                 cell.showData(productArr[(indexPath as NSIndexPath).row])
             }
@@ -680,8 +679,8 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             returnCell = cell
         case 3: //订单备注
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTipsCell.self), for:indexPath) as! WOWTipsCell
-            cell.textView.placeHolder = "写下您的特殊要求"
-            tipsTextField = cell.textView
+        
+            tipsTextField = cell.textField
             returnCell = cell
         case 4: //优惠信息
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderRemissionCell.self), for: indexPath) as! WOWOrderRemissionCell
@@ -729,16 +728,14 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 1:
-            return 0.01
-        default:
-            return 15
-        }
+
+        return 10
+
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
+        
         case 5:     //最后一组
             return 50
         default:

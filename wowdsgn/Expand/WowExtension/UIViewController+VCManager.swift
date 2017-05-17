@@ -641,6 +641,8 @@ public class VCRedirect {
             if let bannerLinkType = model.bannerLinkType {
                 let id = model.bannerLinkTargetId ?? 0
                 switch bannerLinkType {
+                case 0:
+                    DLog("占位符")
                 case 1:
                     if let url = model.bannerLinkUrl{
                         VCRedirect.toVCH5(url)
@@ -701,8 +703,12 @@ public class VCRedirect {
                 case 16:// 跳转标签分类
                     
                     VCRedirect.bingWorksDetails(worksId: id)
-                case 17:
+                case 17:    //作品活动详情页面
                     VCRedirect.goWorksActivity(topicId: id)
+                case 18:    //优惠券
+                    VCRedirect.toCouponVC()
+                case 100:   //个人中心
+                    VCRedirect.toHomeIndex(index: 4)
 
                 default:
                     WOWHud.showMsg("请您更新最新版本")

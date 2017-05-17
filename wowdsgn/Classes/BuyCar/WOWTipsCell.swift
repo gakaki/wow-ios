@@ -10,7 +10,7 @@ import UIKit
 
 class WOWTipsCell: UITableViewCell {
 
-    @IBOutlet weak var textView: HolderTextView!
+    @IBOutlet weak var textField: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

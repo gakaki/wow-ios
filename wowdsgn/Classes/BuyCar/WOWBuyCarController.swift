@@ -645,13 +645,13 @@ extension WOWBuyCarController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if section < dataArr.count {
-            return 15
+            return 10
         }else {
             if section == dataArr.count {
                 if dataArr.count == 0 {
-                    return 325
+                    return 320
                 }else {
-                    return 65
+                    return 60
                 }
 
             }else {

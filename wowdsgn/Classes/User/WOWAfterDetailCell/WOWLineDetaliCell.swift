@@ -8,10 +8,11 @@
 
 import UIKit
 
-let applyDefaultText             = "申请服务:"
-let goodsTypeDefaultText         = "货物状态:"
-let refundResaonDefaultText      = "退款原因:"
-let refundMoneyDefaultText       = "退款金额:"
+let applyDefaultText                = "申请服务:"
+let goodsTypeDefaultText            = "货物状态:"
+let refundResaonDefaultText         = "退款原因:"
+let refundMoneyDefaultText          = "退款金额:"
+//let refundDescribeDefaultText       = "退款说明:"
 extension UILabel {
     func afterDetailFormat(defaultText:String,describeText:String){
         self.strokeWithText(defaultText , str2: describeText , str2Font: 14, str2Color: UIColor.init(hexString: "030303")!)
@@ -48,7 +49,21 @@ class WOWLineDetaliCell: WOWStyleNoneCell {
             
         }
     }
-
+    var refundDescribeText : String?{
+        didSet{
+            if let refundDescribeText = refundDescribeText {
+                
+                if refundDescribeText == "" {
+                     lbDescribe.text = " "
+                }else {
+                     lbDescribe.text = refundDescribeText
+                }
+                
+            }
+           
+            
+        }
+    }
     @IBOutlet weak var lbApply: UILabel!
     @IBOutlet weak var lbGoodsType: UILabel!
     @IBOutlet weak var lbRefundResaon: UILabel!

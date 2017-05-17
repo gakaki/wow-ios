@@ -13,12 +13,54 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
 
     var commentManage           : UserCommentManage = UserCommentManage() // 记录用户的 操作信息 ，包括 评论， 图片的选择
     var photoMange              : UserPhotoManage?  // 记录选择 图片 的信息，
-    var reasonArray  = ["不喜欢","不开心","不要了"]
+
+    
+    var orderCode                   : String! // 订单号
+    var saleOrderItemId             : Int! // 单个商品 在订单中Id
+    var maxAllowedRefundAmount      : String = "0.0" // 最大退款金额
+    var goodsTypeStr                : String = "未收到"{ // 货物状态
+        didSet{
+            
+            tableView.reloadData()
+        }
+    }
+    var goodsTypeIndex              : Int = 0 // 货物状态在piker Index
+
+    var refundReasonStr             : String? = "请选择退款原因"{ // 退款原因
+        didSet{ tableView.reloadData() }
+    }
+    var refundReasonIndex           : Int = 0 { // 退款原因在 在piker Index
+        didSet{
+            params_resonId          = WOWOnlyRefund[refundReasonIndex][0] as! Int
+        }
+    }
+
+    /* ------params 参数Key -------- */
+    var params_received             : Bool      = false
+    var params_resonId              : Int       = 0
+    var params_maxMoney             : String    = "0.0"
+    /* -------------- */
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "仅退款"
+        self.view.insertSubview(commitBtn, aboveSubview: tableView)
         
         // Do any additional setup after loading the view.
+    }
+    lazy var commitBtn: UIButton = {
+        
+        let btn = UIButton(frame:CGRect.init(x: 0, y: MGScreenHeight - 64 - 50, width: MGScreenWidth, height: 50))
+        btn.addTarget(self, action: #selector(commitClickAction), for: .touchUpInside)
+        btn.backgroundColor = YellowColor
+        btn.setTitleColor(UIColor.black, for: .normal)
+        btn.setTitle("提交", for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        return btn
+
+    }()
+    // 提交退换货订单
+    func commitClickAction(){
+        requestCreatRefund()
     }
     override func setUI() {
         super.setUI()
@@ -27,35 +69,64 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
         tableView.register(UINib.nibName("WOWRefundReasonCell"), forCellReuseIdentifier: "WOWRefundReasonCell")
         tableView.register(UINib.nibName("WOWRefundTextCell"), forCellReuseIdentifier: "WOWRefundTextCell")
         tableView.register(UINib.nibName("WOWPushCommentCell"), forCellReuseIdentifier: "WOWPushCommentCell")
+        tableView.register(UINib.nibName("WOWRefundMoneyGoodsCell"), forCellReuseIdentifier: "WOWRefundMoneyGoodsCell")
+        request()
+    }
+    override func request() {
+        super.request()
+        WOWNetManager.sharedManager.requestWithTarget(.api_GetRefundMoney(orderCode: orderCode, saleOrderItemId: saleOrderItemId), successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                let json = JSON(result)
+                let maxStr = json["maxAllowedRefundAmount"].stringValue
+          
+                strongSelf.maxAllowedRefundAmount = maxStr
+                strongSelf.tableView.reloadData()
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                WOWHud.dismiss()
+            }
+        }
+        
 
     }
-    lazy var backView:WOWPickerBackView = {[unowned self] in
-        let v = WOWPickerBackView(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight))
-        v.pickerView.pickerView.delegate = self
-        v.pickerView.sureButton.addTarget(self, action:#selector(surePicker), for:.touchUpInside)
-        return v
-        }()
-    
-    //显示分类选择
-    fileprivate func showPickerView(){
-        backView.pickerView.pickerView.selectRow(0, inComponent: 0, animated: true)
-        backView.pickerView.pickerView.reloadComponent(0)
-        let window = UIApplication.shared.windows.last
+    func requestCreatRefund(){
         
-        window?.addSubview(backView)
-        window?.bringSubview(toFront: backView)
-        backView.show()
+        let params:[String : Any] = [
+//            "orderCode": orderCode,
+                                     "saleOrderItemId"  : saleOrderItemId,
+                                     "refundType"       : 1,
+                                     "refundAmount"     : params_maxMoney,
+                                     "received"         : params_received,
+                                     "refundReason"     : params_resonId,
+                                     "refundRemark"     : commentManage.comments
+//                                     "refundImgs":""
+                                     ]
         
+        WOWNetManager.sharedManager.requestWithTarget(.api_CreatRefund(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            let json = JSON(result)
+            DLog(json)
+            if let strongSelf = self{
+                
+                strongSelf.endRefresh()
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                WOWHud.dismiss()
+            }
+        }
+        
+
     }
-    //确认选择
-    func surePicker() {
-        let row = backView.pickerView.pickerView.selectedRow(inComponent: 0)
-//        indexRow = row
-//        let model = categoryArr[row]
-//        categoryLabel.text = model.categoryName
-//        instagramCategoryId = model.id
-        backView.hideView()
-    }
+
+
 
    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -69,18 +140,26 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
         switch index {
         case 0:
             let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWGoodsTypeCell", for: indexPath) as! WOWGoodsTypeCell
-            
+            cell.lbType.text        = self.goodsTypeStr
             return cell
         case 1:
             let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWRefundReasonCell", for: indexPath) as! WOWRefundReasonCell
-            
+            cell.lbRefundReason.text = refundReasonStr
             return cell
         case 2:
-            
-            let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWGoodsTypeCell", for: indexPath) as! WOWGoodsTypeCell
-            cell.lbGoodsType.text   = "退款金额"
-            cell.lbType.text        = "298.00"
+            let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWRefundMoneyGoodsCell", for: indexPath) as! WOWRefundMoneyGoodsCell
+            cell.lbMaxRefundMoney.text = "最多可退" + maxAllowedRefundAmount
+            cell.lbFreight.isHidden    = true
+            cell.maxMontyStr = {[unowned self] (maxStr)in
+//                print(maxStr)
+//                if let money = maxStr.toFloat() {
+                    self.params_maxMoney = maxStr
+//                    print(self.params_maxMoney)
+//                }
+
+            }
             return cell
+
             
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWPushCommentCell.self), for: indexPath) as! WOWPushCommentCell
@@ -109,10 +188,39 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
         switch row {
+        case 0:
+            let vc = WOWBasePickerViewController()
+            
+            vc.showPicker(arr: ["未收到","已收到"],index: goodsTypeIndex)
+            vc.selectBlock = {[unowned self](str,index) in
+                print(str,index)
+                self.goodsTypeStr = str
+                self.goodsTypeIndex = index
+                if index == 0 {
+                    self.params_received = false
+                }else {
+                    self.params_received = true
+                }
+                
+            }
+            self.presentToMaskViewController(viewControllerToPresent: vc)
+
         case 1:
-          self.showPickerView()
+            let vc = WOWBasePickerViewController()
+            var strArray :[String] = []
+            for a in WOWOnlyRefund {
+                strArray.append(a[1] as! String)
+            }
+            vc.showPicker(arr: strArray,index: refundReasonIndex)
+            vc.selectBlock = {[unowned self](str,index) in
+                print(str,index)
+                self.refundReasonStr = str
+                self.refundReasonIndex = index
+            }
+            self.presentToMaskViewController(viewControllerToPresent: vc)
+
         default:
-            VCRedirect.goAfterDetail()
+//            VCRedirect.goAfterDetail()
             break
         }
       
@@ -177,21 +285,4 @@ extension WOWOnlyRefundViewController:PushCommentDelegate,TZImagePickerControlle
         
     }
 }
-extension WOWOnlyRefundViewController: UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate{
-    
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return reasonArray.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let model = reasonArray[row]
-        return model
-        
-    }
-    
-}
+

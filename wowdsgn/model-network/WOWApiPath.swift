@@ -186,6 +186,11 @@ let URL_OrderCancel            = "v1/order/cancel"           //取消订单
 let URL_OrderComment            = "v1/order/orderItem/unComment"           //订单评论
 
 let URL_OrderPushComment        = "v1/order/comment"
+let URL_GetRefundMoney          = "v1/order/refund/prepare"  // 获取退换货单最大可申请金额接口
+let URL_CreateRefund            = "v1/order/refund/create" // 创建退换货单
+let URL_GetRefundDetail         = "v1/order/refund/detail" //获取 售后详情
+let URL_GetRefundList           = "v1/order/refund/list" // 获取退换货列表
+
 
 //4. 发现页面
 let URL_Found_Main              = "v1/page/find/product"

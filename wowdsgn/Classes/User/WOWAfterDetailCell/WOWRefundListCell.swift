@@ -1,16 +1,15 @@
 //
-//  WOWRefundReasonCell.swift
+//  WOWRefundListCell.swift
 //  wowdsgn
 //
-//  Created by 陈旭 on 2017/5/3.
+//  Created by 陈旭 on 2017/5/16.
 //  Copyright © 2017年 g. All rights reserved.
 //
 
 import UIKit
 
-class WOWRefundReasonCell: WOWStyleNoneCell {
+class WOWRefundListCell: UITableViewCell {
 
-    @IBOutlet weak var lbRefundReason: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

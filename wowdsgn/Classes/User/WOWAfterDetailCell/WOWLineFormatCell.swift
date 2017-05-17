@@ -7,19 +7,19 @@
 //
 
 import UIKit
-enum ReviewProgressType {
-    case Finished
-    case unFinished
+enum LineFormatUIType {
+    case ServiceNumber  // 服务单号UI
+    case RefundMoney    // 退款金额 UI
 }
 class WOWLineFormatCell: WOWStyleNoneCell {
-    var progressType : ReviewProgressType = .unFinished{
+    var formatType : LineFormatUIType = .RefundMoney{
         didSet{
-            switch progressType {
-            case .Finished:
+            switch formatType {
+            case .ServiceNumber:
                 lbOne.text          = "退款金额:"
                 lbTwo.text          = "退款时间:"
                 btnMoney.isHidden   = false
-            case .unFinished:
+            case .RefundMoney:
                 lbOne.text          = "服务单号:"
                 lbTwo.text          = "提交时间:"
                 btnMoney.isHidden   = true

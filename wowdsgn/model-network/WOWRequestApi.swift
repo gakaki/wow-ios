@@ -189,6 +189,14 @@ public enum RequestApi{
     
     case api_OrderPushComment(params: [String: AnyObject]?)// 提交评论内容
 
+    case api_GetRefundMoney(orderCode: String, saleOrderItemId: Int)
+    
+    case api_CreatRefund(params: [String: AnyObject])
+    
+    case api_GetRefundDetail(refundId:Int)
+    
+    case api_GetRefundList(refundOrderStatus:Int?)
+    
     
     case api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
     
@@ -509,6 +517,14 @@ extension RequestApi:TargetType{
             
         case .api_OrderPushComment:
             return URL_OrderPushComment
+        case .api_GetRefundMoney:
+            return URL_GetRefundMoney
+        case .api_CreatRefund:
+            return URL_CreateRefund
+        case .api_GetRefundDetail:
+            return URL_GetRefundDetail
+        case .api_GetRefundList:
+            return URL_GetRefundList
             
         case .api_Invite:
             return URL_Invite
@@ -653,7 +669,10 @@ extension RequestApi:TargetType{
             .api_getInstagramList,
             .api_Works_Banners,
             .api_Works_Topic,
-            .api_InstagramList:
+            .api_InstagramList,
+            .api_GetRefundMoney,
+            .api_GetRefundDetail,
+            .api_GetRefundList:
             return .GET
 
         default:
@@ -819,7 +838,21 @@ extension RequestApi:TargetType{
             
             case let .api_OrderPushComment(param):
                 params = param!
+            case let .api_GetRefundMoney(orderCode, saleOrderItemId):
+              params =  ["orderCode":orderCode,"saleOrderItemId":saleOrderItemId]
+            case let .api_CreatRefund(param):
+                params = param
             
+            case let .api_GetRefundDetail(refundId):
+                params = ["saleOrderItemRefundId":refundId]
+            case let .api_GetRefundList(type):
+                if let type = type {
+                    
+                    params = ["refundOrderStatus":type]
+
+                }else{
+                    break
+                }
             case .api_Home_Banners():
                 params =  ["pageType":1]
             case .api_Home_Tabs():

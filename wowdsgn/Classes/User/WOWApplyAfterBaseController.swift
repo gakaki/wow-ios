@@ -7,9 +7,10 @@
 //
 
 import UIKit
-
+// tableView 基类   只有tableView  统一group风格，无分割线
 class WOWApplyAfterBaseController: WOWBaseViewController,UITableViewDataSource,UITableViewDelegate {
     var tableView: UITableView!
+    var bottomView: UIView! // 底部View  高 50 ，可以自定义定制
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +19,12 @@ class WOWApplyAfterBaseController: WOWBaseViewController,UITableViewDataSource,U
     override func setUI() {
         super.setUI()
         
+        let containerView = UIStackView.init(frame: CGRect.init(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight - 64))
+        containerView.axis = UILayoutConstraintAxis.vertical
+        containerView.alignment = UIStackViewAlignment.fill
+        containerView.distribution = UIStackViewDistribution.fill
+
+        
         tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, w: MGScreenWidth, h: MGScreenHeight), style: .grouped)
         tableView.backgroundColor   = GrayColorLevel5
         tableView.delegate          = self
@@ -25,12 +32,19 @@ class WOWApplyAfterBaseController: WOWBaseViewController,UITableViewDataSource,U
         tableView.separatorStyle    = .none
         self.tableView.rowHeight            = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight   = 60
-        self.view.addSubview(tableView)
-        tableView.snp.makeConstraints {[weak self] (make) in
-            if let strongSelf = self {
-                make.top.bottom.left.right.equalTo(strongSelf.view)
-            }
+
+        
+        bottomView = UIView.init()
+        bottomView.backgroundColor = UIColor.white
+        containerView.addArrangedSubview(tableView)
+        containerView.addArrangedSubview(bottomView)
+        
+        self.view.addSubview(containerView)
+        bottomView.snp.makeConstraints { (make) in
+            make.height.equalTo(50)
         }
+        bottomView.isHidden = true
+        
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {

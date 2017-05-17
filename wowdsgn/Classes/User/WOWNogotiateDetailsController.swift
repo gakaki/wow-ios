@@ -37,7 +37,7 @@ class WOWNogotiateDetailsController: WOWApplyAfterBaseController {
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                VCRedirect.goMoneyFromController()
+        VCRedirect.goMoneyFromController()
     }
     
     override func didReceiveMemoryWarning() {

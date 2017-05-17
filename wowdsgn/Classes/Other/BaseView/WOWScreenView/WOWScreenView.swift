@@ -187,7 +187,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         super.init(coder: aDecoder)
     }
     open lazy var tableView:UITableView = {
-        
+     
         let v = UITableView(frame: CGRect.init(x: 0, y: ScreenViewConfig.headerViewHight, width: self.w, height: self.h - ScreenViewConfig.headerViewHight - ScreenViewConfig.footerViewHight), style:.grouped)
 //        v.separatorColor  = MGRgb(224, g: 224, b: 224)
         v.delegate        = self

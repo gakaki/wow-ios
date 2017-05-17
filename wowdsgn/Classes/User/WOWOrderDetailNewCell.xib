@@ -63,36 +63,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISq-cE-jDD">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eVi-9Y-NCP">
                         <rect key="frame" x="290" y="50" width="70" height="26"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISq-cE-jDD">
+                                <rect key="frame" x="0.0" y="0.0" width="70" height="26"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="CFR-gO-y5B"/>
+                                    <constraint firstAttribute="width" constant="70" id="RfW-Jz-MpW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="申请售后">
+                                    <color key="titleColor" red="0.28846530920060326" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickAfterAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kjx-rb-zC6"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" constant="26" id="CFR-gO-y5B"/>
-                            <constraint firstAttribute="width" constant="70" id="RfW-Jz-MpW"/>
+                            <constraint firstAttribute="width" constant="70" id="6jC-uW-Un7"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="申请售后">
-                            <color key="titleColor" red="0.28846530920060326" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                        <connections>
-                            <action selector="clickAfterAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kjx-rb-zC6"/>
-                        </connections>
-                    </button>
+                    </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="R4R-2a-Q5F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="18K-oz-swY"/>
                     <constraint firstItem="fXJ-fB-5XR" firstAttribute="leading" secondItem="R4R-2a-Q5F" secondAttribute="trailing" constant="10" id="3SS-9I-c93"/>
                     <constraint firstItem="au4-E8-Hsl" firstAttribute="bottom" secondItem="R4R-2a-Q5F" secondAttribute="bottom" id="5k9-o6-yFg"/>
-                    <constraint firstItem="ISq-cE-jDD" firstAttribute="top" secondItem="vfy-mV-4mc" secondAttribute="bottom" constant="12" id="DHK-ik-8s2"/>
                     <constraint firstItem="1RK-q5-zWm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="F8U-gd-TRq"/>
                     <constraint firstItem="R4R-2a-Q5F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="GkR-aB-5Rv"/>
                     <constraint firstItem="GgV-4n-hot" firstAttribute="top" secondItem="R4R-2a-Q5F" secondAttribute="top" id="LKR-HW-yNs"/>
                     <constraint firstItem="fXJ-fB-5XR" firstAttribute="top" secondItem="R4R-2a-Q5F" secondAttribute="top" constant="-2" id="Mer-59-oUy"/>
                     <constraint firstItem="1RK-q5-zWm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="PBQ-Rm-AO9"/>
-                    <constraint firstAttribute="bottom" secondItem="ISq-cE-jDD" secondAttribute="bottom" constant="13.5" id="R8V-GW-vYW"/>
+                    <constraint firstAttribute="trailing" secondItem="eVi-9Y-NCP" secondAttribute="trailing" constant="15" id="QWQ-7r-7TW"/>
                     <constraint firstItem="GgV-4n-hot" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fXJ-fB-5XR" secondAttribute="trailing" constant="8" id="Ufk-md-KDA"/>
                     <constraint firstAttribute="trailing" secondItem="1RK-q5-zWm" secondAttribute="trailing" id="UgW-Xd-tsg"/>
-                    <constraint firstAttribute="trailing" secondItem="ISq-cE-jDD" secondAttribute="trailing" constant="15" id="WZe-8y-EPX"/>
+                    <constraint firstAttribute="bottom" secondItem="eVi-9Y-NCP" secondAttribute="bottom" constant="13.5" id="YsX-nz-PtS"/>
+                    <constraint firstItem="eVi-9Y-NCP" firstAttribute="top" secondItem="vfy-mV-4mc" secondAttribute="bottom" constant="12" id="brc-GZ-afj"/>
                     <constraint firstItem="au4-E8-Hsl" firstAttribute="leading" secondItem="vfy-mV-4mc" secondAttribute="trailing" priority="750" constant="8" id="c8X-P8-Mf7"/>
                     <constraint firstItem="vfy-mV-4mc" firstAttribute="top" secondItem="fXJ-fB-5XR" secondAttribute="bottom" constant="9" id="i0o-N8-WGl"/>
                     <constraint firstItem="vfy-mV-4mc" firstAttribute="leading" secondItem="R4R-2a-Q5F" secondAttribute="trailing" constant="10" id="ibl-cv-wYX"/>

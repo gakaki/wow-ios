@@ -108,7 +108,7 @@ private extension AdLaunchView {
             with: url,
             options: SDWebImageOptions.avoidAutoSetImage,
             progress: nil) { (image, error, cacheType, finisned, url) in
-                print("图片下载成功")
+                DLog("图片下载成功")
         }
     }
     

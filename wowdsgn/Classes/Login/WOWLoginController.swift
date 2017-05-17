@@ -144,7 +144,7 @@ extension WOWLoginController:VTMagicViewDataSource{
     }
     
     func buttonAction(){
-        print("button")
+        DLog("button")
     }
     
     func magicView(_ magicView: VTMagicView, viewControllerAtPage pageIndex: UInt) -> UIViewController{
@@ -166,15 +166,12 @@ extension WOWLoginController:VTMagicViewDataSource{
 
 extension WOWLoginController:VTMagicViewDelegate{
     func magicView(_ magicView: VTMagicView, viewDidAppear viewController: UIViewController, atPage pageIndex: UInt){
-        print("viewDidAppear:", pageIndex);
         
         if let b = magicView.menuItem(at: pageIndex) {
-            print("  button asc is ", b)
             
         }
     }
     func magicView(_ magicView: VTMagicView, didSelectItemAt itemIndex: UInt){
-        print("didSelectItemAtIndex:", itemIndex);
         
     }
     

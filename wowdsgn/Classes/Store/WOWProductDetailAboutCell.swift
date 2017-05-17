@@ -53,7 +53,7 @@ class WOWProductDetailAboutCell: UITableViewCell {
     }
     // 刷新物品的收藏状态与否 传productId 和 favorite状态
     func refreshData(_ sender: Notification)  {
-        print("接受通知")
+        DLog("接受通知")
         if  let send_obj =  sender.object as? [String:AnyObject] {
 
             dataArr?.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{[weak self] in

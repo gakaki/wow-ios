@@ -50,12 +50,12 @@ struct VoSldDataOM {
                 }
                 
             } catch let error as NSError {
-                print(error.localizedDescription)
+                DLog(error.localizedDescription)
             }catch {
-                print("error")
+                DLog("error")
             }
         } else {
-            print("Invalid filename/path.")
+            DLog("Invalid filename/path.")
         }
     }
     
@@ -70,7 +70,7 @@ struct VoSldDataOM {
         
         }
     
-        print("city data elapsed time: \(stopwatch.elapsedTimeString())")
+        DLog("city data elapsed time: \(stopwatch.elapsedTimeString())")
 
     }
     init(){

@@ -18,7 +18,6 @@ class WOWMasterpieceController: WOWBaseViewController {
     var lastContentOffset :CGFloat = 0.0
     var numberOfSection = 1
     let pageSize   = 10
-    var cell_heights: [Int: CGFloat]   = [0:0]
     weak var delegate:WOWChideControllerDelegate?
     var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
 
@@ -190,13 +189,7 @@ class WOWMasterpieceController: WOWBaseViewController {
         self.tableView.estimatedRowHeight = 410
         
     }
-    func getCellHeight(_ sectionIndex:Int) -> CGFloat{
-        if let h = cell_heights[sectionIndex] {
-            return h
-        }else{
-            return CGFloat.leastNormalMagnitude
-        }
-    }
+
     
     //MARK: -- Action
     //发布
@@ -246,7 +239,6 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate ,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if numberOfSection == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWMasterpieceCell
-            cell_heights[0] = MGScreenWidth + 10
             cell.showData(fineWroksArr[indexPath.row])
             return cell
         }else {
@@ -260,12 +252,10 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate ,
                     cell.pageTitle = self.title
                 }
                 cell.indexPathSection = indexPath.section
-                cell_heights[0]  = cell.heightAll
                 return cell
 
             }else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! WOWMasterpieceCell
-                cell_heights[1] = MGScreenWidth + 10
                 cell.showData(fineWroksArr[indexPath.row])
                 return cell
             }
@@ -273,19 +263,17 @@ extension WOWMasterpieceController: UITableViewDataSource, UITableViewDelegate ,
 
         
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return getCellHeight(indexPath.section)
-//    }
+
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if numberOfSection  == 1{
-            return 0
+            return 0.01
             
         }else {
             if section == 0 {
                 return 10
             }else {
-                return 0
+                return 0.01
                 
             }
         }

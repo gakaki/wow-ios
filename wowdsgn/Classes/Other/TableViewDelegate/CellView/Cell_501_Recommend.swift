@@ -43,7 +43,7 @@ class Cell_501_Recommend: UITableViewCell,ModuleViewElement {
             WOWClickLikeAction.requestFavoriteProduct(productId: productId ?? 0,view: self,btn: sender, isFavorite: {[weak self](isFavorite) in
                 
                 if let strongSelf = self {
-                        print("请求成功")
+                        DLog("请求成功")
                     strongSelf.likeBtn.isSelected = isFavorite ?? false
                     self?.productModel?.favorite = isFavorite ?? false
                 }

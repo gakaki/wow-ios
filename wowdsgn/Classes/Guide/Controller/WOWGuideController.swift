@@ -52,8 +52,8 @@ class WOWGuideController: WOWBaseViewController {
                 case .register:
                     title1 = "微信登录"
                     title2 = "手机注册"
-                backGroundColor1 = UIColor.white
-                backGroundColor2 = UIColor.white
+                backGroundColor1 = backGroundColor2!
+             
                 titleColor1 = UIColor.black
                 titleColor2 = UIColor.black
             }
@@ -92,12 +92,7 @@ class WOWGuideController: WOWBaseViewController {
         
         self.view.insertSubview(scrollerView, at: 0)
         pageControl.addTarget(self, action:#selector(WOWGuideController.didPage) , for: UIControlEvents.touchUpInside)
-//        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
-//        button.backgroundColor = .greenColor()
-//        button.setTitle("Test Button", forState: .Normal)
-//        button.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
-//        
-//        self.view.addSubview(button)
+
         
         currentState =  .standby
     }

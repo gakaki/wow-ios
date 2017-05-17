@@ -18,7 +18,8 @@ import Foundation
 let WOWShareUrl                         = "m.wowdsgn.com" // 正式服务器 分享地址
 //let WOWShareUrl                         = "http://10.0.60.121:7070"// 测试服务器分享地址
 
-   let BaseUrl = "http://10.0.60.121:8080/" //内网开发
+   let BaseUrl = "http://10.0.60.121:8080/" //内网开发 
+
 //   let BaseUrl = "http://10.0.60.91:8080/"
 //  let BaseUrl = "https://wowdsgn.iok.la" //外网访问内网也可以的地址
 //   let BaseUrl = "https://mobile-api.wowdsgn.com/" //外网开发
@@ -36,7 +37,7 @@ let URL_CheckVersion                    = "v1/version/check"
 //1.app首页
 let URL_AD                              = "v2/page/startupimg"
 let URL_category                        = "v1/category/sub-category"
-let URL_producty_by_category            = "/v1/product/category/products"
+let URL_producty_by_category            = "/v1/product/category/products"       //分类列表产品
 let URL_category_subCategory_with_image = "v1/category/img-category"
 let URL_category_path_category          = "v1/category/path-category"
 
@@ -58,7 +59,7 @@ let URL_TagProduct              = "v1/product/tag/products"       //标签详情
 
 //1.1 专题
 let URL_topic                   = "v3/topic"
-let URL_topic_product           = "v2/topic/product"
+let URL_topic_product           = "v2/topic/product"            //导购专题产品列表
 
 
 //***********2.商店************
@@ -99,7 +100,7 @@ let URL_ProductAbout            = "v1/product/relateds"
 
 let URL_ProductGroupTop         = "v1/product/group"
 
-let URL_ProductGroupList        = "v1/product/group/products"
+let URL_ProductGroupList        = "v1/product/group/products"      //产品组列表
 
 //2.6收藏
 let URL_IsFavoriteProduct       = "v1/user/product/is-favorite"   //是否喜欢某个单品

@@ -1,38 +1,83 @@
 //
 //  WOWBaseMackViewController.swift
-//  MaskDemo
+//  swift-BaseMask
 //
 //  Created by 陈旭 on 2017/5/5.
 //  Copyright © 2017年 陈旭. All rights reserved.
 //
 
 import UIKit
-
-class WOWBaseMackViewController: UIViewController {
-
-    @IBOutlet weak var btnDismiss: UIButton!
+let kDuration       = 0.15 // 动画弹出消失时间
+let dissDuration    = 0.1  // 背景蒙板弹出消失时间
+class WOWBaseMackViewController: UIViewController,CAAnimationDelegate {
+    
+    var containsView : UIView?  // 内置View
+       
+    lazy var btnDismiss: UIButton = { // 背景Btn 蒙板
+        let btn = UIButton(frame:CGRect.init(x: 0, y: 0, width: MGScreenWidth, height: MGScreenHeight))
+        btn.addTarget(self, action: #selector(dismissBtn), for: .touchUpInside)
+        btn.alpha = 0
+        btn.backgroundColor = UIColor.black
+        return btn
+    }()
+       
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.clear
-        self.btnDismiss.addTarget(self, action: #selector(dismissBtn), for: .touchUpInside)
-        //设置按钮透明度
-        self.btnDismiss.alpha = 0.5
-        self.btnDismiss.backgroundColor = UIColor.black
-        // Do any additional setup after loading the view.
+        self.view.addSubview(btnDismiss)
+
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIView.animate(withDuration: 0.25) { 
-              self.view.layoutIfNeeded()
+        UIView.animate(withDuration: dissDuration, animations: {
+            self.btnDismiss.alpha = 0.5
+            self.view.layoutIfNeeded()
+        }) { (finished) in
+            
+           self.showView()
         }
+
     }
-    func dismissBtn()  {
+    func showView(){ // 弹出视图
+        if let containsView = containsView {
+            let animation = CATransition.init()
+            animation.delegate = self
+            animation.duration = kDuration
+            animation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
+            animation.type = kCATransitionPush;
+            animation.subtype = kCATransitionFromTop;
+            containsView.layer.add(animation, forKey: "LocateViewTop")
+            containsView.alpha = 1.0
+            self.view.addSubview(containsView)
+        }
+
+    }
+    func dissView(){// 消失视图
         
-     UIView.animate(withDuration: 0.25, animations: { 
-        self.view.layoutIfNeeded()
-     }) { (finished) in
-        self.dismiss(animated: false, completion: nil)
+        if let containsView = containsView {
+            let animation = CATransition.init()
+            animation.delegate = self
+            animation.duration = kDuration
+            animation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
+            animation.type = kCATransitionPush;
+            animation.subtype = kCATransitionFromBottom;
+            containsView.layer.add(animation, forKey: "LocateViewTop")
+            containsView.alpha = 0.0
+
+        }
+       
+    }
+    func dismissBtn()  {// 消失蒙板
+        self.dissView()
+        UIView.animate(withDuration: dissDuration, animations: {
+    
+            self.btnDismiss.alpha = 0.0
+            self.view.layoutIfNeeded()
+            
+        }) { (finished) in
+     
+            self.dismiss(animated: false, completion: nil)
         }
         
     }
@@ -42,14 +87,6 @@ class WOWBaseMackViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -21,6 +21,12 @@ class WOWOrderDetailNewCell: UITableViewCell {
     @IBOutlet weak var btnAfterSales: UIButton!
     @IBOutlet weak var singsTagView: TagListView!
     var orderNewDetailModel : WOWNewOrderDetailModel!
+    
+    var orderCode                   : String!
+    var saleOrderItemId             : Int!
+    
+    var productModelData:WOWNewProductModel!
+    
     weak var delegeta: WOWOrderDetailNewCellDelegate?
 
     
@@ -33,6 +39,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
     }
     // 产品UI数据
     func productData(model : WOWNewProductModel!){
+        productModelData = model
         titleLabel.text = model.productName
         singsTagView.textFont = UIFont.systemFont(ofSize: 10)
         singsTagView.removeAllTags()
@@ -50,41 +57,35 @@ class WOWOrderDetailNewCell: UITableViewCell {
         
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         
-        priceLabel.text = result
-        goodsNumber.text = ((model.productQty) ?? 1).toString.get_formted_X()
+        priceLabel.text     = result
+        goodsNumber.text    = ((model.productQty) ?? 1).toString.get_formted_X()
+//        let statusStr = ""
+        if  model.isRefundAvailable ?? false {
+            btnAfterSales.setTitle("申请售后", for: .normal)
+        }else if model.isRefund ?? false{
+            btnAfterSales.setTitle(model.refundStatusName ?? "", for: .normal)
+        }else {
+            btnAfterSales.isHidden = true
+        }
+ 
+//        refundStatusName
+    }
 
-    }
-    // 展示未发货的数据
-    func showData(_ m:WOWNewOrderDetailModel, indexRow:Int){
-        
-        orderNewDetailModel = m
-        
-        if let unShipOutItems = orderNewDetailModel.unShipOutOrderItems { // 判断是否为空
-            if unShipOutItems.count > indexRow { // 判断时否越界
-                let orderProductModel = unShipOutItems[indexRow]
-                
-                self.productData(model: orderProductModel)
-                
-            }
-        }
-        
-    }
-    // 展示发货的数据
-    func showPackages(_ m:WOWNewOrderDetailModel, indexSection:Int, indexRow:Int){
-        orderNewDetailModel = m
-        if let packages = orderNewDetailModel.packages { // 判断是否为空
-            if packages.count > indexSection {
-                if let orderItems = packages[indexSection].orderItems {
-                    if orderItems.count > indexRow {
-                        self.productData(model: orderItems[indexRow])
-                    }
-                }
-            }
-        }
-        
-    }
     @IBAction func clickAfterAction(_ sender: Any) {
-        VCRedirect.goApplyAfterSales(sendType: .sendGoods)
+        if productModelData.isRefund ?? false { // 如果已经申请过，  则进入 售后详情界面
+            VCRedirect.goAfterDetail(productModelData.saleOrderItemRefundId ?? 0)
+            return
+        }
+        if productModelData.isDeliveryed ?? false { // 进入申请售后列表页面  区别 未发货 和 已发货
+            
+            VCRedirect.goApplyAfterSales(sendType: .sendGoods,orderCode:orderCode, saleOrderItemId: productModelData.saleOrderItemId ?? 0)
+            
+        }else {
+            
+            VCRedirect.goApplyAfterSales(sendType: .noSendGoods,orderCode:orderCode,saleOrderItemId:productModelData.saleOrderItemId ?? 0)
+            
+        }
+
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

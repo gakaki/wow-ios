@@ -503,24 +503,29 @@ public class VCRedirect {
     }
 
     //申请售后页面
-    class func goApplyAfterSales(sendType:AfterType = .sendGoods) {
+    class func goApplyAfterSales(sendType:AfterType = .sendGoods,orderCode:String,saleOrderItemId:Int) {
      
         let vc = WOWApplyAfterController()
-        vc.sendType = sendType
+        vc.sendType         = sendType
+        vc.orderCode        = orderCode
+        vc.saleOrderItemId  = saleOrderItemId
         topNaVC?.pushViewController(vc, animated: true)
         
     }
     //仅退款页面
-    class func goOnlyRefund() {
+    class func goOnlyRefund(orderCode:String,saleOrderItemId:Int) {
  
         let vc = WOWOnlyRefundViewController()
+        vc.orderCode        = orderCode
+        vc.saleOrderItemId  = saleOrderItemId
         topNaVC?.pushViewController(vc, animated: true)
         
     }
-    //仅退款页面
-    class func goAfterDetail() {
+    //申请售后详情
+    class func goAfterDetail(_ saleOrderItemRefundId:Int) {
   
         let vc = WOWAfterDetailController()
+        vc.saleOrderItemRefundId = saleOrderItemRefundId
         topNaVC?.pushViewController(vc, animated: true)
         
     }
@@ -538,6 +543,14 @@ public class VCRedirect {
 //        
 //        let vc = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWMoneyFromController.self)) as! WOWMoneyFromController
         let vc = WOWMoneyFromController()
+        topNaVC?.pushViewController(vc, animated: true)
+        
+    }
+    // 申请售后列表页面
+    class func goRefundListController() {
+        //
+        //        let vc = UIStoryboard.initialViewController("NewUser", identifier:String(describing: WOWMoneyFromController.self)) as! WOWMoneyFromController
+        let vc = WOWRefundListController()
         topNaVC?.pushViewController(vc, animated: true)
         
     }

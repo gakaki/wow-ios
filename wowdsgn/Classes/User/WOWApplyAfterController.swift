@@ -8,12 +8,12 @@
 
 import UIKit
 enum AfterType {
-    case toSendGoods    // 待发货
+    case noSendGoods    // 待发货
     case sendGoods      // 以发货
 }
 class WOWApplyAfterController: WOWApplyAfterBaseController {
    
-    var sendType                : AfterType = .toSendGoods{
+    var sendType                : AfterType = .noSendGoods{
         didSet{
             switch sendType {
             case .sendGoods:
@@ -40,6 +40,10 @@ class WOWApplyAfterController: WOWApplyAfterBaseController {
     var describeArray   : [String] = []
     var imgAcionArray   : [String] = ["refund_barter","refund","barter"]
     var  cellLineNumber : Int      = 0
+    
+    var orderCode                   : String!
+    var saleOrderItemId             : Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,7 +74,7 @@ class WOWApplyAfterController: WOWApplyAfterBaseController {
 
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-          VCRedirect.goOnlyRefund() 
+          VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

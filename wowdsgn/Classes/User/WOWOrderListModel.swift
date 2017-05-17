@@ -216,22 +216,23 @@ class WOWNewForGoodsModel: WOWBaseModel,Mappable{
 }
 /// 产品model
 class WOWNewProductModel: WOWBaseModel,Mappable{
-    var productId              : Int? //产品id
-    var productName             : String?// 产品名称
-    var productQty     : Int?// 产品数量
-    var parentProductId     : Int?// 当前产品的Id
-    var color : String?// 产品颜色
-    
-    var specImg : String? // 规格图片
-    
-    var sellPrice     : Double?// 产品销售价格
-    var saleOrderItemId     : Int?// 销售订单单项Id
-    var sellTotalAmount : Double?//产品销售价乘以数量
-    
-    var specName             : String?// 产品规格大小
-    
-    var productTotalAmount             : Double?// 产品总金额
-    var attributes                          : [String]?
+    var productId                                           : Int? //产品id
+    var productName                                         : String?// 产品名称
+    var productQty                                          : Int?// 产品数量
+    var parentProductId                                     : Int?// 当前产品的Id
+    var color                                               : String?// 产品颜色
+    var specImg                                             : String? // 规格图片
+    var sellPrice                                           : Double?// 产品销售价格
+    var saleOrderItemId                                     : Int?// 销售订单单项Id
+    var sellTotalAmount                                     : Double?//产品销售价乘以数量
+    var specName                                            : String?// 产品规格大小
+    var productTotalAmount                                  : Double?// 产品总金额
+    var attributes                                          : [String]?
+    var isRefund                                            : Bool?
+    var isDeliveryed                                        : Bool? // 标记是否已经发货
+    var isRefundAvailable                                   : Bool? // 是否可以申请售后
+    var saleOrderItemRefundId                               : Int? //退换货服务 ID
+    var refundStatusName                                    : String?// 退换货进度名称
     required init?(map: Map) {
         
     }
@@ -249,6 +250,11 @@ class WOWNewProductModel: WOWBaseModel,Mappable{
         parentProductId                     <- map["parentProductId"]
         productTotalAmount                  <- map["productTotalAmount"]
         attributes                          <- map["attributes"]
+        isRefund                            <- map["isRefund"]
+        isDeliveryed                        <- map["isDeliveryed"]
+        isRefundAvailable                   <- map["isRefundAvailable"]
+        saleOrderItemRefundId               <- map["saleOrderItemRefundId"]
+        refundStatusName                    <- map["refundStatusName"]
     }
 }
 // 商品评论model
@@ -271,6 +277,40 @@ class WOWProductPushCommentModel: WOWBaseModel,Mappable{
         productName                             <- map["productName"]
         specAttribute                           <- map["specAttribute"]
         productImg                              <- map["productImg"]
+    }
+    
+}
+// 退换货详情 model
+class WOWRefundDetailModel: WOWBaseModel,Mappable{
+    
+    var refundAmount                                : Double?           // 退款金额
+    var refundRemark                                : String?           // 退款说明
+    var refundType                                  : Int?              // 退款类型
+    var refundTypeName                              : String?           // 退款类型名称
+    var received                                    : Bool?             // 是否已经收到货
+    var refundReason                                : Int?              // 退换货理由Id
+    var serviceCode                                 : String?           // 服务单号
+    var serviceCreateTime                           : String?           // 创建时间
+    var saleOrderItemRefundId                       : Int?              // 退换货ID
+    var refundStatus                                : Int?              // 退换货进度
+    var refundStatusName                            : String?           // 退换货进度名称
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        refundAmount                                    <- map["refundAmount"]
+        refundRemark                                    <- map["refundRemark"]
+        refundType                                      <- map["refundType"]
+        refundTypeName                                  <- map["refundTypeName"]
+        received                                        <- map["received"]
+        refundReason                                    <- map["refundReason"]
+        serviceCode                                     <- map["serviceCode"]
+        serviceCreateTime                               <- map["serviceCreateTime"]
+        saleOrderItemRefundId                           <- map["saleOrderItemRefundId"]
+        refundStatus                                    <- map["refundStatus"]
+        refundStatusName                                <- map["refundStatusName"]
     }
     
 }

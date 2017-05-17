@@ -629,8 +629,38 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
         }
         
     }
+    // 获取未发货数组中的 商品信息，
+    func configUnShipOutGoodsUI(cell:WOWOrderDetailNewCell,indexRow : Int) {
+        
+        if let unShipOutItems = orderNewDetailModel?.unShipOutOrderItems { // 判断是否为空
+            if unShipOutItems.count > indexRow { // 判断时否越界
+                
+                let orderProductModel = unShipOutItems[indexRow]
+                cell.orderCode = self.orderCode
+                cell.productData(model: orderProductModel)
+
+            }
+        }
+    }
+    // 获取 发货数组中的 商品信息，
+    func configShipOutGoodsUI(cell:WOWOrderDetailNewCell,indexRow : Int,indexSection : Int) {
+        
+        if let packages = orderNewDetailModel?.packages { // 判断是否为空
+            if packages.count > indexSection {
+                
+                if let orderItems = packages[indexSection].orderItems {
+                    if orderItems.count > indexRow {
+                        cell.orderCode = self.orderCode
+                        cell.productData(model: orderItems[indexRow])
+                    }
+                }
+            }
+        }
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var returnCell:UITableViewCell!
+        let indexRow        = indexPath.row
+        let indexSection    = indexPath.section
         switch OrderDetailNewaType {
         case .payMent:
             switch (indexPath as NSIndexPath).section {
@@ -645,10 +675,10 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 2:
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "WOWOrderDetailNewCell", for: indexPath) as! WOWOrderDetailNewCell
-                if let orderNewDetailModel = orderNewDetailModel {
+                if orderNewDetailModel != nil {
+                    
                     cell.delegeta = self
-
-                    cell.showData(orderNewDetailModel,indexRow: (indexPath as NSIndexPath).row)
+                    self.configUnShipOutGoodsUI(cell: cell, indexRow: indexRow)
                     
                 }
                 returnCell = cell
@@ -739,16 +769,21 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             case 2:
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "WOWOrderDetailNewCell", for: indexPath) as! WOWOrderDetailNewCell
-                if let orderNewDetailModel = orderNewDetailModel {
+                if orderNewDetailModel != nil {
                     
                     cell.delegeta = self
 
                     switch OrderDetailNewaType {
                     case .forGoods,.finish:
-                        cell.showPackages(orderNewDetailModel, indexSection: (indexPath as NSIndexPath).section - 2, indexRow: (indexPath as NSIndexPath).row)
-                        
+
+                        self.configShipOutGoodsUI(cell: cell, indexRow: indexRow, indexSection: indexSection)
+
+
                     default:
-                        cell.showData(orderNewDetailModel,indexRow: (indexPath as NSIndexPath).row)
+                        
+                        self.configUnShipOutGoodsUI(cell: cell, indexRow: indexRow)
+                      
+
                     }
                     
                 }
@@ -776,10 +811,9 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 
             case goodsArray.count + 2 :
                 let cell = tableView.dequeueReusableCell(withIdentifier: "WOWOrderDetailNewCell", for: indexPath) as! WOWOrderDetailNewCell
-                if let orderNewDetailModel = orderNewDetailModel {
+                if orderNewDetailModel != nil {
                     cell.delegeta = self
-                    cell.showData(orderNewDetailModel,indexRow: (indexPath as NSIndexPath).row)
-                    
+                    self.configUnShipOutGoodsUI(cell: cell, indexRow: indexRow)
                 }
                 
                 returnCell = cell
@@ -801,13 +835,10 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 }else{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "WOWOrderDetailNewCell", for: indexPath) as! WOWOrderDetailNewCell
                     
-                    if let orderNewDetailModel = orderNewDetailModel {
+                    if orderNewDetailModel != nil {
                         cell.delegeta = self
-
-                        cell.showPackages(orderNewDetailModel,indexSection:(indexPath as NSIndexPath).section - 2 , indexRow:(indexPath as NSIndexPath).row - 1)
-                        
+                        self.configShipOutGoodsUI(cell: cell, indexRow: indexRow, indexSection: indexSection)
                     }
-                    
                     returnCell = cell
                 }
             }

@@ -99,8 +99,9 @@ class WOWUserController: WOWBaseTableViewController {
             }
         }
         outGoodsView.addTapGesture {[weak self](tap) in
-            if let strongSelf = self{
+            if self != nil{
                print("退换货")
+                VCRedirect.goRefundListController()
             }
         }
     }

@@ -16,12 +16,12 @@ class WOWMoneyFromController: WOWApplyAfterBaseController {
         = [(TimelinePoint(color: YellowColor, filled: true),UIColor.clear,YellowColor),
            (TimelinePoint(color: YellowColor, filled: true),YellowColor,SeprateColor),
            (TimelinePoint(color: SeprateColor, filled: true),SeprateColor,UIColor.clear)]
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "钱款去向"
         // Do any additional setup after loading the view.
-        
-
+    
   
     }
     override func setUI() {

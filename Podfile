@@ -41,7 +41,7 @@ target 'wowdsgn' do
 	pod 'YYImage'
 	pod 'Kingfisher'
 
-	pod 'VTMagic'
+    pod 'VTMagic'  
 	pod 'SDWebImage'
     pod 'Koloda'
 

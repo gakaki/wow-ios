@@ -164,7 +164,7 @@ let URL_CartUnSelect            = "v1/cart/unselect"   //取消选中购物车�
 
 let URL_CartBottomList          = "v1/cart/recommend-products" // 无购物车，显示热门推荐列表
 //订单相关
-let URL_OrderSettle             = "v2/order/settle"            //查询订单内的物品
+let URL_OrderSettle             = "v3/order/settle"            //查询订单内的物品
 
 let URL_OrderBuyNow             = "v2/order/buyNow"             //立即购买查询信息
 

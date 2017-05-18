@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="156.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gss-5u-9Dq">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tax1" translatesAutoresizingMaskIntoConstraints="NO" id="Gss-5u-9Dq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -25,7 +25,7 @@
                         <rect key="frame" x="0.0" y="117" width="375" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qy9-tU-TWn">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TAX" translatesAutoresizingMaskIntoConstraints="NO" id="qy9-tU-TWn">
                                 <rect key="frame" x="23" y="8" width="44" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -44,4 +44,8 @@
             <point key="canvasLocation" x="-25.5" y="2.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="TAX" width="27" height="14"/>
+        <image name="tax1" width="16" height="16"/>
+    </resources>
 </document>

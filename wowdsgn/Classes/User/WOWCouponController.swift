@@ -28,7 +28,7 @@ class WOWCouponController: WOWBaseViewController {
     
     lazy var emptyView: WOWCouponEmptyView = {
         let view = Bundle.main.loadNibNamed(String(describing: WOWCouponEmptyView.self), owner: self, options: nil)?.last as! WOWCouponEmptyView
-        view.frame = CGRect(x: 0, y: 100, w: MGScreenWidth, h: 400)
+        view.frame = CGRect(x: 0, y: 100, w: MGScreenWidth, h: 500)
         return view
     }()
     

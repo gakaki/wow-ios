@@ -46,6 +46,8 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
     var attributes                          : [String]?
     var limitQty                            : Int?
     var pricePromotionTag                   : String?
+    var oversea                             : Bool?     //是否海购
+    var logisticsMode                       : Int?
     
     required init?(map: Map) {
         
@@ -72,6 +74,8 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
         attributes                           <- map["attributes"]
         limitQty                             <- map["limitQty"]
         pricePromotionTag                    <- map["pricePromotionTag"]
+        oversea                              <- map["oversea"]
+        logisticsMode                        <- map["logisticsMode"]
     }
     
 }

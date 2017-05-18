@@ -25,7 +25,17 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
     var promotionNames                       : [String]?         //促销活动的名字
     var promotionProductInfoVos              : [WOWPromotionProductInfoModel]?   //促销信息
     var totalPromotionDeduction              : Double?          //促销优惠金额
-
+    
+    /**************************V3增加字段*****************************/
+    var overseaOrder                         : Bool?            //是否海购
+    //额外字段
+    var remark                               : String?          //买家备注
+    var isPromotion                          : Bool = true            //是否使用促销
+    var discountAmount                       : Double = 0                  //优惠金额
+    
+    override init() {
+        super.init()
+    }
     
     required init?(map: Map) {
         
@@ -46,7 +56,16 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
         promotionNames                          <- map["promotionNames"]
         promotionProductInfoVos                   <- map["promotionProductInfoVos"]
         totalPromotionDeduction                     <- map["totalPromotionDeduction"]
-
+        //如果优惠金额 = 0 ，说明没有优惠
+        //默认选促销
+        if totalPromotionDeduction == 0 {
+            isPromotion = false
+            discountAmount = deduction ?? 0
+        }else {
+            isPromotion = true
+            discountAmount = totalPromotionDeduction ?? 0
+        
+        }
 
     }
     

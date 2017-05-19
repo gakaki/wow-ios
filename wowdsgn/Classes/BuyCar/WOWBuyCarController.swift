@@ -84,7 +84,7 @@ class WOWBuyCarController: WOWBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addObservers()
-        request()
+        requestBottom()
         MobClick.e(.Shoppingcart)
     }
     
@@ -160,7 +160,6 @@ class WOWBuyCarController: WOWBaseViewController {
     }
     func loginSuccess() {
         request()
-        requestBuyCarProduct()
     }
     
     fileprivate func allbuttonIsSelect() {
@@ -283,12 +282,14 @@ class WOWBuyCarController: WOWBaseViewController {
      */
     override func request() {
         super.request()
+        requestBuyCarProduct()
         requestBottom()
+        
     }
     
     override func pullToRefresh() {
         super.pullToRefresh()
-        requestBuyCarProduct()
+        
     }
     
     fileprivate func requestBuyCarProduct() {
@@ -305,7 +306,7 @@ class WOWBuyCarController: WOWBaseViewController {
                     //重新计算购物车数量
                     WOWUserManager.userCarCount = 0
                     for product in arr {
-                        WOWUserManager.userCarCount += product.productQty ?? 1
+                        WOWUserManager.userCarCount += (product.productQty ?? 1)
                         /**
                          *  productStatus 产品状态
                          1 已上架 2已下架 -1已失效

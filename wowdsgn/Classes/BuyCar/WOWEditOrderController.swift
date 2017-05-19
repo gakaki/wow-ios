@@ -24,14 +24,10 @@ class WOWEditOrderController: WOWBaseViewController {
     var productQty                      :Int?       //立即购买的产品数量
     var entrance                        :editOrderEntrance?     //入口
 
-    var productArr                      = [WOWCarProductModel]()  //产品列表清单
     var addressInfo                     :WOWAddressListModel?       //地址信息
     var orderCode                       = String()      //订单号
     var orderArr                        = [WOWEditOrderModel]() //订单列表
     var totalAmount                     : Double = 0.00      //订单总金额
-    var orderSettle                      : WOWEditOrderModel?
-    var couponModel                     : WOWCouponModel?
-    var isPromotion                     : Bool = true
     
     //时间戳，用来验证唯一
     let timeInterval = Date().timeIntervalSince1970
@@ -87,10 +83,6 @@ class WOWEditOrderController: WOWBaseViewController {
         tableView.register(UINib.nibName(String(describing: WOWOrderCell.self)), forCellReuseIdentifier:String(describing: WOWOrderCell.self))
         //选择优惠
         tableView.register(UINib.nibName(String(describing: WOWOrderFreightCell.self)), forCellReuseIdentifier:String(describing: WOWOrderFreightCell.self))
-        //备注信息
-        tableView.register(UINib.nibName(String(describing: WOWTipsCell.self)), forCellReuseIdentifier:String(describing: WOWTipsCell.self))
-        //优惠信息
-        tableView.register(UINib.nibName(String(describing: WOWOrderRemissionCell.self)), forCellReuseIdentifier:String(describing: WOWOrderRemissionCell.self))
         //订单标题
         tableView.register(UINib.nibName(String(describing: WOWOrderSectionCell.self)), forCellReuseIdentifier:String(describing: WOWOrderSectionCell.self))
         //备注订单集合
@@ -104,24 +96,11 @@ class WOWEditOrderController: WOWBaseViewController {
     }
     
     func configData() {
-//        let coupon = WOWCouponModel.init()
-//        coupon.id = orderSettle?.endUserCouponId
-//        coupon.deduction = orderSettle?.deduction
-//        couponModel = coupon
-//        //如果优惠金额 = 0 ，说明没有优惠
-//        //默认选促销
-//        if orderSettle?.totalPromotionDeduction == 0 {
-//            isPromotion = false
-//            discountAmount = orderSettle?.deduction
-//        }else {
-//            isPromotion = true
-//            discountAmount = orderSettle?.totalPromotionDeduction
-//
-//        }
+
         totalAmount = 0.00
         //计算所有订单的总金额
         for order in orderArr {
-            totalAmount = order.totalAmount ?? 0 + totalAmount
+            totalAmount = (order.totalAmount ?? 0) + totalAmount
         }
         
         let result = WOWCalPrice.calTotalPrice([totalAmount],counts:[1])
@@ -176,17 +155,16 @@ class WOWEditOrderController: WOWBaseViewController {
             vc.couponModel = coupon
 
         }
+        //订单最小金额
         vc.minAmountLimit = orderInfo.productTotalAmount
-        
+        //是否海购商品
+        vc.isOverSea = orderInfo.overseaOrder ?? false
   
         //从优惠券返回的时候要重新更新减得金额
         vc.action = {[weak self] (model:AnyObject) in
             if let strongSelf = self {
                 let couponInfo: WOWCouponModel? = model as? WOWCouponModel
-                
-//                    strongSelf.couponModel = model as? WOWCouponModel
-                
-//                    orderArr[index].deductionName = strongSelf.couponModel?.couponTitle
+
                     strongSelf.orderArr[index].endUserCouponId = couponInfo?.id
                     //优惠金额
                     strongSelf.orderArr[index].deduction = couponInfo?.deduction
@@ -210,15 +188,12 @@ class WOWEditOrderController: WOWBaseViewController {
         let deduction = NSDecimalNumber(value: orderInfo.discountAmount )
         //产品总金额减去优惠总金额，判断下是否需要增加运费
         let amount = productTotal.subtracting(deduction)
-        //如果订单金额满足免邮，邮费=0  海外购的商品邮费为0
-        if orderInfo.overseaOrder ?? false {
-            orderInfo.deliveryFee = 0
+        //如果订单金额满足免邮，邮费=0  
+  
+        if amount.doubleValue < orderInfo.deliveryFeeThreshold {
+            orderInfo.deliveryFee = orderInfo.deliveryStandard
         }else {
-            if amount.doubleValue < orderInfo.deliveryFeeThreshold {
-                orderInfo.deliveryFee = orderInfo.deliveryStandard
-            }else {
-                orderInfo.deliveryFee = 0
-            }
+            orderInfo.deliveryFee = 0
         }
 
         //运费
@@ -231,7 +206,7 @@ class WOWEditOrderController: WOWBaseViewController {
         totalAmount = 0.00
         //计算所有订单的总金额
         for order in orderArr {
-            totalAmount = order.totalAmount ?? 0 + totalAmount
+            totalAmount = (order.totalAmount ?? 0) + totalAmount
         }
         
         let result = WOWCalPrice.calTotalPrice([totalAmount],counts:[1])
@@ -256,23 +231,29 @@ class WOWEditOrderController: WOWBaseViewController {
             return
         }
             //status -1 失效。2下架
-            for product in productArr {
-                if product.productStatus == -1 {
-                    let str = String(format:"您购买的商品\"%@\"已失效",product.productName ?? "")
-                    WOWHud.showWarnMsg(str)
-                    return
-                }
-                if product.productStatus == 2 {
-                    let str = String(format:"您购买的商品\"%@\"已下架",product.productName ?? "")
-                    WOWHud.showWarnMsg(str)
-                    return
-                }
-                if product.productStatus == 1 && product.productStock == 0 {
-                    let str = String(format:"您购买的商品\"%@\"已售罄",product.productName ?? "")
-                    WOWHud.showWarnMsg(str)
-                    return
+        for orderInfo in orderArr {
+            if let productArr = orderInfo.orderSettles {
+                for product in productArr {
+                    if product.productStatus == -1 {
+                        let str = String(format:"您购买的商品\"%@\"已失效",product.productName ?? "")
+                        WOWHud.showWarnMsg(str)
+                        return
+                    }
+                    if product.productStatus == 2 {
+                        let str = String(format:"您购买的商品\"%@\"已下架",product.productName ?? "")
+                        WOWHud.showWarnMsg(str)
+                        return
+                    }
+                    if product.productStatus == 1 && product.productStock == 0 {
+                        let str = String(format:"您购买的商品\"%@\"已售罄",product.productName ?? "")
+                        WOWHud.showWarnMsg(str)
+                        return
+                    }
                 }
             }
+
+        }
+
         
         //下单前判断一下是否已经生成订单号，如果已经生成了则直接弹窗
         guard orderCode.isEmpty else {
@@ -281,12 +262,9 @@ class WOWEditOrderController: WOWBaseViewController {
         }
         //提交订单时候增加loading框，防止同时提交多个订单
         WOWHud.showLoadingSV()
-        switch entrance! {
-        case editOrderEntrance.buyEntrance:
-            requestBuyNowOrderCreat()
-        case editOrderEntrance.carEntrance:
-            requestOrderCreat()
-        }
+        requestOrderCreat()
+
+
 
     }
     
@@ -368,90 +346,119 @@ class WOWEditOrderController: WOWBaseViewController {
         var params = [String: AnyObject]()
         // 截取两位小数点，确保金额正确
         
-        let totalAmoutStr   = String(format: "%.2f",((orderSettle?.totalAmount) ?? 0))
+        
         let shippingInfoId  = (addressInfo?.id) ?? 0
         let orderSource     = 2
-        let totalAmout      = totalAmoutStr 
-        let remark          =  ""
         
-        //往服务端传过去价格确保价格一致性
-        var productPriceGroup = ""
-        //产品id和价格拼接一个字符串，传给后台校验
-            if productArr.count > 0 {
-                for product in productArr.enumerated() {
-                    if product.offset == productArr.count - 1 {
-                        let str = String(format: "%i:%.2f",product.element.productId ?? 0,product.element.sellPrice ?? 0)
-                        productPriceGroup.append(str)
-                    }else {
-                        let str = String(format: "%i:%.2f,",product.element.productId ?? 0,product.element.sellPrice ?? 0)
-                        productPriceGroup.append(str)
+        var itemGroupSettleVos = [Any]()
+        for orderInfo in orderArr {
+            var orderSettle = [String:AnyObject]()
+            //往服务端传过去价格确保价格一致性
+            var productPriceGroup = ""
+            //产品id和价格拼接一个字符串，传给后台校验
+            if let productArr = orderInfo.orderSettles {
+                if productArr.count > 0 {
+                    for product in productArr.enumerated() {
+                        if product.offset == productArr.count - 1 {
+                            let str = String(format: "%i:%.2f",product.element.productId ?? 0,product.element.sellPrice ?? 0)
+                            productPriceGroup.append(str)
+                        }else {
+                            let str = String(format: "%i:%.2f,",product.element.productId ?? 0,product.element.sellPrice ?? 0)
+                            productPriceGroup.append(str)
+                        }
                     }
                 }
             }
-            
-        //是否使用促销，如果参加促销，就把促销id传给后台。
-        if isPromotion {
-            var promotionIds = [String]()
-            if let promotionProductInfoVos = orderSettle?.promotionProductInfoVos {
-                for promotion in promotionProductInfoVos {
-                    promotionIds.append(String(format:"%i", promotion.promotionId ?? 0))
+            //每个订单的总价
+            let totalAmoutStr   = String(format: "%.2f",(orderInfo.totalAmount ?? 0))
+            //是否海购信息
+            let oversea = orderInfo.overseaOrder ?? false
+            //买家备注
+            let remark          =  orderInfo.remark.text ?? ""
+            //是否使用促销，如果参加促销，就把促销id传给后台。
+            if orderInfo.isPromotion {
+                var promotionIds = [String]()
+                if let promotionProductInfoVos = orderInfo.promotionProductInfoVos {
+                    for promotion in promotionProductInfoVos {
+                        promotionIds.append(String(format:"%i", promotion.promotionId ?? 0))
+                    }
                 }
-            }
-            
-            params = [
-                "shippingInfoId": shippingInfoId as AnyObject,
-                "orderSource": orderSource as AnyObject,
-                "orderAmount": totalAmout as AnyObject,
-                "remark": remark as AnyObject,
-                "promotionIds": promotionIds  as AnyObject,
-                "productPriceGroup": productPriceGroup as AnyObject,
-                "orderToken": timeInterval as AnyObject
-            ]
-
-        }else {       //没有参加促销。是否使用优惠券。如果使用优惠券就把优惠券id传过去
-            if let endUserCouponId = couponModel?.id {
                 
-                params = [
-                    "shippingInfoId": shippingInfoId as AnyObject,
+                orderSettle = [
                     "orderSource": orderSource as AnyObject,
-                    "orderAmount": totalAmout as AnyObject,
+                    "orderAmount": totalAmoutStr as AnyObject,
                     "remark": remark as AnyObject,
-                    "endUserCouponId": endUserCouponId  as AnyObject,
+                    "promotionIds": promotionIds  as AnyObject,
                     "productPriceGroup": productPriceGroup as AnyObject,
-                    "orderToken": timeInterval as AnyObject
+                    "oversea": oversea as AnyObject,
                 ]
                 
-            }else {
-                params = [
-                    "shippingInfoId": shippingInfoId as AnyObject ,
-                    "orderSource": orderSource  as AnyObject,
-                    "orderAmount": totalAmout  as AnyObject,
-                    "remark": remark  as AnyObject,
-                    "productPriceGroup": productPriceGroup as AnyObject,
-                    "orderToken": timeInterval as AnyObject
+            }else {       //没有参加促销。是否使用优惠券。如果使用优惠券就把优惠券id传过去
+                if let endUserCouponId = orderInfo.endUserCouponId {
                     
-                ]
+                    orderSettle = [
+                        "orderSource": orderSource as AnyObject,
+                        "orderAmount": totalAmoutStr as AnyObject,
+                        "remark": remark as AnyObject,
+                        "endUserCouponId": endUserCouponId  as AnyObject,
+                        "productPriceGroup": productPriceGroup as AnyObject,
+                        "oversea": oversea as AnyObject,
+                    ]
+                    
+                }else {
+                    orderSettle = [
+                        "orderSource": orderSource  as AnyObject,
+                        "orderAmount": totalAmoutStr  as AnyObject,
+                        "remark": remark  as AnyObject,
+                        "productPriceGroup": productPriceGroup as AnyObject,
+                        "oversea": oversea as AnyObject,
+                        
+                    ]
+                    
+                }
                 
             }
+            itemGroupSettleVos.append(orderSettle)
 
         }
-        
+   
+
+
+        switch entrance! {
+        case editOrderEntrance.buyEntrance:
+            params = [
+                "productId": (productId ?? 0) as AnyObject,
+                "productQty": (productQty ?? 1) as AnyObject,
+                "shippingInfoId": shippingInfoId as AnyObject,
+                "orderSource": orderSource as AnyObject,
+                "orderToken": timeInterval as AnyObject,
+                "itemGroupSettleVos": itemGroupSettleVos as AnyObject,
+                
+            ]
+        case editOrderEntrance.carEntrance:
+            params = [
+                "orderToken": timeInterval as AnyObject,
+                "shippingInfoId": shippingInfoId as AnyObject,
+                "orderSource": orderSource as AnyObject,
+                "itemGroupSettleVos": itemGroupSettleVos as AnyObject,
+            ]
+        }
         
         WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
                 
                 //重新计算购物车数量
-                for product in (strongSelf.productArr ?? [WOWCarProductModel]()) {
-                    WOWUserManager.userCarCount -= product.productQty ?? 1
-                }
-                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+//                for product in (strongSelf.productArr ?? [WOWCarProductModel]()) {
+//                    WOWUserManager.userCarCount -= product.productQty ?? 1
+//                }
+//                NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
+                let model = Mapper<WOWOrderInfoModel>().map(JSONObject:result)
                 
                 strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
                 strongSelf.chooseStyle()
-                WOWHud.dismiss()
 
                 //TalkingData 下单
-                var sum = strongSelf.orderSettle?.totalAmount ?? 0
+                var sum = strongSelf.totalAmount 
                 sum                  = sum * 100 
                 let order_id             = strongSelf.orderCode
                 
@@ -472,112 +479,112 @@ class WOWEditOrderController: WOWBaseViewController {
       
     }
     
-    //立即支付创建订单
-    func requestBuyNowOrderCreat() -> Void {
-        
-        
-        var params              = [String: AnyObject]()
-        let totalAmount         = String(format: "%.2f",((orderSettle?.totalAmount) ?? 0))
-        let product_id          = productId ?? 0
-        let product_qty         = productQty ?? 1
-        let shippingInfoId      = (addressInfo?.id) ?? 0
-        let orderSource         = 2
-        let remark              = tipsTextField.text ?? ""
-        
-        //往服务端传过去价格确保价格一致性
-        var productPriceGroup = ""
-            if productArr.count > 0 {
-                for product in productArr.enumerated() {
-                    if product.offset == productArr.count - 1 {
-                        let str = String(format: "%i:%.2f",product.element.productId ?? 0,product.element.sellPrice ?? 0)
-                        productPriceGroup.append(str)
-                    }else {
-                        let str = String(format: "%i:%.2f,",product.element.productId ?? 0,product.element.sellPrice ?? 0)
-                        productPriceGroup.append(str)
-                    }
-                }
-            }
-            
-        if isPromotion {
-            var promotionIds = [String]()
-            if let promotionProductInfoVos = orderSettle?.promotionProductInfoVos {
-                for promotion in promotionProductInfoVos {
-                    promotionIds.append(String(format:"%i", promotion.promotionId ?? 0))
-                }
-            }
-            
-            params = [
-                "productId": product_id as AnyObject,
-                "productQty": product_qty as AnyObject,
-                "shippingInfoId": shippingInfoId as AnyObject,
-                "orderSource": orderSource as AnyObject,
-                "orderAmount": totalAmount as AnyObject,
-                "remark": remark as AnyObject,
-                "promotionIds": promotionIds  as AnyObject,
-                "productPriceGroup": productPriceGroup as AnyObject,
-                "orderToken": timeInterval as AnyObject
-            ]
-            
-        }else {
-            if let endUserCouponId = couponModel?.id {
-                
-                params = [
-                    "productId": product_id as AnyObject,
-                    "productQty": product_qty as AnyObject,
-                    "shippingInfoId": shippingInfoId as AnyObject,
-                    "orderSource": orderSource as AnyObject,
-                    "orderAmount": totalAmount as AnyObject,
-                    "remark": remark as AnyObject,
-                    "endUserCouponId": endUserCouponId as AnyObject,
-                    "productPriceGroup": productPriceGroup as AnyObject,
-                    "orderToken": timeInterval as AnyObject
-                    
-                ]
-                
-            }else {
-                
-                
-                params = [
-                    "productId": product_id as AnyObject,
-                    "productQty": product_qty as AnyObject,
-                    "shippingInfoId": shippingInfoId as AnyObject,
-                    "orderSource": orderSource as AnyObject,
-                    "orderAmount": totalAmount as AnyObject,
-                    "remark": remark as AnyObject,
-                    "productPriceGroup": productPriceGroup as AnyObject,
-                    "orderToken": timeInterval as AnyObject
-                    
-                ]
-            }
-        }
-        
-        
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result, code) in
-            if let strongSelf = self {
-                strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
-                strongSelf.chooseStyle()
-                WOWHud.dismiss()
-                //TalkingData 下单
-                var sum = strongSelf.orderSettle?.totalAmount ?? 0
-                sum                  = sum * 100 
-                let order_id             = strongSelf.orderCode
-                
-        
-                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
-                order?.addItem(withCategory: "", name: "", unitPrice: Int32(sum), amount: Int32(sum))
-                order?.addItem(withCategory: "", itemId: "", name: "", unitPrice: Int32(sum), amount: Int32(sum)   )
-                
-                TalkingDataAppCpa.onPlaceOrder(WOWUserManager.userID, with: order)
-                AnalyaticEvent.e2(.PlaceOrder,["totalAmount":sum ,"OrderCode":order_id ])
-                
-
-            }
-            
-        }) { (errorMsg) in
-            WOWHud.showWarnMsg(errorMsg)
-
-        }
-    }
+//    //立即支付创建订单
+//    func requestBuyNowOrderCreat() -> Void {
+//        
+//        
+//        var params              = [String: AnyObject]()
+//        let totalAmount         = String(format: "%.2f",((orderSettle?.totalAmount) ?? 0))
+//        let product_id          = productId ?? 0
+//        let product_qty         = productQty ?? 1
+//        let shippingInfoId      = (addressInfo?.id) ?? 0
+//        let orderSource         = 2
+//        let remark              = tipsTextField.text ?? ""
+//        
+//        //往服务端传过去价格确保价格一致性
+//        var productPriceGroup = ""
+//            if productArr.count > 0 {
+//                for product in productArr.enumerated() {
+//                    if product.offset == productArr.count - 1 {
+//                        let str = String(format: "%i:%.2f",product.element.productId ?? 0,product.element.sellPrice ?? 0)
+//                        productPriceGroup.append(str)
+//                    }else {
+//                        let str = String(format: "%i:%.2f,",product.element.productId ?? 0,product.element.sellPrice ?? 0)
+//                        productPriceGroup.append(str)
+//                    }
+//                }
+//            }
+//            
+//        if isPromotion {
+//            var promotionIds = [String]()
+//            if let promotionProductInfoVos = orderSettle?.promotionProductInfoVos {
+//                for promotion in promotionProductInfoVos {
+//                    promotionIds.append(String(format:"%i", promotion.promotionId ?? 0))
+//                }
+//            }
+//            
+//            params = [
+//                "productId": product_id as AnyObject,
+//                "productQty": product_qty as AnyObject,
+//                "shippingInfoId": shippingInfoId as AnyObject,
+//                "orderSource": orderSource as AnyObject,
+//                "orderAmount": totalAmount as AnyObject,
+//                "remark": remark as AnyObject,
+//                "promotionIds": promotionIds  as AnyObject,
+//                "productPriceGroup": productPriceGroup as AnyObject,
+//                "orderToken": timeInterval as AnyObject
+//            ]
+//            
+//        }else {
+//            if let endUserCouponId = couponModel?.id {
+//                
+//                params = [
+//                    "productId": product_id as AnyObject,
+//                    "productQty": product_qty as AnyObject,
+//                    "shippingInfoId": shippingInfoId as AnyObject,
+//                    "orderSource": orderSource as AnyObject,
+//                    "orderAmount": totalAmount as AnyObject,
+//                    "remark": remark as AnyObject,
+//                    "endUserCouponId": endUserCouponId as AnyObject,
+//                    "productPriceGroup": productPriceGroup as AnyObject,
+//                    "orderToken": timeInterval as AnyObject
+//                    
+//                ]
+//                
+//            }else {
+//                
+//                
+//                params = [
+//                    "productId": product_id as AnyObject,
+//                    "productQty": product_qty as AnyObject,
+//                    "shippingInfoId": shippingInfoId as AnyObject,
+//                    "orderSource": orderSource as AnyObject,
+//                    "orderAmount": totalAmount as AnyObject,
+//                    "remark": remark as AnyObject,
+//                    "productPriceGroup": productPriceGroup as AnyObject,
+//                    "orderToken": timeInterval as AnyObject
+//                    
+//                ]
+//            }
+//        }
+//        
+//        
+//        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result, code) in
+//            if let strongSelf = self {
+//                strongSelf.orderCode = JSON(result)["orderCode"].string ?? ""
+//                strongSelf.chooseStyle()
+//                WOWHud.dismiss()
+//                //TalkingData 下单
+//                var sum = strongSelf.orderSettle?.totalAmount ?? 0
+//                sum                  = sum * 100 
+//                let order_id             = strongSelf.orderCode
+//                
+//        
+//                let order                = TDOrder.init(orderId: order_id, total: Int32(sum), currencyType: "CNY")
+//                order?.addItem(withCategory: "", name: "", unitPrice: Int32(sum), amount: Int32(sum))
+//                order?.addItem(withCategory: "", itemId: "", name: "", unitPrice: Int32(sum), amount: Int32(sum)   )
+//                
+//                TalkingDataAppCpa.onPlaceOrder(WOWUserManager.userID, with: order)
+//                AnalyaticEvent.e2(.PlaceOrder,["totalAmount":sum ,"OrderCode":order_id ])
+//                
+//
+//            }
+//            
+//        }) { (errorMsg) in
+//            WOWHud.showWarnMsg(errorMsg)
+//
+//        }
+//    }
     
     //去支付
     fileprivate func goPay(_ charge:AnyObject){
@@ -648,18 +655,17 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
         switch section {
         case 0:     //地址
             return 1
-        case 1:     //商品清单,优惠券 如果促销金额 = 0不显示促销
+        case 1 + orderArr.count://需要帮助
             
+            return 1
+
+        default://商品清单,优惠券 如果促销金额 = 0不显示促销
             if orderArr.count > 0 {
-                let productSum = orderArr[0].orderSettles?.count ?? 0
-                let isHavePromotion = orderArr[0].totalPromotionDeduction == 0 ? 0 : 1
+                let productSum = orderArr[section - 1].orderSettles?.count ?? 0
+                let isHavePromotion = orderArr[section - 1].totalPromotionDeduction == 0 ? 0 : 1
                 return 3 +  productSum + isHavePromotion
             }
-            
             return 0
-
-        default:
-            return 1
         }
     }
     
@@ -670,65 +676,8 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderAddressCell.self), for: indexPath) as! WOWOrderAddressCell
             cell.showData(addressInfo)
             returnCell = cell
-        case 1: //商品清单
-   
-            returnCell = getOrderDetailCell(indexPath: indexPath)
 
-
-
-//        case 2: //运费及优惠券信息
-//            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderFreightCell.self), for: indexPath) as! WOWOrderFreightCell
-//            if (indexPath as NSIndexPath).row == 0 {
-//                cell.leftLabel.text = "优惠券"
-//                cell.lineView.isHidden = false
-//                cell.selectBtn.isSelected = !isPromotion
-//                cell.selectBtn.addTarget(self, action: #selector(selectCoupons), for:.touchUpInside)
-//                if let deductionName = self.orderSettle?.deductionName {
-//                    cell.selectBtn.isEnabled = true
-//                    cell.couponLabel.text = deductionName
-//
-//                }else {
-//                    cell.couponLabel.text = String(format: "您有%i张优惠券可用",self.orderSettle?.avaliableCouponCount ?? 0 )
-//                    cell.selectBtn.isSelected = false
-//                    cell.selectBtn.setImage(UIImage.init(named: "disable"), for: .disabled)
-//                    cell.selectBtn.isEnabled = false
-//                    //如果有促销不使用优惠券则默认选中促销
-//                    if orderSettle?.totalPromotionDeduction != 0 {
-//                        isPromotion = true
-//                        discountAmount = orderSettle?.totalPromotionDeduction
-//                        reCalTotalPrice()
-//                        
-//                    }
-//                }
-//
-//            }else {
-//                cell.leftLabel.text = "促销"
-//                cell.couponLabel.text = self.orderSettle?.promotionNames?.formatArray("；")
-//                cell.lineView.isHidden = true
-//                cell.selectBtn.isEnabled = true
-//                cell.selectBtn.isSelected = isPromotion
-//                cell.selectBtn.addTarget(self, action: #selector(selectPromotion), for:.touchUpInside)
-//            }
-//            returnCell = cell
-//        case 3: //订单备注
-//            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderOtherCell.self), for:indexPath) as! WOWOrderOtherCell
-//        
-////            tipsTextField = cell.textField
-//            returnCell = cell
-//        case 5: //优惠信息
-//            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderRemissionCell.self), for: indexPath) as! WOWOrderRemissionCell
-//            if (indexPath as NSIndexPath).row == 0 {
-//                cell.label.text = "运费"
-//                cell.amountLabel.textColor = UIColor.black
-//                cell.amountLabel.text = WOWCalPrice.calTotalPrice([self.orderSettle?.deliveryFee ?? 0], counts: [1])
-//            }else {
-//                cell.label.text = "优惠"
-//                cell.amountLabel.textColor = UIColor(hexString: "FF7070")
-//                let amount = WOWCalPrice.calTotalPrice([self.discountAmount ?? 0], counts: [1])
-//                cell.amountLabel.text = String(format: "－%@", amount)
-//            }
-//            returnCell = cell
-        case 2:
+        case 1 + orderArr.count:
             // 需要帮助 UI
   
                 let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTelCell.self), for: indexPath) as! WOWTelCell
@@ -741,7 +690,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
                returnCell = cell
         
         default:
-            break
+            returnCell = getOrderDetailCell(indexPath: indexPath)
         }
         return returnCell!
     }
@@ -766,7 +715,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         
-        case 2:     //最后一组
+        case 1 + orderArr.count:     //最后一组
             return 50
         default:
             return 0.01
@@ -840,6 +789,7 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
             }else {      //订单其他信息
                 let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WOWOrderOtherCell.self), for:indexPath) as! WOWOrderOtherCell
                 cell.showData(orderInfo: orderInfo)
+                orderArr[indexPath.section - 1].remark = cell.textField
                 //            tipsTextField = cell.textField
                 return cell
                 

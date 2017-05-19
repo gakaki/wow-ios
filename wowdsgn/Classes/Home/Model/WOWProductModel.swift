@@ -52,8 +52,8 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var availableStock              : Int?
     var hasStock                    : Bool?
     var productQty                  : Int?
-    
-  
+    var isOversea                   : Bool? //是否海购,是-true,否-false
+    var logisticsMode               : Int?  //1-海外直邮，2-保税区直邮
     
     override init() {
         super.init()

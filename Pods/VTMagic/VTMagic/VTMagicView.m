@@ -470,7 +470,7 @@ static VTPanRecognizerDirection direction = VTPanRecognizerDirectionUndefined;
             break;
         }
         default:
-            break;
+        break;
     }
 }
 
@@ -728,11 +728,11 @@ static VTPanRecognizerDirection direction = VTPanRecognizerDirectionUndefined;
         self.currentPage = newIndex;
         switch (_switchStyle) {
             case VTSwitchStyleStiff:
-                [self updateMenuBarWhenSwitchEnd];
-                break;
+            [self updateMenuBarWhenSwitchEnd];
+            break;
             default:
-                [self updateItemStateForDefaultStyle];
-                break;
+            [self updateItemStateForDefaultStyle];
+            break;
         }
     }
     
@@ -763,7 +763,7 @@ static VTPanRecognizerDirection direction = VTPanRecognizerDirectionUndefined;
     _menuBar.scrollEnabled = _menuScrollEnabled;
     _contentView.scrollEnabled = _scrollEnabled;
     if (!decelerate) {
-//        VTLog(@"scrollViewDidEndDragging");
+        //        VTLog(@"scrollViewDidEndDragging");
     }
 }
 
@@ -1005,7 +1005,7 @@ static VTPanRecognizerDirection direction = VTPanRecognizerDirectionUndefined;
 }
 
 - (void)setCurrentPage:(NSInteger)currentPage {
-//    if (_currentPage == _nextPageIndex) return;
+    //    if (_currentPage == _nextPageIndex) return;
     if (currentPage < 0) {
         return;
     }

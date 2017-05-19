@@ -26,7 +26,7 @@ class WOWOrderOtherCell: UITableViewCell {
         deliveryFeeLabel.text = WOWCalPrice.calTotalPrice([orderInfo.deliveryFee ?? 0], counts: [1]) //运费金额
         var productQty = 0
         for product in orderInfo.orderSettles  ?? [WOWCarProductModel](){
-            productQty = product.productQty ?? 0 + productQty
+            productQty = (product.productQty ?? 0) + productQty
         }
         countLabel.text = "共\(productQty)件"
         amountLabel.text = WOWCalPrice.calTotalPrice([orderInfo.totalAmount ?? 0], counts: [1])

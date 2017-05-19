@@ -168,7 +168,7 @@ let URL_OrderSettle             = "v3/order/settle"            //查询订单内
 
 let URL_OrderBuyNow             = "v2/order/buyNow"             //立即购买查询信息
 
-let URL_OrderCreat              = "v2/order/create"           //创建订单
+let URL_OrderCreat              = "v3/order/create"           //创建订单
 
 
 let URL_OrderCharge             = "v1/pay/charge"             //获取支付交易凭证

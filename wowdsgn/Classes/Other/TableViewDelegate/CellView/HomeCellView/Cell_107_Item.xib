@@ -47,31 +47,14 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WFz-IX-2UK">
-                        <rect key="frame" x="0.0" y="77" width="16" height="18"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="18" id="Moy-5d-PcZ"/>
-                            <constraint firstAttribute="width" constant="16" id="ecP-jq-FQg"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🇺🇸美国品牌" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdO-TJ-9rm">
-                        <rect key="frame" x="21" y="81.5" width="61" height="13.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="MJz-8g-J0G" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="2tH-N5-KNp"/>
                 <constraint firstItem="S5D-pV-AGu" firstAttribute="trailing" secondItem="MJz-8g-J0G" secondAttribute="trailing" id="3dg-CU-d5P"/>
-                <constraint firstItem="OdO-TJ-9rm" firstAttribute="leading" secondItem="WFz-IX-2UK" secondAttribute="trailing" constant="5" id="3xL-hz-MfS"/>
                 <constraint firstItem="2g8-vC-zkq" firstAttribute="top" secondItem="S5D-pV-AGu" secondAttribute="bottom" id="4cI-8x-iUd"/>
                 <constraint firstAttribute="trailing" secondItem="MJz-8g-J0G" secondAttribute="trailing" id="7XN-cs-9OJ"/>
                 <constraint firstItem="S5D-pV-AGu" firstAttribute="leading" secondItem="MJz-8g-J0G" secondAttribute="leading" id="7ah-x4-Uyi"/>
-                <constraint firstItem="S5D-pV-AGu" firstAttribute="leading" secondItem="WFz-IX-2UK" secondAttribute="leading" id="8NR-Hr-DiN"/>
-                <constraint firstItem="OdO-TJ-9rm" firstAttribute="bottom" secondItem="WFz-IX-2UK" secondAttribute="bottom" id="9Ft-9y-TSD"/>
-                <constraint firstItem="S5D-pV-AGu" firstAttribute="top" secondItem="WFz-IX-2UK" secondAttribute="bottom" constant="6" id="9lq-su-PGv"/>
                 <constraint firstItem="2g8-vC-zkq" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Ipt-Of-NVU"/>
                 <constraint firstItem="S5D-pV-AGu" firstAttribute="top" secondItem="MJz-8g-J0G" secondAttribute="bottom" constant="1" id="NGZ-ya-aCf"/>
                 <constraint firstItem="MJz-8g-J0G" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="lH6-SI-Wyg"/>

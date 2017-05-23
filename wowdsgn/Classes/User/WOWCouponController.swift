@@ -249,7 +249,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate, UITex
             if entrance == .userEntrance {
                 return 84
             }else {
-                return 149
+                return 139
             }
         default:
             return 15

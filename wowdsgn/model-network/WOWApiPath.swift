@@ -148,8 +148,6 @@ let URL_CartModify               = "v1/cart/modify"
 
 let URL_CartList                 = "v1/cart/list"
 
-let URL_CartNologin              = "v1/cart/nologinlistandadd"
-
 let URL_CartRemove               = "v1/cart/remove" //删除购物车商品
 
 let URL_CartCommit               = "v1/order/commit"
@@ -166,7 +164,7 @@ let URL_CartBottomList          = "v1/cart/recommend-products" // 无购物车�
 //订单相关
 let URL_OrderSettle             = "v3/order/settle"            //查询订单内的物品
 
-let URL_OrderBuyNow             = "v2/order/buyNow"             //立即购买查询信息
+let URL_OrderBuyNow             = "v3/order/settleBuyNow"             //立即购买查询信息
 
 let URL_OrderCreat              = "v3/order/create"           //创建订单
 

@@ -107,6 +107,8 @@ class WOWProductModel: WOWBaseModel,Mappable{
         availableStock              <- map["availableStock"]
         hasStock                    <- map["hasStock"]
         
+        isOversea                   <- map["isOversea"]
+        logisticsMode               <- map["logisticsMode"]
     
         // 前端自己算的 折扣数  暂时废弃，放到后台
 //        if let sellPrice = sellPrice , let originalprice = originalprice {

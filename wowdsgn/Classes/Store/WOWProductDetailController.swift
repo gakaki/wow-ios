@@ -40,6 +40,7 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
     var isHavePromotion = 0 //是否有促销
     var isHaveComment = 0   //是否有评论
     var isHaveAbout = 0 //是否有相关产品
+    var isOversea = 0   //是否有海购
     let pageSize = 6
     //UI
     @IBOutlet weak var tableView: UITableView!
@@ -203,6 +204,7 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
         //如果没有促销标签，则不显示
         isHaveLimit = 0
         isHavePromotion = 0
+        isOversea = 0
         productModel?.limitTag = ""
         promotionTag = ""
         promotionTime = ""
@@ -236,9 +238,15 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
         }else {
             isHaveAbout = 0
         }
+        //如果是海购商品则显示，没有不显示
+        if productModel?.isOversea ?? false {
+            isOversea = 1
+        }else {
+            isOversea = 0
+        }
         //产品参数默认打开
         paramView.isOpen(isOpenParam)
-        numberSections = 7 + isHaveLimit + isHavePromotion + isHaveComment + isHaveAbout
+        numberSections = 7 + isOversea + isHaveLimit + isHavePromotion + isHaveComment + isHaveAbout
         //产品描述说明
         productDescView.productDescLabel.text = productModel?.detailDescription
         productDescView.productDescLabel.setLineHeightAndLineBreak(1.5)

@@ -10,6 +10,7 @@ import UIKit
 
 class WOWProductDesCell: UITableViewCell {
 
+    @IBOutlet weak var exemptionLb: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -29,9 +29,10 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
     /**************************V3增加字段*****************************/
     var overseaOrder                         : Bool?            //是否海购
     //额外字段
-    var remark                               : UITextField!         //买家备注
+    var remark                               : UITextField?         //买家备注
     var isPromotion                          : Bool = true            //是否使用促销
     var discountAmount                       : Double = 0                  //优惠金额
+    var text                                 : String?
     
     override init() {
         super.init()
@@ -94,7 +95,7 @@ class WOWPromotionProductInfoModel: WOWBaseModel,Mappable {
 class WOWOrderInfoModel: WOWBaseModel,Mappable {
     var parentOrderId                          : Int?  //父订单id
     var parentOrderCode                          : String?  //父订单号
-    var orderResultVoList                           : [String]?    //子订单列表
+    var orderResultVoList                           : [WOWOrderCodeModel]?    //子订单列表
     
     
     required init?(map: Map) {

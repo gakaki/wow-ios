@@ -42,6 +42,8 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         tableView.register(UINib.nibName(String(describing: WOWProductCommentCell.self)), forCellReuseIdentifier:String(describing: WOWProductCommentCell.self))
         //相关商品
         tableView.register(UINib.nibName(String(describing: WOWProductDetailAboutCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailAboutCell.self))
+        //税率说明
+        tableView.register(UINib.nibName(String(describing: WOWTaxExplainCell.self)), forCellReuseIdentifier:String(describing: WOWTaxExplainCell.self))
     }
     
     
@@ -51,21 +53,21 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 3 + isHaveLimit + isHavePromotion:   //产品图文详情
+        case 3 + isOversea + isHaveLimit + isHavePromotion:   //产品图文详情
             return productModel?.secondaryImgs?.count ?? 0
-        case 4 + isHaveLimit + isHavePromotion: //产品参数可展开
+        case 4 + isOversea + isHaveLimit + isHavePromotion: //产品参数可展开
             if isOpenParam {
                 return productModel?.productParameter?.count ?? 0
             }else {
                 return 0
             }
-        case 5 + isHaveLimit + isHavePromotion: //温馨提示也可展开
+        case 5 + isOversea + isHaveLimit + isHavePromotion: //温馨提示也可展开
             if isOpenTips {
                 return 1
             }else {
                 return 0
             }
-        case 6 + isHaveLimit + isHavePromotion + isHaveComment: //商品评论
+        case 6 + isOversea + isHaveLimit + isHavePromotion + isHaveComment: //商品评论
             if isHaveComment == 1 {
                 return commentList.count > 3 ? 3 : commentList.count
 
@@ -96,11 +98,15 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         case (1 + isHaveLimit + isHavePromotion,_): //满199包邮
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDesCell.self), for: indexPath) as! WOWProductDesCell
             returnCell = cell
-        case (2 + isHaveLimit + isHavePromotion,_): //品牌设计师
+        case (1 + isOversea + isHaveLimit + isHavePromotion,_): //海购说明
+            let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTaxExplainCell.self), for: indexPath) as! WOWTaxExplainCell
+            cell.showData(productModel?.logisticsMode)
+            returnCell = cell
+        case (2 + isOversea + isHaveLimit + isHavePromotion,_): //品牌设计师
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailDescCell.self), for: indexPath) as! WOWProductDetailDescCell
             cell.showData(self.productModel)
             returnCell = cell
-        case (3 + isHaveLimit + isHavePromotion,_): //产品描述
+        case (3 + isOversea + isHaveLimit + isHavePromotion,_): //产品描述
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailCell.self), for: indexPath) as! WOWProductDetailCell
             if let array = productModel?.secondaryImgs {
                 let model = array[(indexPath as NSIndexPath).row]
@@ -115,7 +121,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             }
             
             returnCell = cell
-        case (4 + isHaveLimit + isHavePromotion,_): //参数
+        case (4 + isOversea + isHaveLimit + isHavePromotion,_): //参数
             
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductParamCell.self), for: indexPath) as! WOWProductParamCell
             
@@ -124,11 +130,11 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             }
             
             returnCell = cell
-        case (5 + isHaveLimit + isHavePromotion,_)://温馨提示
+        case (5 + isOversea + isHaveLimit + isHavePromotion,_)://温馨提示
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWProductDetailTipsWebViewCell", for: indexPath) as! WOWProductDetailTipsWebViewCell
             returnCell = cell
-        case (6 + isHaveLimit + isHavePromotion,_): //客服电话
+        case (6 + isOversea + isHaveLimit + isHavePromotion,_): //客服电话
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTelCell.self), for: indexPath) as! WOWTelCell
 
             cell.contentView.addTapGesture {[unowned self] (sender) in
@@ -147,12 +153,12 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
             }
             returnCell = cell
-        case (6 + isHaveLimit + isHavePromotion + isHaveComment,_): //商品评论
+        case (6 + isOversea + isHaveLimit + isHavePromotion + isHaveComment,_): //商品评论
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductCommentCell.self), for: indexPath) as! WOWProductCommentCell
             cell.showData(model: commentList[indexPath.row])
             cell.delegate = self
             returnCell = cell
-        case (6 + isHaveLimit + isHavePromotion + isHaveAbout + isHaveComment,_)://相关商品
+        case (6 + isOversea + isHaveLimit + isHavePromotion + isHaveAbout + isHaveComment,_)://相关商品
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWProductDetailAboutCell", for: indexPath) as! WOWProductDetailAboutCell
             cell.delegate = self
             cell.dataArr = aboutProductArray
@@ -172,19 +178,19 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 3 + isHaveLimit + isHavePromotion:
+        case 3 + isOversea + isHaveLimit + isHavePromotion:
             //动态获取产品描述的label高度
             return 67 + productDescView.productDescLabel.getEstimatedHeight()
-        case 4 + isHaveLimit + isHavePromotion, 5 + isHaveLimit + isHavePromotion:
+        case 4 + isOversea + isHaveLimit + isHavePromotion, 5 + isOversea  + isHaveLimit + isHavePromotion:
             //产品参数与温馨提示cell头
             return 60
-        case 6 + isHaveLimit + isHavePromotion + isHaveComment:       //商品评价
+        case 6 + isOversea + isHaveLimit + isHavePromotion + isHaveComment:       //商品评价
             if isHaveComment == 1 {
                 return 60
             }else {
                 return 0.01
             }
-        case 6 + isHaveLimit + isHavePromotion + isHaveComment + isHaveAbout: //如果相关商品有数据显示，如果没有就不显示
+        case 6 + isOversea + isHaveLimit + isHavePromotion + isHaveComment + isHaveAbout: //如果相关商品有数据显示，如果没有就不显示
             if aboutProductArray.count > 0 {
                 return 39
             }else {
@@ -203,15 +209,15 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             return 0.01
         case 0 + isHaveLimit + isHavePromotion: //促销标签
             return 0.01
-        case 4 + isHaveLimit + isHavePromotion:   //产品参数
+        case 4 + isOversea + isHaveLimit + isHavePromotion:   //产品参数
             if isOpenParam {
                 return 20
             }else {
                 return 0.01
             }
-        case 6 + isHaveLimit + isHavePromotion:  //客服电话
+        case 6 + isOversea + isHaveLimit + isHavePromotion:  //客服电话
             return 0.01
-        case 6 + isHaveLimit + isHavePromotion + isHaveComment:       //商品评价
+        case 6 + isOversea + isHaveLimit + isHavePromotion + isHaveComment:       //商品评价
             return 0.01
         default:
             return 10
@@ -221,9 +227,9 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
-        case 3 + isHaveLimit + isHavePromotion:     //产品描述
+        case 3 + isOversea + isHaveLimit + isHavePromotion:     //产品描述
             return productDescView
-        case 4 + isHaveLimit + isHavePromotion:   //产品参数
+        case 4 + isOversea + isHaveLimit + isHavePromotion:   //产品参数
             paramView.label.text = "产品参数"
             paramView.openImg.addTapGesture(action: { [weak self](tap) in
                 if let strongSelf = self  {
@@ -234,7 +240,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
                 })
             return paramView
-        case 5 + isHaveLimit + isHavePromotion:   //温馨提示
+        case 5 + isOversea + isHaveLimit + isHavePromotion:   //温馨提示
             tipsView.label.text = "温馨提示"
             tipsView.openImg.addTapGesture(action: { [weak self](tap) in
                 if let strongSelf = self  {
@@ -245,13 +251,13 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
                 })
             return tipsView
-        case 6 + isHaveLimit + isHavePromotion + isHaveComment: //相关商品
+        case 6 + isOversea + isHaveLimit + isHavePromotion + isHaveComment: //相关商品
             if isHaveComment == 1 {
                 return commentView
             }else {
                 return nil
             }
-        case 6 + isHaveLimit + isHavePromotion + isHaveAbout + isHaveComment: //相关商品
+        case 6 + isOversea + isHaveLimit + isHavePromotion + isHaveAbout + isHaveComment: //相关商品
             if aboutProductArray.count > 0 {
                 return aboutView
             }else {
@@ -267,7 +273,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         
         let view = UIView()
         view.backgroundColor = UIColor.clear
-        if section == 4 + isHaveLimit + isHavePromotion { //产品参数
+        if section == 4 + isOversea + isHaveLimit + isHavePromotion { //产品参数
             view.backgroundColor = UIColor.white
         }
         return view
@@ -276,7 +282,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath as NSIndexPath).section {
-        case 6 + isHaveLimit + isHavePromotion:   //客服电话
+        case 6 + isOversea + isHaveLimit + isHavePromotion:   //客服电话
             WOWTool.callPhone()
         default:
             break

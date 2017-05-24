@@ -30,7 +30,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var bottomLine: UIView!
     @IBOutlet weak var topView: UIView!
-    
+    @IBOutlet weak var overseaImg: UIImageView!
     @IBOutlet weak var viewBottom: UIView!
     
     @IBOutlet weak var lbLabel: UILabel!// 冬日促销标签
@@ -60,23 +60,36 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         }else {
            label_soldout.isHidden = true
         }
+        //是否显示分割线
         let i = (indexPath as NSIndexPath).item
         if ( i % 2 != 0 && i != 0){
             view_rightline.isHidden = true
         }else{
             view_rightline.isHidden = false
         }
+        
         if i > 1 {
             topView.isHidden = true
         }else {
             topView.isHidden = false
         }
+        
         productId = model.productId
 
         pictureImageView.set_webimage_url(model.productImg)
         
         // 修改来回上下加载 内存不减的问题
         desLabel.text = model.productTitle ?? ""
+        //是否显示海外购标识
+        if model.isOversea ?? false {
+            overseaImg.isHidden = false
+            let ImgStr = String(format: "countryflags_%i", model.originCountryId ?? 0)
+            overseaImg.image = UIImage(named: ImgStr)
+
+        }else {
+            overseaImg.isHidden = true
+
+        }
         if let price = model.sellPrice {
             let result = WOWCalPrice.calTotalPrice([price],counts:[1])
             priceLabel.text     = result//千万不用格式化了            
@@ -108,6 +121,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         likeBtn.addTarget(self, action: #selector(likeClick(_:)), for: .touchUpInside)
         self.isHiddenSignsLabel(model: model)
     }
+    //是否显示折扣标签
     func isHiddenSignsLabel(model:WOWProductModel)  {
         lbNew.isHidden              = true
         lbDiscount.isHidden         = true

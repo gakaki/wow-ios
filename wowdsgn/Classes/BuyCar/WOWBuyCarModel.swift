@@ -48,6 +48,8 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
     var pricePromotionTag                   : String?
     var isOversea                             : Bool?     //是否海购
     var logisticsMode                       : Int?
+    var originCountry                       : String?
+    var originCountryId                     : Int?
     
     required init?(map: Map) {
         
@@ -76,6 +78,8 @@ class WOWCarProductModel: WOWBaseModel,Mappable {
         pricePromotionTag                    <- map["pricePromotionTag"]
         isOversea                              <- map["isOversea"]
         logisticsMode                        <- map["logisticsMode"]
+        originCountry               <- map["originCountry"]
+        originCountryId             <- map["originCountryId"]
     }
     
 }

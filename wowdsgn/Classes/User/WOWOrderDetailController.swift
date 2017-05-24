@@ -494,7 +494,8 @@ extension WOWOrderDetailController{
                 let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
                 vc.payMethod = paymentChannelName ?? ""
                 vc.orderid = orderCode ?? ""
-                vc.totalPrice = "¥ " + String(format: "%.2f",payAmount ?? 0)
+                let result = WOWCalPrice.calTotalPrice([payAmount ?? 0],counts:[1])
+                vc.totalPrice = result
                 
                 //TalkingData 支付成功
                 var sum = payAmount ?? 0

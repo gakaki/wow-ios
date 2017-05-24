@@ -132,8 +132,9 @@ class WOWCouponController: WOWBaseViewController {
     
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_GetCoupon(redemptionCode: redemotionCode), successClosure: {[weak self] (result, code) in
             if let strongSelf = self {
-                WOWHud.showMsg("您的优惠码已兑换成功！")
                 strongSelf.request()
+                WOWHud.showMsg("您的优惠码已兑换成功！")
+
             }
         }) { (errorMsg) in
             WOWHud.showMsgNoNetWrok(message: errorMsg)

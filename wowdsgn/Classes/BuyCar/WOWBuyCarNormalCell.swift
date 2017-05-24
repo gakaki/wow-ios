@@ -14,19 +14,23 @@ protocol buyCarDelegate: class {
 
 class WOWBuyCarNormalCell: UITableViewCell{
 
-    @IBOutlet weak var goodsImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var subCountButton: UIButton!
-    @IBOutlet weak var addCountButton: UIButton!
-    @IBOutlet weak var countTextField: UITextField!
-    @IBOutlet weak var selectButton: UIButton!
-    @IBOutlet weak var perPriceLabel: UILabel!
+    @IBOutlet weak var goodsImageView: UIImageView!     //商品图片
+    @IBOutlet weak var nameLabel: UILabel!      //商品名字
+    @IBOutlet weak var subCountButton: UIButton!    //减少数量
+    @IBOutlet weak var addCountButton: UIButton!       //增加数量
+    @IBOutlet weak var countTextField: UITextField!     //显示数量
+    @IBOutlet weak var selectButton: UIButton!          //选择框
+    @IBOutlet weak var perPriceLabel: UILabel!          //
     @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var tagList: TagListView!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var limitView: UIView!
     @IBOutlet weak var limitTagLabel: UILabel!
     @IBOutlet weak var topHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var overseaView: UIView!             
+    @IBOutlet weak var overseaImg: UIImageView!
+    @IBOutlet weak var overseaLabel: UILabel!
     var typeArr = [String]()
     var model:WOWCarProductModel!
     weak var delegate: buyCarDelegate?
@@ -54,16 +58,31 @@ class WOWBuyCarNormalCell: UITableViewCell{
         nameLabel.text = model.productName
         countLabel.text = "x \(model.productQty ?? 1)"
         countTextField.text = "\(model.productQty ?? 1)"
+        //产品价格
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         perPriceLabel.text = result
+        //是否选中
         selectButton.isSelected = model.isSelected ?? false
-//        let arr = [model.color ?? "",model.specName ?? ""]
+        //产品规格
         if let attributes = model.attributes {
             tagList.removeAllTags()
             for attribute in attributes {
                 tagList.addTag(attribute)
             }
         }
+        
+        //是否海购商品
+        if model.isOversea ?? false {
+            overseaView.isHidden        = false
+            let ImgStr = String(format: "countryflags_%i", model.originCountryId ?? 0)
+            let lbStr = model.logisticsMode == 2 ? "保税区直邮": ((model.originCountry ?? "") + "直邮")
+            overseaImg.image = UIImage(named: ImgStr)
+            overseaLabel.text = lbStr
+        }else {
+            overseaView.isHidden        = true
+            
+        }
+        
         //判断产品是否是促销产品,如果是促销产品的话打上标签
         if model.limitQty > 0 {
             topHeight.constant = 30

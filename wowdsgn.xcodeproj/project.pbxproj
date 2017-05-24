@@ -472,6 +472,7 @@
 		2DDFB5341DE2CBDF009641F7 /* WOWHotStyleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDFB5331DE2CBDF009641F7 /* WOWHotStyleModel.swift */; };
 		458523D0F557C0CFD1003B89 /* Pods_wowdsgn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D22051AC3698C3AAC002B1 /* Pods_wowdsgn.framework */; };
 		630792B91DEECCCA008834E4 /* Array+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630792B81DEECCCA008834E4 /* Array+Add.swift */; };
+		630D256C1ED427ED00C2329A /* WOWPayResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630D256B1ED427ED00C2329A /* WOWPayResultController.swift */; };
 		63108BA61E8B594E004B2064 /* WOWOtherCenterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63108BA51E8B594E004B2064 /* WOWOtherCenterController.swift */; };
 		63108BA91E8B5A4A004B2064 /* WOWOtherHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63108BA71E8B5A4A004B2064 /* WOWOtherHeaderView.swift */; };
 		63108BAA1E8B5A4A004B2064 /* WOWOtherHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63108BA81E8B5A4A004B2064 /* WOWOtherHeaderView.xib */; };
@@ -1142,6 +1143,7 @@
 		2DDFB5331DE2CBDF009641F7 /* WOWHotStyleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWHotStyleModel.swift; sourceTree = "<group>"; };
 		42D22051AC3698C3AAC002B1 /* Pods_wowdsgn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wowdsgn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		630792B81DEECCCA008834E4 /* Array+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Add.swift"; sourceTree = "<group>"; };
+		630D256B1ED427ED00C2329A /* WOWPayResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWPayResultController.swift; sourceTree = "<group>"; };
 		63108BA51E8B594E004B2064 /* WOWOtherCenterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWOtherCenterController.swift; sourceTree = "<group>"; };
 		63108BA71E8B5A4A004B2064 /* WOWOtherHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWOtherHeaderView.swift; sourceTree = "<group>"; };
 		63108BA81E8B5A4A004B2064 /* WOWOtherHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWOtherHeaderView.xib; sourceTree = "<group>"; };
@@ -2318,6 +2320,7 @@
 				069D2F911DB47ADC00A059D0 /* WOWBuyCarController.swift */,
 				069D2F9D1DB47ADC00A059D0 /* WOWEditOrderController.swift */,
 				069D2FA71DB47ADC00A059D0 /* WOWPaySuccessController.swift */,
+				630D256B1ED427ED00C2329A /* WOWPayResultController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -3424,6 +3427,7 @@
 				2D2331E31DFF9398006E7BC0 /* WOWUpdateView.swift in Sources */,
 				069D32431DB47ADD00A059D0 /* PageControllerDataSource.swift in Sources */,
 				631FA9AA1EA0D47800E18EC9 /* SimpleHUD.swift in Sources */,
+				630D256C1ED427ED00C2329A /* WOWPayResultController.swift in Sources */,
 				069D32C71DB47ADD00A059D0 /* WOWOrderDetailTwoCell.swift in Sources */,
 				2DDA4DD61DDEFE2E00E7A7E8 /* Cell_102_Project.swift in Sources */,
 				63546DFC1E836A4600DB7F82 /* WOWUserHeaderView.swift in Sources */,

@@ -33,7 +33,7 @@ class WOWWorksCell: UICollectionViewCell {
         if ( res.length <= 0 ){
             return ""
         }else{
-            res     = "\(url!)?imageView2/0/w/500/format/webp/q/90"
+            res     = "\(url!)?imageView2/0/w/500/format/webp/q/75"
             
         }
         return res

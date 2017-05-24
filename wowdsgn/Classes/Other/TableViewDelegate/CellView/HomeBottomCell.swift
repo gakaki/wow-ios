@@ -61,6 +61,9 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
     @IBOutlet weak var lbStockOne: UILabel!// 1.第一个 售馨标签
     @IBOutlet weak var lbStockTwo: UILabel!
     
+    @IBOutlet weak var overseaImgOne: UIImageView!
+    @IBOutlet weak var overseaImgTwo: UIImageView!
+    
     @IBOutlet weak var LeftConstraintOne: NSLayoutConstraint! // 标签位置
     @IBOutlet weak var LeftConstraintTwo: NSLayoutConstraint!
     
@@ -172,6 +175,15 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
         imgShowOne.set_webimage_url(model.productImg)
         lbTitleOne.text     = model.productName
         productIdOne        = model.productId
+        //是否显示海外购标识
+        if model.isOversea ?? false {
+            overseaImgOne.isHidden = false
+            let ImgStr = String(format: "countryflags_%i", model.originCountryId ?? 0)
+            overseaImgOne.image = UIImage(named: ImgStr)
+        }else {
+            overseaImgOne.isHidden = true
+            
+        }
         // 格式化 价格小数点
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         priceLbOne.text = sellPrice
@@ -218,6 +230,15 @@ class HomeBottomCell: UITableViewCell,ModuleViewElement {
         imgShowTwo.set_webimage_url(model.productImg)
         lbTitleTwo.text = model.productName
         productIdTwo = model.productId
+        //是否显示海外购标识
+        if model.isOversea ?? false {
+            overseaImgTwo.isHidden = false
+            let ImgStr = String(format: "countryflags_%i", model.originCountryId ?? 0)
+            overseaImgTwo.image = UIImage(named: ImgStr)
+        }else {
+            overseaImgTwo.isHidden = true
+            
+        }
         // 格式化 价格小数点
         let sellPrice = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
         priceLbTwo.text = sellPrice

@@ -11,6 +11,7 @@
 #endif
 
 #import "VTMagic.h"
+#import "UIButton+VTMagic.h"
 #import "UIColor+VTMagic.h"
 #import "UIScrollView+VTMagic.h"
 #import "UIViewController+VTMagic.h"

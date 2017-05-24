@@ -25,7 +25,18 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
     var promotionNames                       : [String]?         //促销活动的名字
     var promotionProductInfoVos              : [WOWPromotionProductInfoModel]?   //促销信息
     var totalPromotionDeduction              : Double?          //促销优惠金额
-
+    
+    /**************************V3增加字段*****************************/
+    var overseaOrder                         : Bool?            //是否海购
+    //额外字段
+    var remark                               : UITextField?         //买家备注
+    var isPromotion                          : Bool = true            //是否使用促销
+    var discountAmount                       : Double = 0                  //优惠金额
+    var text                                 : String?
+    
+    override init() {
+        super.init()
+    }
     
     required init?(map: Map) {
         
@@ -46,7 +57,17 @@ class WOWEditOrderModel: WOWBaseModel,Mappable {
         promotionNames                          <- map["promotionNames"]
         promotionProductInfoVos                   <- map["promotionProductInfoVos"]
         totalPromotionDeduction                     <- map["totalPromotionDeduction"]
-
+        overseaOrder                            <- map["overseaOrder"]
+        //如果优惠金额 = 0 ，说明没有优惠
+        //默认选促销
+        if totalPromotionDeduction == 0 {
+            isPromotion = false
+            discountAmount = deduction ?? 0
+        }else {
+            isPromotion = true
+            discountAmount = totalPromotionDeduction ?? 0
+        
+        }
 
     }
     
@@ -67,6 +88,42 @@ class WOWPromotionProductInfoModel: WOWBaseModel,Mappable {
         productNames                         <- map["productNames"]
         promotionName                         <- map["promotionName"]
        
+    }
+    
+}
+
+class WOWOrderInfoModel: WOWBaseModel,Mappable {
+    var parentOrderId                          : Int?  //父订单id
+    var parentOrderCode                          : String?  //父订单号
+    var orderResultVoList                           : [WOWOrderCodeModel]?    //子订单列表
+    
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        parentOrderId                          <- map["parentOrderId"]
+        parentOrderCode                         <- map["parentOrderCode"]
+        orderResultVoList                         <- map["orderResultVoList"]
+        
+    }
+    
+}
+
+class WOWOrderCodeModel: WOWBaseModel,Mappable {
+    var orderId                          : Int?  //子订单id
+    var orderCode                          : String?  //子订单号
+    
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        orderId                          <- map["orderId"]
+        orderCode                         <- map["orderCode"]
+        
     }
     
 }

@@ -22,13 +22,14 @@ class WOWCouponController: WOWBaseViewController {
     var vo_cupons = [WOWCouponModel]()
     var minAmountLimit: Double?
     var couponModel:WOWCouponModel?
+    var isOverSea: Bool = false
     var action  : WOWObjectActionClosure?
 
     var entrance        = couponEntrance.userEntrance
     
     lazy var emptyView: WOWCouponEmptyView = {
         let view = Bundle.main.loadNibNamed(String(describing: WOWCouponEmptyView.self), owner: self, options: nil)?.last as! WOWCouponEmptyView
-        view.frame = CGRect(x: 0, y: 100, w: MGScreenWidth, h: 400)
+        view.frame = CGRect(x: 0, y: 100, w: MGScreenWidth, h: 500)
         return view
     }()
     
@@ -74,7 +75,7 @@ class WOWCouponController: WOWBaseViewController {
         case .userEntrance:
             params = ["currentPage": pageIndex as AnyObject,"pageSize":pageSize as AnyObject]
         case .orderEntrance:
-            params = ["currentPage": pageIndex as AnyObject, "pageSize": pageSize as AnyObject, "minAmountLimit": minAmountLimit as AnyObject? ?? 0 as AnyObject, "couponLimitType": 0 as AnyObject]
+            params = ["currentPage": pageIndex as AnyObject, "pageSize": pageSize as AnyObject, "minAmountLimit": minAmountLimit as AnyObject? ?? 0 as AnyObject, "couponLimitType": 0 as AnyObject, "overSea": isOverSea as AnyObject]
         }
         
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_Coupons(params: params), successClosure: {[weak self] (result, code) in
@@ -248,7 +249,7 @@ extension WOWCouponController: UITableViewDataSource, UITableViewDelegate, UITex
             if entrance == .userEntrance {
                 return 84
             }else {
-                return 149
+                return 139
             }
         default:
             return 15

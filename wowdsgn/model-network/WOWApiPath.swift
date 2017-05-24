@@ -9,7 +9,7 @@
 import Foundation
 
 //Host
-//王云鹏自己的本机 10.0.23.67        127.0.0.1+
+//王云鹏自己的本机 10.0.23.67        127.0.0.1+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 //测服地址 http://api.dev.wowdsgn.com
 
 
@@ -18,7 +18,7 @@ import Foundation
 let WOWShareUrl                         = "m.wowdsgn.com" // 正式服务器 分享地址
 //let WOWShareUrl                         = "http://10.0.60.121:7070"// 测试服务器分享地址
 
-   let BaseUrl = "http://10.0.60.121:8080/" //内网开发 
+   let BaseUrl = "http://10.0.60.121:8080/" //内网开发
 
 //   let BaseUrl = "http://10.0.60.91:8080/"
 //  let BaseUrl = "https://wowdsgn.iok.la" //外网访问内网也可以的地址
@@ -148,8 +148,6 @@ let URL_CartModify               = "v1/cart/modify"
 
 let URL_CartList                 = "v1/cart/list"
 
-let URL_CartNologin              = "v1/cart/nologinlistandadd"
-
 let URL_CartRemove               = "v1/cart/remove" //删除购物车商品
 
 let URL_CartCommit               = "v1/order/commit"
@@ -164,11 +162,11 @@ let URL_CartUnSelect            = "v1/cart/unselect"   //取消选中购物车�
 
 let URL_CartBottomList          = "v1/cart/recommend-products" // 无购物车，显示热门推荐列表
 //订单相关
-let URL_OrderSettle             = "v2/order/settle"            //查询订单内的物品
+let URL_OrderSettle             = "v3/order/settle"            //查询订单内的物品
 
-let URL_OrderBuyNow             = "v2/order/buyNow"             //立即购买查询信息
+let URL_OrderBuyNow             = "v3/order/settleBuyNow"             //立即购买查询信息
 
-let URL_OrderCreat              = "v2/order/create"           //创建订单
+let URL_OrderCreat              = "v3/order/create"           //创建订单
 
 
 let URL_OrderCharge             = "v1/pay/charge"             //获取支付交易凭证

@@ -10,11 +10,24 @@ import UIKit
 
 class WOWTaxExplainCell: UITableViewCell {
 
+    @IBOutlet weak var taxImg: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    func showData(_ logisticsMode: Int?){
+        if let logisticsMode = logisticsMode {
+            switch logisticsMode {
+            case 1:     //海外直邮
+                taxImg.image = UIImage(named: "tax2")
+            case 2:     //保税区直邮
+                taxImg.image = UIImage(named: "tax1")
+            default:
+                taxImg.image = UIImage(named: "placeholder_product")
+            }
+        }
+    
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

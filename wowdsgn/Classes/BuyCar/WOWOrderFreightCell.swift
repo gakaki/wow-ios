@@ -13,6 +13,7 @@ class WOWOrderFreightCell: UITableViewCell {
     @IBOutlet weak var couponLabel: UILabel!
     @IBOutlet weak var lineView: UIView!
     @IBOutlet weak var selectBtn: UIButton!
+    @IBOutlet weak var tapView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

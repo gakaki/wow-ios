@@ -86,7 +86,9 @@ class WOWBaseMackViewController: UIViewController,CAAnimationDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
+    deinit {
+        DLog("shifang")
+    }
 
 
 }

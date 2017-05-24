@@ -41,9 +41,9 @@ target 'wowdsgn' do
 	pod 'YYImage'
 	pod 'Kingfisher'
 
-	pod 'VTMagic'
+    pod 'VTMagic'   , :git => 'https://github.com/aycgithub/VTMagic.git'
 	pod 'SDWebImage'
-    pod 'Koloda'
+    pod 'Koloda' , :git => 'https://github.com/aycgithub/Koloda.git'
 
   #	pod 'Hashids-Swift'			#短id生成
   #	pod 'StyleKit'       		暂时不用

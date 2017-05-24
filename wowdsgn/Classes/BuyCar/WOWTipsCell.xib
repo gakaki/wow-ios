@@ -1,39 +1,53 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWTipsCell" rowHeight="130" id="Pc7-KI-CrF" customClass="WOWTipsCell" customModule="wowapp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="387" height="130"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WOWTipsCell" rowHeight="65" id="Pc7-KI-CrF" customClass="WOWTipsCell" customModule="wowdsgn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="387" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pc7-KI-CrF" id="pCJ-3x-6Az">
-                <frame key="frameInset" width="387" height="129"/>
+                <rect key="frame" x="0.0" y="0.0" width="387" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oG0-OC-mpN" customClass="HolderTextView" customModule="wowapp" customModuleProvider="target">
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="99.5" id="XZK-js-7qd"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="买家留言:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpl-FT-ycg">
+                        <rect key="frame" x="15" y="16.5" width="61.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="写下您的特殊要求" textAlignment="natural" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NZk-L6-Daj">
+                        <rect key="frame" x="81.5" y="16" width="290.5" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19" id="jLf-Vt-5ag"/>
+                        </constraints>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <outlet property="delegate" destination="Pc7-KI-CrF" id="M4s-6X-tUQ"/>
+                        </connections>
+                    </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="oG0-OC-mpN" firstAttribute="top" secondItem="pCJ-3x-6Az" secondAttribute="top" constant="15" id="2Tg-X5-sYU"/>
-                    <constraint firstAttribute="trailing" secondItem="oG0-OC-mpN" secondAttribute="trailing" constant="15" id="OYA-Pn-PEn"/>
-                    <constraint firstAttribute="bottom" secondItem="oG0-OC-mpN" secondAttribute="bottom" constant="15" id="Rxf-OZ-U3j"/>
-                    <constraint firstItem="oG0-OC-mpN" firstAttribute="leading" secondItem="pCJ-3x-6Az" secondAttribute="leading" constant="15" id="khC-RD-ODy"/>
+                    <constraint firstItem="Jpl-FT-ycg" firstAttribute="centerY" secondItem="pCJ-3x-6Az" secondAttribute="centerY" id="0AK-9X-OXw"/>
+                    <constraint firstItem="NZk-L6-Daj" firstAttribute="leading" secondItem="Jpl-FT-ycg" secondAttribute="trailing" constant="5" id="848-cy-jiV"/>
+                    <constraint firstAttribute="trailing" secondItem="NZk-L6-Daj" secondAttribute="trailing" constant="15" id="ElU-RP-D20"/>
+                    <constraint firstItem="Jpl-FT-ycg" firstAttribute="leading" secondItem="pCJ-3x-6Az" secondAttribute="leading" constant="15" id="pak-vF-f1f"/>
+                    <constraint firstItem="NZk-L6-Daj" firstAttribute="centerY" secondItem="pCJ-3x-6Az" secondAttribute="centerY" id="xRu-Sc-3dC"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="textView" destination="oG0-OC-mpN" id="kGF-vk-6qp"/>
+                <outlet property="textField" destination="NZk-L6-Daj" id="AYc-GU-cpK"/>
             </connections>
-            <point key="canvasLocation" x="267.5" y="526"/>
+            <point key="canvasLocation" x="203" y="495"/>
         </tableViewCell>
     </objects>
 </document>

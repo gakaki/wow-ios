@@ -15,6 +15,7 @@ class WOWHotStyleMain: WOWBaseModuleVC {
  
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        MobClick.e(.Selection_Page)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     override func viewWillDisappear(_ animated: Bool) {

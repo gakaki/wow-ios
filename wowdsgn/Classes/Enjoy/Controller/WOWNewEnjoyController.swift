@@ -246,6 +246,10 @@ extension WOWNewEnjoyController: KolodaViewDelegate {
 // MARK: KolodaViewDataSource
 
 extension WOWNewEnjoyController: KolodaViewDataSource {
+    func kolodaSpeedThatCardShouldDrag(_ koloda: KolodaView) -> DragSpeed {
+        return DragSpeed.default
+    }
+
     
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
         return fineWroksArr.count

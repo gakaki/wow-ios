@@ -152,7 +152,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  顶部导航菜单视图
  */
-@property (nonatomic, strong, nullable) VTMenuBar *menuBar; 
+@property (nonatomic, strong, nullable) VTMenuBar *menuBar;
 
 /**
  *  最顶部的头部组件，默认隐藏

@@ -59,7 +59,6 @@ class WOWBuyBackView: UIView {
     func show(_ entrance: carEntrance) {
         backClear.frame = CGRect(x: 0,y: self.h,width: self.w,height: self.h)
         addSubview(backClear)
-//        buyView.productSpecModel = productSpec
         buyView.refreshProductInfo()
         buyView.productSku()
         buyView.selectSpec = false
@@ -217,7 +216,6 @@ class WOWGoodsBuyView: UIView,UICollectionViewDelegate,UICollectionViewDataSourc
     //初始化视图的时候把初始数据赋值
     func configDefaultData() {
         if let p = WOWBuyCarMananger.sharedBuyCar.productSpecModel{
-//            productSpecModel = p
             //循环遍历产品列表，找出当前id对应的sku，如果找不到该商品则默认取数组中第一个。（
             
             if let productArray = p.products {

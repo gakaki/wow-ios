@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,9 +14,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5R7-eX-IPz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rectangle" translatesAutoresizingMaskIntoConstraints="NO" id="MjL-Ga-mgn">
                         <rect key="frame" x="352" y="18" width="8" height="13"/>
                         <constraints>
@@ -67,9 +71,13 @@
                     <constraint firstItem="I3F-YQ-meT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="05l-ge-hxP"/>
                     <constraint firstItem="95m-1U-wxq" firstAttribute="top" secondItem="I3F-YQ-meT" secondAttribute="bottom" constant="16" id="1Oz-bx-200"/>
                     <constraint firstItem="95m-1U-wxq" firstAttribute="top" secondItem="6bw-i0-dcq" secondAttribute="bottom" constant="6" id="1Ur-IA-4oB"/>
+                    <constraint firstAttribute="bottom" secondItem="5R7-eX-IPz" secondAttribute="bottom" id="2Rg-HR-04e"/>
                     <constraint firstItem="MjL-Ga-mgn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="46q-dZ-2Z5"/>
                     <constraint firstAttribute="bottom" secondItem="95m-1U-wxq" secondAttribute="bottom" id="7y4-WA-l8F"/>
+                    <constraint firstItem="5R7-eX-IPz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="C0r-ri-jIq"/>
+                    <constraint firstAttribute="trailing" secondItem="5R7-eX-IPz" secondAttribute="trailing" id="ECY-dc-vvo"/>
                     <constraint firstItem="I3F-YQ-meT" firstAttribute="leading" secondItem="6bw-i0-dcq" secondAttribute="trailing" constant="2" id="I0D-zp-nAJ"/>
+                    <constraint firstItem="5R7-eX-IPz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="MZU-nu-jp8"/>
                     <constraint firstItem="dgN-gi-k8r" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="I3F-YQ-meT" secondAttribute="trailing" constant="10" id="N3y-Hp-naW"/>
                     <constraint firstItem="I3F-YQ-meT" firstAttribute="leading" secondItem="6bw-i0-dcq" secondAttribute="trailing" constant="2" id="Z0p-Dd-idR"/>
                     <constraint firstAttribute="trailing" secondItem="95m-1U-wxq" secondAttribute="trailing" id="bg6-3b-9nN"/>
@@ -93,6 +101,7 @@
                 <outlet property="leftLabel" destination="I3F-YQ-meT" id="MPj-eL-j5n"/>
                 <outlet property="lineView" destination="95m-1U-wxq" id="0Qr-TW-CyD"/>
                 <outlet property="selectBtn" destination="6bw-i0-dcq" id="qvX-83-krt"/>
+                <outlet property="tapView" destination="5R7-eX-IPz" id="lvw-se-XOJ"/>
             </connections>
             <point key="canvasLocation" x="290.5" y="221"/>
         </tableViewCell>

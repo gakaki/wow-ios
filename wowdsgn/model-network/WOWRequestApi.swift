@@ -100,8 +100,6 @@ public enum RequestApi{
     
     case api_CartList(cart:String)
     
-    case api_CartNologin(cart:String)
-    
     case api_CartRemove(shoppingCartId:[Int])
     
     case api_CartCommit(car:String)
@@ -427,8 +425,7 @@ extension RequestApi:TargetType{
             return URL_CartAdd
         case .api_CartGet:
             return URL_CartGet
-        case .api_CartNologin:
-            return URL_CartNologin
+
         case .api_CartRemove:
             return URL_CartRemove
         case .api_CartCommit:
@@ -759,8 +756,6 @@ extension RequestApi:TargetType{
             case let .api_CartModify(shoppingCartId, productQty):
                 params =  ["shoppingCartId": shoppingCartId, "productQty": productQty]
             case let .api_CartList(cart):
-                params =  ["cart":cart]
-            case let .api_CartNologin(cart):
                 params =  ["cart":cart]
             case let .api_CartRemove(shoppingCartId):
                 params =  ["shoppingCartIds":shoppingCartId]

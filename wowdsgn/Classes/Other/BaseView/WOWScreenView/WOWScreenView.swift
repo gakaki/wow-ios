@@ -13,7 +13,7 @@ class PriceSectionModel:NSObject {
     var minPrice : Int?
     
 }
-class SectionModel: NSObject {
+class WOW_SectionModel: NSObject {
     var sectionTitle : String?
     var isOut :Bool?
     
@@ -49,7 +49,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
     var priceArr                = [Int]()
     /* 配置信息 */
     var cellHightDic            = Dictionary<Int, CGFloat>()
-    var arrayTitle              = [SectionModel]()
+    var arrayTitle              = [WOW_SectionModel]()
     /* 筛选条件 */
     var screenColorArr          = [String]()
     var screenStyleArr          = [String]()
@@ -60,7 +60,7 @@ class WOWScreenView: UIView,CAAnimationDelegate {
         didSet {
             for str in 0 ..< screenTitles.count {
                 
-                let model = SectionModel.init(sectionTitle: screenTitles[str], isOut: true)
+                let model = WOW_SectionModel.init(sectionTitle: screenTitles[str], isOut: true)
                 arrayTitle.append(model)
             }
             tableView.reloadData()

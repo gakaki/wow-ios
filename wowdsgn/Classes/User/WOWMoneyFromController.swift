@@ -12,10 +12,7 @@ import UIKit
 class WOWMoneyFromController: WOWApplyAfterBaseController {
     var actualRefundAmount:String?
     var dataArr  = [WOWRufundProcessModel]()
-    let data : [(TimelinePoint, UIColor, UIColor)]
-        = [(TimelinePoint(color: YellowColor, filled: true),UIColor.clear,YellowColor),
-           (TimelinePoint(color: YellowColor, filled: true),YellowColor,YellowColor),
-           (TimelinePoint(color: SeprateColor, filled: true),SeprateColor,UIColor.clear)]
+    var data = [(TimelinePoint, UIColor, UIColor)]()
     var saleOrderItemRefundId        : Int!      // 单个商品 在订单中Id
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +39,33 @@ class WOWMoneyFromController: WOWApplyAfterBaseController {
                 let bannerList = Mapper<WOWRufundProcessModel>().mapArray(JSONObject:JSON(result)["refundProcessList"].arrayObject)
                 if let bannerList = bannerList {
                     strongSelf.dataArr = bannerList
+                    for item in bannerList.enumerated() {
+                        let pointColor      = TimelinePoint(color: YellowColor)
+                        let seprateColor    = TimelinePoint(color: SeprateColor)
+                        let clearColor        = UIColor.clear
+                        let lineColor       = SeprateColor
+                        if item.offset == 0 {
+                            if item.element.isPass ?? false {
+                                strongSelf.data.append((pointColor,clearColor,YellowColor))
+                            }else{
+                                strongSelf.data.append((seprateColor,clearColor,lineColor))
+                            }
+                        }else if item.offset == bannerList.count - 1 {
+                            if item.element.isPass ?? false {
+                                strongSelf.data.append((pointColor,YellowColor,clearColor))
+                            }else{
+                                strongSelf.data.append((seprateColor,lineColor,clearColor))
+                            }
+                        }else{
+                            if item.element.isPass ?? false {
+                                strongSelf.data.append((pointColor,YellowColor,YellowColor))
+                            }else{
+                                strongSelf.data.append((seprateColor,lineColor,lineColor))
+                            }
+
+                        }
+                        
+                    }
                     strongSelf.actualRefundAmount = json["actualRefundAmount"].stringValue
                     strongSelf.tableView.reloadData()
                 }

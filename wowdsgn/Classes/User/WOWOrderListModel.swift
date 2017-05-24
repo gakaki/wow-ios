@@ -380,7 +380,8 @@ class WOWRufundProcessModel: WOWBaseModel,Mappable{
     var refundEventType                                         : Int?           // 流转事件类型
     var refundEventTypeName                                     : String?           // 流转事件类型名称
     var createTime                                              : String?           // 创建时间
-    
+    var isPass                                                  : Bool?         // 该节点是否已经通过
+
     
     required init?(map: Map) {
         
@@ -390,6 +391,7 @@ class WOWRufundProcessModel: WOWBaseModel,Mappable{
         refundEventType                                                     <- map["refundEventType"]
         refundEventTypeName                                                 <- map["refundEventTypeName"]
         createTime                                                          <- map["createTime"]
+        isPass                                                              <- map["isPass"]
     }
     
 }

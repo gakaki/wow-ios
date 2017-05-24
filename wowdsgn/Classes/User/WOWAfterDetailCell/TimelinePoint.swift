@@ -47,7 +47,7 @@ public struct TimelinePoint {
         self.init(diameter: diameter, lineWidth: 2.0, color: color, filled: filled)
     }
     
-    public init(color: UIColor, filled: Bool) {
+    public init(color: UIColor, filled: Bool = true) {
         self.init(diameter: radiusDefault, lineWidth: 2.0, color: color, filled: filled)
     }
     

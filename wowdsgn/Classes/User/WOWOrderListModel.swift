@@ -149,7 +149,8 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
     var totalProductQty                     : Int?//购买的商品总件数
     var packages                            : [WOWNewForGoodsModel]?//已发货清单列表
     var unShipOutOrderItems                 : [WOWNewProductModel]?//未发货清单列表
-    
+    var orderItemVos                        : [WOWNewProductModel]?// 退换货清单
+    var productAmount                       : String?//退款金额
     var leftPaySeconds                      : Int? // 订单剩余支付时间
     
     var changedAmount                        : Double?        //商家修改金额
@@ -181,21 +182,24 @@ class WOWNewOrderDetailModel: WOWBaseModel,Mappable{
         packages                            <- map["packages"]
         unShipOutOrderItems                 <- map["unShipOutOrderItems"]
         leftPaySeconds                      <- map["leftPaySeconds"]
-        changedAmount                           <- map["changedAmount"]
-        changedAmountType                       <- map["changedAmountType"]
+        changedAmount                       <- map["changedAmount"]
+        changedAmountType                   <- map["changedAmountType"]
+        
+        orderItemVos                        <- map["orderItemVos"]
+        productAmount                       <- map["productAmount"]
     }
 }
 
 /// 已经发货MOdel
 class WOWNewForGoodsModel: WOWBaseModel,Mappable{
     
-    var deliveryCompanyName              : String? //快递公司名称
+    var deliveryCompanyName                 : String? //快递公司名称
     
-    var deliveryOrderNo       : String?// 快递单号
+    var deliveryOrderNo                     : String?// 快递单号
     
-    var deliveryCompanyCode              : String? //快递公司编码
+    var deliveryCompanyCode                 : String? //快递公司编码
     
-    var orderItems : [WOWNewProductModel]? // 产品列表
+    var orderItems                          : [WOWNewProductModel]? // 产品列表
     
     
     required init?(map: Map) {
@@ -204,18 +208,19 @@ class WOWNewForGoodsModel: WOWBaseModel,Mappable{
     
     func mapping(map: Map) {
         
-        deliveryCompanyName                  <- map["deliveryCompanyName"]
+        deliveryCompanyName                         <- map["deliveryCompanyName"]
         
-        deliveryCompanyCode                  <- map["deliveryCompanyCode"]
+        deliveryCompanyCode                         <- map["deliveryCompanyCode"]
         
-        deliveryOrderNo            <- map["deliveryOrderNo"]
+        deliveryOrderNo                             <- map["deliveryOrderNo"]
         
-        orderItems              <- map["orderItems"]
+        orderItems                                  <- map["orderItems"]
         
     }
 }
 /// 产品model
 class WOWNewProductModel: WOWBaseModel,Mappable{
+    
     var productId                                           : Int? //产品id
     var productName                                         : String?// 产品名称
     var productQty                                          : Int?// 产品数量
@@ -231,7 +236,7 @@ class WOWNewProductModel: WOWBaseModel,Mappable{
     var isRefund                                            : Bool?
     var isDeliveryed                                        : Bool? // 标记是否已经发货
     var isRefundAvailable                                   : Bool? // 是否可以申请售后
-    var saleOrderItemRefundId                               : Int? //退换货服务 ID
+    var saleOrderItemRefundId                               : Int?   //退换货服务 ID
     var refundStatusName                                    : String?// 退换货进度名称
     required init?(map: Map) {
         
@@ -294,7 +299,14 @@ class WOWRefundDetailModel: WOWBaseModel,Mappable{
     var saleOrderItemRefundId                       : Int?              // 退换货ID
     var refundStatus                                : Int?              // 退换货进度
     var refundStatusName                            : String?           // 退换货进度名称
-    
+    var returnAddress                               : String?           // 退换地址
+    var refundReceiveName                           : String?           // 退换地址 名字
+    var refundReceivePhone                          : String?           // 退换地址 手机号
+    var maxRefundableTime                           : String?           // 最晚寄回货物时间
+    var returnLogisticsCode                         : String?           // 物流单号
+    var returnDeliveryCompanyName                   : String?           // 物流公司名称
+    var actualRefundAmount                          : Double?           // 实际退款金额
+    var refundSuccessTime                           : String?           // 退款金额时间
     required init?(map: Map) {
         
     }
@@ -311,6 +323,120 @@ class WOWRefundDetailModel: WOWBaseModel,Mappable{
         saleOrderItemRefundId                           <- map["saleOrderItemRefundId"]
         refundStatus                                    <- map["refundStatus"]
         refundStatusName                                <- map["refundStatusName"]
+        returnAddress                                   <- map["returnAddress"]
+        refundReceiveName                               <- map["refundReceiveName"]
+        refundReceivePhone                              <- map["refundReceivePhone"]
+        maxRefundableTime                               <- map["maxRefundableTime"]
+        returnLogisticsCode                             <- map["returnLogisticsCode"]
+        returnDeliveryCompanyName                       <- map["returnDeliveryCompanyName"]
+        actualRefundAmount                              <- map["actualRefundAmount"]
+        refundSuccessTime                               <- map["refundSuccessTime"]
+    }
+}
+
+//  退换货服务  参数Model  获取最大退款金额
+class WOWRefundTypeModel: WOWBaseModel,Mappable{
+    
+    var deliveryFee                                 : String?                           // 邮费金额
+    var maxAllowedRefundAmount                      : String?                           // 最大退款金额
+    var orderDetailResultVo                         : WOWNewOrderDetailModel?           // 退款订单列表
+
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        deliveryFee                                                 <- map["deliveryFee"]
+        maxAllowedRefundAmount                                      <- map["maxAllowedRefundAmount"]
+        orderDetailResultVo                                         <- map["orderDetailResultVo"]
     }
     
 }
+
+//  退换协商详情
+class WOWRufundDiscussModel: WOWBaseModel,Mappable{
+    
+    var createTime                                  : String?                           // 创建的时间
+    var remark                                      : String?                           // 内容
+    var operatorContent                             : String?                           // 标题
+    
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        createTime                                                  <- map["createTime"]
+        remark                                                      <- map["remark"]
+        operatorContent                                             <- map["operatorContent"]
+    }
+    
+}
+
+//  钱款去向model
+class WOWRufundProcessModel: WOWBaseModel,Mappable{
+    
+    var refundEventType                                         : Int?           // 流转事件类型
+    var refundEventTypeName                                     : String?           // 流转事件类型名称
+    var createTime                                              : String?           // 创建时间
+    
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        refundEventType                                                     <- map["refundEventType"]
+        refundEventTypeName                                                 <- map["refundEventTypeName"]
+        createTime                                                          <- map["createTime"]
+    }
+    
+}
+// 退换列表 Model
+class WOWRefundListModel: WOWBaseModel,Mappable{
+    
+
+    var productId                                   : Int?           // 退换地址 名字
+    var productName                                 : String?           // 退换地址 手机号
+    
+    var refundAmount                                : Double?           // 退款金额
+    var refundItemQty                               : Int?              // 退款类型
+    var refundStatus                                : Int?              // 退换货进度
+    var refundStatusName                            : String?           // 退换货进度名称
+    var refundType                                  : Int?              // 退款类型
+    var refundTypeName                              : String?           // 退款类型名称
+    var saleOrderItemRefundId                       : Int?              // 退换货ID
+    var serviceCode                                 : String?           // 服务单号
+    var specImg                                     : String?           // 退款说明
+    var attributes                                  : [String]?
+    var actualRefundAmount                          : Double?           // 实际退款金额
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        productId                                       <- map["productId"]
+        productName                                     <- map["productName"]
+        
+        refundType                                      <- map["refundType"]
+        refundTypeName                                  <- map["refundTypeName"]
+    
+        refundAmount                                    <- map["refundAmount"]
+        
+        attributes                                      <- map["attributes"]
+
+        refundItemQty                                   <- map["refundItemQty"]
+        
+        specImg                                         <- map["specImg"]
+
+        serviceCode                                     <- map["serviceCode"]
+
+        saleOrderItemRefundId                           <- map["saleOrderItemRefundId"]
+        refundStatus                                    <- map["refundStatus"]
+        refundStatusName                                <- map["refundStatusName"]
+        actualRefundAmount                              <- map["actualRefundAmount"]
+    }
+    
+}
+

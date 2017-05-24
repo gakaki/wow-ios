@@ -22,6 +22,8 @@ enum RequestCode:String{
     case ProductExpired = "40202"   //商品过期
     case ProductLimit = "40368" //商品限购
     case VersionNew = "50113" //当前为最新版本
+    case MoreThanNumber         = "40408" //申请售后---超过最大可申请次数
+    case ApplyAfterOutTime       = "40407" //申请售后---超过售后申请的时间段
 }
 
 //MARK:前后端约定的返回数据结构
@@ -161,7 +163,14 @@ class WOWNetManager {
                             if code == RequestCode.VersionNew.rawValue {
                                 return
                             }
-                            
+                            if code == RequestCode.MoreThanNumber.rawValue {
+                                VCRedirect.goAfterMaxApplyNumber(type: .MaxNumber)
+                                return
+                            }
+                            if code == RequestCode.ApplyAfterOutTime.rawValue {
+                                VCRedirect.goAfterMaxApplyNumber()
+                                return
+                            }
                             failClosure(info?.message)
                             
                             return

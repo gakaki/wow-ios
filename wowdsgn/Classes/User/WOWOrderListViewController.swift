@@ -57,7 +57,8 @@ class WOWOrderListViewController: WOWBaseViewController {
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
         pageMenu?.viewBackgroundColor = UIColor.init(hexString: "efeff4")!
         pageMenu?.delegate = self
-        
+    
+        self.tz_addPopGesture(to: pageMenu!.view)
 //        pageMenu!.currentPageIndex = selectCurrentIndex!
         pageMenu?.moveToPage(selectCurrentIndex!)
 //        pageMenu!.startingPageForScroll = selectCurrentIndex!

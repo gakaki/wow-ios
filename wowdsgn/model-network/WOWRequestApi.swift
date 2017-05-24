@@ -189,14 +189,21 @@ public enum RequestApi{
     
     case api_OrderPushComment(params: [String: AnyObject]?)// 提交评论内容
 
-    case api_GetRefundMoney(orderCode: String, saleOrderItemId: Int)
+    case api_GetRefundMoney(saleOrderItemId: Int,isWholeRefund:Bool? )
     
     case api_CreatRefund(params: [String: AnyObject])
     
     case api_GetRefundDetail(refundId:Int)
     
-    case api_GetRefundList(refundOrderStatus:Int?)
+    case api_GetRefundList(params: [String: AnyObject])
     
+    case api_GetRefundLog(orderCode: String? , saleOrderItemRefundId: Int? )
+    
+    case api_GetRefundProcess(saleOrderItemRefundId:Int)
+    
+    case api_GetCancelRefund(saleOrderItemRefundId:Int)
+    
+    case api_EntryRefundInfo(params: [String: AnyObject])
     
     case api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
     
@@ -525,7 +532,14 @@ extension RequestApi:TargetType{
             return URL_GetRefundDetail
         case .api_GetRefundList:
             return URL_GetRefundList
-            
+        case .api_GetRefundLog:
+            return URL_GetRefundLog
+        case .api_GetCancelRefund:
+            return URL_CancelRefund
+        case .api_EntryRefundInfo:
+            return URL_EntryRefundInfo
+        case .api_GetRefundProcess:
+            return URL_GetRufundProcess
         case .api_Invite:
             return URL_Invite
         //发现页面
@@ -672,7 +686,9 @@ extension RequestApi:TargetType{
             .api_InstagramList,
             .api_GetRefundMoney,
             .api_GetRefundDetail,
-            .api_GetRefundList:
+            .api_GetRefundList,
+            .api_GetRefundLog,
+            .api_GetRefundProcess:
             return .GET
 
         default:
@@ -838,21 +854,44 @@ extension RequestApi:TargetType{
             
             case let .api_OrderPushComment(param):
                 params = param!
-            case let .api_GetRefundMoney(orderCode, saleOrderItemId):
-              params =  ["orderCode":orderCode,"saleOrderItemId":saleOrderItemId]
+            case let .api_GetRefundMoney(saleOrderItemId,isWholeRefund):
+                
+                params = ["saleOrderItemId":saleOrderItemId]
+                if let isWholeRefund = isWholeRefund {
+                    
+                    params["isWholeRefund"] = isWholeRefund
+                    
+                }
+            
+            case let .api_GetRefundLog(orderCode, saleOrderItemRefundId):
+                if let orderCode = orderCode {
+                
+                    params = ["orderCode":orderCode]
+                
+                }else if let saleOrderItemRefundId = saleOrderItemRefundId{
+                
+                    params = ["saleOrderItemRefundId":saleOrderItemRefundId]
+                
+                }
+
             case let .api_CreatRefund(param):
                 params = param
             
             case let .api_GetRefundDetail(refundId):
                 params = ["saleOrderItemRefundId":refundId]
-            case let .api_GetRefundList(type):
-                if let type = type {
-                    
-                    params = ["refundOrderStatus":type]
-
-                }else{
-                    break
-                }
+            case let .api_GetRefundList(param):
+                
+                params = param
+            
+            case let .api_GetRefundProcess(saleOrderItemRefundId):
+                params = ["saleOrderItemRefundId":saleOrderItemRefundId]
+            
+            case let .api_GetCancelRefund(saleOrderItemRefundId):
+                params = ["saleOrderItemRefundId":saleOrderItemRefundId]
+            
+            case let .api_EntryRefundInfo(param):
+                params = param
+            
             case .api_Home_Banners():
                 params =  ["pageType":1]
             case .api_Home_Tabs():

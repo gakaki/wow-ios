@@ -1,17 +1,17 @@
 //
-//  WOWMoneyTopCell.swift
-//  TimeLinessDemo
+//  WOWSubmitSuccess.swift
+//  wowdsgn
 //
-//  Created by 陈旭 on 2017/5/9.
-//  Copyright © 2017年 陈旭. All rights reserved.
+//  Created by 陈旭 on 2017/5/22.
+//  Copyright © 2017年 g. All rights reserved.
 //
 
 import UIKit
 
-class WOWMoneyTopCell: WOWStyleNoneCell {
-    @IBOutlet weak var lbRefundType: UILabel!
+class WOWSubmitSuccess: WOWStyleNoneCell {
 
-    @IBOutlet weak var lbMoneyNumber: UILabel!
+    @IBOutlet weak var lbNumber: UILabel!
+    @IBOutlet weak var lbCompany: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,8 +27,8 @@ class WOWMoneyTopCell: WOWStyleNoneCell {
         dotteShapLayer.lineWidth = 1
         
         
-        mdotteShapePath.move(to: CGPoint(x:15,y:89))
-        mdotteShapePath.addLine(to: CGPoint(x:MGScreenWidth - 15,y:89))
+        mdotteShapePath.move(to: CGPoint(x:15,y:56))
+        mdotteShapePath.addLine(to: CGPoint(x:MGScreenWidth - 15,y:56))
         dotteShapLayer.path = mdotteShapePath
         let arr :NSArray = NSArray(array: [2,2])
         dotteShapLayer.lineDashPhase = 1.0

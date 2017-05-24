@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退款原因" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4d-1H-Eci">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退款金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4d-1H-Eci">
                         <rect key="frame" x="15" y="10" width="60" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="4Gp-u0-gxr"/>
@@ -33,48 +33,64 @@
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最多可退33.34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rXc-XU-HSe">
-                        <rect key="frame" x="83.5" y="12.5" width="82.5" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rXc-XU-HSe">
+                        <rect key="frame" x="83.5" y="12.5" width="3.5" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="1" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQV-kI-Pxu">
-                        <rect key="frame" x="15" y="44" width="360" height="20"/>
+                        <rect key="frame" x="15" y="44" width="345" height="20"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入退款金额" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Czl-43-FoO">
-                                <rect key="frame" x="0.0" y="0.0" width="279" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="289" height="20"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                 <connections>
                                     <outlet property="delegate" destination="KGk-i7-Jjw" id="YGA-NY-EKd"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="含运费¥8.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FoC-5I-1Jo">
-                                <rect key="frame" x="279" y="0.0" width="81" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="含运费¥ " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FoC-5I-1Jo">
+                                <rect key="frame" x="289" y="0.0" width="56" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khN-Bv-9Py">
+                        <rect key="frame" x="15" y="79" width="360" height="0.5"/>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="0.5" id="Kyu-9f-Dhf"/>
+                            <constraint firstAttribute="height" constant="0.5" id="qkc-LO-dlz"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="0.5" id="ryi-ur-HOf"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="khN-Bv-9Py" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="0sG-G6-FZN"/>
                     <constraint firstItem="rXc-XU-HSe" firstAttribute="centerY" secondItem="X4d-1H-Eci" secondAttribute="centerY" id="3Hs-mp-YBF"/>
+                    <constraint firstAttribute="trailing" secondItem="khN-Bv-9Py" secondAttribute="trailing" id="FeJ-Iz-byu"/>
                     <constraint firstItem="rXc-XU-HSe" firstAttribute="leading" secondItem="JUX-4z-3Ug" secondAttribute="trailing" id="L9D-ix-zqa"/>
                     <constraint firstItem="JUX-4z-3Ug" firstAttribute="leading" secondItem="X4d-1H-Eci" secondAttribute="trailing" id="Tza-WX-WeR"/>
+                    <constraint firstAttribute="bottom" secondItem="khN-Bv-9Py" secondAttribute="bottom" id="Vgl-oD-I0W"/>
                     <constraint firstItem="X4d-1H-Eci" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="XDV-R3-pf6"/>
                     <constraint firstItem="X4d-1H-Eci" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="elm-I2-3mc"/>
                     <constraint firstItem="eQV-kI-Pxu" firstAttribute="top" secondItem="JUX-4z-3Ug" secondAttribute="bottom" constant="13" id="j3R-TB-iog"/>
                     <constraint firstItem="eQV-kI-Pxu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="khb-DH-LP7"/>
-                    <constraint firstAttribute="trailing" secondItem="eQV-kI-Pxu" secondAttribute="trailing" id="lVI-i2-38r"/>
+                    <constraint firstAttribute="trailing" secondItem="eQV-kI-Pxu" secondAttribute="trailing" constant="15" id="lVI-i2-38r"/>
                     <constraint firstItem="JUX-4z-3Ug" firstAttribute="centerY" secondItem="X4d-1H-Eci" secondAttribute="centerY" id="rHu-Oa-Gz3"/>
                     <constraint firstAttribute="bottom" secondItem="eQV-kI-Pxu" secondAttribute="bottom" constant="16" id="zHk-NC-Cem"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="lbFreight" destination="FoC-5I-1Jo" id="q56-jR-cDQ"/>
+                <outlet property="lbMark" destination="JUX-4z-3Ug" id="7kA-vB-7R4"/>
                 <outlet property="lbMaxRefundMoney" destination="rXc-XU-HSe" id="g73-ht-EN3"/>
                 <outlet property="tfMoeny" destination="Czl-43-FoO" id="PDV-nj-4h4"/>
             </connections>

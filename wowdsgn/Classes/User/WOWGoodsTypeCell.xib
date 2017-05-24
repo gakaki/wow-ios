@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,8 +23,14 @@
                         <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未收到" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7NW-yN-51W">
-                        <rect key="frame" x="15" y="41" width="49" height="19.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2iq-cI-pmp">
+                        <rect key="frame" x="72.5" y="10.5" width="8.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7NW-yN-51W">
+                        <rect key="frame" x="15" y="41" width="4.5" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -42,7 +48,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="7NW-yN-51W" firstAttribute="top" secondItem="q1S-Yc-ie5" secondAttribute="bottom" constant="14" id="GHh-6z-h0Z"/>
+                    <constraint firstItem="2iq-cI-pmp" firstAttribute="leading" secondItem="q1S-Yc-ie5" secondAttribute="trailing" id="HsG-W2-g0o"/>
                     <constraint firstAttribute="trailing" secondItem="myH-LH-QtJ" secondAttribute="trailing" id="JXe-UT-CWO"/>
+                    <constraint firstItem="2iq-cI-pmp" firstAttribute="centerY" secondItem="q1S-Yc-ie5" secondAttribute="centerY" constant="2" id="Ohh-Df-fta"/>
                     <constraint firstAttribute="bottom" secondItem="myH-LH-QtJ" secondAttribute="bottom" id="Wza-dK-4Qd"/>
                     <constraint firstItem="myH-LH-QtJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="mJa-N4-WIX"/>
                     <constraint firstItem="7NW-yN-51W" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="pFf-s9-aLe"/>
@@ -53,6 +61,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="lbGoodsType" destination="q1S-Yc-ie5" id="B9I-n1-zts"/>
+                <outlet property="lbSing" destination="2iq-cI-pmp" id="XBc-sL-s1M"/>
                 <outlet property="lbType" destination="7NW-yN-51W" id="9ZK-D4-1YR"/>
             </connections>
             <point key="canvasLocation" x="56" y="-31"/>

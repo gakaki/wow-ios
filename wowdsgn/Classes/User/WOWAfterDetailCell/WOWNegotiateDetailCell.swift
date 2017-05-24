@@ -9,7 +9,9 @@
 import UIKit
 // 协商详情
 class WOWNegotiateDetailCell: WOWStyleNoneCell {
-
+    @IBOutlet weak var lbTime: UILabel!
+    @IBOutlet weak var lbTitle: UILabel!
+    @IBOutlet weak var lbContent: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

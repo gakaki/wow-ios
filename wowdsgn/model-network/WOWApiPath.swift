@@ -190,7 +190,10 @@ let URL_GetRefundMoney          = "v1/order/refund/prepare"  // 获取退换货�
 let URL_CreateRefund            = "v1/order/refund/create" // 创建退换货单
 let URL_GetRefundDetail         = "v1/order/refund/detail" //获取 售后详情
 let URL_GetRefundList           = "v1/order/refund/list" // 获取退换货列表
-
+let URL_GetRefundLog            = "v1/order/refund/log" // 获取退换货单操作日志
+let URL_GetRufundProcess        = "v1/order/refund/process" // 获取退款单钱款流向
+let URL_CancelRefund            = "v1/order/refund/cancel" // 撤销申请
+let URL_EntryRefundInfo         = "v1/order/refund/delivery" // 用户录入退换货单物流信息
 
 //4. 发现页面
 let URL_Found_Main              = "v1/page/find/product"

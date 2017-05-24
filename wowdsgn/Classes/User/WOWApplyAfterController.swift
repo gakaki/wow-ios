@@ -7,13 +7,13 @@
 //
 
 import UIKit
-enum AfterType {
+enum GoodsSendType {
     case noSendGoods    // 待发货
     case sendGoods      // 以发货
 }
 class WOWApplyAfterController: WOWApplyAfterBaseController {
    
-    var sendType                : AfterType = .noSendGoods{
+    var sendType                : GoodsSendType = .noSendGoods{
         didSet{
             switch sendType {
             case .sendGoods:
@@ -52,8 +52,10 @@ class WOWApplyAfterController: WOWApplyAfterBaseController {
     }
     override func setUI() {
         super.setUI()
-
-        tableView.register(UINib.nibName("WOWApplyAfterCell"), forCellReuseIdentifier: "WOWApplyAfterCell")
+        
+        tableView.mj_header          = nil
+         tableView.cellId_register("WOWApplyAfterCell")
+//        tableView.register(UINib.nibName("WOWApplyAfterCell"), forCellReuseIdentifier: "WOWApplyAfterCell")
 
     }
    override func numberOfSections(in tableView: UITableView) -> Int {
@@ -74,7 +76,32 @@ class WOWApplyAfterController: WOWApplyAfterBaseController {
 
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-          VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId)
+        switch indexPath.row {
+        case 0:
+            
+            switch sendType {
+            case .noSendGoods:
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_AllOrderRefund)
+            default:
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .RefundMoney)
+            }
+            
+        case 1:
+            
+            switch sendType {
+            case .noSendGoods:
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_OnlyRefund)
+            default:
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .OnlyRefund)
+            }
+        case 2:
+            
+            VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .ExchangGoods)
+            
+        default:
+            break
+        }
+      
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

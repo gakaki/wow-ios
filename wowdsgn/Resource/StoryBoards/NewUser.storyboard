@@ -347,11 +347,96 @@
             </objects>
             <point key="canvasLocation" x="-564" y="698"/>
         </scene>
+        <!--Refund Time Out Controller-->
+        <scene sceneID="fBU-Z8-a7v">
+            <objects>
+                <viewController storyboardIdentifier="WOWRefundTimeOutController" id="XCc-FT-BJd" customClass="WOWRefundTimeOutController" customModule="wowdsgn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Z8-kU-iGZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="ltk-va-85q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1aK-EQ-FvN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="refundTimeOut" translatesAutoresizingMaskIntoConstraints="NO" id="Fjz-fL-fZK">
+                                <rect key="frame" x="155" y="194" width="65" height="86"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="OAy-I1-3M0"/>
+                                    <constraint firstAttribute="height" constant="86" id="bNi-Tk-cJO"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="亲，您已错过申请售后的时间段（交易完成15天内），如果您有换货或维修诉求，" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKr-9k-a9s">
+                                <rect key="frame" x="56" y="298" width="262" height="33.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="262" id="Nqn-yK-Rgu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wdK-Y6-XFq">
+                                <rect key="frame" x="121.5" y="342.5" width="132" height="20"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUh-Bc-e5m">
+                                        <rect key="frame" x="0.0" y="0.0" width="14.5" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="协商解决" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3k6-ZZ-6v8">
+                                        <rect key="frame" x="74.5" y="0.0" width="57.5" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系客服" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v85-5n-2ef">
+                                        <rect key="frame" x="15.5" y="1" width="57.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.0" green="0.41960784313725491" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="v85-5n-2ef" firstAttribute="centerY" secondItem="FUh-Bc-e5m" secondAttribute="centerY" id="3ap-Vr-ZiT"/>
+                                    <constraint firstItem="FUh-Bc-e5m" firstAttribute="leading" secondItem="wdK-Y6-XFq" secondAttribute="leading" id="4wA-n9-h6N"/>
+                                    <constraint firstItem="FUh-Bc-e5m" firstAttribute="top" secondItem="wdK-Y6-XFq" secondAttribute="top" id="KKz-89-OqP"/>
+                                    <constraint firstItem="3k6-ZZ-6v8" firstAttribute="centerY" secondItem="FUh-Bc-e5m" secondAttribute="centerY" id="SpX-KL-9jY"/>
+                                    <constraint firstAttribute="height" constant="20" id="avD-Yf-UNV"/>
+                                    <constraint firstItem="FUh-Bc-e5m" firstAttribute="centerY" secondItem="wdK-Y6-XFq" secondAttribute="centerY" id="mZM-xE-pUI"/>
+                                    <constraint firstItem="v85-5n-2ef" firstAttribute="leading" secondItem="FUh-Bc-e5m" secondAttribute="trailing" constant="1" id="nbD-GJ-jac"/>
+                                    <constraint firstItem="3k6-ZZ-6v8" firstAttribute="leading" secondItem="v85-5n-2ef" secondAttribute="trailing" constant="1" id="oUM-HU-9pp"/>
+                                    <constraint firstItem="3k6-ZZ-6v8" firstAttribute="top" secondItem="wdK-Y6-XFq" secondAttribute="top" id="oYT-gw-VFO"/>
+                                    <constraint firstAttribute="trailing" secondItem="3k6-ZZ-6v8" secondAttribute="trailing" id="zvv-9X-yN8"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Fjz-fL-fZK" firstAttribute="centerX" secondItem="1aK-EQ-FvN" secondAttribute="centerX" id="Fin-Ei-2nk"/>
+                            <constraint firstItem="Fjz-fL-fZK" firstAttribute="top" secondItem="5Z8-kU-iGZ" secondAttribute="bottom" constant="174" id="QMt-EB-EqX"/>
+                            <constraint firstItem="wdK-Y6-XFq" firstAttribute="top" secondItem="KKr-9k-a9s" secondAttribute="bottom" constant="11" id="omg-qw-hSt"/>
+                            <constraint firstItem="KKr-9k-a9s" firstAttribute="top" secondItem="Fjz-fL-fZK" secondAttribute="bottom" constant="18" id="pIt-Yn-QmC"/>
+                            <constraint firstItem="wdK-Y6-XFq" firstAttribute="centerX" secondItem="1aK-EQ-FvN" secondAttribute="centerX" id="qWb-JV-n5d"/>
+                            <constraint firstItem="KKr-9k-a9s" firstAttribute="centerX" secondItem="Fjz-fL-fZK" secondAttribute="centerX" id="rhU-Iz-L4F"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lbTimerReason" destination="KKr-9k-a9s" id="tOy-97-cPq"/>
+                        <outlet property="viewCoustrom" destination="wdK-Y6-XFq" id="wYt-Ks-rgY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eib-8s-23t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="255.19999999999999" y="673.31334332833592"/>
+        </scene>
     </scenes>
     <resources>
         <image name="barter" width="30" height="30"/>
         <image name="next_arrow" width="9" height="16"/>
         <image name="refund" width="30" height="30"/>
+        <image name="refundTimeOut" width="65" height="86"/>
         <image name="refund_barter" width="30" height="30"/>
     </resources>
 </document>

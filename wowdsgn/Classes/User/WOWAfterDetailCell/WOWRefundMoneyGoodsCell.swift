@@ -13,6 +13,27 @@ class WOWRefundMoneyGoodsCell: WOWStyleNoneCell,UITextFieldDelegate {
     @IBOutlet weak var lbFreight: UILabel!
     @IBOutlet weak var lbMaxRefundMoney: UILabel!
     @IBOutlet weak var tfMoeny: UITextField!
+    @IBOutlet weak var lbMark: UILabel!
+
+    
+    func showDataUI(afterType:ChooseAfterType,maxAmount:String = "0.0",freight:String = "0.0",orderAmount:Double = 0.0)  {
+        switch afterType {
+        case .SendNo_AllOrderRefund: // 整单退款 才包含运费
+            let result = WOWCalPrice.totalPrice([orderAmount],counts:[1])
+            tfMoeny.text                           =  result
+            lbFreight.text                         = "含运费" + "¥" + freight
+            
+            lbMaxRefundMoney.isHidden              = true
+            lbFreight.isHidden                     = false
+            tfMoeny.isUserInteractionEnabled       = false
+            lbMark.isHidden                        = true
+        default:
+            lbMaxRefundMoney.text   = "最多可退" + maxAmount
+            lbFreight.isHidden     = true
+            break
+        }
+
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
      

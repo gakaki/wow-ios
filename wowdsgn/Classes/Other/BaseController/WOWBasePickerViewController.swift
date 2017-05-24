@@ -99,7 +99,14 @@ class BasePikerView: UIView,UIPickerViewDataSource, UIPickerViewDelegate { // ä¹
         return str
         
     }
-    
+    @objc(pickerView:viewForRow:forComponent:reusingView:) func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        pickerLabel.font = UIFont.systemFont(ofSize: 15)
+        pickerLabel.numberOfLines = 0
+        pickerLabel.textAlignment = .center
+        pickerLabel.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
+        return pickerLabel
+    }
     func initFromXIB() {
         
         contentView.frame = self.bounds

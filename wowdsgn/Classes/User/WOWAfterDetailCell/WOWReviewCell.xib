@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,10 +14,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="审核进度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wj-yI-ZfE">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="售后状态：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wj-yI-ZfE">
                         <rect key="frame" x="15" y="0.0" width="71.5" height="49.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="49.5" id="FDG-tJ-zVJ"/>
@@ -26,25 +26,39 @@
                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已撤销" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKU-IG-Upv">
-                        <rect key="frame" x="86.5" y="16.5" width="43" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKU-IG-Upv">
+                        <rect key="frame" x="86.5" y="16.5" width="4" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Jyt-lb-BRh">
+                        <rect key="frame" x="296" y="17" width="9" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="9" id="MfT-Mr-VTR"/>
+                            <constraint firstAttribute="height" constant="16" id="ml6-I6-C28"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="5Wj-yI-ZfE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ANi-XJ-UkY"/>
                     <constraint firstItem="SKU-IG-Upv" firstAttribute="centerY" secondItem="5Wj-yI-ZfE" secondAttribute="centerY" id="AmQ-bd-4PH"/>
+                    <constraint firstAttribute="trailing" secondItem="Jyt-lb-BRh" secondAttribute="trailing" constant="15" id="MTX-Y8-CzX"/>
                     <constraint firstItem="SKU-IG-Upv" firstAttribute="leading" secondItem="5Wj-yI-ZfE" secondAttribute="trailing" id="Qto-M8-nsa"/>
+                    <constraint firstItem="Jyt-lb-BRh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YON-nw-X9l"/>
                     <constraint firstItem="5Wj-yI-ZfE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="YlQ-kg-R0C"/>
                     <constraint firstAttribute="bottom" secondItem="5Wj-yI-ZfE" secondAttribute="bottom" id="arJ-a2-bsd"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="imgNextArrow" destination="Jyt-lb-BRh" id="mU0-Bm-KWo"/>
                 <outlet property="lbReviewType" destination="SKU-IG-Upv" id="NLC-dW-fZj"/>
+                <outlet property="lbTitle" destination="5Wj-yI-ZfE" id="Yyp-Kc-bvD"/>
             </connections>
             <point key="canvasLocation" x="-48" y="-137.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="next_arrow" width="9" height="16"/>
+    </resources>
 </document>

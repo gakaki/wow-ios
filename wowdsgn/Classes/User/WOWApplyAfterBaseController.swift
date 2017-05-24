@@ -30,6 +30,7 @@ class WOWApplyAfterBaseController: WOWBaseViewController,UITableViewDataSource,U
         tableView.delegate          = self
         tableView.dataSource        = self
         tableView.separatorStyle    = .none
+        tableView.mj_header          = mj_header
         self.tableView.rowHeight            = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight   = 60
 
@@ -43,7 +44,7 @@ class WOWApplyAfterBaseController: WOWBaseViewController,UITableViewDataSource,U
         bottomView.snp.makeConstraints { (make) in
             make.height.equalTo(50)
         }
-        bottomView.isHidden = true
+        bottomView.isHidden = true // 默认隐藏， 
         
         
     }

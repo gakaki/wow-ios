@@ -6,8 +6,8 @@
 @import  PonyFrameworkOnSwift;
 @import  SnapKit;
 @import  Moya;
-//@import RxSwift;
-
+@import RxSwift;
+@import RxDataSources;
 @import SwiftyJSON;
 //@import RealmSwift;
 @import ObjectMapper;
@@ -46,7 +46,7 @@
 #import "QYSDK.h"
 #import <FCUUID/FCUUID.h>
 #import "UICollectionViewLeftAlignedLayout.h"
-
+#import "UINavigationController+TZPopGesture.h"
 //Leancloud
 //#import <AVOSCloud/AVOSCloud.h>
 

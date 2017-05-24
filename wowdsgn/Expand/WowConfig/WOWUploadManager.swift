@@ -19,6 +19,7 @@ enum QiniuBucket:String {// 七牛的路径
     case FeebdBack          = "user/feedback/"
     case UserShopComment    = "product-review/"
     case ShowWorksDetail    = "social/insta/"
+    case AfterBack          = "after/detail/"
 }
 
 

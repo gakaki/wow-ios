@@ -32,6 +32,7 @@ class WOWPushCommentCell: WOWStyleNoneCell,TZImagePickerControllerDelegate {
                 topView.isHidden    = true
                 TopHightConstraint.constant     = 0
             case .RefundReason:
+                lbPlaceholder                       = "请输入退款说明"
                 topView.isHidden                    = true
                 TopHightConstraint.constant         = 40
                 textViewLeftConstraint.constant     = 10
@@ -177,7 +178,7 @@ extension WOWPushCommentCell:UICollectionViewDelegate,UICollectionViewDataSource
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsetsMake(0, 0,
+        return UIEdgeInsetsMake(0, 15,
                                 0, 15)
     }
 

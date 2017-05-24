@@ -10,13 +10,10 @@ import UIKit
 
 
 class WOWMoneyFromController: WOWApplyAfterBaseController {
-
-    
-    let data : [(TimelinePoint, UIColor, UIColor)]
-        = [(TimelinePoint(color: YellowColor, filled: true),UIColor.clear,YellowColor),
-           (TimelinePoint(color: YellowColor, filled: true),YellowColor,SeprateColor),
-           (TimelinePoint(color: SeprateColor, filled: true),SeprateColor,UIColor.clear)]
-  
+    var actualRefundAmount:String?
+    var dataArr  = [WOWRufundProcessModel]()
+    var data = [(TimelinePoint, UIColor, UIColor)]()
+    var saleOrderItemRefundId        : Int!      // 单个商品 在订单中Id
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "钱款去向"
@@ -26,13 +23,64 @@ class WOWMoneyFromController: WOWApplyAfterBaseController {
     }
     override func setUI() {
         super.setUI()
-//        tableView.register(UINib.init(nibName: "WOWTimerLineCell", bundle: Bundle.main), forCellReuseIdentifier: "WOWTimerLineCell")
-        
-        tableView.register(UINib.nibName("WOWTimerLineCell"), forCellReuseIdentifier: "WOWTimerLineCell")
-        
-        tableView.register(UINib.nibName("WOWMoneyTopCell"), forCellReuseIdentifier: "WOWMoneyTopCell")
-//        tableView.register(UINib.init(nibName: "WOWMoneyTopCell", bundle: Bundle.main), forCellReuseIdentifier: "WOWMoneyTopCell")
+        tableView.cellId_register("WOWTimerLineCell")
+        tableView.cellId_register("WOWMoneyTopCell")
+        request()
     }
+    override func request() {
+        super.request()
+        WOWNetManager.sharedManager.requestWithTarget(.api_GetRefundProcess(saleOrderItemRefundId: saleOrderItemRefundId), successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            let json = JSON(result)
+            DLog(json)
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                
+                let bannerList = Mapper<WOWRufundProcessModel>().mapArray(JSONObject:JSON(result)["refundProcessList"].arrayObject)
+                if let bannerList = bannerList {
+                    strongSelf.dataArr = bannerList
+                    for item in bannerList.enumerated() {
+                        let pointColor      = TimelinePoint(color: YellowColor)
+                        let seprateColor    = TimelinePoint(color: SeprateColor)
+                        let clearColor        = UIColor.clear
+                        let lineColor       = SeprateColor
+                        if item.offset == 0 {
+                            if item.element.isPass ?? false {
+                                strongSelf.data.append((pointColor,clearColor,YellowColor))
+                            }else{
+                                strongSelf.data.append((seprateColor,clearColor,lineColor))
+                            }
+                        }else if item.offset == bannerList.count - 1 {
+                            if item.element.isPass ?? false {
+                                strongSelf.data.append((pointColor,YellowColor,clearColor))
+                            }else{
+                                strongSelf.data.append((seprateColor,lineColor,clearColor))
+                            }
+                        }else{
+                            if item.element.isPass ?? false {
+                                strongSelf.data.append((pointColor,YellowColor,YellowColor))
+                            }else{
+                                strongSelf.data.append((seprateColor,lineColor,lineColor))
+                            }
+
+                        }
+                        
+                    }
+                    strongSelf.actualRefundAmount = json["actualRefundAmount"].stringValue
+                    strongSelf.tableView.reloadData()
+                }
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                strongSelf.endRefresh()
+                WOWHud.dismiss()
+            }
+        }
+        
+        
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -42,12 +90,14 @@ class WOWMoneyFromController: WOWApplyAfterBaseController {
         return 1
     }
    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count + 1
+        return dataArr.count + 1
     }
    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard indexPath.row != 0 else {
             let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWMoneyTopCell", for: indexPath) as! WOWMoneyTopCell
-            
+            if let actualRefundAmount = actualRefundAmount {
+                cell.lbMoneyNumber.text = "¥" + actualRefundAmount
+            }
             return cell
         }
         
@@ -56,6 +106,9 @@ class WOWMoneyFromController: WOWApplyAfterBaseController {
         cell.timelinePoint          = timelinePoint
         cell.timeline.frontColor    = timeLineTopColor
         cell.timeline.backColor     = timeLineBottomColor
+        let model = dataArr[indexPath.row - 1]
+        cell.lbTime.text    = model.createTime ?? ""
+        cell.lbApply.text   = model.refundEventTypeName ?? ""
         return cell
         
         

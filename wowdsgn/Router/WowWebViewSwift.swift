@@ -134,7 +134,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         view.insertSubview(webView, belowSubview: progressView)
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         webView.navigationDelegate  = self
-       
+        self.tz_addPopGesture(to: webView)
         bridge = ZHWebViewBridge.bridge(webView)
 //        bridge_router()
         can()
@@ -147,7 +147,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
         webView.load(myRequest)
         //获取H5信息
         requestH5()
-
+      
     }
     
     public override func viewWillAppear(_ animated: Bool) {

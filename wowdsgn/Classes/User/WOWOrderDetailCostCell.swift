@@ -12,6 +12,8 @@ class WOWOrderDetailCostCell: UITableViewCell {
     @IBOutlet weak var freightTypeLabel: UILabel!// 邮费 / 优惠券
     @IBOutlet weak var priceLabel: UILabel!// 相关费用
     @IBOutlet weak var saidImageView: UIImageView!// 相关费用
+    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     var orderNewDetailModel : WOWNewOrderDetailModel!
     
     override func awakeFromNib() {

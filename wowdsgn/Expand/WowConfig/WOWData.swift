@@ -84,4 +84,50 @@ let WOWOnlyRefundReceived   = [RefundArray[0],RefundArray[5],RefundArray[6],Refu
 let WOWRefundAllReceived    = [RefundArray[12],RefundArray[5],RefundArray[6],RefundArray[7],RefundArray[8],RefundArray[9],RefundArray[10]]
 let WOWReturnGoodsReceived  = [RefundArray[0],RefundArray[13],RefundArray[5],RefundArray[6],RefundArray[7],RefundArray[9],RefundArray[10]]
 
+let WOWCompanyArray         = [ // 快递公司名称 与 WOWCompanyCodeArray  一一对应
+    "顺丰速运",
+    "日日顺",
+    "全峰",
+    "韵达",
+    "中通",
+    "天天",
+    "百世汇通",
+    "宅急送",
+    "德邦",
+    "新邦",
+    "申通",
+    "圆通速递",
+    "优速快递",
+    "EMS",
+    "苏宁快递",
+    "全一快递",
+    "其他"
+    ]
+
+let WOWCompanyCodeArray         = [ // 快递公司代码 传后台参数时使用
+    "shunfeng",
+    "rrs",
+    "quanfengkuaidi",
+    "yunda",
+    "zhongtong",
+    "tiantian",
+    "baishiwuliu",
+    "zhaijisong",
+    "debangwuliu",
+    "xinbangwuliu",
+    "shentong",
+    "yuantong",
+    "yousu",
+    "EMS",
+    "suning",
+    "quanyi",
+    "qita"
+]
+
+
+
+
+
+
+
 

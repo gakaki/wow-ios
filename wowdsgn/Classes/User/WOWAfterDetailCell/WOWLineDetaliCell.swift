@@ -17,6 +17,9 @@ extension UILabel {
     func afterDetailFormat(defaultText:String,describeText:String){
         self.strokeWithText(defaultText , str2: describeText , str2Font: 14, str2Color: UIColor.init(hexString: "030303")!)
     }
+    func afterListFormat(defaultText:String,describeText:String){
+        self.strokeWithText(defaultText , str2: describeText , str2Font: 13, str2Color: UIColor.init(hexString: "030303")!)
+    }
 }
 class WOWLineDetaliCell: WOWStyleNoneCell {
 
@@ -53,7 +56,7 @@ class WOWLineDetaliCell: WOWStyleNoneCell {
         didSet{
             if let refundDescribeText = refundDescribeText {
                 
-                if refundDescribeText == "" {
+                if refundDescribeText == "" {// 保证layout 正确
                      lbDescribe.text = " "
                 }else {
                      lbDescribe.text = refundDescribeText

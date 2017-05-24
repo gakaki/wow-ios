@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3J-VN-Zff">
@@ -28,9 +28,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHO-HI-zCt">
-                        <rect key="frame" x="15" y="14" width="100" height="21"/>
+                        <rect key="frame" x="15" y="-0.5" width="100" height="50.5"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="9w0-Jr-8cE"/>
+                            <constraint firstAttribute="height" constant="50" id="9w0-Jr-8cE"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -47,18 +47,21 @@
                 <constraints>
                     <constraint firstItem="CeA-Q3-MZU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="49" id="CI7-8M-bf9"/>
                     <constraint firstItem="E3J-VN-Zff" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="204" id="JKO-z7-fzb"/>
-                    <constraint firstAttribute="bottom" secondItem="PHO-HI-zCt" secondAttribute="bottom" constant="14" id="KDA-zK-IXT"/>
-                    <constraint firstItem="CeA-Q3-MZU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="V4i-nl-rXS"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="E3J-VN-Zff" secondAttribute="trailing" id="bT2-o4-fSg"/>
-                    <constraint firstItem="PHO-HI-zCt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="bcR-vQ-7cR"/>
-                    <constraint firstItem="E3J-VN-Zff" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="hEY-rq-Jvc"/>
+                    <constraint firstAttribute="bottom" secondItem="PHO-HI-zCt" secondAttribute="bottom" id="Kuu-ZZ-qmc"/>
+                    <constraint firstItem="CeA-Q3-MZU" firstAttribute="centerY" secondItem="E3J-VN-Zff" secondAttribute="centerY" id="UBC-wH-X1k"/>
+                    <constraint firstAttribute="trailing" secondItem="E3J-VN-Zff" secondAttribute="trailing" constant="8" id="oPH-zw-iPp"/>
+                    <constraint firstItem="PHO-HI-zCt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ooa-lX-p2a"/>
                     <constraint firstAttribute="trailingMargin" secondItem="PHO-HI-zCt" secondAttribute="trailing" constant="197" id="rAt-Au-rfm"/>
                     <constraint firstItem="PHO-HI-zCt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="rBd-Dz-Tqt"/>
+                    <constraint firstItem="PHO-HI-zCt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rOd-rb-pca"/>
+                    <constraint firstItem="E3J-VN-Zff" firstAttribute="centerY" secondItem="PHO-HI-zCt" secondAttribute="centerY" id="ypg-hs-x7i"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="freightTypeLabel" destination="PHO-HI-zCt" id="Z5E-xQ-RI5"/>
+                <outlet property="heightConstraint" destination="9w0-Jr-8cE" id="kkX-xo-Dez"/>
                 <outlet property="priceLabel" destination="E3J-VN-Zff" id="nhb-0o-Vge"/>
+                <outlet property="rightConstraint" destination="oPH-zw-iPp" id="gHL-sU-clx"/>
                 <outlet property="saidImageView" destination="CeA-Q3-MZU" id="c5v-06-IVw"/>
             </connections>
             <point key="canvasLocation" x="273" y="203"/>

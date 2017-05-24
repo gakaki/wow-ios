@@ -7,33 +7,39 @@
 //
 
 import UIKit
-enum AfterType {
+enum GoodsSendType {
     case noSendGoods    // 待发货
     case sendGoods      // 以发货
 }
-class WOWApplyAfterController: WOWApplyAfterBaseController {
-   
-    var sendType                : AfterType = .noSendGoods{
+struct RefundReason {
+    var title       : String
+    var describe    : String
+    var icon        : String
+}
+class WOWApplyAfterController: WOWBaseViewController {
+    
+    let tableView: UITableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
+    let disposeBag = DisposeBag()
+    
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String,RefundReason>>()
+    
+    var reasonArray = [RefundReason]()
+    
+    let reason  = RefundReason(title:"退货退款", describe:"已收到货，需要退还已收到的货物", icon:"refund_barter")
+    let reason1 = RefundReason(title:"仅退款", describe:"未收到货，协商退款", icon:"refund")
+    let reason2 = RefundReason(title:"换货", describe:"对已收到的货物不满意，协商换货", icon:"barter")
+    let reason3 = RefundReason(title:"整单退款", describe:"还未发货，协商整单取消", icon:"refund_barter")
+
+    var sendType                : GoodsSendType = .noSendGoods{
         didSet{
             switch sendType {
             case .sendGoods:
-                cellLineNumber  = 3
-                titlyArray      = ["退货退款",
-                                   "仅退款",
-                                   "换货"]
-                describeArray   = ["已收到货，需要退还已收到的货物",
-                                   "未收到货，协商退款",
-                                   "对已收到的货物不满意，协商换货"]
+                reasonArray = [reason,reason1,reason2]
                 break
             default:
-                cellLineNumber  = 2
-                titlyArray      = ["整单退款",
-                                   "仅退款"]
-                describeArray   = ["还未发货，协商整单取消",
-                                   "未收到货，协商退款"]
+                reasonArray = [reason3,reason1]
                 break
             }
-
         }
     }
     var titlyArray      : [String] = []
@@ -52,29 +58,62 @@ class WOWApplyAfterController: WOWApplyAfterBaseController {
     }
     override func setUI() {
         super.setUI()
-
-        tableView.register(UINib.nibName("WOWApplyAfterCell"), forCellReuseIdentifier: "WOWApplyAfterCell")
-
-    }
-   override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellLineNumber
-    }
-   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let index = indexPath.row
-
-            let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWApplyAfterCell", for: indexPath) as! WOWApplyAfterCell
-            cell.lbTitle.text       = titlyArray[index]
-            cell.lbDescribe.text    = describeArray[index]
-            cell.imgAicon.image     = UIImage.init(named: imgAcionArray[index])
-            cell.selectionStyle     = .none
+        tableView.cellId_register("WOWApplyAfterCell")
+        tableView.separatorStyle    = .none
+        tableView.backgroundColor   = GrayColorLevel5
+        self.tableView.rowHeight            = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight   = 60
+        view.addSubview(tableView)
+        
+        dataSource.configureCell = {
+            (_, tableView, indexPath, reason) in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WOWApplyAfterCell", for: indexPath) as! WOWApplyAfterCell
+            
+            cell.lbTitle.text       = reason.title
+            cell.lbDescribe.text    = reason.describe
+            cell.imgAicon.image     = UIImage.init(named: reason.icon)
+            
             return cell
+        }
+        let sections = [
+            SectionModel(model: "", items: reasonArray)
+        ]
+        let items = Observable.just(sections)
+        items.bindTo(tableView.rx.items(dataSource: dataSource)).addDisposableTo(disposeBag)
+        tableView.rx.itemSelected.subscribe {[unowned self] (indexpath) in
+                if let index = indexpath.element {
+                    self.goOnlyRefundVC(indexPath: index)
+                }
+            }.addDisposableTo(disposeBag)
 
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-          VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId)
+
+    func goOnlyRefundVC(indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            switch sendType {
+            case .noSendGoods:
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_AllOrderRefund)
+            default:
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .RefundMoney)
+            }
+            
+        case 1:
+            
+            switch sendType {
+            case .noSendGoods:
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_OnlyRefund)
+            default:
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .OnlyRefund)
+            }
+        case 2:
+            
+            VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .ExchangGoods)
+            
+        default:
+            break
+        }
+      
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

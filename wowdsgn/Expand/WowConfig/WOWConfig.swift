@@ -126,6 +126,9 @@ let YellowColor     = UIColor(hexString: "#FFD444")!
 let tabBackColor    = UIColor(hexString: "#FFFFFF")!
 
 let GrayFontColor    = UIColor(hexString: "#4A4A4A")!
+
+let CCCFontColor    = UIColor(hexString: "#CCCCCC")!
+
 //MARK:Font
  /// 
 let Fontlevel000 = UIFont.systemScaleFontSize(17)

@@ -18,7 +18,7 @@ class WOWOrderDetailNewCell: UITableViewCell {
     @IBOutlet weak var goodsNumber: UILabel!
     @IBOutlet weak var tapView: UIView!
     
-    @IBOutlet weak var btnAfterSales: UIButton!
+    @IBOutlet weak var lbAfterSales: UILabel!
     @IBOutlet weak var singsTagView: TagListView!
     var orderNewDetailModel : WOWNewOrderDetailModel!
     
@@ -32,10 +32,12 @@ class WOWOrderDetailNewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-//        btnAfterSales
-        btnAfterSales.addBorder(width: 0.5, color: UIColor.init(hexString: "cccccc")!)
-//        btnAfterSales.isHidden = true 
+        lbAfterSales.addBorder(width: 0.5, color: UIColor.init(hexString: "cccccc")!)
+        lbAfterSales.addTapGesture {[weak self] (sender) in
+            if let strongSelf = self {
+                strongSelf.clickAfterAction()
+            }
+        }
     }
     // 产品UI数据
     func productData(model : WOWNewProductModel!){
@@ -54,38 +56,72 @@ class WOWOrderDetailNewCell: UITableViewCell {
                 }
             }
         })
-        
         let result = WOWCalPrice.calTotalPrice([model.sellPrice ?? 0],counts:[1])
-        
         priceLabel.text     = result
         goodsNumber.text    = ((model.productQty) ?? 1).toString.get_formted_X()
-//        let statusStr = ""
-        if  model.isRefundAvailable ?? false {
-            btnAfterSales.setTitle("申请售后", for: .normal)
-        }else if model.isRefund ?? false{
-            btnAfterSales.setTitle(model.refundStatusName ?? "", for: .normal)
-        }else {
-            btnAfterSales.isHidden = true
+
+//        if  model.isRefundAvailable ?? false {
+//            btnAfterSales.setTitle("申请售后", for: .normal)
+//        }else
+        let statusName = (model.refundStatusName ?? "").get_formted_Space()
+        let defaultName = "申请售后".get_formted_Space()
+        if model.isRefund ?? false{
+            lbAfterSales.text = statusName
+        }else if model.isRefundAvailable ?? false {
+            lbAfterSales.text = defaultName
         }
- 
-//        refundStatusName
+        if model.isRefundAvailable ?? false  {
+            if model.isRefund ?? false {
+                 lbAfterSales.text = statusName
+         
+            }else{
+                lbAfterSales.text = defaultName
+
+            }
+        }else if model.isRefund ?? false{
+              lbAfterSales.text = statusName
+  
+        }else{
+             lbAfterSales.isHidden = true
+        }
+//        else {
+//            btnAfterSales.isHidden = true
+//        }
+        
     }
 
-    @IBAction func clickAfterAction(_ sender: Any) {
-        if productModelData.isRefund ?? false { // 如果已经申请过，  则进入 售后详情界面
-            VCRedirect.goAfterDetail(productModelData.saleOrderItemRefundId ?? 0)
-            return
+    func clickAfterAction() {
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_GetRefundMoney(saleOrderItemId: productModelData.saleOrderItemId ?? 0, isWholeRefund: nil), successClosure: {[weak self] (result, code) in
+            WOWHud.dismiss()
+            if let strongSelf = self{
+             
+                let json = JSON(result)
+                DLog(json)
+                strongSelf.gotoApplyAfterVC()
+                
+            }
+        }) {[weak self] (errorMsg) in
+            if let strongSelf = self{
+                print(errorMsg ?? "")
+                WOWHud.dismiss()
+            }
         }
-        if productModelData.isDeliveryed ?? false { // 进入申请售后列表页面  区别 未发货 和 已发货
-            
-            VCRedirect.goApplyAfterSales(sendType: .sendGoods,orderCode:orderCode, saleOrderItemId: productModelData.saleOrderItemId ?? 0)
-            
-        }else {
-            
-            VCRedirect.goApplyAfterSales(sendType: .noSendGoods,orderCode:orderCode,saleOrderItemId:productModelData.saleOrderItemId ?? 0)
-            
-        }
-
+    }
+    func gotoApplyAfterVC(){
+            if productModelData.isRefund ?? false { // 如果已经申请过，  则进入 售后详情界面
+                VCRedirect.goAfterDetail(productModelData.saleOrderItemRefundId ?? 0)
+                return
+            }
+            if productModelData.isDeliveryed ?? false { // 进入申请售后列表页面  区别 未发货 和 已发货
+        
+                VCRedirect.goApplyAfterSales(sendType: .sendGoods,orderCode:orderCode, saleOrderItemId: productModelData.saleOrderItemId ?? 0)
+        
+            }else {
+        
+                VCRedirect.goApplyAfterSales(sendType: .noSendGoods,orderCode:orderCode,saleOrderItemId:productModelData.saleOrderItemId ?? 0)
+                    
+            }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

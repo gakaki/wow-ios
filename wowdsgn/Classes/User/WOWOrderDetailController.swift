@@ -106,6 +106,10 @@ class WOWOrderDetailController: WOWBaseViewController{
         super.viewDidLoad()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        request()
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if entrance == .orderPay{
@@ -164,7 +168,7 @@ class WOWOrderDetailController: WOWBaseViewController{
         isSomeForGoodsType   = true
         isOpen               = true
 
-        request()
+    
         WOWBorderColor(rightButton)
         navigationItem.title = "订单详情"
         configTableView()
@@ -777,7 +781,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     switch OrderDetailNewaType {
                     case .forGoods,.finish:
 
-                        self.configShipOutGoodsUI(cell: cell, indexRow: indexRow, indexSection: indexSection)
+                        self.configShipOutGoodsUI(cell: cell, indexRow: indexRow, indexSection: indexSection - 2)
 
 
                     default:
@@ -838,7 +842,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     
                     if orderNewDetailModel != nil {
                         cell.delegeta = self
-                        self.configShipOutGoodsUI(cell: cell, indexRow: indexRow, indexSection: indexSection)
+                        self.configShipOutGoodsUI(cell: cell, indexRow: indexRow - 1, indexSection: indexSection - 2)
                     }
                     returnCell = cell
                 }

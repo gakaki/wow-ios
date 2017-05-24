@@ -10,6 +10,7 @@ import UIKit
 
 class WOWGoodsTypeCell: WOWStyleNoneCell {
 
+    @IBOutlet weak var lbSing: UILabel!
     @IBOutlet weak var lbGoodsType: UILabel!
     @IBOutlet weak var lbType: UILabel!
     override func awakeFromNib() {

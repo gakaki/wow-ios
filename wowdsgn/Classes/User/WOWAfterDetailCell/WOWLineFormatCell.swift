@@ -16,13 +16,14 @@ class WOWLineFormatCell: WOWStyleNoneCell {
         didSet{
             switch formatType {
             case .ServiceNumber:
-                lbOne.text          = "退款金额:"
-                lbTwo.text          = "退款时间:"
-                btnMoney.isHidden   = false
-            case .RefundMoney:
                 lbOne.text          = "服务单号:"
                 lbTwo.text          = "提交时间:"
                 btnMoney.isHidden   = true
+
+            case .RefundMoney:
+                lbOne.text          = "退款金额:"
+                lbTwo.text          = "退款时间:"
+                btnMoney.isHidden   = false
             }
         }
     }
@@ -32,12 +33,18 @@ class WOWLineFormatCell: WOWStyleNoneCell {
     @IBOutlet weak var lbTwo: UILabel!
     @IBOutlet weak var lbOneDescribe: UILabel!
     @IBOutlet weak var lbTwoDescribe: UILabel!
+    var saleOrderItemRefundId:Int!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         btnMoney.addBorder(width: 0.5, color: UIColor.init(hexString: "cccccc")!)
     }
-
+    
+    @IBAction func lookMonryWhere(_ sender: Any) {
+        
+     VCRedirect.goMoneyFromController(saleOrderItemRefundId)
+        
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

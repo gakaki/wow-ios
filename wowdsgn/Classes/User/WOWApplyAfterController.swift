@@ -19,10 +19,11 @@ struct RefundReason {
 class WOWApplyAfterController: WOWBaseViewController {
     
     let tableView: UITableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
+    // 释放资源属性
     let disposeBag = DisposeBag()
-    
+    // 资源类熟悉
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String,RefundReason>>()
-    
+    // 数据源
     var reasonArray = [RefundReason]()
     
     let reason  = RefundReason(title:"退货退款", describe:"已收到货，需要退还已收到的货物", icon:"refund_barter")
@@ -64,7 +65,7 @@ class WOWApplyAfterController: WOWBaseViewController {
         self.tableView.rowHeight            = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight   = 60
         view.addSubview(tableView)
-        
+        // 配置cell
         dataSource.configureCell = {
             (_, tableView, indexPath, reason) in
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWApplyAfterCell", for: indexPath) as! WOWApplyAfterCell

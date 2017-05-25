@@ -263,7 +263,7 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
-                WOWHud.dismiss()
+//                WOWHud.dismiss()
             }
         }
         

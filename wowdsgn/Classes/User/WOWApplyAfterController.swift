@@ -29,7 +29,7 @@ class WOWApplyAfterController: WOWBaseViewController {
     let reason  = RefundReason(title:"退货退款", describe:"已收到货，需要退还已收到的货物", icon:"refund_barter")
     let reason1 = RefundReason(title:"仅退款", describe:"未收到货，协商退款", icon:"refund")
     let reason2 = RefundReason(title:"换货", describe:"对已收到的货物不满意，协商换货", icon:"barter")
-    let reason3 = RefundReason(title:"整单退款", describe:"还未发货，协商整单取消", icon:"refund_barter")
+    let reason3 = RefundReason(title:"整单退款", describe:"还未发货，协商整单取消", icon:"refund_All")
 
     var sendType                : GoodsSendType = .noSendGoods{
         didSet{

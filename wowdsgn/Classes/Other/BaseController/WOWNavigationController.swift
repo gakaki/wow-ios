@@ -13,7 +13,7 @@ class WOWNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationBar.isTranslucent = false
-        interactivePopGestureRecognizer?.delegate = nil
+//        interactivePopGestureRecognizer?.delegate = nil
         
     }
 

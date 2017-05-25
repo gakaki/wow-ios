@@ -8,8 +8,9 @@
 
 import UIKit
 enum GoodsSendType {
-    case noSendGoods    // 待发货
-    case sendGoods      // 以发货
+    case noSendGoods        // 待发货
+    case sendGoods          // 以发货
+    case someNoSend         // 部分发货 -- 未发货
 }
 struct RefundReason {
     var title       : String
@@ -36,6 +37,9 @@ class WOWApplyAfterController: WOWBaseViewController {
             switch sendType {
             case .sendGoods:
                 reasonArray = [reason,reason1,reason2]
+                break
+            case .someNoSend:
+                reasonArray = [reason1]
                 break
             default:
                 reasonArray = [reason3,reason1]
@@ -95,6 +99,8 @@ class WOWApplyAfterController: WOWBaseViewController {
             switch sendType {
             case .noSendGoods:
                 VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_AllOrderRefund)
+            case .someNoSend:
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_OnlyRefund)
             default:
                 VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .RefundMoney)
             }
@@ -104,6 +110,8 @@ class WOWApplyAfterController: WOWBaseViewController {
             switch sendType {
             case .noSendGoods:
                 VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_OnlyRefund)
+            case .someNoSend:
+                break
             default:
                 VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .OnlyRefund)
             }

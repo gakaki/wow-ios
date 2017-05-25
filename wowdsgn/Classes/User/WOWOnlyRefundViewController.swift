@@ -91,7 +91,15 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
             }
         }
     }
-    var goodsTypeIndex              : Int = 0 // 货物状态在piker Index
+    var goodsTypeIndex              : Int = 0{
+        didSet{
+            if goodsTypeIndex == 0 {
+                params_received = false
+            }else{
+                params_received = true
+            }
+        }
+    } // 货物状态在piker Index
 
     var refundReasonStr             : String? = "请选择退款原因"{ // 退款原因
         didSet{ tableView.reloadData() }
@@ -172,7 +180,7 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
                 strongSelf.endRefresh()
-                WOWHud.dismiss()
+//                WOWHud.dismiss()
             }
         }
 
@@ -262,8 +270,9 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
+                WOWHud.showMsg(errorMsg ?? "")
                 strongSelf.endRefresh()
-//                WOWHud.dismiss()
+
             }
         }
         

@@ -22,6 +22,9 @@ class WOWOrderDetailNewCell: UITableViewCell {
     @IBOutlet weak var singsTagView: TagListView!
     var orderNewDetailModel : WOWNewOrderDetailModel!
     
+    
+    var orderType : OrderNewType?
+    
     var orderCode                   : String!
     var saleOrderItemId             : Int!
     
@@ -107,14 +110,21 @@ class WOWOrderDetailNewCell: UITableViewCell {
                 VCRedirect.goAfterDetail(productModelData.saleOrderItemRefundId ?? 0)
                 return
             }
+        
+
             if productModelData.isDeliveryed ?? false { // 进入申请售后列表页面  区别 未发货 和 已发货
         
                 VCRedirect.goApplyAfterSales(sendType: .sendGoods,orderCode:orderCode, saleOrderItemId: productModelData.saleOrderItemId ?? 0)
         
             }else {
-        
+                
+                if orderType == .someFinishForGoods {
+                    VCRedirect.goApplyAfterSales(sendType: .someNoSend,orderCode:orderCode,saleOrderItemId:productModelData.saleOrderItemId ?? 0)
+                    return
+                }
+                
                 VCRedirect.goApplyAfterSales(sendType: .noSendGoods,orderCode:orderCode,saleOrderItemId:productModelData.saleOrderItemId ?? 0)
-                    
+                
             }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

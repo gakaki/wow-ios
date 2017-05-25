@@ -182,18 +182,16 @@ class WOWUploadManager {
                    
                     qm.put(data, key: imagePath, token: token, complete: { (info, key, resp) in
                          WOWHud.dismiss()
-                        if (info?.error != nil) {
-                            
-                            failClosure("错误")
-                            
-                        } else {
-
-                            let key = resp?["key"]
+                        
+                        if (info?.isOK ?? false),  let resp = resp{
+                            let key = resp["key"]
                             let headImageUrl = "https://img.wowdsgn.com/\(key!)"
                             successClosure(headImageUrl)
 
+                        }else{
+                            failClosure("错误")
                         }
-
+                  
                     }, option: uploadOption)
             }
 

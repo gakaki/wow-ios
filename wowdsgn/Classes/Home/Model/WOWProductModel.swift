@@ -54,6 +54,8 @@ class WOWProductModel: WOWBaseModel,Mappable{
     var productQty                  : Int?
     var isOversea                   : Bool? //是否海购,是-true,否-false
     var logisticsMode               : Int?  //1-海外直邮，2-保税区直邮
+    var originCountry               : String?   //国家名字
+    var originCountryId             : Int?      //国家id
     
     override init() {
         super.init()
@@ -109,14 +111,9 @@ class WOWProductModel: WOWBaseModel,Mappable{
         
         isOversea                   <- map["isOversea"]
         logisticsMode               <- map["logisticsMode"]
-    
-        // 前端自己算的 折扣数  暂时废弃，放到后台
-//        if let sellPrice = sellPrice , let originalprice = originalprice {
-//            
-//            if !(sellPrice >= originalprice || sellPrice == 0 || originalprice == 0) {
-//                discount = String.init(format: "%.1f", sellPrice * 10/originalprice)
-//            }
-//        }
+        originCountry               <- map["originCountry"]
+        originCountryId             <- map["originCountryId"]
+
     }
     
     /// 商品列表瀑布流需要用的高度

@@ -28,6 +28,7 @@ class WOWEditOrderController: WOWBaseViewController {
     var orderCode                       = String()      //订单号
     var orderArr                        = [WOWEditOrderModel]() //订单列表
     var totalAmount                     : Double = 0.00      //订单总金额
+    var orderResultVoList               = [WOWOrderCodeModel]() //订单编号
     
     //时间戳，用来验证唯一
     let timeInterval = Date().timeIntervalSince1970
@@ -223,6 +224,37 @@ class WOWEditOrderController: WOWBaseViewController {
         navigationController?.pushViewController(vc, animated: true)
 
     }
+    /**
+     订单列表
+     */
+    
+    func goOrderList()  {
+         MobClick.e(.My_Orders)
+        let vc = WOWOrderListViewController()
+        vc.entrance = orderDetailEntrance.orderPay
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    //支付成功页面
+    func goPaySuccess(paymentChannelName: String?) {
+        //如果子单数量大于1说明是多个订单
+        if orderResultVoList.count > 1 {
+            let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPayResultController") as! WOWPayResultController
+            vc.payMethod = paymentChannelName ?? ""
+            vc.orderIdArr = orderResultVoList
+            let result = WOWCalPrice.calTotalPrice([totalAmount ],counts:[1])
+            vc.totalPrice = result
+            navigationController?.pushViewController(vc, animated: true)
+
+        }else {
+            let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
+            vc.payMethod = paymentChannelName ?? ""
+            vc.orderid = orderCode
+            let result = WOWCalPrice.calTotalPrice([totalAmount ],counts:[1])
+            vc.totalPrice = result
+            navigationController?.pushViewController(vc, animated: true)
+
+        }
+    }
     
     //MARK: - Action
     @IBAction func sureClick(_ sender: UIButton) {
@@ -379,7 +411,6 @@ class WOWEditOrderController: WOWBaseViewController {
             //买家备注
             let remark          =  orderInfo.remark?.text ?? ""
             orderSettle = [
-                "orderSource": orderSource  as AnyObject,
                 "orderAmount": totalAmoutStr  as AnyObject,
                 "remark": remark  as AnyObject,
                 "productPriceGroup": productPriceGroup as AnyObject,
@@ -404,7 +435,7 @@ class WOWEditOrderController: WOWBaseViewController {
             }else {       //没有参加促销。是否使用优惠券。如果使用优惠券就把优惠券id传过去
                 if let endUserCouponId = orderInfo.endUserCouponId {
                     
-                    orderSettle = [
+                    orderSettle += [
 
                         "endUserCouponId": endUserCouponId  as AnyObject,
   
@@ -413,10 +444,21 @@ class WOWEditOrderController: WOWBaseViewController {
                 }
                 
             }
+            //如果立即购买就加上产品id和数量
+            switch entrance! {
+            case editOrderEntrance.buyEntrance:
+                orderSettle += [
+                    
+                    "productItemId": (productId ?? 0) as AnyObject,
+                    "productQty": (productQty ?? 1) as AnyObject,
+                    
+                ]
+            default:
+                break
+            }
             itemGroupSettleVos.append(orderSettle)
 
         }
-   
 
         params = [
             "orderToken": timeInterval as AnyObject,
@@ -425,17 +467,7 @@ class WOWEditOrderController: WOWBaseViewController {
             "itemGroupSettleVos": itemGroupSettleVos as AnyObject,
         ]
      
-        switch entrance! {
-        case editOrderEntrance.buyEntrance:
-            params += [
-                
-                "productId": (productId ?? 0) as AnyObject,
-                "productQty": (productQty ?? 1) as AnyObject,
 
-            ]
-        default:
-            break
-        }
         
         WOWNetManager.sharedManager.requestWithTarget(.api_OrderCreate(params: params), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
@@ -455,6 +487,7 @@ class WOWEditOrderController: WOWBaseViewController {
 
                 NotificationCenter.postNotificationNameOnMainThread(WOWUpdateCarBadgeNotificationKey, object: nil)
                 let model = Mapper<WOWOrderInfoModel>().map(JSONObject:result)
+                strongSelf.orderResultVoList = model?.orderResultVoList ?? [WOWOrderCodeModel]()
                 //如果有父订单写父订单号，如果没有父订单就写子订单
                 if let parentOrderCode = model?.parentOrderCode {
                     strongSelf.orderCode = parentOrderCode
@@ -501,7 +534,7 @@ class WOWEditOrderController: WOWBaseViewController {
                     case "cancel":
                         WOWHud.showMsg("支付取消")
                         if strongSelf.orderArr.count > 1 {
-                            VCRedirect.toOrderList()
+                            strongSelf.goOrderList()
                         }else {
                             strongSelf.goOrderDetail()
 
@@ -511,7 +544,7 @@ class WOWEditOrderController: WOWBaseViewController {
                     default:
                         WOWHud.showMsg("支付失败")
                         if strongSelf.orderArr.count > 1 {
-                            VCRedirect.toOrderList()
+                            strongSelf.goOrderList()
                         }else {
                             strongSelf.goOrderDetail()
                             
@@ -528,24 +561,19 @@ class WOWEditOrderController: WOWBaseViewController {
     func requestPayResult() {
         WOWNetManager.sharedManager.requestWithTarget(.api_PayResult(orderCode: orderCode), successClosure: { [weak self](result, code) in
             if let strongSelf = self {
+                
                 let json = JSON(result)
-                let orderCode = strongSelf.orderCode
-                let payAmount = strongSelf.totalAmount
                 let paymentChannelName = json["paymentChannelName"].string
-                let vc = UIStoryboard.initialViewController("BuyCar", identifier:"WOWPaySuccessController") as! WOWPaySuccessController
-                vc.payMethod = paymentChannelName ?? ""
-                vc.orderid = orderCode 
-                let result = WOWCalPrice.calTotalPrice([payAmount ],counts:[1])
-                vc.totalPrice = result
+                
+                //支付成功页面
+                strongSelf.goPaySuccess(paymentChannelName: paymentChannelName)
                 
                 //TalkingData 支付成功
-                var sum = payAmount 
+                var sum = strongSelf.totalAmount
                 sum                  = sum * 100 
-                let order_id             = orderCode 
 
-                AnalyaticEvent.e2(.PaySuccess,["totalAmount":Int32(sum) ,"OrderCode":order_id ])
-                //支付结果
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
+                AnalyaticEvent.e2(.PaySuccess,["totalAmount":Int32(sum) ,"OrderCode":strongSelf.orderCode ])
+                
                 MobClick.e(.Orders_Payment)
                 
                 
@@ -776,7 +804,13 @@ extension WOWEditOrderController: selectPayDelegate {
             WOWHud.showMsg("订单生成失败")
             return
         }
-        goOrderDetail()
+    
+        if orderArr.count > 1 {
+            goOrderList()
+        }else {
+            goOrderDetail()
+            
+        }
     }
 
 }

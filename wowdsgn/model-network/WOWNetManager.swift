@@ -56,14 +56,7 @@ class WOWNetManager {
     
     let requestProvider = MoyaProvider<RequestApi>(endpointClosure: WOWNetManager.endpointClosure)
 
-    
-    func getPresentedController() -> UIViewController? {
-        let appRootVC: UIViewController = UIApplication.shared.keyWindow!.rootViewController!
-        let topVC: UIViewController     = appRootVC
-        let presentedVC                 = topVC.presentedViewController
-        
-        return presentedVC
-    }
+
    
 
     func requestWithTarget(

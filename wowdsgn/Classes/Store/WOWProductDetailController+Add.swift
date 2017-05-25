@@ -19,6 +19,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         tableView.rowHeight          = UITableViewAutomaticDimension
         tableView.mj_header = self.mj_header
         tableView.tableHeaderView = cycleView   //banner轮播
+        
         //显示价格的cell
         tableView.register(UINib.nibName(String(describing: WOWProductDetailPriceCell.self)), forCellReuseIdentifier:String(describing: WOWProductDetailPriceCell.self))
         //限购标签
@@ -81,32 +82,47 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var returnCell :UITableViewCell!
+        
         switch ((indexPath as NSIndexPath).section,(indexPath as NSIndexPath).row) {
         case (0,_): //标题价钱
+            
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailPriceCell.self), for: indexPath) as! WOWProductDetailPriceCell
             cell.showData(productModel)
             returnCell = cell
+            
         case (0 + isHaveLimit,_): //限购标签
+            
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductLimitCell.self), for: indexPath) as! WOWProductLimitCell
             cell.limitLabel.text = productModel?.limitTag ?? ""
             returnCell = cell
+            
         case (0 + isHaveLimit + isHavePromotion,_): //促销标签
+            
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductPromotionCell.self), for: indexPath) as! WOWProductPromotionCell
             cell.promotionTag.text = promotionTag
             cell.promotionTime.text = promotionTime
             returnCell = cell
+            
         case (1 + isHaveLimit + isHavePromotion,_): //满199包邮
+            
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDesCell.self), for: indexPath) as! WOWProductDesCell
+            cell.showData(productModel)
             returnCell = cell
+            
         case (1 + isOversea + isHaveLimit + isHavePromotion,_): //海购说明
+            
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTaxExplainCell.self), for: indexPath) as! WOWTaxExplainCell
             cell.showData(productModel?.logisticsMode)
             returnCell = cell
+            
         case (2 + isOversea + isHaveLimit + isHavePromotion,_): //品牌设计师
+            
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailDescCell.self), for: indexPath) as! WOWProductDetailDescCell
             cell.showData(self.productModel)
             returnCell = cell
+            
         case (3 + isOversea + isHaveLimit + isHavePromotion,_): //产品描述
+            
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductDetailCell.self), for: indexPath) as! WOWProductDetailCell
             if let array = productModel?.secondaryImgs {
                 let model = array[(indexPath as NSIndexPath).row]
@@ -121,6 +137,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             }
             
             returnCell = cell
+            
         case (4 + isOversea + isHaveLimit + isHavePromotion,_): //参数
             
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductParamCell.self), for: indexPath) as! WOWProductParamCell
@@ -130,11 +147,14 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
             }
             
             returnCell = cell
+            
         case (5 + isOversea + isHaveLimit + isHavePromotion,_)://温馨提示
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWProductDetailTipsWebViewCell", for: indexPath) as! WOWProductDetailTipsWebViewCell
             returnCell = cell
+            
         case (6 + isOversea + isHaveLimit + isHavePromotion,_): //客服电话
+            
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWTelCell.self), for: indexPath) as! WOWTelCell
 
             cell.contentView.addTapGesture {[unowned self] (sender) in
@@ -153,12 +173,16 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
             }
             returnCell = cell
+            
         case (6 + isOversea + isHaveLimit + isHavePromotion + isHaveComment,_): //商品评论
+            
             let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: WOWProductCommentCell.self), for: indexPath) as! WOWProductCommentCell
             cell.showData(model: commentList[indexPath.row])
             cell.delegate = self
             returnCell = cell
+            
         case (6 + isOversea + isHaveLimit + isHavePromotion + isHaveAbout + isHaveComment,_)://相关商品
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWProductDetailAboutCell", for: indexPath) as! WOWProductDetailAboutCell
             cell.delegate = self
             cell.dataArr = aboutProductArray
@@ -170,32 +194,44 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
             }
             returnCell = cell
+            
         default:
+            
             break
         }
+        
         return returnCell
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
         switch section {
+            
         case 3 + isOversea + isHaveLimit + isHavePromotion:
+            
             //动态获取产品描述的label高度
             return 67 + productDescView.productDescLabel.getEstimatedHeight()
+            
         case 4 + isOversea + isHaveLimit + isHavePromotion, 5 + isOversea  + isHaveLimit + isHavePromotion:
             //产品参数与温馨提示cell头
             return 60
+            
         case 6 + isOversea + isHaveLimit + isHavePromotion + isHaveComment:       //商品评价
+            
             if isHaveComment == 1 {
                 return 60
             }else {
                 return 0.01
             }
+            
         case 6 + isOversea + isHaveLimit + isHavePromotion + isHaveComment + isHaveAbout: //如果相关商品有数据显示，如果没有就不显示
+            
             if aboutProductArray.count > 0 {
                 return 39
             }else {
                 return 0.01
             }
+            
         default:
             return 0.01
         }
@@ -203,33 +239,53 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
+            
         case 0: //商品价格
+            
             return 0.01
+            
         case 0 + isHaveLimit : //限购标签
+            
             return 0.01
+            
         case 0 + isHaveLimit + isHavePromotion: //促销标签
+            
             return 0.01
+            
         case 4 + isOversea + isHaveLimit + isHavePromotion:   //产品参数
+            
             if isOpenParam {
                 return 20
             }else {
                 return 0.01
             }
+            
         case 6 + isOversea + isHaveLimit + isHavePromotion:  //客服电话
+            
             return 0.01
+            
         case 6 + isOversea + isHaveLimit + isHavePromotion + isHaveComment:       //商品评价
+            
             return 0.01
+            
         default:
+            
             return 10
+            
         }
         
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         switch section {
+            
         case 3 + isOversea + isHaveLimit + isHavePromotion:     //产品描述
+            
             return productDescView
+            
         case 4 + isOversea + isHaveLimit + isHavePromotion:   //产品参数
+            
             paramView.label.text = "产品参数"
             paramView.openImg.addTapGesture(action: { [weak self](tap) in
                 if let strongSelf = self  {
@@ -240,7 +296,9 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
                 })
             return paramView
+            
         case 5 + isOversea + isHaveLimit + isHavePromotion:   //温馨提示
+            
             tipsView.label.text = "温馨提示"
             tipsView.openImg.addTapGesture(action: { [weak self](tap) in
                 if let strongSelf = self  {
@@ -251,20 +309,27 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
                 })
             return tipsView
+            
         case 6 + isOversea + isHaveLimit + isHavePromotion + isHaveComment: //相关商品
+            
             if isHaveComment == 1 {
                 return commentView
             }else {
                 return nil
             }
+            
         case 6 + isOversea + isHaveLimit + isHavePromotion + isHaveAbout + isHaveComment: //相关商品
+            
             if aboutProductArray.count > 0 {
                 return aboutView
             }else {
                 return nil
             }
+            
         default:
+            
             return nil
+            
         }
     }
     
@@ -281,9 +346,13 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         switch (indexPath as NSIndexPath).section {
+            
         case 6 + isOversea + isHaveLimit + isHavePromotion:   //客服电话
+            
             WOWTool.callPhone()
+            
         default:
             break
         }
@@ -292,8 +361,11 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
 }
 
 extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
+    
     func aboutProduct(_ productDetailAboutCell:WOWProductDetailAboutCell, pageIndex: Int, isRreshing: Bool, pageSize: Int) {
+        
         let params = ["productId": productModel?.productId ?? 0, "currentPage": pageIndex,"pageSize":pageSize] as [String : Any]
+        
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_ProductAbout(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
             
             if let strongSelf = self {
@@ -304,6 +376,7 @@ extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
                 if let array = arr{
                     strongSelf.aboutProductArray.append(contentsOf: array)
                     productDetailAboutCell.dataArr?.append(contentsOf: array)
+                    
                     //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
                     if array.count < productDetailAboutCell.pageSize {
                         productDetailAboutCell.collectionView.xzm_footer = nil
@@ -334,18 +407,23 @@ extension WOWProductDetailController: WOWProductDetailAboutCellDelegate {
         }
         
     }
+    
     func selectCollectionIndex(_ productId: Int) {
+        
         let vc = UIStoryboard.initialViewController("Store", identifier:String(describing: WOWProductDetailController.self)) as! WOWProductDetailController
         vc.hideNavigationBar = true
         vc.productId = productId
         navigationController?.pushViewController(vc, animated: true)
+        
     }
     
 }
 
 
 extension WOWProductDetailController: WOWProductCommentCellDelegate {
+    
     func setPhoto() -> [PhotoModel] {
+        
         var photos: [PhotoModel] = []
         
         for  aa:WOWProductPicTextModel in productModel?.secondaryImgs ?? [WOWProductPicTextModel](){
@@ -362,6 +440,7 @@ extension WOWProductDetailController: WOWProductCommentCellDelegate {
     }
     
     func lookBigImg(_ beginPage:Int)  {
+        
         DispatchQueue.main.async {
             let photoBrowser = PhotoBrowser(photoModels:self.setPhoto()) {[weak self] (extraBtn) in
                 if let sSelf = self {

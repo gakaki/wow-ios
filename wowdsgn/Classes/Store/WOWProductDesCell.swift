@@ -15,6 +15,18 @@ class WOWProductDesCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    func showData(_ model:WOWProductModel?){
+
+        if let model = model {
+            if model.isOversea ?? false {
+                exemptionLb.text = "包邮包税"
+            }else {
+                exemptionLb.text = "满99包邮"
+            }
+        }
+    
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

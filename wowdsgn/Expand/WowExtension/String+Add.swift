@@ -115,7 +115,7 @@ extension String{
             return ""
         }else{
             
-            res     = "\(self)?imageView2/1/format/webp/q/90"
+            res     = "\(self)?imageView2/1/format/webp/q/75"
 
         }
         return res

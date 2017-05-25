@@ -15,7 +15,9 @@ class WOWProductDetailPriceCell: UITableViewCell {
     @IBOutlet weak var originalPriceLabel: UILabel!
     @IBOutlet weak var lbLabel: UILabel!
     @IBOutlet weak var lbDiscount: UILabel!
-    @IBOutlet weak var LeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var overseaView: UIView!
+    @IBOutlet weak var overseaImg: UIImageView!
+    @IBOutlet weak var overseaLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,14 +41,18 @@ class WOWProductDetailPriceCell: UITableViewCell {
             default: break
             }
         }
-
-        if lbDiscount.isHidden && !lbLabel.isHidden{
-            
-            self.LeftConstraint.constant = 0
-            
+        //是否海购商品
+        if model?.isOversea ?? false {
+            overseaView.isHidden        = false
+            let ImgStr = String(format: "countryflags_%i", model?.originCountryId ?? 0)
+            let lbStr = model?.logisticsMode == 2 ? "保税区直邮": ((model?.originCountry ?? "") + "直邮")
+            overseaImg.image = UIImage(named: ImgStr)
+            overseaLabel.text = lbStr
         }else {
-            LeftConstraint.constant = 5
+            overseaView.isHidden        = true
+
         }
+
        
 
         nameLabel.text = model?.productTitle ?? ""

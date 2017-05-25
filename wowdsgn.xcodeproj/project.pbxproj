@@ -382,6 +382,7 @@
 		2D80F0951E0A262500B60AE8 /* WOWFeedBackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D80F0931E0A262500B60AE8 /* WOWFeedBackCell.xib */; };
 		2D80F0971E0B81C700B60AE8 /* WOWCommentManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D80F0961E0B81C700B60AE8 /* WOWCommentManage.swift */; };
 		2D81C6401E1F6F05004E8832 /* BaseScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D81C63F1E1F6F05004E8832 /* BaseScreenViewController.swift */; };
+		2D8F05CB1ED5988200594340 /* UITableView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8F05CA1ED5988100594340 /* UITableView+Add.swift */; };
 		2D92082A1E5ACEA8005EA750 /* NHRangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9208281E5ACEA8005EA750 /* NHRangeSlider.swift */; };
 		2D92082B1E5ACEA8005EA750 /* NHRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9208291E5ACEA8005EA750 /* NHRangeSliderView.swift */; };
 		2D96759E1E76711400F0C0F6 /* Cell_105_Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D96759C1E76711400F0C0F6 /* Cell_105_Banner.swift */; };
@@ -1057,6 +1058,7 @@
 		2D80F0931E0A262500B60AE8 /* WOWFeedBackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWFeedBackCell.xib; sourceTree = "<group>"; };
 		2D80F0961E0B81C700B60AE8 /* WOWCommentManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWCommentManage.swift; sourceTree = "<group>"; };
 		2D81C63F1E1F6F05004E8832 /* BaseScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScreenViewController.swift; sourceTree = "<group>"; };
+		2D8F05CA1ED5988100594340 /* UITableView+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Add.swift"; sourceTree = "<group>"; };
 		2D9208271E5ACEA8005EA750 /* NHRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHRangeSlider.h; sourceTree = "<group>"; };
 		2D9208281E5ACEA8005EA750 /* NHRangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NHRangeSlider.swift; sourceTree = "<group>"; };
 		2D9208291E5ACEA8005EA750 /* NHRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NHRangeSliderView.swift; sourceTree = "<group>"; };
@@ -1856,6 +1858,7 @@
 				069D31031DB47ADD00A059D0 /* UIView+BorderLine.swift */,
 				069D31041DB47ADD00A059D0 /* UIViewController+VCManager.swift */,
 				63B6AEB31E5D987C00DF1533 /* WOWMessageToVc.swift */,
+				2D8F05CA1ED5988100594340 /* UITableView+Add.swift */,
 			);
 			path = WowExtension;
 			sourceTree = "<group>";
@@ -3338,6 +3341,7 @@
 				069D31BB1DB47ADD00A059D0 /* WOWOrderFooterView.swift in Sources */,
 				63F14ADD1E66C5450034C09E /* MagicMovePop.swift in Sources */,
 				069D32EC1DB47ADD00A059D0 /* WOWTool.swift in Sources */,
+				2D8F05CB1ED5988200594340 /* UITableView+Add.swift in Sources */,
 				069D324D1DB47ADD00A059D0 /* WOWCheckSelectView.swift in Sources */,
 				63F3DA8A1DE6C2BD009CE52D /* WOWProductCommentController.swift in Sources */,
 				069D31C01DB47ADD00A059D0 /* WOWProductOrderCell.swift in Sources */,

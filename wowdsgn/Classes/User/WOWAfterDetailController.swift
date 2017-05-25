@@ -5,11 +5,7 @@
 //  Created by 陈旭 on 2017/5/5.
 //  Copyright © 2017年 g. All rights reserved.
 //
-extension UITableView{
-    func cellId_register(_ cellId:String)    {
-        self.register(UINib.nibName(cellId), forCellReuseIdentifier: cellId)
-    }
-}
+
 import UIKit
 enum CurrentUIStyle{ // 四种风格
     case ReviewingUI    //   审核中 or 申请服务：换货 -- 已确认 之后的UI 没有 钱款去向

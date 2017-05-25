@@ -60,9 +60,6 @@ class WOWOrderDetailNewCell: UITableViewCell {
         priceLabel.text     = result
         goodsNumber.text    = ((model.productQty) ?? 1).toString.get_formted_X()
 
-//        if  model.isRefundAvailable ?? false {
-//            btnAfterSales.setTitle("申请售后", for: .normal)
-//        }else
         let statusName = (model.refundStatusName ?? "").get_formted_Space()
         let defaultName = "申请售后".get_formted_Space()
         if model.isRefund ?? false{
@@ -84,9 +81,6 @@ class WOWOrderDetailNewCell: UITableViewCell {
         }else{
              lbAfterSales.isHidden = true
         }
-//        else {
-//            btnAfterSales.isHidden = true
-//        }
         
     }
 

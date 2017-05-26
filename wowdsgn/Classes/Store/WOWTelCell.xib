@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,19 +14,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="244" text="4008-203-237" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaX-7M-J1Q">
-                        <rect key="frame" x="78.5" y="38" width="73" height="8"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" red="1" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="（周一至周五 9:00-18:30）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXm-rl-vIz">
-                        <rect key="frame" x="151.5" y="36.5" width="129" height="12"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                        <rect key="frame" x="84" y="27" width="153" height="30.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30.5" id="Xqc-bA-EAu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="1" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="IK1-WZ-LLM">
@@ -56,11 +53,9 @@
                 <constraints>
                     <constraint firstItem="IK1-WZ-LLM" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="7KA-G5-4aL"/>
                     <constraint firstItem="IK1-WZ-LLM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="AjN-2i-98Z"/>
-                    <constraint firstItem="dXm-rl-vIz" firstAttribute="leading" secondItem="MaX-7M-J1Q" secondAttribute="trailing" id="S0k-zk-dc9"/>
-                    <constraint firstItem="dXm-rl-vIz" firstAttribute="centerY" secondItem="MaX-7M-J1Q" secondAttribute="centerY" id="U9v-bx-fgU"/>
-                    <constraint firstItem="MaX-7M-J1Q" firstAttribute="top" secondItem="IK1-WZ-LLM" secondAttribute="bottom" constant="4" id="WIx-wu-aaa"/>
-                    <constraint firstAttribute="bottom" secondItem="MaX-7M-J1Q" secondAttribute="bottom" constant="13.5" id="YCc-xQ-XCt"/>
-                    <constraint firstItem="MaX-7M-J1Q" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="-45" id="gII-bX-J7S"/>
+                    <constraint firstAttribute="bottom" secondItem="dXm-rl-vIz" secondAttribute="bottom" constant="2" id="GL7-4I-a6Q"/>
+                    <constraint firstItem="dXm-rl-vIz" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="RqI-X9-CvC"/>
+                    <constraint firstItem="dXm-rl-vIz" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="12" id="TMZ-Fe-Cdg"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

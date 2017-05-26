@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qy4-2a-rWX" id="K4f-VD-Tj2">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="98.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ghJ-LF-hHg">
@@ -23,15 +23,15 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vhz-ll-rMp">
                                 <rect key="frame" x="0.0" y="0.0" width="345" height="18"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="countryflags_10" translatesAutoresizingMaskIntoConstraints="NO" id="M3r-99-vHJ">
-                                        <rect key="frame" x="0.0" y="3.5" width="17" height="11"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M3r-99-vHJ">
+                                        <rect key="frame" x="0.0" y="2" width="21" height="14"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="17" id="bEp-78-pcK"/>
-                                            <constraint firstAttribute="height" constant="11" id="kve-Hw-80H"/>
+                                            <constraint firstAttribute="width" constant="21" id="bEp-78-pcK"/>
+                                            <constraint firstAttribute="height" constant="14" id="kve-Hw-80H"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F71-EQ-ZhJ">
-                                        <rect key="frame" x="25" y="0.0" width="0.0" height="18"/>
+                                        <rect key="frame" x="29" y="0.0" width="0.0" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="Aaf-i8-578"/>
                                         </constraints>
@@ -133,7 +133,4 @@
             <point key="canvasLocation" x="179" y="541"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="countryflags_10" width="17" height="11"/>
-    </resources>
 </document>

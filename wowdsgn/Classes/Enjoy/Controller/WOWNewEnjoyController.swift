@@ -26,7 +26,10 @@ class WOWNewEnjoyController: WOWBaseViewController {
         let v = Bundle.main.loadNibNamed(String(describing: WOWNewGuideView.self), owner: self, options: nil)?.last as! WOWNewGuideView
         return v
     }()
-    
+    lazy var popWindow:UIWindow = {
+        let w = UIApplication.shared.delegate as! AppDelegate
+        return w.window!
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         addObserver()
@@ -107,10 +110,10 @@ class WOWNewEnjoyController: WOWBaseViewController {
             UserDefaults.standard.synchronize()
             /**  第一次进入，此处把第一次进入时要进入的控制器作为根视图控制器  */
             
-            let window = UIApplication.shared.windows.last
+//            let window = UIApplication.shared.windows
             
-            window?.addSubview(guideView)
-            window?.bringSubview(toFront: guideView)
+            popWindow.addSubview(guideView)
+            popWindow.bringSubview(toFront: guideView)
             
         }
 

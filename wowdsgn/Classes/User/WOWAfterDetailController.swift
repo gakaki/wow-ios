@@ -25,8 +25,10 @@ enum AfterDetailProgress { // 售后明细 进度
     case Rejected       // 已驳回  --- 在审核中 待用户回寄商家 回寄中 可以驳回
     case Cancel         // 已撤销  --- 只能在  审核中 撤销
 }
+
 class WOWAfterDetailController: WOWApplyAfterBaseController {
-    
+
+    var action:WOWActionClosure?
     var saleOrderItemRefundId : Int!
     var orderCode             : String!   // 订单号
     var cellStyle   : CurrentUIStyle = .ReviewingUI {
@@ -132,7 +134,9 @@ class WOWAfterDetailController: WOWApplyAfterBaseController {
                 strongSelf.endRefresh()
                 if code == "0" {
                     WOWHud.showMsg("撤销申请成功")
-                    
+                    if let ac = strongSelf.action{
+                        ac()
+                    }
                     WOWDelay.start(delay: 1) {
                         strongSelf.request()
                     }
@@ -143,8 +147,8 @@ class WOWAfterDetailController: WOWApplyAfterBaseController {
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
+                WOWHud.showMsg(errorMsg ?? "")
                 strongSelf.endRefresh()
-                WOWHud.dismiss()
             }
         }
         
@@ -194,8 +198,8 @@ class WOWAfterDetailController: WOWApplyAfterBaseController {
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
+                WOWHud.showMsg(errorMsg ?? "")
                 strongSelf.endRefresh()
-                WOWHud.dismiss()
             }
         }
 

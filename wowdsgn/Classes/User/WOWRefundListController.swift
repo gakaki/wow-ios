@@ -18,6 +18,8 @@ class WOWRefundListController: WOWApplyAfterBaseController {
     override func setUI() {
         super.setUI()
         tableView.cellId_register("WOWRefundListCell")
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
     override func request() {
         super.request()
@@ -65,8 +67,9 @@ class WOWRefundListController: WOWApplyAfterBaseController {
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
+                WOWHud.showMsg(errorMsg ?? "")
                 strongSelf.endRefresh()
-                WOWHud.dismiss()
+
             }
         }
         
@@ -100,7 +103,19 @@ class WOWRefundListController: WOWApplyAfterBaseController {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = dataArr[indexPath.section]
-        VCRedirect.goAfterDetail(model.saleOrderItemRefundId ?? 0)
+        let vc = WOWAfterDetailController()
+        
+        vc.saleOrderItemRefundId = model.saleOrderItemRefundId ?? 0
+        vc.action = {[weak self] in // 撤销成功，更新状态
+            if let strongSelf = self {
+                
+                strongSelf.pageIndex = 1
+                strongSelf.request()
+                
+            }
+        }
+       _ = self.navigationController?.pushViewController(vc, animated: true)
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

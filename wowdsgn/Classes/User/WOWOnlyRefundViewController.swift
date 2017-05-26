@@ -100,10 +100,14 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
     var goodsTypeIndex              : Int = 0{
         didSet{
             if goodsTypeIndex == 0 {
+               
+                
                 params_received = false
             }else{
+ 
                 params_received = true
             }
+          
         }
     } // 货物状态在piker Index
 
@@ -115,6 +119,8 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
             params_resonId          = chooseReasonArray[refundReasonIndex][0] as! Int
         }
     }
+    
+    var jsonResult  :JSON?  // 是否已经有数据，
     /* ------params 参数Key -------- */
     var params_received             : Bool      = false
     var params_resonId              : Int       = 0
@@ -155,13 +161,21 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
         
         request()
     }
+    
     override func request() {
         super.request()
         switch afterType {
         case .SendNo_AllOrderRefund: // 整单退款  传订单号 ，其他同意 用Id
             self.requestCurrentData(itemId: saleOrderItemId,isWholeRefund:true)
         default:
-            self.requestCurrentData(itemId: saleOrderItemId)
+            if let json = jsonResult { // 如果有数据，直接用 否则去掉接口
+              
+                self.configTableViewDatasouce(json: json)
+                WOWHud.dismiss()
+            }else{
+                self.requestCurrentData(itemId: saleOrderItemId)
+            }
+            
             break
         }
         
@@ -174,13 +188,7 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
                 strongSelf.endRefresh()
                 let json = JSON(result)
                 DLog(json)
-
-                strongSelf.maxAllowedRefundAmount = json["maxAllowedRefundAmount"].stringValue
-                strongSelf.deliveryFee            = json["deliveryFee"].stringValue
-              
-                strongSelf.mainDataModel = Mapper<WOWNewOrderDetailModel>().map(JSONObject:  json["orderDetailResultVo"].object)
-                
-               
+                strongSelf.configTableViewDatasouce(json: json)
                 
             }
         }) {[weak self] (errorMsg) in
@@ -190,6 +198,13 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
             }
         }
 
+    }
+    func configTableViewDatasouce(json: JSON){
+        
+        self.maxAllowedRefundAmount = json["maxAllowedRefundAmount"].stringValue
+        self.deliveryFee            = json["deliveryFee"].stringValue
+        
+        self.mainDataModel = Mapper<WOWNewOrderDetailModel>().map(JSONObject:  json["orderDetailResultVo"].object)
     }
     func requestCreatRefund(){
         if params_resonId == 0  {
@@ -238,6 +253,7 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
             WOWHud.showMsg("退款理由的最大字数为140字，请您删减")
             return
         }
+        
         // 拼接字符串，对应接口的上传格式
         let imgStr = WOWTool.jointImgStr(imgArray: commentManage.commentImgs, spaceStr: ",")
         var params:[String : Any] = [
@@ -257,7 +273,7 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
         default:
             break
         }
-
+        WOWHud.showLoadingSV()
         WOWNetManager.sharedManager.requestWithTarget(.api_CreatRefund(params: params as [String : AnyObject]), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
             let json = JSON(result)
@@ -482,6 +498,11 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
 //                print(str,index)
                 self.goodsTypeStr = str
                 self.goodsTypeIndex = index
+                /*--重置原因参数-*/
+                self.refundReasonStr    = "请选择退款原因"
+                self.refundReasonIndex  = 0
+                self.params_resonId     = 0
+           
                 if index == 0 {
                     self.params_received = false
                 }else {

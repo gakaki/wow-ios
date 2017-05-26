@@ -18,7 +18,7 @@ struct RefundReason {
     var icon        : String
 }
 class WOWApplyAfterController: WOWBaseViewController {
-    
+    var jsonResult  :JSON?  // 是否已经有数据，
     let tableView: UITableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
     // 释放资源属性
     let disposeBag = DisposeBag()
@@ -100,24 +100,24 @@ class WOWApplyAfterController: WOWBaseViewController {
             case .noSendGoods:
                 VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_AllOrderRefund)
             case .someNoSend:
-                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_OnlyRefund)
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_OnlyRefund,json: jsonResult)
             default:
-                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .RefundMoney)
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .RefundMoney,json: jsonResult)
             }
             
         case 1:
             
             switch sendType {
             case .noSendGoods:
-                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_OnlyRefund)
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_OnlyRefund,json: jsonResult)
             case .someNoSend:
                 break
             default:
-                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .OnlyRefund)
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .OnlyRefund,json: jsonResult)
             }
         case 2:
             
-            VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .ExchangGoods)
+            VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .ExchangGoods,json: jsonResult)
             
         default:
             break

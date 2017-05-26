@@ -31,6 +31,12 @@ class WOWCommentController: WOWBaseViewController {
     @IBOutlet weak var numberLabel: UILabel!
     //顶部蒙层
     var navBackgroundView: WOWMaskColorView!
+    
+    
+    lazy var popWindow:UIWindow = {
+        let w = UIApplication.shared.delegate as! AppDelegate
+        return w.window!
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         addObserver()
@@ -195,9 +201,8 @@ extension WOWCommentController:UITextViewDelegate{
     }
     fileprivate func addNavBackgroundView() {
         navBackgroundView = WOWMaskColorView(frame: CGRect(x: 0, y: 0, width: MGScreenWidth, height: 64.5))
-        let window = UIApplication.shared.windows.last
-        window?.addSubview(navBackgroundView)
-        window?.bringSubview(toFront: navBackgroundView)
+        popWindow.addSubview(navBackgroundView)
+        popWindow.bringSubview(toFront: navBackgroundView)
     }
     fileprivate func removeNavBackgroundView() {
         navBackgroundView.removeFromSuperview()

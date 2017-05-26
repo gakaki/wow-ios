@@ -59,7 +59,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
         v.delegate = self
         return v
     }()
-    
+    lazy var popWindow:UIWindow = {
+        let w = UIApplication.shared.delegate as! AppDelegate
+        return w.window!
+    }()
 //    lazy var pickerContainerView :WOWPickerView = {
 //        let v = Bundle.main.loadNibNamed("WOWPickerView", owner: self, options: nil)?.last as! WOWPickerView
 //        return v
@@ -151,10 +154,10 @@ class WOWUserInfoController: WOWBaseTableViewController {
     }
     
     fileprivate func showPickerView(){
-        let window = UIApplication.shared.windows.last
+        let window = UIApplication.shared.windows
         
-        window?.addSubview(backView)
-        window?.bringSubview(toFront: backView)
+        popWindow.addSubview(backView)
+        popWindow.bringSubview(toFront: backView)
         backView.show()
 
     }

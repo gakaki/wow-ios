@@ -77,6 +77,10 @@ class WOWEnjoyController: WOWBaseViewController {
         v.delegate = self 
         return v
     }()
+    lazy var popWindow:UIWindow = {
+        let w = UIApplication.shared.delegate as! AppDelegate
+        return w.window!
+    }()
     override func setUI() {
         super.setUI()
         self.view.backgroundColor = UIColor.white
@@ -176,10 +180,10 @@ class WOWEnjoyController: WOWBaseViewController {
             toLoginVC(true)
             return
         }
-        let window = UIApplication.shared.windows.last
+//        let window = UIApplication.shared.windows
         
-        window?.addSubview(chooseClassView)
-        window?.bringSubview(toFront: chooseClassView)
+        popWindow.addSubview(chooseClassView)
+        popWindow.bringSubview(toFront: chooseClassView)
     
         for model in chooseClassArr {
             
@@ -232,10 +236,10 @@ class WOWEnjoyController: WOWBaseViewController {
     
     //MARK: - 弹出选择分类窗口
     func chooseStyle() {
-        let window = UIApplication.shared.windows.last
+//        let window = UIApplication.shared.windows
         
-        window?.addSubview(backView)
-        window?.bringSubview(toFront: backView)
+        popWindow.addSubview(backView)
+        popWindow.bringSubview(toFront: backView)
         backView.show()
     }
     override func didReceiveMemoryWarning() {

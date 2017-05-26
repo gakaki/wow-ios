@@ -22,6 +22,8 @@ class WOWMasterpieceController: WOWBaseViewController {
     var backTopBtnScrollViewOffsetY : CGFloat = (MGScreenHeight - 64 - 44) * 3// 第几屏幕出现按钮
 
     @IBOutlet weak var publishBtn: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -40,10 +42,10 @@ class WOWMasterpieceController: WOWBaseViewController {
             /**  第一次进入，此处把第一次进入时要进入的控制器作为根视图控制器  */
             let data = ["414-1", "414-2", "414-3"]
             let v = WOWGuidePageView(datas: data)
-            let window = UIApplication.shared.windows.last
+//            let window = UIApplication.shared.windows
             
-            window?.addSubview(guideView)
-            window?.addSubview(v)
+            popWindow.addSubview(guideView)
+            popWindow.addSubview(v)
 
         }
 
@@ -68,7 +70,10 @@ class WOWMasterpieceController: WOWBaseViewController {
         let v = Bundle.main.loadNibNamed(String(describing: WOWMasterGuideView.self), owner: self, options: nil)?.last as! WOWMasterGuideView
         return v
     }()
-    
+    lazy var popWindow:UIWindow = {
+        let w = UIApplication.shared.delegate as! AppDelegate
+        return w.window!
+    }()
     
     func backTop()  {
         let index  = IndexPath.init(row: 0, section: 0)

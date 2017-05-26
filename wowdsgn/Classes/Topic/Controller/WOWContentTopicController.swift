@@ -106,7 +106,10 @@ class WOWContentTopicController: WOWBaseViewController {
         v.moreButton.addTarget(self, action: #selector(moreCommentClick), for: .touchUpInside)
         return v
     }()
-    
+    lazy var popWindow:UIWindow = {
+        let w = UIApplication.shared.delegate as! AppDelegate
+        return w.window!
+    }()
     // 刷新顶部数据
     func reloadNagationItemThumbButton(_ isFavorite: Bool, thumbNum: Int)  {
         nagationItem.thumbButton.isSelected = isFavorite
@@ -676,9 +679,9 @@ extension WOWContentTopicController: UITextViewDelegate{
     
     fileprivate func addNavBackgroundView() {
         navBackgroundView = WOWMaskColorView(frame: CGRect(x: 0, y: 0, width: MGScreenWidth, height: 64.5))
-        let window = UIApplication.shared.windows.last
-        window?.addSubview(navBackgroundView)
-        window?.bringSubview(toFront: navBackgroundView)
+    
+        popWindow.addSubview(navBackgroundView)
+        popWindow.bringSubview(toFront: navBackgroundView)
     }
     fileprivate func removeNavBackgroundView() {
         navBackgroundView.removeFromSuperview()

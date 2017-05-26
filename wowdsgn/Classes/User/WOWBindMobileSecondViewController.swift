@@ -68,16 +68,16 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
         }
         
     }
-    
+    //绑定完手机后返回到上一个页面，如果是绑定手机过来就直接返回个人中心页 ，如果是订单页过来就返回订单页
     func goBack() {
         switch entrance {
-        case .bindMobile:
+        case .bindMobile:   //绑定手机
             for controller in (navigationController?.viewControllers)! {
                 if controller.isKind(of: WOWUserInfoController.self){
                     let _ = navigationController?.popToViewController(controller, animated: true)
                 }
             }
-        case .editOrder, .orderDetail:
+        case .editOrder, .orderDetail:      //订单页面
             if let ac = action{
                 ac(true as AnyObject)
                 popVC()
@@ -87,11 +87,12 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
             let _ = navigationController?.popViewController(animated: true)
         }
     }
-    
+    //点击导航栏返回按钮
     override func navBack() {
+        
         switch entrance {
 
-        case .editOrder:
+        case .editOrder, .orderDetail:
             if let ac = action{
                 popVC()
                 ac(false as AnyObject)

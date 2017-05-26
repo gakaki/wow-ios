@@ -27,6 +27,10 @@ class WOWWorksDetailsController: WOWBaseViewController {
         let v = WOWWorkMoreBackView(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight))
         return v
     }()
+    lazy var popWindow:UIWindow = {
+        let w = UIApplication.shared.delegate as! AppDelegate
+        return w.window!
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -50,9 +54,9 @@ class WOWWorksDetailsController: WOWBaseViewController {
                 //umeng
                 MobClick.e(.more_button_picture_details_page)
                 
-                let window = UIApplication.shared.windows.last
-                window?.addSubview(strongSelf.backView)
-                window?.bringSubview(toFront: strongSelf.backView)
+//                let window = UIApplication.shared.windows
+                strongSelf.popWindow.addSubview(strongSelf.backView)
+                strongSelf.popWindow.bringSubview(toFront: strongSelf.backView)
                 strongSelf.backView.selectView.delegate = self
                 if strongSelf.modelData?.myInstagram ?? false {
                     strongSelf.backView.showView_self()

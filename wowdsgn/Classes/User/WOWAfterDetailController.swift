@@ -98,7 +98,7 @@ class WOWAfterDetailController: WOWApplyAfterBaseController {
     lazy var cancelBtn: UIButton = {
         
         let btn = UIButton()
-        btn.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(cancelClickAction), for: .touchUpInside)
         btn.backgroundColor = tabBackColor
         btn.setTitleColor(UIColor.black, for: .normal)
         btn.setTitle("撤销申请", for: .normal)
@@ -107,7 +107,23 @@ class WOWAfterDetailController: WOWApplyAfterBaseController {
         return btn
         
     }()
+    func cancelClickAction()  {
+        
+        let alertController = UIAlertController(title: "",
+                                                message: "确定撤销？", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "确定", style: .default, handler: {
+            [unowned self] action in
+            self.cancelAction()
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+
     func cancelAction(){
+        
         WOWNetManager.sharedManager.requestWithTarget(.api_GetCancelRefund(saleOrderItemRefundId: saleOrderItemRefundId), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
             let json = JSON(result)
@@ -116,7 +132,12 @@ class WOWAfterDetailController: WOWApplyAfterBaseController {
                 strongSelf.endRefresh()
                 if code == "0" {
                     WOWHud.showMsg("撤销申请成功")
-                    strongSelf.request()
+                    
+                    WOWDelay.start(delay: 1) {
+                        strongSelf.request()
+                    }
+                  
+                    
                 }
                 
             }

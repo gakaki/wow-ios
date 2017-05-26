@@ -10,7 +10,7 @@
 import Foundation
 struct WOWDelay {
     // delay -- 多少秒后结束 回掉
-    func start(delay:Double, closure:@escaping ()->()) {
+   static func start(delay:Double, closure:@escaping ()->()) {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             closure()
         }

@@ -80,8 +80,8 @@ let RefundArray:[[Any]] = [[1,"尺码拍错／不喜欢／不想要"],[2,"空包
 
 let WOWOnlyRefund           = [RefundArray[0]]
 let WOWOnlyRefundNoReceived = [RefundArray[0],RefundArray[1],RefundArray[2],RefundArray[3]]
-let WOWOnlyRefundReceived   = [RefundArray[0],RefundArray[5],RefundArray[6],RefundArray[7],RefundArray[8],RefundArray[9],RefundArray[10],RefundArray[11]]
-let WOWRefundAllReceived    = [RefundArray[12],RefundArray[5],RefundArray[6],RefundArray[7],RefundArray[8],RefundArray[9],RefundArray[10]]
+let WOWOnlyRefundReceived   = [RefundArray[0],RefundArray[4],RefundArray[5],RefundArray[6],RefundArray[7],RefundArray[8],RefundArray[9],RefundArray[10],RefundArray[11]]
+let WOWRefundAllReceived    = [RefundArray[12],RefundArray[4],RefundArray[5],RefundArray[6],RefundArray[7],RefundArray[8],RefundArray[9],RefundArray[10]]
 let WOWReturnGoodsReceived  = [RefundArray[0],RefundArray[13],RefundArray[5],RefundArray[6],RefundArray[7],RefundArray[9],RefundArray[10]]
 
 let WOWCompanyArray         = [ // 快递公司名称 与 WOWCompanyCodeArray  一一对应

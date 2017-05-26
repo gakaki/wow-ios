@@ -8,8 +8,9 @@
 
 import UIKit
 enum GoodsSendType {
-    case noSendGoods    // 待发货
-    case sendGoods      // 以发货
+    case noSendGoods        // 待发货
+    case sendGoods          // 以发货
+    case someNoSend         // 部分发货 -- 未发货
 }
 struct RefundReason {
     var title       : String
@@ -19,22 +20,26 @@ struct RefundReason {
 class WOWApplyAfterController: WOWBaseViewController {
     
     let tableView: UITableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
+    // 释放资源属性
     let disposeBag = DisposeBag()
-    
+    // 资源类熟悉
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String,RefundReason>>()
-    
+    // 数据源
     var reasonArray = [RefundReason]()
     
     let reason  = RefundReason(title:"退货退款", describe:"已收到货，需要退还已收到的货物", icon:"refund_barter")
     let reason1 = RefundReason(title:"仅退款", describe:"未收到货，协商退款", icon:"refund")
     let reason2 = RefundReason(title:"换货", describe:"对已收到的货物不满意，协商换货", icon:"barter")
-    let reason3 = RefundReason(title:"整单退款", describe:"还未发货，协商整单取消", icon:"refund_barter")
+    let reason3 = RefundReason(title:"整单退款", describe:"还未发货，协商整单取消", icon:"refund_All")
 
     var sendType                : GoodsSendType = .noSendGoods{
         didSet{
             switch sendType {
             case .sendGoods:
                 reasonArray = [reason,reason1,reason2]
+                break
+            case .someNoSend:
+                reasonArray = [reason1]
                 break
             default:
                 reasonArray = [reason3,reason1]
@@ -64,7 +69,7 @@ class WOWApplyAfterController: WOWBaseViewController {
         self.tableView.rowHeight            = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight   = 60
         view.addSubview(tableView)
-        
+        // 配置cell
         dataSource.configureCell = {
             (_, tableView, indexPath, reason) in
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWApplyAfterCell", for: indexPath) as! WOWApplyAfterCell
@@ -94,6 +99,8 @@ class WOWApplyAfterController: WOWBaseViewController {
             switch sendType {
             case .noSendGoods:
                 VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_AllOrderRefund)
+            case .someNoSend:
+                VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_OnlyRefund)
             default:
                 VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .RefundMoney)
             }
@@ -103,6 +110,8 @@ class WOWApplyAfterController: WOWBaseViewController {
             switch sendType {
             case .noSendGoods:
                 VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .SendNo_OnlyRefund)
+            case .someNoSend:
+                break
             default:
                 VCRedirect.goOnlyRefund(orderCode:orderCode,saleOrderItemId:saleOrderItemId,afterType: .OnlyRefund)
             }

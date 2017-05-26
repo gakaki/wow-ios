@@ -11,6 +11,7 @@ import UIKit
 
 class WOWMoneyFromController: WOWApplyAfterBaseController {
     var actualRefundAmount:String?
+    var currentRefundEventTypeName : String?
     var dataArr  = [WOWRufundProcessModel]()
     var data = [(TimelinePoint, UIColor, UIColor)]()
     var saleOrderItemRefundId        : Int!      // 单个商品 在订单中Id
@@ -66,7 +67,8 @@ class WOWMoneyFromController: WOWApplyAfterBaseController {
                         }
                         
                     }
-                    strongSelf.actualRefundAmount = json["actualRefundAmount"].stringValue
+                    strongSelf.currentRefundEventTypeName   = json["currentRefundEventTypeName"].stringValue
+                    strongSelf.actualRefundAmount           = json["actualRefundAmount"].stringValue
                     strongSelf.tableView.reloadData()
                 }
                 
@@ -95,9 +97,13 @@ class WOWMoneyFromController: WOWApplyAfterBaseController {
    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard indexPath.row != 0 else {
             let cell                = tableView.dequeueReusableCell(withIdentifier: "WOWMoneyTopCell", for: indexPath) as! WOWMoneyTopCell
-            if let actualRefundAmount = actualRefundAmount {
-                cell.lbMoneyNumber.text = "¥" + actualRefundAmount
-            }
+//            if let actualRefundAmount = actualRefundAmount {
+                cell.lbMoneyNumber.text = "¥" + (actualRefundAmount ?? "")
+//                if let  currentRefundEventTypeName = currentRefundEventTypeName {
+                cell.lbRefundType.text = currentRefundEventTypeName ?? ""
+//                }
+              
+//            }
             return cell
         }
         

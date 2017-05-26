@@ -58,12 +58,13 @@ class WOWOrderListViewController: WOWBaseViewController {
         pageMenu?.viewBackgroundColor = UIColor.init(hexString: "efeff4")!
         pageMenu?.delegate = self
     
-        self.tz_addPopGesture(to: pageMenu!.view)
+  
 //        pageMenu!.currentPageIndex = selectCurrentIndex!
         pageMenu?.moveToPage(selectCurrentIndex!)
 //        pageMenu!.startingPageForScroll = selectCurrentIndex!
         self.view.addSubview(pageMenu!.view)
-
+        self.tz_addPopGesture(to: pageMenu!.view)
+//        self.tz_addPopGesture(to: pageMenu)
     }
     override func navBack() {
         if entrance == .orderPay {

@@ -649,7 +649,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 let orderProductModel = unShipOutItems[indexRow]
                 cell.orderCode = self.orderCode
                 cell.productData(model: orderProductModel)
-
+                cell.orderType = OrderDetailNewaType
             }
         }
     }
@@ -663,6 +663,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                     if orderItems.count > indexRow {
                         cell.orderCode = self.orderCode
                         cell.productData(model: orderItems[indexRow])
+                        cell.orderType = OrderDetailNewaType
                     }
                 }
             }

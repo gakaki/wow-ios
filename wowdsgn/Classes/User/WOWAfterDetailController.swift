@@ -5,17 +5,13 @@
 //  Created by 陈旭 on 2017/5/5.
 //  Copyright © 2017年 g. All rights reserved.
 //
-extension UITableView{
-    func cellId_register(_ cellId:String)    {
-        self.register(UINib.nibName(cellId), forCellReuseIdentifier: cellId)
-    }
-}
+
 import UIKit
 enum CurrentUIStyle{ // 四种风格
     case ReviewingUI    //   审核中 or 申请服务：换货 -- 已确认 之后的UI 没有 钱款去向
-    case SureUI         //   已确认 之后的UI 多一行 钱款去向 没有 提交物流信息单号的Cell
+    case SureUI         //   已确认 之后的UI 多一行 钱款去向 无 提交物流信息单号的Cell
     case SendBackUI     //   待用户寄回货物 or 用户提交货物物流单号成功之后 和 ExchangeUI 区别在于 有无 “钱款去向” 的cell
-    case ExchangeUI     //   换货 --- 待用户寄回货物 or 用户提交货物物流单号成功之后
+    case ExchangeUI     //   换货 --- 待用户寄回货物 or 用户提交货物物流单号成功之后 无 “钱款去向” 的cell
 }
 
 enum AfterDetailProgress { // 售后明细 进度
@@ -211,6 +207,8 @@ class WOWAfterDetailController: WOWApplyAfterBaseController {
         default:
             if refundType == 3 {
                 return .ExchangeUI
+            }else if refundType == 1{
+                return .SureUI
             }
                 return .SendBackUI
         }

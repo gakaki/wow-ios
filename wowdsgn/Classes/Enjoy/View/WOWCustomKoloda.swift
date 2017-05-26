@@ -27,8 +27,8 @@ class WOWCustomKoloda: UIView {
         self.backgroundColor = UIColor.white
         
         headImg.borderRadius(20)
-        let borColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
-        headImg.borderColor(1, borderColor: borColor)
+//        let borColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
+//        headImg.borderColor(1, borderColor: borColor)
         // Initialization code
     }
     

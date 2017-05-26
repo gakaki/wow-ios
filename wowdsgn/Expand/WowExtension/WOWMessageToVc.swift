@@ -103,7 +103,6 @@ public class WOWMessageToVc: NSObject {
                 if let id = id {
                     
                     VCRedirect.toOrderDetail(orderCode: id)
-                    
                 }
             case "211"://AppStore
                 

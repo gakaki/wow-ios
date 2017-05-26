@@ -70,6 +70,11 @@ class WOWCouponController: WOWBaseViewController {
 
     override func request(){
         super.request()
+        requestCoupon(isGet: false)
+
+    }
+    
+    func requestCoupon(isGet: Bool) {
         var params = [String: AnyObject]()
         switch entrance {
         case .userEntrance:
@@ -91,12 +96,12 @@ class WOWCouponController: WOWBaseViewController {
                         strongSelf.vo_cupons = []
                     }
                     strongSelf.vo_cupons.append(contentsOf: array)
-                //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
-                if array.count < strongSelf.pageSize {
-                    strongSelf.tableView.mj_footer = nil
-                 
-                }else {
-                    strongSelf.tableView.mj_footer = strongSelf.mj_footer
+                    //如果请求的数据条数小于totalPage，说明没有数据了，隐藏mj_footer
+                    if array.count < strongSelf.pageSize {
+                        strongSelf.tableView.mj_footer = nil
+                        
+                    }else {
+                        strongSelf.tableView.mj_footer = strongSelf.mj_footer
                     }
                 }else {
                     if strongSelf.pageIndex == 1{
@@ -112,28 +117,31 @@ class WOWCouponController: WOWBaseViewController {
                 }
                 strongSelf.tableView.reloadData()
                 strongSelf.endRefresh()
+                //如果领取优惠券成功提示一下
+                if isGet {
+                    WOWHud.showMsg("您的优惠码已兑换成功！")
+
+                }
             }
             
         }){[weak self] (errorMsg) in
             
             if let strongSelf = self{
                 strongSelf.tableView.addSubview(strongSelf.emptyView)
-
+                
                 strongSelf.tableView.mj_footer = nil
-
+                
                 strongSelf.endRefresh()
                 WOWHud.showMsgNoNetWrok(message: errorMsg)
             }
         }
-
     }
     //通过优惠码获取优惠券
     func getCoupon(redemotionCode: String) {
     
         WOWNetManager.sharedManager.requestWithTarget(RequestApi.api_GetCoupon(redemptionCode: redemotionCode), successClosure: {[weak self] (result, code) in
             if let strongSelf = self {
-                strongSelf.request()
-                WOWHud.showMsg("您的优惠码已兑换成功！")
+                strongSelf.requestCoupon(isGet: true)
 
             }
         }) { (errorMsg) in

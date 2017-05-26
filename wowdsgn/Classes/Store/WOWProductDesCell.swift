@@ -10,7 +10,8 @@ import UIKit
 
 class WOWProductDesCell: UITableViewCell {
 
-    @IBOutlet weak var exemptionLb: UILabel!
+    @IBOutlet weak var exemptionLb: UILabel!    //第一个标签
+    @IBOutlet weak var logisticsLb: UILabel!    //第三个标签
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,9 +22,19 @@ class WOWProductDesCell: UITableViewCell {
         if let model = model {
             if model.isOversea ?? false {
                 exemptionLb.text = "包邮包税"
+                if let logisticsMode = model.logisticsMode {
+                    if logisticsMode == 1 {
+                        logisticsLb.text = "海外直邮"
+                    }else {
+                        logisticsLb.text = "14天到货"
+                    }
+                }
             }else {
                 exemptionLb.text = "满99包邮"
+                logisticsLb.text = "七天退换"
             }
+            
+         
         }
     
     }

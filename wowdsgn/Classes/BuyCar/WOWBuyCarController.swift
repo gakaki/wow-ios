@@ -216,6 +216,7 @@ class WOWBuyCarController: WOWBaseViewController {
     
 //MARK:结算
     @IBAction func endButtonClick(_ sender: UIButton) {
+
         /**
          *  商品结算之前首先判断有没有选中商品，然后判断商品的库存是否充足，再判断所选商品是否下架
          */

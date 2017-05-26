@@ -126,6 +126,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="exemptionLb" destination="ZmP-Qj-kdZ" id="hyg-Im-dgu"/>
+                <outlet property="logisticsLb" destination="QoS-Qi-xi6" id="0o1-qh-M5P"/>
             </connections>
             <point key="canvasLocation" x="15.5" y="49.5"/>
         </tableViewCell>

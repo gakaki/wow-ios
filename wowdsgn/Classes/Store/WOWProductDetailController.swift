@@ -148,7 +148,6 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
         self.bottomView.layer.borderWidth = 0.5
         self.bottomView.layer.borderColor = MGRgb(234, g: 234, b: 234).cgColor
         self.bottomView.clipsToBounds = true
-        //        buyCarCount()
     }
 
     fileprivate func addObservers(){
@@ -163,12 +162,10 @@ class WOWProductDetailController: WOWBaseViewController,UINavigationControllerDe
             aboutProductArray.ergodicArrayWithProductModel(dic: send_obj, successLikeClosure:{[weak self] in
                 if let strongSelf = self {
                     strongSelf.tableView.reloadData()
-                    //                    strongSelf.collectionView.reloadData()
                 }
                 
             })
-//            aboutProductArray.ergodicArrayWithProductModel(dic: send_obj)
-//             self.tableView.reloadData()
+
         }
 
        

@@ -274,13 +274,6 @@ class WOWEditOrderController: WOWBaseViewController {
                 }else {
                     strongSelf.goOrderDetail()
 
-//                    let delayTime = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-//                    DispatchQueue.main.asyncAfter(deadline: delayTime) {[weak self] in
-//                        if let strongSelf = self {
-//                            
-//                            
-//                        }
-//                    }
 
                 }
 

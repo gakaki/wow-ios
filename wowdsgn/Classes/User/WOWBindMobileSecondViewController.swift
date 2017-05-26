@@ -11,6 +11,7 @@ import UIKit
     case userInfo
     case bindMobile
     case editOrder
+    case orderDetail
 }
 
 class WOWBindMobileSecondViewController: WOWBaseViewController {
@@ -38,7 +39,6 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
         super.viewDidAppear(animated)
         if entrance == .editOrder{
             
-            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
             self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
 
             
@@ -77,7 +77,7 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
                     let _ = navigationController?.popToViewController(controller, animated: true)
                 }
             }
-        case .editOrder:
+        case .editOrder, .orderDetail:
             if let ac = action{
                 ac(true as AnyObject)
                 popVC()

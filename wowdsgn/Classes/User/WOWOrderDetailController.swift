@@ -88,7 +88,8 @@ class WOWOrderDetailController: WOWBaseViewController{
     var isOpen                      : Bool!
     
     var isSomeForGoodsType          : Bool! // 记录是否是 部分发货 的布局。 区分页眉上 标题不同
-    
+    var channel                          = ""
+
     var myQueueTimer1: DispatchQueue?
     var myTimer1: DispatchSourceTimer?
     
@@ -115,7 +116,6 @@ class WOWOrderDetailController: WOWBaseViewController{
         super.viewDidAppear(animated)
         if entrance == .orderPay{
             
-            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
             self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
 
             
@@ -384,6 +384,49 @@ class WOWOrderDetailController: WOWBaseViewController{
         }
         
     }
+    // 绑定手机号页面
+    func goBindMobile() {
+        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWBindMobileSecondViewController.self)) as! WOWBindMobileSecondViewController
+        vc.entrance = .orderDetail
+        vc.action = {[weak self] (model:AnyObject) in
+            if let strongSelf = self {
+                let isBind: Bool = model as! Bool
+                if isBind {
+                    strongSelf.payOrder()
+                    
+                }
+                
+            }
+        }
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    //招行绑定手机号
+    func cmbcAlter() {
+        let customView = Bundle.main.loadNibNamed("WOWCMBCAlterView", owner: self, options: nil)?.last as! WOWCMBCAlterView
+        customView.closeBtn.addAction {
+            
+            customView.hide()
+            
+            
+        }
+        customView.bindMobileBtn.addAction {
+            customView.hideWithBlock { [weak self](view, finish) in
+                if let strongSelf = self {
+                    if finish {
+                        
+                        strongSelf.goBindMobile()
+                    }
+                }
+                
+                
+            }
+            
+            
+        }
+        customView.show()
+        
+    }
     //确认收货
     fileprivate func confirmReceive(_ orderCode:String){
         func confirm(){
@@ -437,33 +480,46 @@ class WOWOrderDetailController: WOWBaseViewController{
             }
             
         }
+    
+    //支付订单
+    func payOrder() {
+        
+        let deviceId = TalkingDataAppCpa.getDeviceId()
+        let adid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        let sysVersion = UIDevice.current.systemVersion //获取系统版本 例如：9.2
+        
+        let params = ["orderNo": orderCode, "channel": channel, "clientIp": IPManager.sharedInstance.ip_public, "tdid": deviceId, "idfa": adid, "osversion": sysVersion]
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(params:params as [String : AnyObject]), successClosure: { [weak self](result, code) in
+            if let strongSelf = self {
+                //绑定招行支付手机号
+                if code == RequestCode.CMBCError.rawValue {
+                    strongSelf.cmbcAlter()
+                    return
+                }
+                let json = JSON(result)
+                let charge = json["charge"]
+                strongSelf.goPay(charge.object as AnyObject)
+            }
+            
+        }) { (errorMsg) in
+            WOWHud.showWarnMsg(errorMsg)
+        }
+        
+    }
 }
 // MARK: - 订单支付相关
 extension WOWOrderDetailController{
     
-    func sureOrderPay(_ channel: String){
+    func sureOrderPay(_ payChannel: String){
         if let orderNewModel = self.orderNewDetailModel {
             if  (orderNewModel.orderCode ?? "").isEmpty {
                 WOWHud.showMsg("订单不存在")
                 return
             }
+            channel = payChannel
+            payOrder()
 
-            let deviceId = TalkingDataAppCpa.getDeviceId()
-            let adid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-            let sysVersion = UIDevice.current.systemVersion //获取系统版本 例如：9.2
-            
-            let params = ["orderNo": orderCode, "channel": channel, "clientIp": IPManager.sharedInstance.ip_public, "tdid": deviceId, "idfa": adid, "osversion": sysVersion]
-            
-            WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(params:params as [String : AnyObject]), successClosure: { [weak self](result, code) in
-                if let strongSelf = self {
-                    let json = JSON(result)
-                    let charge = json["charge"]
-                    strongSelf.goPay(charge.object as AnyObject)
-                }
-                
-            }) { (errorMsg) in
-                WOWHud.showWarnMsg(errorMsg)
-            }
         }
         
     }

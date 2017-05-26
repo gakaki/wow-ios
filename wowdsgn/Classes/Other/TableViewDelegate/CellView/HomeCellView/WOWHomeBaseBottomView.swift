@@ -9,6 +9,7 @@
 import UIKit
 
 class WOWHomeBaseBottomView: UIView {
+    @IBOutlet weak var heightBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var imgBackgroud: UIImageView!
 //    required init?(coder aDecoder: NSCoder) {

@@ -39,7 +39,7 @@ extension UILabel {
         mustr1 .addAttribute(NSFontAttributeName, value:UIFont.systemFont(ofSize: str2Font), range: str1Range)
         
         let strPlace = NSAttributedString.init(string: "  ")
-        mustr1 .insert(strPlace, at: strLeng)
+        mustr1.insert(strPlace, at: strLeng)
         
         self.attributedText = mustr1
         
@@ -47,16 +47,37 @@ extension UILabel {
     // 指定的字体加颜色
     func colorWithText( _ str1:String,str2:String,str1Color:UIColor){
         
-        let  mustr1 = NSMutableAttributedString.init(string: str1 + str2)
+        let mustr1 = NSMutableAttributedString.init(string: str1 + str2)
         
         let strLeng = str1.characters.count
         
         let str1Range = NSMakeRange(0, strLeng)
         // 颜色
-        mustr1 .addAttribute(NSForegroundColorAttributeName, value: str1Color, range: str1Range)
+        mustr1.addAttribute(NSForegroundColorAttributeName, value: str1Color, range: str1Range)
         
-//        let strPlace = NSAttributedString.init(string: "")
-//        mustr1 .insert(strPlace, at: strLeng)
+
+
+        self.attributedText = mustr1
+        
+    }
+    
+    // 指定的字体加颜色
+    func colorWithTextWithLine( _ str1:String,str2:String,str1Color:UIColor, lineHeight: CGFloat){
+        
+        let mustr1 = NSMutableAttributedString.init(string: str1 + str2)
+        
+        let strLeng = str1.characters.count
+        
+        let str1Range = NSMakeRange(0, strLeng)
+        // 颜色
+        mustr1.addAttribute(NSForegroundColorAttributeName, value: str1Color, range: str1Range)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.0
+        paragraphStyle.lineHeightMultiple = lineHeight
+        paragraphStyle.alignment = self.textAlignment
+        paragraphStyle.lineBreakMode = .byTruncatingTail
+        mustr1.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, mustr1.length))
         
         self.attributedText = mustr1
         
@@ -71,7 +92,7 @@ extension UILabel {
         let range = NSMakeRange(strLeng, str1Leng)
         
         // 颜色
-        mustr1 .addAttribute(NSForegroundColorAttributeName, value: changeColor, range: range)
+        mustr1.addAttribute(NSForegroundColorAttributeName, value: changeColor, range: range)
         
         
         
@@ -81,7 +102,7 @@ extension UILabel {
     // 改变指定字体
     func fontWithText( _ str1:String,str2:String, font: UIFont){
         
-        let  mustr1 = NSMutableAttributedString.init(string: str1 + str2)
+        let mustr1 = NSMutableAttributedString.init(string: str1 + str2)
         
         let strLeng = str1.characters.count
         
@@ -89,10 +110,6 @@ extension UILabel {
         // 颜色
         mustr1.addAttribute(NSFontAttributeName, value: font, range: str1Range)
        
-        
-        
-        //        let strPlace = NSAttributedString.init(string: "")
-        //        mustr1 .insert(strPlace, at: strLeng)
         
         self.attributedText = mustr1
         

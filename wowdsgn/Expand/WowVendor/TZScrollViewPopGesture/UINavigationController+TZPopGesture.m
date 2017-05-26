@@ -77,8 +77,7 @@
 }
 
 #pragma mark - UINavigationControllerDelegate
-
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+-(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     // 让系统的侧滑返回生效
     self.interactivePopGestureRecognizer.enabled = YES;
     if (self.childViewControllers.count > 0) {
@@ -88,6 +87,7 @@
             self.interactivePopGestureRecognizer.delegate = nil; // 支持侧滑
         }
     }
+
 }
 
 @end

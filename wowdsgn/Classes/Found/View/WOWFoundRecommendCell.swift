@@ -27,8 +27,11 @@ extension Double {
 }
 extension UILabel{
     func setStrokeWithText( _ str:String ){
-        
-        let attrString      = NSAttributedString(string: str, attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
+        var s = ""
+        if str != "" {
+            s = "¥" + str
+        }
+        let attrString      = NSAttributedString(string:s, attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
         self.attributedText = attrString
 
     }

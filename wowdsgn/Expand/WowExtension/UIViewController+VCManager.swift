@@ -504,23 +504,24 @@ public class VCRedirect {
     }
 
     //申请售后页面
-    class func goApplyAfterSales(sendType:GoodsSendType = .sendGoods,orderCode:String,saleOrderItemId:Int) {
+    class func goApplyAfterSales(sendType:GoodsSendType = .sendGoods,orderCode:String,saleOrderItemId:Int,json : JSON? = nil) {
      
         let vc = WOWApplyAfterController()
         vc.sendType         = sendType
         vc.orderCode        = orderCode
         vc.saleOrderItemId  = saleOrderItemId
+        vc.jsonResult       = json
         topNaVC?.pushViewController(vc, animated: true)
         
     }
     //仅退款页面
-    class func goOnlyRefund(orderCode:String,saleOrderItemId:Int,afterType:ChooseAfterType = .SendNo_OnlyRefund) {
+    class func goOnlyRefund(orderCode:String,saleOrderItemId:Int,afterType:ChooseAfterType = .SendNo_OnlyRefund,json : JSON? = nil) {
  
         let vc = WOWOnlyRefundViewController()
         vc.orderCode        = orderCode
         vc.saleOrderItemId  = saleOrderItemId
         vc.afterType        = afterType
-
+        vc.jsonResult       = json
         topNaVC?.pushViewController(vc, animated: true)
         
     }

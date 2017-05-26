@@ -57,8 +57,8 @@ class WOWNogotiateDetailsController: WOWApplyAfterBaseController {
             }
         }) {[weak self] (errorMsg) in
             if let strongSelf = self{
+                WOWHud.showMsg(errorMsg ?? "")
                 strongSelf.endRefresh()
-                WOWHud.dismiss()
             }
         }
         

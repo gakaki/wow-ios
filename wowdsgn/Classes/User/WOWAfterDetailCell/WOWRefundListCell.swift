@@ -13,7 +13,7 @@ class WOWRefundListCell: WOWStyleNoneCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var goodsNumber: UILabel!
-    
+
     @IBOutlet weak var lbServiceNumber: UILabel!
     @IBOutlet weak var lbAfterType: UILabel!
     @IBOutlet weak var lbAfterProgress: UILabel!

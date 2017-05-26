@@ -35,6 +35,7 @@ final class WOWHomeClassTabs: WOWBaseModel,Mappable{
     var moduleName              :       String?
     var moduleDescription       :       String?
     var moduleContent           :       WOWCarouselBanners?// 顶部轮播，单个图片
+    var moduleStyle             :   WOWHomeModultStyle?
     required init?(map: Map) {
         
     }
@@ -49,7 +50,7 @@ final class WOWHomeClassTabs: WOWBaseModel,Mappable{
         moduleName                  <- map["moduleName"]
         moduleDescription           <- map["moduleDescription"]
         moduleContent              <- map["moduleContent"]
-      
+        moduleStyle                 <- map["moduleStyle"]
     }
     
 }
@@ -68,6 +69,7 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
     var moduleContentTmp        :   AnyObject?
     var moduleContentArr        :  [WowModulePageItemVO]?
 
+    var moduleStyle             :   WOWHomeModultStyle?
     
     var name                    :   String?
     
@@ -89,6 +91,7 @@ final class WOWHomeModle: WOWBaseModel,Mappable{
         moduleName                  <- map["moduleName"]
         moduleDescription           <- map["moduleDescription"]
         moduleId                    <- map["moduleId"]
+        moduleStyle                 <- map["moduleStyle"]
         switch moduleType! {
         case 101,103://顶部轮播
             moduleContent           <- map["moduleContent"]
@@ -198,6 +201,25 @@ class WOWHomeHot_1001_title: WOWBaseModel,Mappable {
         icon                <- map["icon"]
         tags                <- map["tags"]
         columns             <- map["columns"]
+    }
+    
+}
+
+class WOWHomeModultStyle: WOWBaseModel,Mappable {
+    
+    var marginBottom                   :       Float?
+    var marginLeft                     :       Float?
+    var marginRight                    :       Float?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        marginBottom                    <- map["marginBottom"]
+        marginLeft                      <- map["marginLeft"]
+        marginRight                     <- map["marginRight"]
+
     }
     
 }

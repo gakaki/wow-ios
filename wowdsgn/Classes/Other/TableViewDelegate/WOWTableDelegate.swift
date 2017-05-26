@@ -450,28 +450,29 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                
             }
         let model = dataSourceArray[section]
+        let bottom = CGFloat(model.moduleStyle?.marginBottom ?? 10)
         switch model.moduleType ?? 0{
         case 901,1001,103:// 精选页这几个Cell UI上没有 15px
             switch ViewControllerType ?? .Home{
             case .HotStyle:
-                return CGFloat.leastNormalMagnitude
+                return bottom
             default:
-                return 10
+                return bottom
             }
         case 102,107,106:
             if (model.moduleContent?.link) != nil {
-                return 60
+                return 50 + bottom
             }else {
-                return 10
+                return bottom
             }
         case 105:
             return CGFloat.leastNormalMagnitude
         case 402,401:
             
-            return 60
+            return 50 + bottom
             
         default:
-             return 10
+             return bottom
         }
         
 
@@ -490,17 +491,18 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             }
         
             let model = dataSourceArray[section]
-                switch model.moduleType ?? 0{// 不同的type  不同的页脚
+            let bottom = CGFloat(model.moduleStyle?.marginBottom ?? 10)
+            switch model.moduleType ?? 0{// 不同的type  不同的页脚
                     case 102,107,106:
                         if let link = model.moduleContent?.link {
-                            return hearderBaseBottomView(bannerModel: link, module: model)
+                            return hearderBaseBottomView(bannerModel: link, module: model,bottomHeight: bottom)
                         }else {
                             return nil
                         }
 
                     case 402,401:
                        
-                        return hearderBaseBottomView(bannerModel: nil, is402: true, id: model.moduleContentProduct?.id ?? 0, module: model)
+                        return hearderBaseBottomView(bannerModel: nil, is402: true, id: model.moduleContentProduct?.id ?? 0, module: model,bottomHeight: bottom)
                     
                 default:
                     return nil
@@ -682,10 +684,10 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
         
     }
     // 2.0 版本 查看更多页脚
-    func hearderBaseBottomView(bannerModel: WOWCarouselBanners?,is402:Bool = false,id:Int = 0, module: WOWHomeModle) -> UIView { // 137 37
+    func hearderBaseBottomView(bannerModel: WOWCarouselBanners?,is402:Bool = false,id:Int = 0, module: WOWHomeModle,bottomHeight:CGFloat = 10) -> UIView { // 137 37
         
         let view = Bundle.main.loadNibNamed("WOWHomeBaseBottomView", owner: self, options: nil)?.last as! WOWHomeBaseBottomView
-        
+//        view.heightBottomConstraint.constant = bottomHeight
         view.imgBackgroud.addTapGesture {[weak self] (sender) in
             if let strongSelf = self {
                 switch module.moduleType ?? 0{// 不同的type  不同的页脚

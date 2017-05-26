@@ -87,6 +87,12 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
                 }
                 goodsTypeIndex = 1
             }else {
+                switch afterType {
+                case .OnlyRefund:
+                    chooseReasonArray          = WOWOnlyRefundNoReceived
+                default:
+                    break
+                }
                 goodsTypeIndex = 0
             }
         }
@@ -223,6 +229,9 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
                 }
                 break
             }
+        }else {
+            WOWHud.showMsg("请输入正确的金额")
+            return
         }
 
         if commentManage.commentsLength > 140 {

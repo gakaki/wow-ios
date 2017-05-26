@@ -104,20 +104,26 @@ class WOWOrderDetailController: WOWBaseViewController{
     weak var delegate               : OrderDetailDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         request()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if entrance == .orderPay{
+            
             self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+
+            
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
     }
     override func didReceiveMemoryWarning() {

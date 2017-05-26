@@ -29,6 +29,7 @@ class WOWEditOrderController: WOWBaseViewController {
     var orderArr                        = [WOWEditOrderModel]() //订单列表
     var totalAmount                     : Double = 0.00      //订单总金额
     var orderResultVoList               = [WOWOrderCodeModel]() //订单编号
+    var channel                          = ""
     
     //时间戳，用来验证唯一
     let timeInterval = Date().timeIntervalSince1970
@@ -68,8 +69,12 @@ class WOWEditOrderController: WOWBaseViewController {
         let v = WOWRemissionBackView(frame:CGRect(x: 0,y: 0,width: self.view.w,height: self.view.h + 64))
         return v
     }()
-    
-    
+    lazy var popWindow:UIWindow = {
+        let w = UIApplication.shared.delegate as! AppDelegate
+        return w.window!
+    }()
+
+
     
     //MARK:Private Method
     override func setUI() {
@@ -112,19 +117,17 @@ class WOWEditOrderController: WOWBaseViewController {
     
     //MARK: - 弹出选择支付窗口
     func chooseStyle() {
-        let window = UIApplication.shared.windows.last
         
-        window?.addSubview(backView)
-        window?.bringSubview(toFront: backView)
+        popWindow.addSubview(backView)
+        popWindow.bringSubview(toFront: backView)
         backView.show()
     }
     // 弹出促销信息
     func remissionInfo(_ index: Int) {
         let orderInfo = orderArr[index]
-        let window = UIApplication.shared.windows.last
-        
-        window?.addSubview(remissionView)
-        window?.bringSubview(toFront: remissionView)
+  
+        popWindow.addSubview(remissionView)
+        popWindow.bringSubview(toFront: remissionView)
         remissionView.remissionView.promotionInfoArr = orderInfo.promotionProductInfoVos ?? [WOWPromotionProductInfoModel]()
         remissionView.show()
     }
@@ -234,6 +237,8 @@ class WOWEditOrderController: WOWBaseViewController {
         vc.entrance = orderDetailEntrance.orderPay
         navigationController?.pushViewController(vc, animated: true)
     }
+ 
+    
     //支付成功页面
     func goPaySuccess(paymentChannelName: String?) {
         //如果子单数量大于1说明是多个订单
@@ -254,6 +259,70 @@ class WOWEditOrderController: WOWBaseViewController {
             navigationController?.pushViewController(vc, animated: true)
 
         }
+    }
+    
+    // 绑定手机号页面
+    func goBindMobile() {
+        let vc = UIStoryboard.initialViewController("User", identifier:String(describing: WOWBindMobileSecondViewController.self)) as! WOWBindMobileSecondViewController
+        vc.entrance = .editOrder
+        vc.action = {[weak self] (model:AnyObject) in
+            if let strongSelf = self {
+                let isBind: Bool = model as! Bool
+                if isBind {
+                    strongSelf.payOrder()
+
+                }else {
+                    strongSelf.goOrderDetail()
+
+//                    let delayTime = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+//                    DispatchQueue.main.asyncAfter(deadline: delayTime) {[weak self] in
+//                        if let strongSelf = self {
+//                            
+//                            
+//                        }
+//                    }
+
+                }
+
+                
+            }
+        }
+
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    //招行绑定手机号
+    func cmbcAlter() {
+        let customView = Bundle.main.loadNibNamed("WOWCMBCAlterView", owner: self, options: nil)?.last as! WOWCMBCAlterView
+        customView.closeBtn.addAction {
+                customView.hideWithBlock { [weak self](view, finish) in
+                    if let strongSelf = self {
+                        if finish {
+                            
+                            strongSelf.goOrderDetail()
+                        }
+                    }
+                    
+
+            }
+            
+
+        }
+        customView.bindMobileBtn.addAction {
+            customView.hideWithBlock { [weak self](view, finish) in
+                if let strongSelf = self {
+                    if finish {
+                        
+                        strongSelf.goBindMobile()
+                    }
+                }
+                
+                
+            }
+            
+            
+        }
+        customView.show()
+        
     }
     
     //MARK: - Action
@@ -419,18 +488,18 @@ class WOWEditOrderController: WOWBaseViewController {
             ]
             //是否使用促销，如果参加促销，就把促销id传给后台。
             if orderInfo.isPromotion {
-                var promotionIds = [String]()
-                if let promotionProductInfoVos = orderInfo.promotionProductInfoVos {
-                    for promotion in promotionProductInfoVos {
-                        promotionIds.append(String(format:"%i", promotion.promotionId ?? 0))
-                    }
-                }
-                
-                orderSettle += [
-                    
-                    "promotionIds": promotionIds  as AnyObject,
-
-                ]
+//                var promotionIds = [String]()
+//                if let promotionProductInfoVos = orderInfo.promotionProductInfoVos {
+//                    for promotion in promotionProductInfoVos {
+//                        promotionIds.append(String(format:"%i", promotion.promotionId ?? 0))
+//                    }
+//                }
+//                
+//                orderSettle += [
+//                    
+//                    "promotionIds": promotionIds  as AnyObject,
+//
+//                ]
                 
             }else {       //没有参加促销。是否使用优惠券。如果使用优惠券就把优惠券id传过去
                 if let endUserCouponId = orderInfo.endUserCouponId {
@@ -496,6 +565,7 @@ class WOWEditOrderController: WOWBaseViewController {
                         strongSelf.orderCode = model?.orderResultVoList?[0].orderCode ?? ""
                     }
                 }
+                //弹窗
                 strongSelf.chooseStyle()
 
                 //TalkingData 下单
@@ -582,6 +652,38 @@ class WOWEditOrderController: WOWBaseViewController {
             }) { (errorMsg) in
                 WOWHud.showWarnMsg(errorMsg)
         }
+    }
+    
+    //支付订单
+    func payOrder() {
+        if  orderCode.isEmpty {
+            WOWHud.showMsg("订单生成失败")
+            return
+        }
+        
+        let deviceId = TalkingDataAppCpa.getDeviceId()
+        let adid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        let sysVersion = UIDevice.current.systemVersion //获取系统版本 例如：9.2
+        
+        let params = ["orderNo": orderCode, "channel": channel, "clientIp": IPManager.sharedInstance.ip_public, "tdid": deviceId, "idfa": adid, "osversion": sysVersion]
+        
+        
+        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(params:params as [String : AnyObject]), successClosure: { [weak self](result, code) in
+            if let strongSelf = self {
+                //绑定招行支付手机号
+                if code == RequestCode.CMBCError.rawValue {
+                    strongSelf.cmbcAlter()
+                    return
+                }
+                let json = JSON(result)
+                let charge = json["charge"]
+                strongSelf.goPay(charge.object as AnyObject)
+            }
+            
+        }) { (errorMsg) in
+            WOWHud.showMsgNoNetWrok(message: errorMsg)
+        }
+
     }
     
 }
@@ -773,30 +875,10 @@ extension WOWEditOrderController:UITableViewDelegate,UITableViewDataSource,UITex
 
 //MARK: - selectPayDelegate
 extension WOWEditOrderController: selectPayDelegate {
-    func surePay(_ channel: String) {
+    func surePay(_ payChannel: String) {
         backView.hidePayView()
-        if  orderCode.isEmpty {
-            WOWHud.showMsg("订单生成失败")
-            return
-        }
-        
-        let deviceId = TalkingDataAppCpa.getDeviceId()
-        let adid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-        let sysVersion = UIDevice.current.systemVersion //获取系统版本 例如：9.2
-
-        let params = ["orderNo": orderCode, "channel": channel, "clientIp": IPManager.sharedInstance.ip_public, "tdid": deviceId, "idfa": adid, "osversion": sysVersion]
-       
-        
-        WOWNetManager.sharedManager.requestWithTarget(.api_OrderCharge(params:params as [String : AnyObject]), successClosure: { [weak self](result, code) in
-            if let strongSelf = self {
-                let json = JSON(result)
-                let charge = json["charge"]
-                strongSelf.goPay(charge.object as AnyObject)
-            }
-            
-            }) { (errorMsg) in
-                WOWHud.showMsgNoNetWrok(message: errorMsg)
-        }
+        channel = payChannel
+        payOrder()
     }
     
     func canclePay() {

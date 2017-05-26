@@ -45,7 +45,7 @@ class WOWBaseMackViewController: UIViewController,CAAnimationDelegate {
             animation.delegate = self
             animation.duration = kDuration
             animation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
-            animation.type = kCATransitionPush;
+            animation.type = kCATransitionMoveIn;
             animation.subtype = kCATransitionFromTop;
             containsView.layer.add(animation, forKey: "LocateViewTop")
             containsView.alpha = 1.0

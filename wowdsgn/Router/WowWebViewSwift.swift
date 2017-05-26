@@ -24,7 +24,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     
     public var url = ""
     var shareTitle = "尖叫设计"
-    var shareDesc = "生活即风格！"
+    var shareDesc = WowShareText
     
     
     //MARK: -- delegate
@@ -253,7 +253,7 @@ public class WOWWebViewController: WOWBaseViewController , WKUIDelegate, WKNavig
     
     @IBAction func shareClick(_ sender: UIButton) {
         //加载成功后弹出分享按钮
-        WOWShareManager.shareUrl(shareTitle, shareText: WowShareText, url: url, shareImage: shareProductImage ?? UIImage(named: "me_logo")!)
+        WOWShareManager.shareUrl(shareTitle, shareText: shareDesc , url: url, shareImage: shareProductImage ?? UIImage(named: "me_logo")!)
         
      
     }

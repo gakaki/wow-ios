@@ -10,6 +10,7 @@ import UIKit
  public enum BindMobileEntrance {
     case userInfo
     case bindMobile
+    case editOrder
 }
 
 class WOWBindMobileSecondViewController: WOWBaseViewController {
@@ -19,22 +20,39 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
     @IBOutlet weak var codeTextField: UITextField!
     @IBOutlet weak var msgCodeButton: UIButton!
     
+    var action  : WOWObjectActionClosure?
+    
     var entrance = BindMobileEntrance.userInfo     //入口
     var mobile:String!
     //MARK:Life
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if entrance == .editOrder{
+            
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+
+            
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         MobClick.e(.Bind_Phonepage_Reg)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
     }
     //MARK:Lazy
     
@@ -51,6 +69,40 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
         
     }
     
+    func goBack() {
+        switch entrance {
+        case .bindMobile:
+            for controller in (navigationController?.viewControllers)! {
+                if controller.isKind(of: WOWUserInfoController.self){
+                    let _ = navigationController?.popToViewController(controller, animated: true)
+                }
+            }
+        case .editOrder:
+            if let ac = action{
+                ac(true as AnyObject)
+                popVC()
+            }
+
+        default:
+            let _ = navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    override func navBack() {
+        switch entrance {
+
+        case .editOrder:
+            if let ac = action{
+                popVC()
+                ac(false as AnyObject)
+
+            }
+            
+        default:
+            let _ = navigationController?.popViewController(animated: true)
+        }
+    }
+
     //MARK:Actions
     @IBAction func msgCodeButtonClick(_ sender: UIButton) {
         if !validatePhone(phoneTextField.text, tips: "请输入手机号", is_phone: true){
@@ -86,11 +138,8 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
             if let strongSelf = self{
                 WOWHud.showMsg("绑定成功")
                 WOWUserManager.userMobile = strongSelf.phoneTextField.text!
-                for controller in (strongSelf.navigationController?.viewControllers)! {
-                    if controller.isKind(of: WOWUserInfoController.self){
-                       let _ = strongSelf.navigationController?.popToViewController(controller, animated: true)
-                    }
-                }
+                strongSelf.goBack()
+
             }
         }) {(errorMsg) in
             WOWHud.showWarnMsg(errorMsg)
@@ -113,6 +162,7 @@ class WOWBindMobileSecondViewController: WOWBaseViewController {
         }
         return true
     }
+    
     
     
 }

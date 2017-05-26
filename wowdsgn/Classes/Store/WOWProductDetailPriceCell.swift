@@ -45,7 +45,7 @@ class WOWProductDetailPriceCell: UITableViewCell {
         if model?.isOversea ?? false {
             overseaView.isHidden        = false
             let ImgStr = String(format: "countryflags_%i", model?.originCountryId ?? 0)
-            let lbStr = model?.logisticsMode == 2 ? "保税区直邮": ((model?.originCountry ?? "") + "直邮")
+            let lbStr = model?.logisticsMode == 2 ? "保税区采购": ((model?.originCountry ?? "") + "直邮")
             overseaImg.image = UIImage(named: ImgStr)
             overseaLabel.text = lbStr
         }else {

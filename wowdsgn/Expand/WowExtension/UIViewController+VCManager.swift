@@ -192,13 +192,14 @@ public class VCRedirect {
     /*
      ** 订单详情页面
      */
-    public class func toOrderDetail(orderCode: String){
+    class func toOrderDetail(orderCode: String, _ entrance: orderDetailEntrance = .orderList ){
         guard WOWUserManager.loginStatus else{
             toLoginVC(true)
             return
         }
         let vc = UIStoryboard.initialViewController("User", identifier: "WOWOrderDetailController") as! WOWOrderDetailController
         vc.orderCode = orderCode
+        vc.entrance = entrance
         topNaVC?.pushViewController(vc, animated: true)
     }
     

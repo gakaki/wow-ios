@@ -24,6 +24,7 @@ enum RequestCode:String{
     case VersionNew = "50113" //当前为最新版本
     case MoreThanNumber         = "40408" //申请售后---超过最大可申请次数
     case ApplyAfterOutTime       = "40407" //申请售后---超过售后申请的时间段
+    case CMBCError              = "50119"   //如需使用招行一网通支付，请先绑定手机号
 }
 
 //MARK:前后端约定的返回数据结构
@@ -162,6 +163,13 @@ class WOWNetManager {
                             }
                             if code == RequestCode.ApplyAfterOutTime.rawValue {
                                 VCRedirect.goAfterMaxApplyNumber()
+                                return
+                            }
+                            //绑定招行支付
+                            if code == RequestCode.CMBCError.rawValue {
+                                let res = info?.data ?? [] as AnyObject
+                                successClosure(res, info?.code)
+                                
                                 return
                             }
                             failClosure(info?.message)

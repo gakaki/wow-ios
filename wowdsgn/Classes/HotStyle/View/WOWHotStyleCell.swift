@@ -103,7 +103,7 @@ class WOWHotStyleCell: UITableViewCell,ModuleViewElement {
     }
     @IBAction func shareClick(sender: UIButton) {
         let shareUrl = WOWShareUrl + "/topic/\(modelData?.id ?? 0)"
-        WOWShareManager.share(modelData?.topicName, shareText: WowShareText, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
+        WOWShareManager.share(modelData?.topicName, shareText: modelData?.topicDesc ?? WowShareText, url:shareUrl,shareImage:shareProductImage ?? UIImage(named: "me_logo")!)
         
     }
     

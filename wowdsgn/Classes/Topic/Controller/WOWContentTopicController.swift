@@ -156,7 +156,7 @@ class WOWContentTopicController: WOWBaseViewController {
     func fxClick() -> Void {
 
         let shareUrl = WOWShareUrl + "/topic/\(topic_id )"
-        WOWShareManager.share(vo_topic?.topicName, shareText: WowShareText, url:shareUrl,shareImage:vo_topic?.topicImg ?? UIImage(named: "me_logo")!)
+        WOWShareManager.share(vo_topic?.topicName, shareText: vo_topic?.topicDesc ?? WowShareText, url:shareUrl,shareImage:vo_topic?.topicImg ?? UIImage(named: "me_logo")!)
 
         
     }

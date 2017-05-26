@@ -25,15 +25,27 @@ class WOWProductDetailTipsWebViewCell: UITableViewCell,UIWebViewDelegate {
             break
         }
 
-        let url = Bundle.main.url(forResource: "product_detail_tips", withExtension:"html")
-        webView.loadRequest( URLRequest(url: url!))
-        webView.scrollView.isScrollEnabled = false
-        webView.scrollView.bounces = false
+
 
     }
    
     
     @IBOutlet weak var telButton: UIButton!
+    
+    func showData(_ model:WOWProductModel?){
+        var url: URL?
+        if let model = model {
+            if model.isOversea ?? false {
+                url = Bundle.main.url(forResource: "product_detail_seatips", withExtension:"html")
+            }else {
+                url = Bundle.main.url(forResource: "product_detail_tips", withExtension:"html")
+
+            }
+            webView.loadRequest( URLRequest(url: url!))
+            webView.scrollView.isScrollEnabled = false
+            webView.scrollView.bounces = false
+        }
+    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

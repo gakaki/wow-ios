@@ -151,6 +151,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
         case (5 + isOversea + isHaveLimit + isHavePromotion,_)://温馨提示
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "WOWProductDetailTipsWebViewCell", for: indexPath) as! WOWProductDetailTipsWebViewCell
+            cell.showData(productModel)
             returnCell = cell
             
         case (6 + isOversea + isHaveLimit + isHavePromotion,_): //客服电话

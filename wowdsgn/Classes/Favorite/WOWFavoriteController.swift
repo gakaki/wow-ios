@@ -57,7 +57,7 @@ class WOWFavoriteController: WOWBaseViewController {
         v.magicView.isScrollEnabled         = true
         self.addChildViewController(v)
         self.view.addSubview(v.magicView)
-        
+         self.tz_addPopGesture(to: v.magicView)
         v.magicView.snp.makeConstraints {[weak self] (make) -> Void in
             if let strongSelf = self {
                 make.size.equalTo(strongSelf.view)

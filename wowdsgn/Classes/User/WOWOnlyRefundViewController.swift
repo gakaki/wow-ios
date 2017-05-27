@@ -171,7 +171,7 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
             if let json = jsonResult { // 如果有数据，直接用 否则去掉接口
               
                 self.configTableViewDatasouce(json: json)
-                WOWHud.dismiss()
+            
             }else{
                 self.requestCurrentData(itemId: saleOrderItemId)
             }
@@ -201,11 +201,12 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
     }
     // 配置tableViewDatasouce需要的数据源
     func configTableViewDatasouce(json: JSON){
-        
+        WOWHud.dismiss()
         self.maxAllowedRefundAmount = json["maxAllowedRefundAmount"].stringValue
         self.deliveryFee            = json["deliveryFee"].stringValue
         
         self.mainDataModel = Mapper<WOWNewOrderDetailModel>().map(JSONObject:  json["orderDetailResultVo"].object)
+        self.jsonResult             = nil // 用过之后清空  下拉刷新 拉服务器数据
     }
     func requestCreatRefund(){
         if params_resonId == 0  {

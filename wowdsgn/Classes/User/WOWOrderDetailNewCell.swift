@@ -100,7 +100,13 @@ class WOWOrderDetailNewCell: UITableViewCell {
              
                 let json = JSON(result)
                 DLog(json)
-                strongSelf.gotoApplyAfterVC(json: json)
+               let isWholeRefund = json["isWholeRefund"].bool
+                if let isWholeRefund = isWholeRefund {
+                    strongSelf.gotoApplyAfterVC(json: json,isWholeRefund: isWholeRefund)
+                }else {
+                    strongSelf.gotoApplyAfterVC(json: json)
+                }
+              
                 
             }
         }) {[weak self] (errorMsg) in
@@ -136,7 +142,8 @@ class WOWOrderDetailNewCell: UITableViewCell {
         return false
 
     }
-    func gotoApplyAfterVC(json : JSON? = nil){
+    func gotoApplyAfterVC(json : JSON? = nil,isWholeRefund:Bool = true){
+        
             if productModelData.isRefund ?? false { // 如果已经申请过，  则进入 售后详情界面
                 VCRedirect.goAfterDetail(productModelData.saleOrderItemRefundId ?? 0)
                 return
@@ -149,12 +156,13 @@ class WOWOrderDetailNewCell: UITableViewCell {
         
             }else {
                     // 当订单里有一个item已经申请售后过的， 或者， 订单为部分发货，则不能申请整单退款
-                if cheackIsRefundItem() ||  orderType == .someFinishForGoods {
+                if cheackIsRefundItem() ||  orderType == .someFinishForGoods || isWholeRefund == false{
                     VCRedirect.goApplyAfterSales(sendType: .someNoSend,orderCode:orderCode,saleOrderItemId:productModelData.saleOrderItemId ?? 0,json: json)
                     return
                 }
-                
+            
                 VCRedirect.goApplyAfterSales(sendType: .noSendGoods,orderCode:orderCode,saleOrderItemId:productModelData.saleOrderItemId ?? 0,json: json)
+                
                 
             }
     }

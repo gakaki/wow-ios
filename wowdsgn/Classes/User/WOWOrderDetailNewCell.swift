@@ -110,20 +110,46 @@ class WOWOrderDetailNewCell: UITableViewCell {
             }
         }
     }
+        // 检查此订单 其他 item 是否有申请 售后的
+    func cheackIsRefundItem() -> Bool{
+        
+        if let packages  = orderNewDetailModel.packages{
+            for orderItems in packages {
+                if let items = orderItems.orderItems {
+                    for order in items {
+                        if order.isRefund ?? false {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+        
+        if let unShipOutOrderItems = orderNewDetailModel.unShipOutOrderItems {
+            for orderItems in unShipOutOrderItems {
+                if orderItems.isRefund ?? false {
+                    return true
+                }
+            }
+        }
+        
+        return false
+
+    }
     func gotoApplyAfterVC(json : JSON? = nil){
             if productModelData.isRefund ?? false { // 如果已经申请过，  则进入 售后详情界面
                 VCRedirect.goAfterDetail(productModelData.saleOrderItemRefundId ?? 0)
                 return
             }
-        
+         
 
             if productModelData.isDeliveryed ?? false { // 进入申请售后列表页面  区别 未发货 和 已发货
         
                 VCRedirect.goApplyAfterSales(sendType: .sendGoods,orderCode:orderCode, saleOrderItemId: productModelData.saleOrderItemId ?? 0,json: json)
         
             }else {
-                
-                if orderType == .someFinishForGoods {
+                    // 当订单里有一个item已经申请售后过的， 或者， 订单为部分发货，则不能申请整单退款
+                if cheackIsRefundItem() ||  orderType == .someFinishForGoods {
                     VCRedirect.goApplyAfterSales(sendType: .someNoSend,orderCode:orderCode,saleOrderItemId:productModelData.saleOrderItemId ?? 0,json: json)
                     return
                 }

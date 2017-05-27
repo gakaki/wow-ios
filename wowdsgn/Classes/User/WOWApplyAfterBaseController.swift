@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 // tableView 基类   只有tableView  统一group风格，无分割线
 class WOWApplyAfterBaseController: WOWBaseViewController,UITableViewDataSource,UITableViewDelegate {
     var tableView: UITableView!
@@ -15,6 +16,18 @@ class WOWApplyAfterBaseController: WOWBaseViewController,UITableViewDataSource,U
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.sharedManager().enableAutoToolbar = true
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        
     }
     override func setUI() {
         super.setUI()
@@ -45,9 +58,15 @@ class WOWApplyAfterBaseController: WOWBaseViewController,UITableViewDataSource,U
             make.height.equalTo(50)
         }
         bottomView.isHidden = true // 默认隐藏， 
-        
-        
+//        
+//        let tapGestureRecognizer = UIPanGestureRecognizer.init(target: self, action:  #selector(tap))
+//        
+//        self.tableView.addGestureRecognizer(tapGestureRecognizer)
+
     }
+//    func tap(gestureRecognizer: UIPanGestureRecognizer)  {
+//        self.view.endEditing(true)
+//    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -65,6 +84,9 @@ class WOWApplyAfterBaseController: WOWBaseViewController,UITableViewDataSource,U
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//            self.view.endEditing(true)
+//    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

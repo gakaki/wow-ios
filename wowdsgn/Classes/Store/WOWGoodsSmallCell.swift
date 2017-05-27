@@ -80,7 +80,7 @@ class WOWGoodsSmallCell: UICollectionViewCell {
         
         // 修改来回上下加载 内存不减的问题
         desLabel.text = model.productTitle ?? ""
-        //是否显示海外购标识
+        //是否显示海外购标识 
         if model.isOversea ?? false {
             overseaImg.isHidden = false
             let ImgStr = String(format: "countryflags_%i", model.originCountryId ?? 0)

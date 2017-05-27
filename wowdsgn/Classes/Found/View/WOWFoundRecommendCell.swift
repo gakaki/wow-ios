@@ -26,9 +26,11 @@ extension Double {
     }
 }
 extension UILabel{
+    //添加中划线
     func setStrokeWithText( _ str:String ){
  
-        let attrString      = NSAttributedString(string:str, attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
+        let attrString      = NSAttributedString(string:str, attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,
+                                                                          NSBaselineOffsetAttributeName: NSUnderlineStyle.styleNone.rawValue])
         self.attributedText = attrString
 
     }

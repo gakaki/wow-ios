@@ -127,6 +127,8 @@ class WOWCouponController: WOWBaseViewController {
         }){[weak self] (errorMsg) in
             
             if let strongSelf = self{
+                strongSelf.vo_cupons = []
+
                 strongSelf.tableView.addSubview(strongSelf.emptyView)
                 
                 strongSelf.tableView.mj_footer = nil

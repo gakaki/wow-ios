@@ -293,7 +293,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                     strongSelf.isOpenParam = !strongSelf.isOpenParam
                     strongSelf.paramView.isOpen(strongSelf.isOpenParam)
                     let sections = NSIndexSet(index: section)
-                    tableView.reloadSections(sections as IndexSet, with: .automatic)
+                    tableView.reloadData()
                 }
                 })
             return paramView
@@ -306,7 +306,7 @@ extension WOWProductDetailController:UITableViewDelegate,UITableViewDataSource{
                     strongSelf.isOpenTips = !strongSelf.isOpenTips
                     strongSelf.tipsView.isOpen(strongSelf.isOpenTips)
                     let sections = NSIndexSet(index: section)
-                    tableView.reloadSections(sections as IndexSet, with: .automatic)
+                    tableView.reloadData()
                 }
                 })
             return tipsView

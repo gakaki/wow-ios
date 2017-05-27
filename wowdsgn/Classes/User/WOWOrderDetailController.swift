@@ -71,7 +71,7 @@ class WOWOrderDetailController: WOWBaseViewController{
             }
         }
     }
-    var cellNumber  : Int = 2
+    var cellNumber  : Int = 2 // 运费一栏
     var surePayType                 : PayType = .none
     
     var OrderDetailNewaType         : OrderNewType = .someFinishForGoods
@@ -307,6 +307,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                 self.OrderDetailNewaType = OrderNewType.finish
                 if orderNewModel.unShipOutOrderItems?.count > 0 { // 说明有未发货的东西 则是正在申请售后中的东西
                     self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
+                    isSomeForGoodsType = false      // 标记不是部分发货的原始布局
                 }
                 if orderNewModel.packages?.count > 1 { // 如果大于1， 说明有不多个包裹的订单 则 换UI界面
                     self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
@@ -335,6 +336,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                 self.rightButton.setTitle("确认收货", for: UIControlState())
                 if orderNewModel.unShipOutOrderItems?.count > 0 { // 说明有未发货的东西 则是正在申请售后中的东西
                     self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
+                    isSomeForGoodsType = false      // 标记不是部分发货的原始布局
                 }
                 
                 if orderNewModel.packages?.count > 1 {// 如果大于1， 说明有不多个包裹的订单 则 换UI界面
@@ -714,6 +716,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 cell.orderCode = self.orderCode
                 cell.productData(model: orderProductModel)
                 cell.orderType = OrderDetailNewaType
+                cell.orderNewDetailModel = orderNewDetailModel!
             }
         }
     }
@@ -728,6 +731,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                         cell.orderCode = self.orderCode
                         cell.productData(model: orderItems[indexRow])
                         cell.orderType = OrderDetailNewaType
+                        cell.orderNewDetailModel = orderNewDetailModel!
                     }
                 }
             }

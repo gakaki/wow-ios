@@ -302,7 +302,15 @@ class WOWOrderDetailController: WOWBaseViewController{
         
             case 1,5,6:
                 self.OrderDetailNewaType = OrderNewType.noForGoods
-                hideRightBtn()
+                 hideRightBtn()
+                if orderNewModel.packages?.count > 0 {// 如果大于1， 说明有不多个包裹的订单 则 换UI界面
+                    self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
+                    isSomeForGoodsType = false      // 标记不是部分发货的原始布局
+                    break
+                }
+
+                
+               
             case 4:
                 self.OrderDetailNewaType = OrderNewType.finish
                 if orderNewModel.unShipOutOrderItems?.count > 0 { // 说明有未发货的东西 则是正在申请售后中的东西
@@ -337,11 +345,17 @@ class WOWOrderDetailController: WOWBaseViewController{
                 if orderNewModel.unShipOutOrderItems?.count > 0 { // 说明有未发货的东西 则是正在申请售后中的东西
                     self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
                     isSomeForGoodsType = false      // 标记不是部分发货的原始布局
+                    break
                 }
                 
                 if orderNewModel.packages?.count > 1 {// 如果大于1， 说明有不多个包裹的订单 则 换UI界面
                     self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
                     isSomeForGoodsType = false      // 标记不是部分发货的原始布局
+                    break
+                }
+                if orderNewModel.unShipOutOrderItems?.count > 0  && orderNewModel.packages?.count == 0 {
+                    self.OrderDetailNewaType          = OrderNewType.forGoods
+                    break
                 }
             default:
                 break

@@ -291,13 +291,13 @@ class WOWOrderDetailController: WOWBaseViewController{
     func orderType(_ OrderDetailModel:WOWNewOrderDetailModel?) {
         if let orderNewModel = OrderDetailModel {
             
-           
+       
             switch orderNewModel.orderStatus ?? 0  {
             case 0:
                 self.OrderDetailNewaType          = OrderNewType.payMent
 
                 self.timerCount(detailModel: orderNewModel) // 更新Model层时间戳
-                
+                self.rightButton.isHidden = false
                 self.rightButton.setTitle("立即支付", for: UIControlState())
         
             case 1,5,6:
@@ -305,6 +305,9 @@ class WOWOrderDetailController: WOWBaseViewController{
                 hideRightBtn()
             case 4:
                 self.OrderDetailNewaType = OrderNewType.finish
+                if orderNewModel.unShipOutOrderItems?.count > 0 { // 说明有未发货的东西 则是正在申请售后中的东西
+                    self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
+                }
                 if orderNewModel.packages?.count > 1 { // 如果大于1， 说明有不多个包裹的订单 则 换UI界面
                     self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
                     isSomeForGoodsType = false
@@ -314,6 +317,7 @@ class WOWOrderDetailController: WOWBaseViewController{
                         hideRightBtn()
                     }else{
                         self.clooseOrderButton.isHidden = true
+                        self.rightButton.isHidden = false
                         self.rightButton.setTitle("去评论", for: UIControlState())
                     }
                 }else{
@@ -327,11 +331,15 @@ class WOWOrderDetailController: WOWBaseViewController{
             case 3:
                 self.OrderDetailNewaType          = OrderNewType.forGoods
                 self.clooseOrderButton.isHidden     = true
+                self.rightButton.isHidden = false
                 self.rightButton.setTitle("确认收货", for: UIControlState())
-
+                if orderNewModel.unShipOutOrderItems?.count > 0 { // 说明有未发货的东西 则是正在申请售后中的东西
+                    self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
+                }
+                
                 if orderNewModel.packages?.count > 1 {// 如果大于1， 说明有不多个包裹的订单 则 换UI界面
-                     self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
-                    isSomeForGoodsType = false
+                    self.OrderDetailNewaType          = OrderNewType.someFinishForGoods
+                    isSomeForGoodsType = false      // 标记不是部分发货的原始布局
                 }
             default:
                 break
@@ -1255,7 +1263,11 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
             
             
         case .forGoods,.finish:
+            if self.orderNewDetailModel?.packages?.count == 0 {
+                return
+            }
             if isOpen == true {
+
                 if  let forGoodsArr = self.orderNewDetailModel?.packages?[0].orderItems {
                     self.orderGoodsNumber = forGoodsArr.count
                 }

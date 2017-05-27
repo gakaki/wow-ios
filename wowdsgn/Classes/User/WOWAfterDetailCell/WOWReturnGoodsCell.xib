@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="293"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="293"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="292.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请于 发往以上地址，否则退款将被取消" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MtN-P1-xon">
@@ -210,7 +210,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="填写物流单号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="agm-gZ-Bt6">
-                                        <rect key="frame" x="86.5" y="16.5" width="90" height="17"/>
+                                        <rect key="frame" x="86.5" y="16.5" width="288.5" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -231,6 +231,7 @@
                                     <constraint firstAttribute="trailing" secondItem="w1L-oj-0fv" secondAttribute="trailing" id="fgu-RT-vEt"/>
                                     <constraint firstItem="agm-gZ-Bt6" firstAttribute="leading" secondItem="d0D-Ev-qD5" secondAttribute="trailing" id="ijv-7c-SB4"/>
                                     <constraint firstItem="d0D-Ev-qD5" firstAttribute="leading" secondItem="suL-eO-1NX" secondAttribute="trailing" constant="2" id="jEQ-Gm-YKO"/>
+                                    <constraint firstAttribute="trailing" secondItem="agm-gZ-Bt6" secondAttribute="trailing" id="r9F-6z-zHg"/>
                                     <constraint firstItem="w1L-oj-0fv" firstAttribute="top" secondItem="z0l-Cm-tiF" secondAttribute="top" id="wQc-lX-6GJ"/>
                                     <constraint firstItem="d0D-Ev-qD5" firstAttribute="centerY" secondItem="z0l-Cm-tiF" secondAttribute="centerY" id="xKJ-C9-RDb"/>
                                 </constraints>

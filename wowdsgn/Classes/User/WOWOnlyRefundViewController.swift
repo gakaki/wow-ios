@@ -56,7 +56,7 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
             }
         }
     }
-    var chooseReasonArray           : [[Any]] = WOWOnlyRefund
+    var chooseReasonArray           : [[Any]] = WOWOnlyRefund // 退款原因理由
     
     var cellSectionNumber           : Int = 1   //  分组数量，  整单退款 = 3组 ，其他都是 一组
     var freightSectionNumber        : Int = 2   //  运费分组行数， 有改价 = 3  行， 没有改价 = 2行
@@ -76,28 +76,28 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
             self.tableView.reloadData()
         }
     }
-    var goodsTypeStr                : String = goodsType_NO{ // 货物状态
+    var goodsTypeStr                : String = goodsType_NO{ //默认货物状态，根据前面传来， 修改默认goodsTypeIndex
         didSet{
             if  goodsTypeStr == goodsType_YES {
-                switch afterType {
-                case .OnlyRefund:
-                    chooseReasonArray          = WOWOnlyRefundReceived
-                default:
-                    break
-                }
-                goodsTypeIndex = 1
+
+                goodsTypeIndex = 1  //
             }else {
-                switch afterType {
-                case .OnlyRefund:
-                    chooseReasonArray          = WOWOnlyRefundNoReceived
-                default:
-                    break
-                }
+
                 goodsTypeIndex = 0
+            }
+            if afterType == .OnlyRefund { // 如果是仅退款， 则根据状态修改退款原因
+                
+                if goodsTypeStr == goodsType_YES {
+                    chooseReasonArray          = WOWOnlyRefundReceived
+                }else{
+                    chooseReasonArray          = WOWOnlyRefundNoReceived
+                }
+
+                
             }
         }
     }
-    var goodsTypeIndex              : Int = 0{
+    var goodsTypeIndex              : Int = 0{ // 默认 选择 货物收到与否 情况 的pircker 下标
         didSet{
             if goodsTypeIndex == 0 {
                
@@ -180,7 +180,7 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
         }
         
     }
-    
+    // 请求当前页面的数据， 根据是否是整单退款
     func requestCurrentData(itemId: Int, isWholeRefund: Bool? = nil){
         WOWNetManager.sharedManager.requestWithTarget(.api_GetRefundMoney(saleOrderItemId: itemId, isWholeRefund: isWholeRefund), successClosure: {[weak self] (result, code) in
             WOWHud.dismiss()
@@ -199,6 +199,7 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
         }
 
     }
+    // 配置tableViewDatasouce需要的数据源
     func configTableViewDatasouce(json: JSON){
         
         self.maxAllowedRefundAmount = json["maxAllowedRefundAmount"].stringValue
@@ -498,7 +499,7 @@ class WOWOnlyRefundViewController: WOWApplyAfterBaseController {
 //                print(str,index)
                 self.goodsTypeStr = str
                 self.goodsTypeIndex = index
-                /*--重置原因参数-*/
+                /*--当修改货物收到未收到状态时，退款原因可能会跟着改变，此时重置原因参数-*/
                 self.refundReasonStr    = "请选择退款原因"
                 self.refundReasonIndex  = 0
                 self.params_resonId     = 0

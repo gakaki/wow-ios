@@ -24,7 +24,7 @@ class Cell_107_Item: UICollectionViewCell {
             let sellPriceStr = "¥" + String(describing: NSDecimalNumber(value: model?.sellPrice ?? 0))
             lbPrice.text = sellPriceStr
             if let originalPrice = model?.originalprice { // 如果有 原价 且大于现价
-                let originalPriceStr = String(describing: NSDecimalNumber(value: originalPrice))
+                let  originalPriceStr = WOWCalPrice.calTotalPrice([originalPrice ],counts:[1])
 
                 if originalPrice > model?.sellPrice {
 

@@ -69,7 +69,7 @@ class WOWFavoriteController: WOWBaseViewController {
         vc_product    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavProduct.self)) as? WOWFavProduct
         vc_brand    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavBrand.self)) as? WOWFavBrand
         vc_designer = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavDesigner.self)) as? WOWFavDesigner
-
+        self.tz_addPopGesture(to: v.magicView)
         v.magicView.reloadData()
     }
     fileprivate func addObserver(){

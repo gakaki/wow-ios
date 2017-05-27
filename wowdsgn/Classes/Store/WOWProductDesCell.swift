@@ -21,7 +21,7 @@ class WOWProductDesCell: UITableViewCell {
 
         if let model = model {
             if model.isOversea ?? false {
-                exemptionLb.text = "包邮包税"
+                exemptionLb.text = "包税包邮"
                 if let logisticsMode = model.logisticsMode {
                     if logisticsMode == 1 {
                         logisticsLb.text = "海外直邮"

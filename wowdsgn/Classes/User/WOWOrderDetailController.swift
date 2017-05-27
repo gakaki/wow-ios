@@ -795,7 +795,7 @@ extension WOWOrderDetailController:UITableViewDelegate,UITableViewDataSource{
                 }
                 if (indexPath as NSIndexPath).row == 2 {
                     cell.payTypeImageView.image = UIImage(named: "cmb_wallet")
-                    cell.payTypeLabel.text      = "招行支付"
+                    cell.payTypeLabel.text      = "招商银行"
                     switch surePayType {
                     case PayType.payCmbWallet:
                         cell.isClooseImageView.image = UIImage(named: "selectBig")

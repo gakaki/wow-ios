@@ -123,7 +123,7 @@ class VCDesignerList: WOWBaseViewController {
                     
                     //循环所有的然后给分组
                     for letter in strongSelf.headerIndexs{
-                        let group_row    = designers.filter{ (d) in d.designerNameFirstLetter == letter }
+                        let group_row    = designers.filter{ (d) in d.designerNameFirstLetter?.caseInsensitiveCompare(letter).rawValue == 0 }
                         if group_row.count > 0 {
                             
                             strongSelf.dataArray.append(group_row)

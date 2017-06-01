@@ -126,7 +126,7 @@ class WOWBrandListController: WOWBaseViewController {
                     if let brands = brands {
                         //循环所有的然后给分组
                         for letter in strongSelf.headerIndexs{
-                            let group_row    = brands.filter{ (brand) in brand.letter == letter }
+                            let group_row    = brands.filter{ (brand) in brand.letter?.caseInsensitiveCompare(letter).rawValue == 0 }
                             if group_row.count > 0 {
                                 strongSelf.dataArray.append(group_row)
                                 strongSelf.originalArray.append(contentsOf: group_row)

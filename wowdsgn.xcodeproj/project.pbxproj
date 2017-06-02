@@ -274,7 +274,6 @@
 		06A5C4671E13B21600FE0A7A /* libTalkingData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5C45E1E13B21600FE0A7A /* libTalkingData.a */; };
 		06A5C4681E13B21600FE0A7A /* libTalkingDataAppCpa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5C45F1E13B21600FE0A7A /* libTalkingDataAppCpa.a */; };
 		06A5C4691E13B21600FE0A7A /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5C4601E13B21600FE0A7A /* libUMessage_Sdk_1.4.0.a */; };
-		06A5C46E1E13BB4D00FE0A7A /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5C46D1E13BB4D00FE0A7A /* UMMobClick.framework */; };
 		06A5C4731E13D4D800FE0A7A /* TalkingDataEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5C4721E13D4D800FE0A7A /* TalkingDataEvent.swift */; };
 		06C869A41DD19B4E004C05E3 /* AppDelegateUmengHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869A31DD19B4E004C05E3 /* AppDelegateUmengHelper.swift */; };
 		06C869AB1DD19C8E004C05E3 /* Config3rd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C869AA1DD19C8E004C05E3 /* Config3rd.swift */; };
@@ -496,6 +495,7 @@
 		631FA9A91EA0D47800E18EC9 /* PhotoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631FA9A41EA0D47800E18EC9 /* PhotoViewCell.swift */; };
 		631FA9AA1EA0D47800E18EC9 /* SimpleHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631FA9A51EA0D47800E18EC9 /* SimpleHUD.swift */; };
 		631FA9AB1EA0D47800E18EC9 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631FA9A61EA0D47800E18EC9 /* UIViewExtension.swift */; };
+		6324AFB11EDFF0FA00943C1C /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324AFB01EDFF0FA00943C1C /* UMMobClick.framework */; };
 		6326BF391DD0160700917FA3 /* WOWLaunchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6326BF381DD0160700917FA3 /* WOWLaunchView.xib */; };
 		6326BF3B1DD0161600917FA3 /* WOWLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6326BF3A1DD0161600917FA3 /* WOWLaunchView.swift */; };
 		6327F58A1E94BD0700E9D317 /* WOWGuidePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6327F5891E94BD0700E9D317 /* WOWGuidePageView.swift */; };
@@ -947,7 +947,6 @@
 		06A5C4631E13B21600FE0A7A /* TalkingDataSMS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkingDataSMS.h; sourceTree = "<group>"; };
 		06A5C4641E13B21600FE0A7A /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		06A5C46B1E13B24100FE0A7A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		06A5C46D1E13BB4D00FE0A7A /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		06A5C4721E13D4D800FE0A7A /* TalkingDataEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkingDataEvent.swift; sourceTree = "<group>"; };
 		06C869A31DD19B4E004C05E3 /* AppDelegateUmengHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateUmengHelper.swift; sourceTree = "<group>"; };
 		06C869A71DD19BDF004C05E3 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
@@ -1180,6 +1179,7 @@
 		631FA9A41EA0D47800E18EC9 /* PhotoViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewCell.swift; sourceTree = "<group>"; };
 		631FA9A51EA0D47800E18EC9 /* SimpleHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleHUD.swift; sourceTree = "<group>"; };
 		631FA9A61EA0D47800E18EC9 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		6324AFB01EDFF0FA00943C1C /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		6326BF381DD0160700917FA3 /* WOWLaunchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWLaunchView.xib; sourceTree = "<group>"; };
 		6326BF3A1DD0161600917FA3 /* WOWLaunchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWLaunchView.swift; sourceTree = "<group>"; };
 		6327F5891E94BD0700E9D317 /* WOWGuidePageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWGuidePageView.swift; sourceTree = "<group>"; };
@@ -1359,8 +1359,8 @@
 				069D2F701DB4792300A059D0 /* libicucore.tbd in Frameworks */,
 				069D2F6E1DB4791600A059D0 /* AdSupport.framework in Frameworks */,
 				069D2F6C1DB4791200A059D0 /* CoreMotion.framework in Frameworks */,
+				6324AFB11EDFF0FA00943C1C /* UMMobClick.framework in Frameworks */,
 				069D2F6A1DB4790C00A059D0 /* SafariServices.framework in Frameworks */,
-				06A5C46E1E13BB4D00FE0A7A /* UMMobClick.framework in Frameworks */,
 				06A5C4691E13B21600FE0A7A /* libUMessage_Sdk_1.4.0.a in Frameworks */,
 				458523D0F557C0CFD1003B89 /* Pods_wowdsgn.framework in Frameworks */,
 			);
@@ -1423,7 +1423,6 @@
 			children = (
 				06A5C43F1E13B1F500FE0A7A /* WowThird */,
 				069D2F881DB47ADC00A059D0 /* AD */,
-				069D2F8C1DB47ADC00A059D0 /* Brand */,
 				069D2F901DB47ADC00A059D0 /* BuyCar */,
 				069D2FB51DB47ADC00A059D0 /* Favorite */,
 				069D2FC11DB47ADC00A059D0 /* Found */,
@@ -1451,37 +1450,6 @@
 				069D2F8B1DB47ADC00A059D0 /* WOWVOAd.swift */,
 			);
 			path = AD;
-			sourceTree = "<group>";
-		};
-		069D2F8C1DB47ADC00A059D0 /* Brand */ = {
-			isa = PBXGroup;
-			children = (
-				069D2F8D1DB47ADC00A059D0 /* Controller */,
-				069D2F8E1DB47ADC00A059D0 /* Model */,
-				069D2F8F1DB47ADC00A059D0 /* View */,
-			);
-			path = Brand;
-			sourceTree = "<group>";
-		};
-		069D2F8D1DB47ADC00A059D0 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		069D2F8E1DB47ADC00A059D0 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		069D2F8F1DB47ADC00A059D0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		069D2F901DB47ADC00A059D0 /* BuyCar */ = {
@@ -2005,7 +1973,7 @@
 		06A5C45C1E13B21600FE0A7A /* lib_frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				06A5C46D1E13BB4D00FE0A7A /* UMMobClick.framework */,
+				6324AFB01EDFF0FA00943C1C /* UMMobClick.framework */,
 				06A5C45E1E13B21600FE0A7A /* libTalkingData.a */,
 				06A5C45F1E13B21600FE0A7A /* libTalkingDataAppCpa.a */,
 				06A5C4601E13B21600FE0A7A /* libUMessage_Sdk_1.4.0.a */,

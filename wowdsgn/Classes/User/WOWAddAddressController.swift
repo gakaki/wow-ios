@@ -59,7 +59,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let gesture = UITapGestureRecognizer(target: self, action:#selector(viewTap(_:)))
-//
+
 //        cell.productImg.addGestureRecognizer(gesture)
         self.view.addGestureRecognizer(gesture)
     }

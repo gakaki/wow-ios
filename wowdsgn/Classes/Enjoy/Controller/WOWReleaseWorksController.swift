@@ -30,17 +30,8 @@ class WOWReleaseWorksController: WOWBaseViewController {
     var type:Int = 0    //type = 0时从选择分类页过来。否则从活动页过来
     var topicId: Int = 0        //活动专题id
     var activityName: String?   //活动名称
+    var dataArray = [String]()      //活动名称数组
 
-    lazy var backView:WOWPickerBackView = {[unowned self] in
-        let v = WOWPickerBackView(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight))
-        v.pickerView.pickerView.delegate = self
-        v.pickerView.sureButton.addTarget(self, action:#selector(surePicker), for:.touchUpInside)
-        return v
-        }()
-    lazy var popWindow:UIWindow = {
-        let w = UIApplication.shared.delegate as! AppDelegate
-        return w.window!
-    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "发布"
@@ -51,6 +42,10 @@ class WOWReleaseWorksController: WOWBaseViewController {
         self.automaticallyAdjustsScrollViewInsets = true
         let itemReghit = UIBarButtonItem.init(title: "取消", style: .plain, target: self, action: #selector(cancelAction))
         navigationItem.rightBarButtonItem = itemReghit
+        dataArray = []
+        for categary in categoryArr {
+            dataArray.append(categary.categoryName ?? "")
+        }
 
         let tapGestureRecognizer = UIPanGestureRecognizer.init(target: self, action:  #selector(tap))
         
@@ -63,7 +58,13 @@ class WOWReleaseWorksController: WOWBaseViewController {
             rightSpace.constant = 34
             categoryTap.addTapGesture {[unowned self] (tap) in
                 MobClick.e(.sellect_classifiaction_clicks_post_picture_page)
-                self.showPickerView()
+                VCRedirect.prentPirckerMask(dataArr: self.dataArray, startIndex: self.indexRow, block: {[unowned self] (str, index) in
+                    self.indexRow = index
+                    let model = self.categoryArr[index]
+                    self.categoryLabel.text = model.categoryName
+                    self.instagramCategoryId = model.id
+                    
+                })
             }
         }else {
             //是活动的时候左边是分类，右边是活动名称
@@ -108,26 +109,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
         self.present(alertController, animated: true, completion: nil)
       
     }
-    //显示分类选择
-    fileprivate func showPickerView(){
-        backView.pickerView.pickerView.selectRow(indexRow, inComponent: 0, animated: true)
-        backView.pickerView.pickerView.reloadComponent(0)
-//        let window = UIApplication.shared.windows
-        
-        popWindow.addSubview(backView)
-        popWindow.bringSubview(toFront: backView)
-        backView.show()
-        
-    }
-    //确认选择
-    func surePicker() {
-        let row = backView.pickerView.pickerView.selectedRow(inComponent: 0)
-        indexRow = row
-        let model = categoryArr[row]
-        categoryLabel.text = model.categoryName
-        instagramCategoryId = model.id
-        backView.hideView()
-    }
+
     
     //MARK: - NET
 
@@ -232,7 +214,7 @@ class WOWReleaseWorksController: WOWBaseViewController {
     }
     
 }
-extension WOWReleaseWorksController: UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate{
+extension WOWReleaseWorksController: UITextViewDelegate{
     
     fileprivate func limitTextLength(_ textView: UITextView){
         
@@ -272,18 +254,5 @@ extension WOWReleaseWorksController: UITextViewDelegate, UIPickerViewDataSource,
         
     }
 
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return categoryArr.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let model = categoryArr[row]
-        return model.categoryName
-        
-    }
 
 }

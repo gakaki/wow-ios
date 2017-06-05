@@ -71,6 +71,8 @@ class WOWHotMainCell: UITableViewCell {
             lbPraise.text    = m.readQty?.toString
         }
         lbTitleMain.text     = m.topicName
+        lbTitleMain.setLineHeightAndLineBreak(1.2)
+
         let timerNumber      = (m.publishTime ?? 0)/1000
         lbTime.text          = timerNumber.getTimeString()
         btnLike.isSelected   = m.favorite ?? false

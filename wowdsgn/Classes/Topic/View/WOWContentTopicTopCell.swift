@@ -23,19 +23,7 @@ class WOWContentTopicTopCell: UITableViewCell {
     @IBOutlet weak var aspect: NSLayoutConstraint!
     
     weak var delegeta: WOWContentTopicTopCellDelegate?
-    //内容图片的宽高比约束
-    internal var aspectConstraint : NSLayoutConstraint? = nil{
-        didSet {
-            if oldValue != nil {
-                //删除旧的约束
-                LayoutConstraint.deactivate([oldValue!])
-            }
-            if aspectConstraint != nil {
-                LayoutConstraint.activate([aspectConstraint!])
-                
-            }
-        }
-    }
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -52,22 +40,7 @@ class WOWContentTopicTopCell: UITableViewCell {
         if let model = model {
             if let img = model.topicImg {
                 topicImg.set_webimage_url(img)
-//                topicImg.yy_setImage(
-//                    with: URL(string:img.webp_url()),
-//                    placeholder: UIImage(named: "placeholder_product"),
-//                    options: [YYWebImageOptions.progressiveBlur , YYWebImageOptions.setImageWithFadeAnimation],
-//                    completion: {[weak self] (img, url, from_type, image_stage,err ) in
-//                        if let strongSelf = self {
-//                            if let image = img {
-//                                let imageAspect = image.size.width / image.size.height
-//                                strongSelf.aspectConstraint = NSLayoutConstraint(item: strongSelf.topicImg,
-//                                                                                 attribute: .width, relatedBy: .equal,
-//                                                                                 toItem: strongSelf.topicImg, attribute: .height,
-//                                                                                 multiplier: imageAspect , constant: 0.0)
-//                            }
-//                        }
-//                })
-//
+
             }
 
             columnName.text = model.columnName ?? ""
@@ -95,6 +68,7 @@ class WOWContentTopicTopCell: UITableViewCell {
 
             }
             topicTitle.text = model.topicName
+            topicTitle.setLineHeightAndLineBreak(1.2)
             topicDesc.text = model.topicDesc
             topicDesc.setLineHeightAndLineBreak(1.5)
         }
@@ -102,7 +76,6 @@ class WOWContentTopicTopCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         //清除内容图片的宽高比约束
-        aspectConstraint = nil
     }
   
     

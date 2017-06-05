@@ -359,10 +359,8 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
             let cell            = tableView.dequeueReusableCell( withIdentifier: identifier , for: indexPath) as! Cell_104_TwoLine
             
             cell.delegate       = self.vc as! Cell_104_TwoLineDelegate?
-//            cell.setData(model.moduleContent?.banners ?? [WOWCarouselBanners]())
             cell.dataArr = model.moduleContent?.banners ?? [WOWCarouselBanners]()
-//            cell_heights[section]  = cell.heightAll
-//            cell.bringSubview(toFront: cell.collectionView)
+
             returnCell = cell
             
         case WOWHotColumnCell.cell_type():
@@ -576,7 +574,6 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
                     isHiddenLien = false
                     t            =  model.moduleName ?? "居家好物"
                     return hearderBaseTopView(title: t, subTitle: model.moduleDescription ?? "")
-//                    return WOW_Cell_402_Hearder(title: t,isHiddenLine: isHiddenLien,is402: true,id: model.moduleContentProduct?.id ?? 0)
                 case 501:
                     isHiddenLien = true
                     t            = "单品推荐"
@@ -687,7 +684,6 @@ class WOWTableDelegate: NSObject,UITableViewDelegate,UITableViewDataSource,Cycle
     func hearderBaseBottomView(bannerModel: WOWCarouselBanners?,is402:Bool = false,id:Int = 0, module: WOWHomeModle,bottomHeight:CGFloat = 10) -> UIView { // 137 37
         
         let view = Bundle.main.loadNibNamed("WOWHomeBaseBottomView", owner: self, options: nil)?.last as! WOWHomeBaseBottomView
-//        view.heightBottomConstraint.constant = bottomHeight
         view.imgBackgroud.addTapGesture {[weak self] (sender) in
             if let strongSelf = self {
                 switch module.moduleType ?? 0{// 不同的type  不同的页脚

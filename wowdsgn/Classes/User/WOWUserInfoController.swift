@@ -35,8 +35,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
     @IBOutlet weak var space: NSLayoutConstraint!
     @IBOutlet weak var arrowImg: UIImageView!
     
-//    var  backGroundMaskView : UIView!
-//    var  backGroundWindow : UIWindow!
     
     var addressInfo                     :WOWAddressListModel?
 
@@ -49,8 +47,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
     fileprivate var star        :Int    = WOWUserManager.userConstellation
     fileprivate var age         :Int    = WOWUserManager.userAgeRange
     
-    var pickDataArr:[Int:String] = [Int:String]()
-    var editingGroupAndRow:[Int:Int] = [0:0]
     var image:UIImage!
     
 //MARK:Lazy
@@ -59,15 +55,7 @@ class WOWUserInfoController: WOWBaseTableViewController {
         v.delegate = self
         return v
     }()
-    lazy var popWindow:UIWindow = {
-        let w = UIApplication.shared.delegate as! AppDelegate
-        return w.window!
-    }()
-//    lazy var pickerContainerView :WOWPickerView = {
-//        let v = Bundle.main.loadNibNamed("WOWPickerView", owner: self, options: nil)?.last as! WOWPickerView
-//        return v
-//    }()
-    
+
     //个人资料
     lazy var aboutView:WOWAboutHeaderView = {
         let v = Bundle.main.loadNibNamed(String(describing: WOWAboutHeaderView.self), owner: self, options: nil)?.last as! WOWAboutHeaderView
@@ -89,29 +77,20 @@ class WOWUserInfoController: WOWBaseTableViewController {
         return v
     }()
     
-    
-    lazy var backView:WOWPickerBackView = {[unowned self] in
-        let v = WOWPickerBackView(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight))
-        v.pickerView.pickerView.delegate = self
-        v.pickerView.sureButton.addTarget(self, action:#selector(surePicker), for:.touchUpInside)
-        return v
-    }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        MobClick.e(.Personal_Information)
-        
-        addObserver()
-       
 
 
     }
    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        MobClick.e(.Personal_Information)
+
         IQKeyboardManager.sharedManager().enable = false
-        
+        addObserver()
+
         MobClick.e(.Personal_Information_Page)
 
     }
@@ -128,7 +107,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
         
         removeObserver()
 
-        
         IQKeyboardManager.sharedManager().enable = true
 
 
@@ -151,15 +129,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
         request()
         requestAddressInfo()
         
-    }
-    
-    fileprivate func showPickerView(){
-        let window = UIApplication.shared.windows
-        
-        popWindow.addSubview(backView)
-        popWindow.bringSubview(toFront: backView)
-        backView.show()
-
     }
     
     func refresh_image(){
@@ -197,11 +166,21 @@ class WOWUserInfoController: WOWBaseTableViewController {
 
         DispatchQueue.main.async {[weak self] () -> Void in
             if let strongSelf = self {
-                strongSelf.sexTextField.text  = WOWSex[strongSelf.sex]
+                let sexIndex: Int = strongSelf.sex - 1 < 0 ? 0 : strongSelf.sex - 1
+                let starIndex: Int = strongSelf.star - 1 < 0 ? 0 : strongSelf.star - 1
+
+
+                strongSelf.sexTextField.text  = WOWSex[sexIndex]
                 strongSelf.desLabel.text      = WOWUserManager.userDes
                 strongSelf.nickLabel.text     = WOWUserManager.userName
                 strongSelf.ageTextField.text  = WOWAgeRange[strongSelf.age]
-                strongSelf.starTextField.text = WOWConstellation[strongSelf.star]
+                if strongSelf.star == 0 {
+                    strongSelf.starTextField.text = ""
+
+                }else {
+                    strongSelf.starTextField.text = WOWConstellation[starIndex]
+
+                }
                 strongSelf.jobLabel.text      = WOWUserManager.userIndustry
                 if WOWUserManager.userMobile.isEmpty {
                     strongSelf.mobileLabel.text   = "去绑定"
@@ -236,30 +215,6 @@ class WOWUserInfoController: WOWBaseTableViewController {
         configUserInfo()
     }
 
-    
-    func surePicker() {
-        let row = backView.pickerView.pickerView.selectedRow(inComponent: 0)
-        
-        if editingGroupAndRow == [0:3] {
-            
-            sex = row + 1
-            
-            sexTextField?.text = pickDataArr[row + 1]
-            
-        }else if editingGroupAndRow == [0:4]{
-            
-            age = row
-            
-            ageTextField?.text = pickDataArr[row]
-            
-        }else if editingGroupAndRow == [0:5] {
-            star = row + 1
-            
-            starTextField?.text = pickDataArr[row + 1]
-        }
-        requestEditUserInfo()
-        backView.hideView()
-    }
     
     func bindMobile()  {
         if WOWUserManager.userMobile.isEmpty {
@@ -430,43 +385,36 @@ extension WOWUserInfoController{
         case (0,0):
             showPicture()
         case (0,3):
-            editingGroupAndRow = [0:3]
+            let index: Int = sex - 1 < 0 ? 0 : sex - 1
+            VCRedirect.prentPirckerMask(dataArr: WOWSex, startIndex: index, block: {[unowned self] (str, index) in
+                self.sex = index + 1
+                
+                self.sexTextField?.text = str
+                self.requestEditUserInfo()
 
-            pickDataArr = WOWSex
-            
-            if  sex == 0 {
-                backView.pickerView.pickerView.selectRow(2, inComponent: 0, animated: true)
-            }else{
-                backView.pickerView.pickerView.selectRow(sex - 1, inComponent: 0, animated: true)
-            }
-           
-            backView.pickerView.pickerView.reloadComponent(0)
-            showPickerView()
+            })
 
         case (0,4):
-            editingGroupAndRow = [0:4]
+            VCRedirect.prentPirckerMask(dataArr: WOWAgeRange, startIndex: age, block: {[unowned self] (str, index) in
+                self.age = index
+                
+                self.ageTextField?.text = str
+                self.requestEditUserInfo()
 
-            pickDataArr = WOWAgeRange
-            backView.pickerView.pickerView.selectRow(age, inComponent: 0, animated: true)
-            backView.pickerView.pickerView.reloadComponent(0)
-            showPickerView()
+            })
+
 
         case (0,5):
-            editingGroupAndRow = [0:5]
-            pickDataArr = WOWConstellation
-            if star == 0 {
-                
-                backView.pickerView.pickerView.selectRow(star, inComponent: 0, animated: true)
-          
-            }else {
-                
-                backView.pickerView.pickerView.selectRow(star - 1, inComponent: 0, animated: true)
-         
-            }
+            let index: Int = star - 1 < 0 ? 0 : star - 1
 
-            
-            backView.pickerView.pickerView.reloadComponent(0)
-            showPickerView()
+            VCRedirect.prentPirckerMask(dataArr: WOWConstellation, startIndex: index, block: {[unowned self] (str, index) in
+                self.star = index + 1
+                
+                self.starTextField?.text = str
+                self.requestEditUserInfo()
+
+            })
+
 
         case (0, 7):
             
@@ -577,7 +525,7 @@ func json_serialize( _ dict:[String:AnyObject]) -> String {
     
     return str
 }
-extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate{
+extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
@@ -600,23 +548,7 @@ extension WOWUserInfoController:UIImagePickerControllerDelegate,UINavigationCont
         }
      
     }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickDataArr.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        if editingGroupAndRow == [0:4]  {
-            return pickDataArr[row]
-        }else{
-            return pickDataArr[row + 1]
-        }
-    }
+
     
   
 }

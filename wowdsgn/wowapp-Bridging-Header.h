@@ -46,7 +46,7 @@
 #import "QYSDK.h"
 #import <FCUUID/FCUUID.h>
 #import "UICollectionViewLeftAlignedLayout.h"
-#import "UINavigationController+TZPopGesture.h"
+//#import "UINavigationController+TZPopGesture.h"
 //Leancloud
 //#import <AVOSCloud/AVOSCloud.h>
 

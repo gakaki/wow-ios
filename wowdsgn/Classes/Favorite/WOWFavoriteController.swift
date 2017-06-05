@@ -57,7 +57,7 @@ class WOWFavoriteController: WOWBaseViewController {
         v.magicView.isScrollEnabled         = true
         self.addChildViewController(v)
         self.view.addSubview(v.magicView)
-         self.tz_addPopGesture(to: v.magicView)
+//         self.tz_addPopGesture(to: v.magicView)
         v.magicView.snp.makeConstraints {[weak self] (make) -> Void in
             if let strongSelf = self {
                 make.size.equalTo(strongSelf.view)
@@ -69,7 +69,6 @@ class WOWFavoriteController: WOWBaseViewController {
         vc_product    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavProduct.self)) as? WOWFavProduct
         vc_brand    = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavBrand.self)) as? WOWFavBrand
         vc_designer = UIStoryboard.initialViewController("Favorite", identifier:String(describing: WOWFavDesigner.self)) as? WOWFavDesigner
-        self.tz_addPopGesture(to: v.magicView)
         v.magicView.reloadData()
     }
     fileprivate func addObserver(){

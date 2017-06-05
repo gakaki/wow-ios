@@ -368,7 +368,6 @@
 		2D635A2A1ED2919C00632328 /* WOWSubmitSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D635A281ED2919C00632328 /* WOWSubmitSuccess.swift */; };
 		2D635A2B1ED2919C00632328 /* WOWSubmitSuccess.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D635A291ED2919C00632328 /* WOWSubmitSuccess.xib */; };
 		2D635A2D1ED2E95600632328 /* WOWRefundTimeOutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D635A2C1ED2E95600632328 /* WOWRefundTimeOutController.swift */; };
-		2D635A391ED41CF800632328 /* UINavigationController+TZPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D635A381ED41CF800632328 /* UINavigationController+TZPopGesture.m */; };
 		2D670E7D1E8505EE00D7A8EB /* WOWSharePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D670E7B1E8505EE00D7A8EB /* WOWSharePhotoView.swift */; };
 		2D670E7E1E8505EE00D7A8EB /* WOWSharePhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D670E7C1E8505EE00D7A8EB /* WOWSharePhotoView.xib */; };
 		2D670E8A1E851AF900D7A8EB /* PhotoTweaksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D670E811E851AF900D7A8EB /* PhotoTweaksViewController.m */; };
@@ -1044,8 +1043,6 @@
 		2D635A281ED2919C00632328 /* WOWSubmitSuccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSubmitSuccess.swift; sourceTree = "<group>"; };
 		2D635A291ED2919C00632328 /* WOWSubmitSuccess.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWSubmitSuccess.xib; sourceTree = "<group>"; };
 		2D635A2C1ED2E95600632328 /* WOWRefundTimeOutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWRefundTimeOutController.swift; sourceTree = "<group>"; };
-		2D635A371ED41CF800632328 /* UINavigationController+TZPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+TZPopGesture.h"; sourceTree = "<group>"; };
-		2D635A381ED41CF800632328 /* UINavigationController+TZPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+TZPopGesture.m"; sourceTree = "<group>"; };
 		2D670E7B1E8505EE00D7A8EB /* WOWSharePhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOWSharePhotoView.swift; sourceTree = "<group>"; };
 		2D670E7C1E8505EE00D7A8EB /* WOWSharePhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WOWSharePhotoView.xib; sourceTree = "<group>"; };
 		2D670E801E851AF900D7A8EB /* PhotoTweaksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTweaksViewController.h; sourceTree = "<group>"; };
@@ -1847,7 +1844,6 @@
 			isa = PBXGroup;
 			children = (
 				633809C41ED6895B00244913 /* PopupView */,
-				2D635A361ED41CF800632328 /* TZScrollViewPopGesture */,
 				631FA9A11EA0D47800E18EC9 /* PhotoBrowser */,
 				2D670E7F1E851AF900D7A8EB /* PhotoTweaks */,
 				63A3104F1E77E41000D7C983 /* HidingNavigationBar */,
@@ -2411,15 +2407,6 @@
 				2D26FD291E2479F1006D75F4 /* SVCloosePriceCell.xib */,
 			);
 			path = WOWScreenViewCell;
-			sourceTree = "<group>";
-		};
-		2D635A361ED41CF800632328 /* TZScrollViewPopGesture */ = {
-			isa = PBXGroup;
-			children = (
-				2D635A371ED41CF800632328 /* UINavigationController+TZPopGesture.h */,
-				2D635A381ED41CF800632328 /* UINavigationController+TZPopGesture.m */,
-			);
-			path = TZScrollViewPopGesture;
 			sourceTree = "<group>";
 		};
 		2D670E7F1E851AF900D7A8EB /* PhotoTweaks */ = {
@@ -3489,7 +3476,6 @@
 				2D509A761DB5D3120047CD13 /* WOWSearchBarView.swift in Sources */,
 				069D323C1DB47ADD00A059D0 /* WOWRegistProtocolController.swift in Sources */,
 				069D32351DB47ADD00A059D0 /* WOWLoginController.swift in Sources */,
-				2D635A391ED41CF800632328 /* UINavigationController+TZPopGesture.m in Sources */,
 				069D31D71DB47ADD00A059D0 /* WOWFavProduct.swift in Sources */,
 				069D32F71DB47ADD00A059D0 /* UIView+BorderLine.swift in Sources */,
 				2D562CA61E16038500E702CE /* SVStyleCell.swift in Sources */,

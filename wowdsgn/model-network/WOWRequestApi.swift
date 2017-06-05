@@ -31,19 +31,10 @@ public enum RequestApi{
     case api_Home_BottomList(params: [String: AnyObject]?)
     // 精选页底部列表
     case api_HotStyle_BottomList(params: [String: AnyObject]?)
-    //发现 分类 页面
-    case api_Found_Main
-    case api_Found_2nd
     
     //筛选 页面
     case Api_Screen_Main
     case Api_Screen_Price(categoryId:Int)
-    
-    
-    //module 页面 发现 页面 新
-    case api_Module_Page2
-    
-    case api_Activity
     
     case api_AddressAdd(receiverName: String, provinceId: Int, cityId: Int, countyId: Int, addressDetail: String, receiverMobile: String, isDefault:Bool)
     
@@ -98,11 +89,7 @@ public enum RequestApi{
     //购物车相关
     case api_CartModify(shoppingCartId:Int, productQty:Int)
     
-    case api_CartList(cart:String)
-    
     case api_CartRemove(shoppingCartId:[Int])
-    
-    case api_CartCommit(car:String)
     
     case api_CartAdd(productId: Int, productQty: Int)
     
@@ -203,11 +190,7 @@ public enum RequestApi{
     
     case api_EntryRefundInfo(params: [String: AnyObject])
     
-    case api_ProductList(pageindex:String,categoryID:String,style:String,sort:String,uid:String,keyword:String)
-    
     case api_ProductDetail(productId: Int)
-    
-    case api_ProductImgDetail(productId: Int)
     
     case api_ProductSpec(productId: Int)
     
@@ -216,8 +199,6 @@ public enum RequestApi{
     case api_Register(account:String,password:String,captcha:String)
     
     case api_ResetPwd(mobile:String,captcha:String,newPwd:String)
-    
-    case api_StoreHome
     
     case api_SubmitTopicComment(topicId:Int,content:String)
 
@@ -342,10 +323,6 @@ extension RequestApi:TargetType{
             
          case .api_Product_By_Category:
             return URL_producty_by_category
-        case .api_Activity:
-            return URL_activity
-        case .api_StoreHome:
-            return URL_storeHome
         case .api_Sence:
             return URL_scene
         case .api_SenceDetail:
@@ -379,12 +356,8 @@ extension RequestApi:TargetType{
             return URL_Search_hot
         case .api_SearchResult:
             return URL_Search_result
-        case .api_ProductList:
-            return URL_product
         case .api_ProductDetail:
             return URL_product_detail
-        case .api_ProductImgDetail:
-            return URL_Product_imageDetail
         case .api_ProductSpec:
             return URL_ProductSpec
         case .api_ProductAbout:
@@ -419,8 +392,6 @@ extension RequestApi:TargetType{
             return URL_CartModify
         case .api_UserUpdate:
             return URL_UpdateInfo
-        case .api_CartList:
-            return URL_CartList
         case .api_CartAdd:
             return URL_CartAdd
         case .api_CartGet:
@@ -428,8 +399,6 @@ extension RequestApi:TargetType{
 
         case .api_CartRemove:
             return URL_CartRemove
-        case .api_CartCommit:
-            return URL_CartCommit
         case .api_CartSelect:
             return URL_CartSelect
         case .api_CartUnSelect:
@@ -539,14 +508,6 @@ extension RequestApi:TargetType{
             return URL_GetRufundProcess
         case .api_Invite:
             return URL_Invite
-        //发现页面
-        //module 页面 发现 页面 新
-        case .api_Module_Page2:
-            return URL_Module_Page2
-        case .api_Found_Main:
-            return URL_Found_Main
-        case .api_Found_2nd:
-            return URL_Found_2nd
         // 筛选
         case .Api_Screen_Main:
             return URL_ScreenMain
@@ -642,8 +603,8 @@ extension RequestApi:TargetType{
     
     public var method:Moya.Method{
         switch self {
-        case .api_Addresslist, .api_BrandList, .api_Home_Banners, .api_LikeBrand, .api_LikeProduct, .api_LikeDesigner, .api_IsFavoriteProduct, .api_IsFavoriteBrand, .api_IsFavoriteDesigner, .api_ProductDetail, .api_ProductImgDetail, .api_ProductSpec, .api_OrderList,.api_CartGet, .api_AddressDefault, .api_OrderSettle, .api_BrandDetail, .api_ProductBrand, .api_Found_Main , .api_Found_2nd, .api_DesignerDetail, .api_productDesigner, .api_Category, .api_PayResult, .api_OrderDetail , .api_Product_By_Category , .api_Coupons , .api_Topics, .api_Topic_Products, .api_Home_List, .api_Home_BottomList
-            ,.api_Module_Page2,
+        case .api_Addresslist, .api_BrandList, .api_Home_Banners, .api_LikeBrand, .api_LikeProduct, .api_LikeDesigner, .api_IsFavoriteProduct, .api_IsFavoriteBrand, .api_IsFavoriteDesigner, .api_ProductDetail, .api_ProductSpec, .api_OrderList,.api_CartGet, .api_AddressDefault, .api_OrderSettle, .api_BrandDetail, .api_ProductBrand, .api_DesignerDetail, .api_productDesigner, .api_Category, .api_PayResult, .api_OrderDetail , .api_Product_By_Category , .api_Coupons , .api_Topics, .api_Topic_Products, .api_Home_List, .api_Home_BottomList
+            ,
             .api_SearchHot, .api_SearchResult,
             .api_DesignerList,
             .api_Category_subCategory_with_image,
@@ -722,8 +683,6 @@ extension RequestApi:TargetType{
                 params = ["designerId": designerId]
             case let .api_productDesigner(designerId, pageSize, currentPage):
                 params = ["designerId": designerId, "pageSize": pageSize, "currentPage": currentPage]
-            case let .api_ProductList(pageindex,categoryID,style,sort,uid,keyword):
-                params = ["pageindex":pageindex,"cid":categoryID,"style":style,"sort":sort,"uid":uid,"keyword":keyword]
             case let .api_ProductDetail(productId):
                 params = ["productId":productId]
             case let .api_ProductAbout(param):
@@ -736,9 +695,6 @@ extension RequestApi:TargetType{
             
             case let .api_userFeedBack(param):
                 params = param
-            
-            case let .api_ProductImgDetail(productId):
-                params = ["productId":productId]
             case let .api_ProductSpec(productId):
                 params = ["productId":productId]
             case let .api_TopicCommentList(pageSize,currentPage,topicId, lastId):
@@ -755,12 +711,8 @@ extension RequestApi:TargetType{
             
             case let .api_CartModify(shoppingCartId, productQty):
                 params =  ["shoppingCartId": shoppingCartId, "productQty": productQty]
-            case let .api_CartList(cart):
-                params =  ["cart":cart]
             case let .api_CartRemove(shoppingCartId):
                 params =  ["shoppingCartIds":shoppingCartId]
-            case let .api_CartCommit(cart):
-                params =  ["cart":cart]
             case let .api_CartAdd(productId, productQty):
                 params =  ["productId": productId, "productQty": productQty]
             case let .api_CartSelect(shoppingCartIds):
@@ -901,17 +853,11 @@ extension RequestApi:TargetType{
                 params = param!
             case let .api_HotStyle_BottomList(param):
                 params = param!
-            case .api_Module_Page2:
-                params = ["pageId":2, "region":1]
             // 筛选
             case .Api_Screen_Main:
                 break
             case let .Api_Screen_Price(categoryId):
                 params = ["categoryId":categoryId]
-            case .api_Found_2nd:
-                break
-            case .api_Found_Main:
-                break
             case .api_DesignerList:
                 break
             case .api_User:
@@ -1023,8 +969,6 @@ extension RequestApi:TargetType{
         case .api_Sms:
             return "验证码发送成功"
         case .api_AddressAdd:
-            return ""
-        case .api_CartList,.api_ProductList:
             return ""
         case .api_CartAdd:
             return "添加购物车成功"

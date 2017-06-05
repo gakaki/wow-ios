@@ -64,8 +64,6 @@ let URL_topic_product           = "v2/topic/product"            //导购专题�
 
 //***********2.商店************
 //2.1首页
-let URL_storeHome               = "v1/shop"
-
 
 let URL_Home_Tabs               = "v1/page/tabs"
 let URL_home_banners            = "v1/page/banners"    //1.1首页 查看首页Banner
@@ -78,12 +76,8 @@ let URL_Search_hot              = "v1/product/search/hot-keywords"  //热门搜�
 let URL_Search_result           = "v1/product/search"           //搜索结果
 
 
-//2.2商品列表
-let URL_product                 = "v2/product"
 //2.3商品详情
 let URL_product_detail          = "v2/product"
-//产品图文详情
-let URL_Product_imageDetail     = "v1/product/images/detail"
 //2.4发表评论
 let URL_SubmitTopicComment           = "v1/topic/comments"
 //2.5评论列表
@@ -138,19 +132,13 @@ let URL_DesignerList            = "v1/designer/designerList"    //设计师列�
 let URL_DesignerDetail          = "v1/designer/detail"         //设计师详情
 
 let URL_ProductDesigner         = "v2/product/designer"            //设计师产品
-//3.app活动
-let URL_activity                = "v1/post"
 
 
 //*********************4.购物车**********
 // tag 为0 的时候 自增  为1的时候覆盖掉
 let URL_CartModify               = "v1/cart/modify"
 
-let URL_CartList                 = "v1/cart/list"
-
 let URL_CartRemove               = "v1/cart/remove" //删除购物车商品
-
-let URL_CartCommit               = "v1/order/commit"
 
 let URL_CartAdd                  = "v1/cart/add"        //添加购物车
 
@@ -192,13 +180,6 @@ let URL_GetRefundLog            = "v1/order/refund/log" // 获取退换货单操
 let URL_GetRufundProcess        = "v1/order/refund/process" // 获取退款单钱款流向
 let URL_CancelRefund            = "v1/order/refund/cancel" // 撤销申请
 let URL_EntryRefundInfo         = "v1/order/refund/delivery" // 用户录入退换货单物流信息
-
-//4. 发现页面
-let URL_Found_Main              = "v1/page/find/product"
-let URL_Found_2nd               = "v1/page/find/category"
-
-//新发现页面 还是用moyax吧 
-let URL_Module_Page2            = "v2/page"
 
 //5.个人中心
 let URL_UpdateInfo              = "v1/usermongo/userupdate"

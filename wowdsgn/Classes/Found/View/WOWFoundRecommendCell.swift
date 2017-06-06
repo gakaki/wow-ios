@@ -43,7 +43,7 @@ class WOWFoundRecommendCell: UITableViewCell {
         return 501
     }
     var product:WowModulePageItemVO?
-    var delegate:WOWFoundRecommendCellDelegate?
+    weak var delegate:WOWFoundRecommendCellDelegate?
     var heightAll   = 180.h
     static func isNib() -> Bool { return false }
 

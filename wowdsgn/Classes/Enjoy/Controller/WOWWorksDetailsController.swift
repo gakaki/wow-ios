@@ -27,9 +27,9 @@ class WOWWorksDetailsController: WOWBaseViewController {
         let v = WOWWorkMoreBackView(frame:CGRect(x: 0,y: 0,width: MGScreenWidth,height: MGScreenHeight))
         return v
     }()
-    lazy var popWindow:UIWindow = {
-        let w = UIApplication.shared.delegate as! AppDelegate
-        return w.window!
+    lazy var popWindow:UIWindow? = {
+        let w = UIApplication.shared.delegate as? AppDelegate
+        return w?.window
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,6 @@ class WOWWorksDetailsController: WOWBaseViewController {
         tableView.mj_header = mj_header
         tableView.clearRestCell()
         self.title = "照片"
-        //        configureSearchController()
         tableView.register(UINib.nibName("WorksDetailCell"), forCellReuseIdentifier:"WorksDetailCell")
       
         request()
@@ -51,23 +50,29 @@ class WOWWorksDetailsController: WOWBaseViewController {
         super.setUI()
         self.makeCustomerImageNavigationItem("work_more", left: false) { [weak self] in
             if let strongSelf = self {
-                //umeng
-                MobClick.e(.more_button_picture_details_page)
-                
-//                let window = UIApplication.shared.windows
-                strongSelf.popWindow.addSubview(strongSelf.backView)
-                strongSelf.popWindow.bringSubview(toFront: strongSelf.backView)
-                strongSelf.backView.selectView.delegate = self
-                if strongSelf.modelData?.myInstagram ?? false {
-                    strongSelf.backView.showView_self()
-                }else {
-                    strongSelf.backView.showView_othersOne()
-                }
+                strongSelf.showMenu()
+        
             }
-            
         }
     }
     
+    func showMenu()  {
+        //umeng
+        MobClick.e(.more_button_picture_details_page)
+        
+        let window = UIApplication.shared.windows.last
+        
+        popWindow?.addSubview(backView)
+        popWindow?.bringSubview(toFront: backView)
+        backView.selectView.delegate = self
+        if self.modelData?.myInstagram ?? false {
+            self.backView.showView_self()
+        }else {
+            self.backView.showView_othersOne()
+        }
+        
+
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
           setLeftBack()

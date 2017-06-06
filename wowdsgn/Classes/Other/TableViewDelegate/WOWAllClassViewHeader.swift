@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol WOWAllClassViewHeaderDelegate {
+protocol WOWAllClassViewHeaderDelegate: class {
     func toggleSection(_ header: WOWAllClassViewHeader, section: Int)
 }
 
 class WOWAllClassViewHeader: UITableViewHeaderFooterView {
     
-    var delegate: WOWAllClassViewHeaderDelegate?
+    weak var delegate: WOWAllClassViewHeaderDelegate?
     var section: Int = 0
     
     

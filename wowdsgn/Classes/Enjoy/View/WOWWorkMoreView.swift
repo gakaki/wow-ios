@@ -29,7 +29,7 @@ class WOWWorkMoreBackView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var dismissButton:UIButton = {
+    lazy var dismissButton:UIButton = {[unowned self] in
         let b = UIButton(type: .system)
         b.backgroundColor = UIColor.clear
         b.addTarget(self, action: #selector(hideView), for:.touchUpInside)
@@ -158,7 +158,7 @@ protocol WOWWorkMoreViewDelegate:class {
 }
 class WOWWorkMoreView: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    var delegate: WOWWorkMoreViewDelegate?
+    weak var delegate: WOWWorkMoreViewDelegate?
     
     var moreArr = [WOWMoreModel]() {
         didSet{

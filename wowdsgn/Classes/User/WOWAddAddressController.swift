@@ -262,11 +262,7 @@ class WOWAddAddressController: WOWBaseTableViewController {
 
 //MARK:Delegate
     override func numberOfSections(in tableView: UITableView) -> Int {
-//        if let model = addressModel{
-//            if model.isDefault == 1{
-//                return 1
-//            }
-//        }
+
         return 1
     }
     

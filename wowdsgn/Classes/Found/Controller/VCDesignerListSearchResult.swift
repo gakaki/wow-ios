@@ -8,7 +8,7 @@ protocol VCDesignerListSearchResultDelegate:class{
 class VCDesignerListSearchResult: WOWBaseTableViewController {
     
     var resultArr = [WOWDesignerModel]()
-    var delegate  : VCDesignerListSearchResultDelegate?
+    weak var delegate  : VCDesignerListSearchResultDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
     }
